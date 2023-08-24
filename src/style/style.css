@@ -1,44 +1,52 @@
 @font-face {
-	font-family:Hanuman;
-	src: url("font/Hanuman-Bold.woff2") format('woff2'),url("font/Hanuman-Bold.woff") format('woff'),url("font/Hanuman-Bold.ttr") format('truetype');
+	font-family: Hanuman;
+	src:
+		url('font/Hanuman-Bold.woff2') format('woff2'),
+		url('font/Hanuman-Bold.woff') format('woff'),
+		url('font/Hanuman-Bold.ttr') format('truetype');
 	font-display: swap;
 	font-weight: bold;
 }
 
 @font-face {
-	font-family:Hanuman;
-	src: url("font/Hanuman-Regular.woff2") format('woff2'),url("font/Hanuman-Regular.woff") format('woff'),url("font/Hanuman-Regular.ttr") format('truetype');
+	font-family: Hanuman;
+	src:
+		url('font/Hanuman-Regular.woff2') format('woff2'),
+		url('font/Hanuman-Regular.woff') format('woff'),
+		url('font/Hanuman-Regular.ttr') format('truetype');
 	font-display: swap;
 	font-weight: normal;
 }
 
 :root {
-	--color-background-modal:#F0F0F080;
-	--color-background-system:180deg, #FFF 0%, #EAE8EB 100%;
-	--color-blue:#006BDB;
-	--color-content:#EAE8EB;
-	--color-instagram:25deg, #F9ED32 0%, #EE2A7B 60.94%, #002AFF 100%;
-	--color-primary-system:#49AB84;
-	--color-red-dark:#DC3545;
-	--color-red:#EC474F;
-	--color-secondary-system:#198754;
-	--color-social-media:#9A999E;
-	--color-sub-content:#F0F0F0;
-	--color-text-footer:#333;
-	--color-yellow:#FDE71E;
+	--color-background-modal: #f0f0f080;
+	--color-background-system: 180deg, #fff 0%, #eae8eb 100%;
+	--color-blue: #006bdb;
+	--color-content: #eae8eb;
+	--color-instagram: 25deg, #f9ed32 0%, #ee2a7b 60.94%, #002aff 100%;
+	--color-primary-system: #49ab84;
+	--color-red-dark: #dc3545;
+	--color-red: #ec474f;
+	--color-secondary-system: #198754;
+	--color-shadow: #19875480;
+	--color-social-media: #9a999e;
+	--color-sub-content: #f0f0f0;
+	--color-text-footer: #333;
+	--color-yellow: #fde71e;
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-background-modal:#18181880;
-		--color-background-system:180deg, #181818 0%, #1E1E1E 100%;
-		--color-content:#222;
-		--color-primary-system:#198754;
-		--color-red-dark:#65000A;
-		--color-red:#DC3545;
-		--color-secondary-system:#002C17;
-		--color-social-media:#333;
-		--color-sub-content:#333;
-		--color-text-footer:#9A999E;
+		--color-background-modal: #18181880;
+		--color-background-system: 180deg, #181818 0%, #1e1e1e 100%;
+		--color-content: #222;
+		--color-primary-system: #198754;
+		--color-shadow: #19875480;
+		--color-red-dark: #65000a;
+		--color-red: #dc3545;
+		--color-secondary-system: #002c17;
+		--color-social-media: #333;
+		--color-sub-content: #333;
+		--color-text-footer: #9a999e;
 	}
 }

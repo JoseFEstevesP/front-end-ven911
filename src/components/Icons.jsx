@@ -9,7 +9,7 @@ const Icons = ({ className, iconName, type = 'system' }) => {
 			);
 	}, [type]);
 	return (
-		<svg className={className}>
+		<svg role='img' className={className}>
 			<use href={`${fileIcon}#${iconName}`}></use>
 		</svg>
 	);

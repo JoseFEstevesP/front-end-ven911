@@ -9,14 +9,14 @@
 	border-radius: 0.625em;
 	background-color: var(--color-primary-system);
 	border: 0.125em solid var(--color-secondary-system);
+	box-shadow: 0 0 0.25em var(--color-secondary);
 	scale: 1;
-	transition: scale .3s;
-
+	transition: scale .5s;
 }
 
 @media(hover:hover){
 	.btn:hover{
-		scale:0.98;
+		scale: 0.99;
 	}
 }
 

@@ -1,12 +1,14 @@
-import Btn from './Btn';
+import { Link } from 'react-router-dom';
 import Icons from './Icons';
 import './style/cardModule.css';
-const CardModule = ({ title, iconName }) => {
+const CardModule = ({ title, iconName, to }) => {
 	return (
 		<article className='card'>
 			<h2 className='card__title'>{title}</h2>
 			<Icons className='card__icon' iconName={iconName} type='module' />
-			<Btn text='Entrar' className='card__btn' />
+			<Link className='card__link' to={to}>
+				Entrar
+			</Link>
 		</article>
 	);
 };

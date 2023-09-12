@@ -6,7 +6,7 @@ const CardModule = ({ title, iconName }) => {
 		<article className='card'>
 			<h2 className='card__title'>{title}</h2>
 			<Icons className='card__icon' iconName={iconName} type='module' />
-			<Btn text='Entrar' className='btn card__btn' />
+			<Btn text='Entrar' className='card__btn' />
 		</article>
 	);
 };

@@ -1,29 +1,35 @@
 import Icons from './Icons';
 import './style/btn.css';
 const Btn = ({
-	className = 'btn',
+	className = '',
 	disabled = false,
 	handleClick,
-	iconType = 'system',
+	typeIcon = 'system',
 	nameIcon,
-	classIcon = 'btn__icon',
+	classIcon = '',
 	title,
 	text,
 	type = 'button',
 	name,
+	sizeIcon,
 }) => {
 	return (
 		<button
 			name={name}
 			title={title}
 			type={type}
-			className={className}
+			className={`btn ${className}`}
 			onClick={handleClick}
 			disabled={disabled}
 		>
 			{text || ''}
 			{nameIcon && (
-				<Icons iconName={nameIcon} type={iconType} className={classIcon} />
+				<Icons
+					iconName={nameIcon}
+					type={typeIcon}
+					className={classIcon}
+					size={sizeIcon}
+				/>
 			)}
 		</button>
 	);

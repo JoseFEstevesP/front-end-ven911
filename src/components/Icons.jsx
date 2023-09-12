@@ -10,7 +10,7 @@ const Icons = ({ className, iconName, type = 'system', size }) => {
 			);
 	}, [type]);
 	return (
-		<svg role='img' className={`${className} icon`} style={{ '--size': size }}>
+		<svg role='img' className={`icon ${className}`} style={{ '--size': size }}>
 			<use href={`${fileIcon}#${iconName}`}></use>
 		</svg>
 	);

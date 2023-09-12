@@ -1,0 +1,28 @@
+.btn {
+	font-size: 1rem;
+	font-weight: bold;
+	padding: 0.5rem 1em;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	gap:0.5em;
+	border-radius: 0.625em;
+	background-color: var(--color-primary-system);
+	border: 0.125em solid var(--color-secondary-system);
+	scale: 1;
+	transition: scale .3s;
+
+}
+
+@media(hover:hover){
+	.btn:hover{
+		scale:0.98;
+	}
+}
+
+.btn__icon{
+	--size: 1.5em;
+
+	width: var(--size);
+	height: var(--size);
+}

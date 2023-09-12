@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './style/icons.css';
-const Icons = ({ className = 'icon', iconName, type = 'system', size }) => {
+const Icons = ({ className, iconName, type = 'system', size }) => {
 	const [fileIcon, setFileIcon] = useState(null);
 	useEffect(() => {
 		import(`./../assets/icons/${type}.svg`)
@@ -10,7 +10,7 @@ const Icons = ({ className = 'icon', iconName, type = 'system', size }) => {
 			);
 	}, [type]);
 	return (
-		<svg role='img' className={className} style={{ '--size': size }}>
+		<svg role='img' className={`${className} icon`} style={{ '--size': size }}>
 			<use href={`${fileIcon}#${iconName}`}></use>
 		</svg>
 	);

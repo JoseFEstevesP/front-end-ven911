@@ -50,3 +50,12 @@
 		--color-text-footer: #9a999e;
 	}
 }
+
+#root{
+	width: 100%;
+	min-height: 100vh;
+}
+
+.none{
+	overflow: hidden;
+}

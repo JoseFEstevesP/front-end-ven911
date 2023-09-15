@@ -2,18 +2,17 @@
 	font-size: 1rem;
 	font-weight: bold;
 	padding: 0.5rem 1em;
-	display:flex;
+	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap:0.5em;
+	gap: 0.5em;
 	border-radius: 0.625em;
 	scale: 1;
-	transition: scale .3s;
+	transition: scale 0.3s;
 }
 
-@media(hover:hover){
-	.btn:hover{
+@media (hover: hover) {
+	.btn:hover {
 		scale: 0.99;
 	}
 }
-

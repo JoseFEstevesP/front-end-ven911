@@ -164,8 +164,8 @@
 	padding: 0 0 1em;
 }
 
-@media screen and (width >= 768px ) {
-	.menu__li--profileAndExit{
+@media screen and (width >= 768px) {
+	.menu__li--profileAndExit {
 		padding: 0;
 	}
 }

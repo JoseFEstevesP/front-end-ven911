@@ -7,11 +7,8 @@
 	align-items: center;
 	gap:0.5em;
 	border-radius: 0.625em;
-	background-color: var(--color-primary-system);
-	border: 0.125em solid var(--color-secondary-system);
-	box-shadow: 0 0 0.25em var(--color-secondary);
 	scale: 1;
-	transition: scale .5s;
+	transition: scale .3s;
 }
 
 @media(hover:hover){

@@ -1,8 +1,6 @@
+import Theme from '../components/Theme';
+
 const Home = () => {
-	return (
-		<>
-			<h2>Home</h2>
-		</>
-	);
+	return <Theme />;
 };
 export default Home;

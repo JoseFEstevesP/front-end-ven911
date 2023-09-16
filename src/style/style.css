@@ -64,7 +64,7 @@ html[data-theme='dark'] {
 		--color-text-footer: #9a999e;
 	}
 
-	html[daa-theme='light'] {
+	html[data-theme='light'] {
 		--color-background-modal: #f0f0f080;
 		--color-background-system: 180deg, #fff 0%, #eae8eb 100%;
 		--color-blue: #006bdb;

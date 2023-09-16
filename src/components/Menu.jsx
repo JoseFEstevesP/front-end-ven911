@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Btn from './Btn';
 import Icons from './Icons';
+import Theme from './Theme';
 import './style/menu.css';
 const Menu = ({ children }) => {
 	const menu = useRef(null);
@@ -55,7 +56,7 @@ const Menu = ({ children }) => {
 						</li>
 					</ul>
 				</nav>
-				<Btn nameIcon='sun' className='menu__btnTheme' />
+				<Theme />
 			</section>
 		</>
 	);

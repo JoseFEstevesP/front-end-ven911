@@ -7,12 +7,16 @@
 	align-items: center;
 	gap: 0.5em;
 	border-radius: 0.625em;
-	scale: 1;
-	transition: scale 0.3s;
+	transform: scale(1);
+	transition: transform 0.3s;
 }
 
 @media (hover: hover) {
 	.btn:hover {
-		scale: 0.99;
+		transform: scale(0.99);
 	}
+}
+
+.btn:active {
+	transform: scale(1.09);
 }

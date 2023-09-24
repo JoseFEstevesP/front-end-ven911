@@ -35,7 +35,7 @@ const Menu = ({ children }) => {
 					</button>
 				</div>
 				<nav className='menu__menu' ref={menu}>
-					<ul className='menu__ul'>
+					<ul className='box menu__ul'>
 						{children}
 						<li className='menu__li menu__li--profileAndExit'>
 							<Btn

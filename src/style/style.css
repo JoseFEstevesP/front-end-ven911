@@ -90,3 +90,10 @@ html[data-theme='dark'] {
 .none {
 	overflow: hidden;
 }
+
+.box {
+	border-radius: 0.625em;
+	background-color: var(--color-content);
+	border: 0.125em solid var(--color-primary-system);
+	box-shadow: 0.125em 0.125em 0.313em 0 var(--color-primary-system);
+}

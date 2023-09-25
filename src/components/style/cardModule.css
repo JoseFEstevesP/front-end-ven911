@@ -8,10 +8,6 @@
 	justify-items: center;
 	align-items: end;
 	gap: 0.5em;
-	border-radius: 0.625em;
-	box-shadow: 0.125em 0.125em 0.25em var(--color-shadow);
-	border: var(--color-primary-system);
-	background-color: var(--color-content);
 }
 
 .card__title {

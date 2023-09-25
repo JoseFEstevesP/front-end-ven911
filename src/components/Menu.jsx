@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { system } from '../data/system';
 import Btn from './Btn';
 import Icons from './Icons';
 import Theme from './Theme';
@@ -26,7 +27,8 @@ const Menu = ({ children }) => {
 			<section className='menu'>
 				<Link to='/' onClick={handleHome}>
 					<h1 className='menu__title'>
-						{<Icons iconName='logo' className='menu__icon' />}S.U.C.I 911
+						{<Icons iconName='logo' className='menu__icon' />}
+						{`${system.component.menu.title}`}
 					</h1>
 				</Link>
 				<div className='menu__contentBtn'>

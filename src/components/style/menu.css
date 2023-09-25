@@ -239,8 +239,8 @@
 	padding: 0;
 }
 
-@media(hover:hover){
-	.menu__subLi:hover .menu__submenu{
+@media (hover: hover) {
+	.menu__subLi:hover .menu__submenu {
 		transform: translateX(-50%) translateY(0);
 		opacity: 100%;
 		visibility: visible;
@@ -269,10 +269,13 @@
 	opacity: 0%;
 	visibility: hidden;
 	transform: translateX(-50%) translateY(-1em);
-	transition:opacity .3s,visibility .3s,transform .3s ;
+	transition:
+		opacity 0.3s,
+		visibility 0.3s,
+		transform 0.3s;
 }
 
-.menu__submenu--show{
+.menu__submenu--show {
 	transform: translateX(-50%) translateY(0);
 	opacity: 100%;
 	visibility: visible;

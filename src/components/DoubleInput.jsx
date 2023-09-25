@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { system } from '../data/system';
 import Icons from './Icons';
 import './style/input.css';
 const DoubleInput = ({
@@ -60,11 +61,17 @@ const DoubleInput = ({
 							value={inputs.date}
 						>
 							<option value='' disabled hidden>
-								Dia/Mes/Año
+								{`${system.component.doubleInput.select.dia}/${system.component.doubleInput.select.mes}/${system.component.doubleInput.select.año}`}
 							</option>
-							<option value='dia'>Dia</option>
-							<option value='mes'>Mes</option>
-							<option value='año'>Año</option>
+							<option value='dia'>
+								{system.component.doubleInput.select.dia}
+							</option>
+							<option value='mes'>
+								{system.component.doubleInput.select.mes}
+							</option>
+							<option value='año'>
+								{system.component.doubleInput.select.año}
+							</option>
 						</select>
 						<div className='input__contentIcon'>
 							<Icons

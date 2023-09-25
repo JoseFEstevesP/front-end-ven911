@@ -130,6 +130,10 @@
 	margin: 0 auto;
 	padding: 0;
 	width: 20em;
+	border-radius: 0.625em;
+	background-color: var(--color-content);
+	border: 0.125em solid var(--color-primary-system);
+	box-shadow: 0.125em 0.125em 0.313em 0 var(--color-primary-system);
 }
 
 @media screen and (width >= 768px) {
@@ -140,7 +144,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		gap: 0.625em;
+		gap: 1em;
 		border-radius: 0;
 		width: auto;
 	}
@@ -247,10 +251,14 @@
 	}
 }
 
+.menu__subLi {
+	position: relative;
+}
+
 .menu__subBtn {
 	margin: 0 auto;
 	border: 0;
-	position: relative;
+	padding: 1.125em 0.625em;
 }
 
 .menu__subIcon {
@@ -260,12 +268,10 @@
 }
 
 .menu__submenu {
-	width: 18.75em;
 	position: absolute;
 	left: 50%;
 	z-index: 3;
 	padding: 0;
-	margin: 1em 0 0;
 	opacity: 0%;
 	visibility: hidden;
 	transform: translateX(-50%) translateY(-1em);

@@ -11,6 +11,59 @@ export const system = {
 				año: 'Año',
 			},
 		},
+		footer: {
+			credit: {
+				title: 'Créditos',
+				creditIcon: {
+					title: 'Iconos de los módulos',
+					presentationIcon: {
+						title: 'Presentación iconos creados por monkik - Flaticon',
+						url: 'https://www.flaticon.es/iconos-gratis/presentacion',
+					},
+					boydIcon: {
+						title: 'Byod iconos creados por Flat Icons - Flaticon',
+						url: 'https://www.flaticon.es/iconos-gratis/byod',
+					},
+					personalIcon: {
+						title: 'Personal iconos creados por Futuer - Flaticon',
+						url: 'https://www.flaticon.es/iconos-gratis/personal',
+					},
+					pazIcon: {
+						title: 'Paz iconos creados por Freepik - Flaticon',
+						url: 'https://www.flaticon.es/iconos-gratis/paz',
+					},
+					ambulanceIcon: {
+						title: 'Ambulancia iconos creados por Freepik - Flaticon',
+						url: 'https://www.flaticon.es/iconos-gratis/ambulancia',
+					},
+					budgetIcon: {
+						title: 'Presupuesto iconos creados por ultimatearm - Flaticon',
+						url: 'https://www.flaticon.es/iconos-gratis/presupuesto',
+					},
+				},
+			},
+			creator: {
+				title: 'Croadores',
+				creators: {
+					JE: {
+						data: 'José Esteves CI: 27793193',
+						portfolio: 'https://josefestevesp.github.io/',
+					},
+					CLC: {
+						data: 'Carlos j, la concha. CI:16.034.267',
+						portfolio: '',
+					},
+					CF: {
+						data: 'Jose contreras Carlos r flores CI: 5.902.143',
+						portfolio: '',
+					},
+					FM: {
+						data: 'Freddy moreno C.I: 20.096.150',
+						portfolio: '',
+					},
+				},
+			},
+		},
 	},
 	page: {
 		home: {

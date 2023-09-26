@@ -3,6 +3,6 @@ const useModal = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const handleOpen = () => setIsOpen(true);
 	const handelClose = () => setIsOpen(false);
-	return { isOpen, handleOpen, handelClose };
+	return [isOpen, handleOpen, handelClose];
 };
 export default useModal;

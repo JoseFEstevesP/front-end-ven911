@@ -12,7 +12,10 @@ const Modal = ({ isOpen, children, close }) => {
 	return (
 		<>
 			<div className={`modal ${isOpen && 'modal--show'}`} onClick={close}>
-				<section className='modal__content box'>
+				<section
+					className={`modal__content box ${isOpen && 'modal__content--show'}`}
+					onClick={e => e.stopPropagation()}
+				>
 					<Btn nameIcon='close' className='modal__btn' handleClick={close} />
 					{children}
 				</section>

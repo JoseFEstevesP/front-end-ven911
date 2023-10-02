@@ -35,6 +35,7 @@
 	align-items: center;
 }
 
+<<<<<<< HEAD
 .footer__social{
 	--size:1.5em;
 
@@ -48,3 +49,18 @@
 		color:inherit;
 	}
 }
+=======
+.footer__social {
+	--size: 1.5em;
+
+	padding: 1em 0.5em;
+	color: var(--color-social-media);
+	transition: color 0.3s;
+}
+
+@media (hover: hover) {
+	.footer__social:hover {
+		color: inherit;
+	}
+}
+>>>>>>> styleAndFontDefault

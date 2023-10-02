@@ -36,19 +36,25 @@
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .footer__social{
 	--size:1.5em;
+=======
+.footer__social {
+	--size: 1.5em;
+>>>>>>> table
 
-	padding:1em 0.5em;
-	color:var(--color-social-media);
-	transition:color .3s;
+	padding: 1em 0.5em;
+	color: var(--color-social-media);
+	transition: color 0.3s;
 }
 
-@media(hover:hover){
-	.footer__social:hover{
-		color:inherit;
+@media (hover: hover) {
+	.footer__social:hover {
+		color: inherit;
 	}
 }
+<<<<<<< HEAD
 =======
 .footer__social {
 	--size: 1.5em;
@@ -64,3 +70,5 @@
 	}
 }
 >>>>>>> styleAndFontDefault
+=======
+>>>>>>> table

@@ -1,7 +1,7 @@
 .creators {
 	width: 100%;
 	height: 100%;
-	font-size:1rem;
+	font-size: 1rem;
 }
 
 .creators__title {
@@ -15,7 +15,7 @@
 	list-style: none;
 }
 
-.creators__item{
+.creators__item {
 	padding: 0.5em 0;
 }
 

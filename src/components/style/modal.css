@@ -2,6 +2,7 @@
 	width: 100%;
 	height: 100%;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	font-size:1rem;
 =======
 <<<<<<< Updated upstream
@@ -9,6 +10,9 @@
 	font-size: 1rem;
 >>>>>>> Stashed changes
 >>>>>>> styleAndFontDefault
+=======
+	font-size: 1rem;
+>>>>>>> table
 	position: fixed;
 	inset: 0;
 	display: flex;
@@ -33,10 +37,10 @@
 	position: relative;
 <<<<<<< HEAD
 	transform: scale(0);
-	transition: transform .3s;
+	transition: transform 0.3s;
 }
 
-.modal__content--show{
+.modal__content--show {
 	transform: scale(1);
 =======
 <<<<<<< Updated upstream

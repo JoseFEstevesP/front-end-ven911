@@ -64,6 +64,14 @@ export const system = {
 				},
 			},
 		},
+		form: {
+			ci: 'Ingrese su cedula...',
+			password: 'Ingrese su contaseña...',
+		},
+		btn: {
+			submit: 'Enviar',
+		},
+		loading: 'Cargando...',
 	},
 	page: {
 		home: {
@@ -78,13 +86,13 @@ export const system = {
 				btn: 'Entrar',
 			},
 			info: {
-				historia: {
+				history: {
 					title: 'Historia',
 					text: `El sistema de emergencia 911 se creó en Venezuela en 1999, como un número de teléfono gratuito y único para reportar emergencias. La idea fue creada por el Ministerio de Relaciones Interiores y Justicia, y el primer sistema 911 se implementó en Caracas, en 1999.
 								El sistema 911 se ha expandido rápidamente en Venezuela, y ahora está disponible en todas las ciudades principales. El sistema 911 está operado por los cuerpos policiales, bomberos y servicios médicos de emergencia locales, y está diseñado para responder a todo tipo de emergencias, incluyendo incendios, accidentes automovilísticos, violencia doméstica y emergencias médicas.
 								El sistema 911 ha sido un gran éxito, y ha salvado millones de vidas. El sistema 911 ha hecho que sea más fácil para las personas reportar emergencias, y ha ayudado a garantizar que las personas que necesitan ayuda la reciban rápidamente.`,
 				},
-				valores: {
+				values: {
 					title: 'Valores',
 					text: `
 					- Honestidad: Ser honestos en todas nuestras acciones, tanto con nosotros mismos como con los demás.
@@ -99,7 +107,7 @@ export const system = {
 Estos valores son fundamentales para el funcionamiento del VEN 911 Venezuela, ya que permiten que la institución brinde un servicio de calidad a la población venezolana.
 					`,
 				},
-				objetivo: {
+				objective: {
 					title: 'Objetivo',
 					text: `
 					El objetivo del VEN 911 Venezuela es proporcionar una respuesta rápida y efectiva a las emergencias en todo el país. La institución cuenta con una red de centros de atención telefónica y de despacho que están equipados con tecnología de punta. Los operadores del VEN 911 están capacitados para responder a una amplia gama de emergencias, incluyendo incendios, accidentes de tráfico, delitos, desastres naturales y otras situaciones de emergencia.
@@ -109,5 +117,9 @@ Estos valores son fundamentales para el funcionamiento del VEN 911 Venezuela, ya
 				},
 			},
 		},
+	},
+	msg: {
+		abort: 'La solicitud fue cancelada debido a un cambio inesperado',
+		msgLogin: 'Usuario conectado con éxito',
 	},
 };

@@ -1,6 +1,5 @@
 .input {
 	width: 100%;
-	min-width: 20em;
 	font-size: 1rem;
 	display: flex;
 	justify-content: center;
@@ -11,6 +10,7 @@
 
 .input__label {
 	margin-left: 1em;
+	font-weight: bold;
 }
 
 .input__label::first-letter {
@@ -82,8 +82,7 @@
 }
 
 .input__error {
-	margin: 0;
-	margin-left: 1em;
+	margin: 0 1em;
 	color: var(--color-red);
 }
 

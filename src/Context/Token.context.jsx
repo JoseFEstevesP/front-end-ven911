@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react';
 export const ContextToken = createContext();
 const TokenProvider = ({ children }) => {
-	const [token, setToken] = useState(null);
+	const [token, setToken] = useState(sessionStorage.getItem('token') || null);
 	return (
 		<ContextToken.Provider value={{ token, setToken }}>
 			{children}

@@ -1,14 +1,16 @@
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { system } from '../data/system';
 import Btn from './Btn';
 import Icons from './Icons';
 import Theme from './Theme';
 import './style/menu.css';
+import { ContextToken } from '../Context/Token.context';
 const Menu = ({ children }) => {
 	const menu = useRef(null);
 	const bar = useRef(null);
 	const profile = useRef(null);
+	const { token } = useContext(ContextToken);
 	const handleClick = () => {
 		document.body.classList.toggle('none');
 		menu.current.classList.toggle('menu__menu--show');
@@ -39,23 +41,25 @@ const Menu = ({ children }) => {
 				<nav className='menu__menu' ref={menu}>
 					<ul className='menu__ul'>
 						{children}
-						<li className='menu__li menu__li--profileAndExit'>
-							<Btn
-								nameIcon='user'
-								className='menu__btnProfile'
-								handleClick={handleProfile}
-							/>
-							<ul className='menu__profileAndExit' ref={profile}>
-								<li className='menu__profileAndExitItem'>
-									<Link to='/profile'>
-										<Icons iconName='user' />
-									</Link>
-								</li>
-								<li className='menu__profileAndExitItem'>
-									<Btn nameIcon='exit' className='menu__btnExit' />
-								</li>
-							</ul>
-						</li>
+						{token && (
+							<li className='menu__li menu__li--profileAndExit'>
+								<Btn
+									nameIcon='user'
+									className='menu__btnProfile'
+									handleClick={handleProfile}
+								/>
+								<ul className='menu__profileAndExit' ref={profile}>
+									<li className='menu__profileAndExitItem'>
+										<Link to='/profile'>
+											<Icons iconName='user' />
+										</Link>
+									</li>
+									<li className='menu__profileAndExitItem'>
+										<Btn nameIcon='exit' className='menu__btnExit' />
+									</li>
+								</ul>
+							</li>
+						)}
 					</ul>
 				</nav>
 				<Theme />

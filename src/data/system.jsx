@@ -89,23 +89,53 @@ export const system = {
 				history: {
 					title: 'Historia',
 					text: `El sistema de emergencia 911 se creó en Venezuela en 1999, como un número de teléfono gratuito y único para reportar emergencias. La idea fue creada por el Ministerio de Relaciones Interiores y Justicia, y el primer sistema 911 se implementó en Caracas, en 1999.
-								El sistema 911 se ha expandido rápidamente en Venezuela, y ahora está disponible en todas las ciudades principales. El sistema 911 está operado por los cuerpos policiales, bomberos y servicios médicos de emergencia locales, y está diseñado para responder a todo tipo de emergencias, incluyendo incendios, accidentes automovilísticos, violencia doméstica y emergencias médicas.
+	El sistema 911 se ha expandido rápidamente en Venezuela, y ahora está disponible en todas las ciudades principales. El sistema 911 está operado por los cuerpos policiales, bomberos y servicios médicos de emergencia locales, y está diseñado para responder a todo tipo de emergencias, incluyendo incendios, accidentes automovilísticos, violencia doméstica y emergencias médicas.
 								El sistema 911 ha sido un gran éxito, y ha salvado millones de vidas. El sistema 911 ha hecho que sea más fácil para las personas reportar emergencias, y ha ayudado a garantizar que las personas que necesitan ayuda la reciban rápidamente.`,
 				},
 				values: {
 					title: 'Valores',
-					text: `
-					- Honestidad: Ser honestos en todas nuestras acciones, tanto con nosotros mismos como con los demás.
-					- Equidad: Tratar a todos con justicia y respeto, sin importar su condición social, económica o política.
-					- Decoro: Comportarnos de manera adecuada y respetuosa, tanto en nuestra vida profesional como personal.
-					- Lealtad: Ser fieles a nuestros principios, a nuestros compañeros de trabajo y a nuestra institución.
-					- Vocación de servicio: Dedicarnos a servir a los demás, poniendo sus necesidades por encima de las nuestras.
-					- Disciplina: Cumplir con nuestros deberes y responsabilidades de manera responsable y eficiente.
-					- Eficacia: Alcanzar nuestros objetivos de manera oportuna y eficiente, utilizando los recursos disponibles de la mejor manera posible.
-					- Responsabilidad: Asumir las consecuencias de nuestros actos, tanto positivos como negativos.
-
-Estos valores son fundamentales para el funcionamiento del VEN 911 Venezuela, ya que permiten que la institución brinde un servicio de calidad a la población venezolana.
-					`,
+					text: (
+						<>
+							<ul>
+								<li>
+									<b>Honestidad</b>: Ser honestos en todas nuestras acciones,
+									tanto con nosotros mismos como con los demás.
+								</li>
+								<li>
+									<b>Equidad</b>: Tratar a todos con justicia y respeto, sin
+									importar su condición social, económica o política.
+								</li>
+								<li>
+									<b>Decoro</b>: Comportarnos de manera adecuada y respetuosa,
+									tanto en nuestra vida profesional como personal.
+								</li>
+								<li>
+									<b>Lealtad</b>: Ser fieles a nuestros principios, a nuestros
+									compañeros de trabajo y a nuestra institución.
+								</li>
+								<li>
+									<b>Vocación de servicio</b>: Dedicarnos a servir a los demás,
+									poniendo sus necesidades por encima de las nuestras.
+								</li>
+								<li>
+									<b>Disciplina</b>: Cumplir con nuestros deberes y
+									responsabilidades de manera responsable y eficiente.
+								</li>
+								<li>
+									<b>Eficacia</b>: Alcanzar nuestros objetivos de manera
+									oportuna y eficiente, utilizando los recursos disponibles de
+									la mejor manera posible.
+								</li>
+								<li>
+									<b>Responsabilidad</b>: Asumir las consecuencias de nuestros
+									actos, tanto positivos como negativos.
+								</li>
+							</ul>
+							Estos valores son fundamentales para el funcionamiento del VEN 911
+							Venezuela, ya que permiten que la institución brinde un servicio
+							de calidad a la población venezolana.
+						</>
+					),
 				},
 				objective: {
 					title: 'Objetivo',

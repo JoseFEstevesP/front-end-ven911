@@ -1,0 +1,31 @@
+.info{
+	width: 100%;
+	padding:0.5em 1em;
+	font-size: 1rem;
+	position: relative;
+}
+
+@media screen and (width >= 768px) {
+	.info{
+		width: 48em;
+		margin: 0 auto;
+	}
+}
+
+.info__title{
+	margin: 0;
+	text-align: right;
+	color: var(--color-primary-system);
+}
+
+.info__text{
+	width: 100%;
+}
+
+@media screen and (width >= 768px) {
+	.info__text{
+		width: 100%;
+		padding:1em;
+		margin:0 auto;
+	}
+}

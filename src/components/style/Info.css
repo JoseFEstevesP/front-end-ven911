@@ -13,8 +13,10 @@
 }
 
 .info__title{
+	--position:right;
+
 	margin: 0;
-	text-align: right;
+	text-align: var(--position);
 	color: var(--color-primary-system);
 }
 

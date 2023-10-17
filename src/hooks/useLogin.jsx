@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
+import { ContextRol } from '../Context/Rol.context';
 import { ContextToken } from '../Context/Token.context';
 import { ContextMsg } from '../Context/msg.context';
 import { system } from '../data/system';
 import usePost from './usePost';
-import { ContextRol } from '../Context/Rol.context';
 
-const useLogin = ({ initForm, url, urlRol }) => {
+const useLogin = ({ initForm, url }) => {
 	const { setToken } = useContext(ContextToken);
 	const { setMsg } = useContext(ContextMsg);
 	const { setRol } = useContext(ContextRol);
@@ -37,15 +37,17 @@ const useLogin = ({ initForm, url, urlRol }) => {
 	};
 	useEffect(() => {
 		if (error) {
-			const passErr = error?.filter(error => error.password);
-			const ciErr = error?.filter(error => error.ci);
+			const errors = {};
+			const initFormKeys = Object.keys(initForm);
+			for (const key of initFormKeys) {
+				if (error?.some(error => error[key])) {
+					errors[key] = error.filter(error => error[key]);
+				}
+			}
+			setErrors(errors);
 			setMsg({ ...error[0], type: true });
-			setErrors({
-				password: passErr.length > 0 ? passErr : false,
-				ci: ciErr.length > 0 ? ciErr : false,
-			});
 		}
-	}, [error, setMsg]);
+	}, [error, setMsg, initForm]);
 
 	return {
 		handleChange,

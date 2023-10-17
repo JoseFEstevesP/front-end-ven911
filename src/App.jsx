@@ -6,6 +6,8 @@ import Msg from './components/Msg';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import Home from './page/Home';
 import Redirect from './page/Redirect';
+import Head from './components/Head';
+import Footer from './components/Footer';
 
 const App = () => {
 	return (
@@ -13,12 +15,14 @@ const App = () => {
 			<RolProvider>
 				<MsgProvider>
 					<Msg />
+					<Head />
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route element={<ProtectedRoutes />}>
 							<Route path='/p' element={<Redirect />} />
 						</Route>
 					</Routes>
+					<Footer />
 				</MsgProvider>
 			</RolProvider>
 		</TokenProvider>

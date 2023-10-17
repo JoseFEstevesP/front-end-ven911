@@ -1,0 +1,10 @@
+.head {
+	width: 20em;
+	margin: 0 auto;
+}
+
+@media screen and (width >= 768px) {
+	.head {
+		width: 43.75em;
+	}
+}

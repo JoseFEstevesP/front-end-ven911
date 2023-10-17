@@ -6,7 +6,7 @@ import Credit from './Credit';
 import Icons from './Icons';
 import Modal from './Modal';
 import './style/footer.css';
-const Footer = () => {
+const Footer = ({ className }) => {
 	const [isOpenCredit, handleOpenCredit, handelCloseCredit] = useModal();
 	const [isOpenCreator, handleOpenCreator, handelCloseCreator] = useModal();
 	return (
@@ -17,7 +17,7 @@ const Footer = () => {
 			<Modal isOpen={isOpenCreator} close={handelCloseCreator}>
 				<Creators />
 			</Modal>
-			<section className='footer'>
+			<section className={`footer ${className}`}>
 				<div className='footer__contentBtn'>
 					<Btn
 						text={system.component.footer.credit.title}

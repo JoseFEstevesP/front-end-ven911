@@ -72,6 +72,9 @@ export const system = {
 			submit: 'Enviar',
 		},
 		loading: 'Cargando...',
+		page: {
+			title: 'S.U.C.I 9-1-1',
+		},
 	},
 	page: {
 		home: {

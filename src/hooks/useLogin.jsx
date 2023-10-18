@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
+import { ContextRol } from '../Context/Rol.context';
 import { ContextToken } from '../Context/Token.context';
 import { ContextMsg } from '../Context/msg.context';
 import { system } from '../data/system';
-import usePost from './usePost';
-import { ContextRol } from '../Context/Rol.context';
+import usePostLogin from './usePostLogin';
 
-const useLogin = ({ initForm, url, urlRol }) => {
+const useLogin = ({ initForm, url }) => {
 	const { setToken } = useContext(ContextToken);
 	const { setMsg } = useContext(ContextMsg);
 	const { setRol } = useContext(ContextRol);
-	const { handelFetch, data, error, loading } = usePost();
+	const { handelFetch, data, error, loading } = usePostLogin();
 	const [form, setForm] = useState(initForm);
 	const [errors, setErrors] = useState({});
 

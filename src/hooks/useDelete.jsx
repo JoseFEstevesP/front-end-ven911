@@ -22,7 +22,6 @@ const useDelete = ({ url }) => {
 	};
 	useEffect(() => {
 		if (error) {
-			console.log('useEffect -> error:', error);
 			setMsg({ ...error[0], type: true });
 		}
 	}, [error, setMsg]);

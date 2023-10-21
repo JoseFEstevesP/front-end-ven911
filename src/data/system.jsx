@@ -155,6 +155,7 @@ export const system = {
 		abort: 'La solicitud fue cancelada debido a un cambio inesperado',
 		msgLogin: 'Usuario conectado con éxito',
 		msgRegister: 'Registro con éxito',
+		msgUpdate: 'Actualizado con éxito',
 		msgDele: 'Eliminación con éxito',
 	},
 };

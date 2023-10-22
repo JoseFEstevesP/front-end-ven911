@@ -1,15 +1,17 @@
-import { useRef, useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { ContextToken } from '../Context/Token.context';
 import { system } from '../data/system';
+import useExit from '../hooks/useExit';
 import Btn from './Btn';
 import Icons from './Icons';
 import Theme from './Theme';
 import './style/menu.css';
-import { ContextToken } from '../Context/Token.context';
 const Menu = ({ children }) => {
 	const menu = useRef(null);
 	const bar = useRef(null);
 	const profile = useRef(null);
+	const { handelClickExit } = useExit();
 	const { token } = useContext(ContextToken);
 	const handleClick = () => {
 		document.body.classList.toggle('none');
@@ -24,6 +26,8 @@ const Menu = ({ children }) => {
 	const handleProfile = () => {
 		profile.current.classList.toggle('menu__profileAndExit--show');
 	};
+	const handleExit = () => handelClickExit();
+
 	return (
 		<>
 			<section className='menu'>
@@ -55,7 +59,11 @@ const Menu = ({ children }) => {
 										</Link>
 									</li>
 									<li className='menu__profileAndExitItem'>
-										<Btn nameIcon='exit' className='menu__btnExit' />
+										<Btn
+											nameIcon='exit'
+											className='menu__btnExit'
+											handleClick={handleExit}
+										/>
 									</li>
 								</ul>
 							</li>

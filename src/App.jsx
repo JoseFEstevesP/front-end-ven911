@@ -1,13 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
-import RolProvider from './Context/Rol.context';
-import TokenProvider from './Context/Token.context';
-import MsgProvider from './Context/msg.context';
+import Footer from './components/Footer';
+import Head from './components/Head';
 import Msg from './components/Msg';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import RolProvider from './context/Rol.context';
+import TokenProvider from './context/Token.context';
+import MsgProvider from './context/msg.context';
+import Error404 from './page/Error404';
 import Home from './page/Home';
 import Redirect from './page/Redirect';
-import Head from './components/Head';
-import Footer from './components/Footer';
 
 const App = () => {
 	return (
@@ -21,6 +22,7 @@ const App = () => {
 						<Route element={<ProtectedRoutes />}>
 							<Route path='/p' element={<Redirect />} />
 						</Route>
+						<Route path='/*' element={<Error404 />} />
 					</Routes>
 					<Footer />
 				</MsgProvider>

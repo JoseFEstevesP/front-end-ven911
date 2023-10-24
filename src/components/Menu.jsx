@@ -1,13 +1,13 @@
 import { useContext, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ContextToken } from '../Context/Token.context';
+import { Link, NavLink } from 'react-router-dom';
+import { ContextToken } from '../context/Token.context';
 import { system } from '../data/system';
 import useExit from '../hooks/useExit';
 import Btn from './Btn';
 import Icons from './Icons';
 import Theme from './Theme';
 import './style/menu.css';
-const Menu = ({ children }) => {
+const Menu = ({ children, className }) => {
 	const menu = useRef(null);
 	const bar = useRef(null);
 	const profile = useRef(null);
@@ -30,7 +30,7 @@ const Menu = ({ children }) => {
 
 	return (
 		<>
-			<section className='menu'>
+			<section className={`menu ${className}`}>
 				<Link to='/' onClick={handleHome}>
 					<h1 className='menu__title'>
 						{<Icons iconName='logo' className='menu__icon' />}
@@ -54,9 +54,14 @@ const Menu = ({ children }) => {
 								/>
 								<ul className='menu__profileAndExit' ref={profile}>
 									<li className='menu__profileAndExitItem'>
-										<Link to='/profile'>
+										<NavLink
+											to={'/profile'}
+											className={({ isActive }) =>
+												`${isActive ? 'menu__a--active' : ''}`
+											}
+										>
 											<Icons iconName='user' />
-										</Link>
+										</NavLink>
 									</li>
 									<li className='menu__profileAndExitItem'>
 										<Btn

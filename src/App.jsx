@@ -9,6 +9,7 @@ import MsgProvider from './context/msg.context';
 import Error404 from './page/Error404';
 import Home from './page/Home';
 import Redirect from './page/Redirect';
+import Profile from './page/profile';
 
 const App = () => {
 	return (
@@ -21,6 +22,7 @@ const App = () => {
 						<Route path='/' element={<Home />} />
 						<Route element={<ProtectedRoutes />}>
 							<Route path='/p' element={<Redirect />} />
+							<Route path='/profile' element={<Profile />} />
 						</Route>
 						<Route path='/*' element={<Error404 />} />
 					</Routes>

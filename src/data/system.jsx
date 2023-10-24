@@ -65,8 +65,20 @@ export const system = {
 			},
 		},
 		form: {
-			ci: 'Ingrese su cedula...',
-			password: 'Ingrese su contaseña...',
+			label: {
+				ci: 'CI',
+				email: 'Correo',
+				password: 'Contraseña',
+				name: 'Nombre',
+				surname: 'Apellido',
+			},
+			placeholder: {
+				ci: 'Ingrese su cedula...',
+				email: 'Ingrese su correo...',
+				password: 'Ingrese su contaseña...',
+				name: 'Ingrese su nombre...',
+				surname: 'Ingrese su apellido...',
+			},
 		},
 		btn: {
 			submit: 'Enviar',
@@ -149,6 +161,16 @@ export const system = {
 					`,
 				},
 			},
+		},
+		profile: {
+			title: 'Perfil',
+			form: {
+				oldPassword: 'Contraseña anterior',
+				newPassword: 'Contraseña nueva',
+			},
+			data: 'Actualizar Datos',
+			pass: 'Actualizar Contraseña',
+			email: 'Actualizar Correo',
 		},
 	},
 	msg: {

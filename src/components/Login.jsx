@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { ContextToken } from '../Context/Token.context';
+import { ContextToken } from '../context/Token.context';
 import { system } from '../data/system';
 import useLogin from '../hooks/useLogin';
 import Btn from './Btn';
@@ -12,7 +12,7 @@ const initForm = {
 	ci: '',
 	password: '',
 };
-const Login = ({ title, iconSubmit, to, url }) => {
+const Login = ({ title, to, url }) => {
 	const { handleSubmit, handleChange, form, errors, loading } = useLogin({
 		initForm,
 		url,
@@ -36,8 +36,8 @@ const Login = ({ title, iconSubmit, to, url }) => {
 					<Input
 						iconName={'ci'}
 						name={'ci'}
-						label={'CI'}
-						placeholder={system.component.form.ci}
+						label={system.component.form.label.ci}
+						placeholder={system.component.form.placeholder.ci}
 						type='number'
 						onChange={handleChange}
 						value={form.ci}
@@ -46,15 +46,14 @@ const Login = ({ title, iconSubmit, to, url }) => {
 					<Input
 						iconName={'padlock'}
 						name={'password'}
-						label={'contraseña'}
-						placeholder={system.component.form.password}
+						label={system.component.form.label.password}
+						placeholder={system.component.form.placeholder.password}
 						type='password'
 						onChange={handleChange}
 						value={form.password}
 						error={errors.password}
 					/>
 					<Btn
-						nameIcon={iconSubmit}
 						typeIcon='module'
 						className='btnStyle'
 						text={system.component.btn.submit}

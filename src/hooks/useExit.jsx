@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { ContextRol } from '../Context/Rol.context';
-import { ContextToken } from '../Context/Token.context';
+import { ContextRol } from '../context/Rol.context';
+import { ContextToken } from '../context/Token.context';
 const useExit = () => {
 	const { setToken } = useContext(ContextToken);
 	const { setRol } = useContext(ContextRol);

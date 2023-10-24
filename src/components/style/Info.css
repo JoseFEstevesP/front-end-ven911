@@ -1,33 +1,33 @@
-.info{
+.info {
 	width: 100%;
-	padding:0.5em 1em;
+	padding: 0.5em 1em;
 	font-size: 1rem;
 	position: relative;
 }
 
 @media screen and (width >= 768px) {
-	.info{
+	.info {
 		width: 48em;
 		margin: 0 auto;
 	}
 }
 
-.info__title{
-	--position:right;
+.info__title {
+	--position: right;
 
 	margin: 0;
 	text-align: var(--position);
 	color: var(--color-primary-system);
 }
 
-.info__text{
+.info__text {
 	width: 100%;
 }
 
 @media screen and (width >= 768px) {
-	.info__text{
+	.info__text {
 		width: 100%;
-		padding:1em;
-		margin:0 auto;
+		padding: 1em;
+		margin: 0 auto;
 	}
 }

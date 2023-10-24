@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { ContextMsg } from '../Context/msg.context';
+import { ContextMsg } from '../context/msg.context';
 import { system } from '../data/system';
 import useUpdate from './useUpdate';
 
@@ -48,6 +48,7 @@ const useUpdateData = ({ initForm, url }) => {
 		handleSubmit,
 		errors,
 		loading,
+		data,
 	};
 };
 export default useUpdateData;

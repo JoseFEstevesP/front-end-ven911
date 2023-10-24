@@ -1,4 +1,4 @@
-import MenuGA from '../components/MenuGA';
+import MenuModule from '../components/MenuModule';
 import Page from '../components/Page';
 import FormProfileData from '../components/profileComponent/FormProfileData';
 import FormProfileEmail from '../components/profileComponent/FormProfileEmail';
@@ -12,7 +12,7 @@ const Profile = () => {
 	return (
 		<Page title={system.page.profile.title}>
 			<section className='profile'>
-				<MenuGA className='profile__menu' />
+				<MenuModule className='profile__menu' />
 				{dataDefault && (
 					<FormProfileData
 						initForm={{

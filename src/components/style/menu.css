@@ -11,7 +11,7 @@
 .menu__title {
 	display: flex;
 	justify-content: center;
-	align-items: flex-end;
+	align-items: center;
 	font-size: 2em;
 	gap: 0.25em;
 	font-weight: bold;

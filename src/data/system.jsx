@@ -2,7 +2,7 @@
 export const system = {
 	component: {
 		menu: {
-			title: 'S.U.C.I 911',
+			title: 'S.U.C.I Ven9-1-1',
 		},
 		doubleInput: {
 			select: {
@@ -179,5 +179,15 @@ export const system = {
 		msgRegister: 'Registro con éxito',
 		msgUpdate: 'Actualizado con éxito',
 		msgDele: 'Eliminación con éxito',
+	},
+	routeApi: {
+		user: {
+			primary: '/user',
+			login: '/login',
+			profile: '/profile',
+			updateData: '/update-data',
+			updateEmail: '/update-email',
+			updatePassword: '/update-password',
+		},
 	},
 };

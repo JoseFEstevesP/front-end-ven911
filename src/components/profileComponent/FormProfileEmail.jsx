@@ -8,7 +8,10 @@ const FormProfileEmail = ({ initForm }) => {
 	const { handleSubmit, handleChange, form, errors, data, setForm } =
 		useUpdateData({
 			initForm,
-			url: `${import.meta.env.VITE_ULR_API}/user/update-email`,
+			url:
+				import.meta.env.VITE_ULR_API +
+				system.routeApi.user.primary +
+				system.routeApi.user.updateEmail,
 		});
 	useEffect(() => {
 		if (data) {

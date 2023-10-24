@@ -6,7 +6,10 @@ import Input from '../Input';
 const FormProfilePassword = ({ initForm }) => {
 	const { handleSubmit, handleChange, form, errors } = useUpdateData({
 		initForm,
-		url: `${import.meta.env.VITE_ULR_API}/user/update-password`,
+		url:
+			import.meta.env.VITE_ULR_API +
+			system.routeApi.user.primary +
+			system.routeApi.user.updatePassword,
 	});
 	return (
 		<section className='box formData formData--pass'>

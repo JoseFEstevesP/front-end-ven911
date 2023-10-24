@@ -21,7 +21,7 @@ const App = () => {
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route element={<ProtectedRoutes />}>
-							<Route path='/p' element={<Redirect />} />
+							<Route path='/redirect' element={<Redirect />} />
 							<Route path='/profile' element={<Profile />} />
 						</Route>
 						<Route path='/*' element={<Error404 />} />

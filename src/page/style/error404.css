@@ -1,17 +1,17 @@
-.error404{
-	display:flex;
+.error404 {
+	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.error404__icon{
-	--size:5em;
+.error404__icon {
+	--size: 5em;
 }
 
-.error404__title{
+.error404__title {
 	text-align: center;
 }
 
-.error404__text{
+.error404__text {
 	text-align: center;
 }

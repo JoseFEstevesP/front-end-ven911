@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { ContextRol } from '../Context/Rol.context';
-import { ContextToken } from '../Context/Token.context';
-import { ContextMsg } from '../Context/msg.context';
+import { ContextRol } from '../context/Rol.context';
+import { ContextToken } from '../context/Token.context';
+import { ContextMsg } from '../context/msg.context';
 import { system } from '../data/system';
 import usePostLogin from './usePostLogin';
 

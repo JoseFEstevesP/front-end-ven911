@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { ContextMsg } from '../Context/msg.context';
+import { ContextMsg } from '../context/msg.context';
 import { system } from '../data/system';
 import useDel from './useDel';
 

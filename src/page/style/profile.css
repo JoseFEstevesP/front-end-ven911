@@ -1,0 +1,56 @@
+.profile {
+	display: grid;
+	grid-template-rows: 3.125em repeat(3, auto);
+	grid-template-areas:
+		'menu'
+		'data'
+		'pass'
+		'email';
+	gap: 1em;
+	place-items: center;
+	align-content: stretch;
+	padding: 0 1em;
+}
+
+@media screen and (width >= 768px) {
+	.profile {
+		grid-template-rows: 3.125em auto;
+		grid-template-areas:
+			'menu menu menu'
+			'data pass email';
+	}
+}
+
+.formData__title {
+	margin: 0 0 0.5em;
+}
+
+.profile__menu {
+	grid-area: menu;
+}
+
+.formData {
+	width: 20em;
+	font-size: 1em;
+	padding: 1em;
+}
+
+.formData--data {
+	grid-area: data;
+}
+
+.formData--pass {
+	grid-area: pass;
+}
+
+.formData--email {
+	grid-area: email;
+}
+
+.formData__form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 1em;
+}

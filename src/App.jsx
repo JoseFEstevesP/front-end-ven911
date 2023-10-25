@@ -10,6 +10,7 @@ import Error404 from './page/Error404';
 import Home from './page/Home';
 import Redirect from './page/Redirect';
 import Profile from './page/profile';
+import ModuleGA from './page/ModuleGA';
 
 const App = () => {
 	return (
@@ -23,6 +24,7 @@ const App = () => {
 						<Route element={<ProtectedRoutes />}>
 							<Route path='/redirect' element={<Redirect />} />
 							<Route path='/profile' element={<Profile />} />
+							<Route path='/ga' element={<ModuleGA />} />
 						</Route>
 						<Route path='/*' element={<Error404 />} />
 					</Routes>

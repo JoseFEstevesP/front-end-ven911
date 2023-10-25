@@ -1,0 +1,26 @@
+.redirect {
+	font-size: 1rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 1em;
+	padding: 0 1em;
+}
+
+.redirect__title {
+	margin: 0;
+}
+
+.redirect__modules {
+	width: 100%;
+	max-width: 48em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1em;
+}
+
+.redirect__btnExit {
+	padding: 0.5em;
+}

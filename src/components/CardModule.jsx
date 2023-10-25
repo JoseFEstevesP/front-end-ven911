@@ -8,7 +8,7 @@ const CardModule = ({ title, iconName, to }) => {
 			<h2 className='card__title'>{title}</h2>
 			<Icons className='card__icon' iconName={iconName} type='module' />
 			<Link className='card__link' to={to}>
-				{system.page.home.cardModule.btn}
+				{system.page.redirect.cardModule.btn}
 			</Link>
 		</article>
 	);

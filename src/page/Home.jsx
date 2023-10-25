@@ -7,7 +7,7 @@ const Home = () => {
 		<Page title='Inicio'>
 			<div className='home'>
 				<Login
-					title={system.component.menu.title}
+					title={system.title}
 					to={'/redirect'}
 					url={
 						import.meta.env.VITE_ULR_API +

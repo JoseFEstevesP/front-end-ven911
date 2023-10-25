@@ -34,7 +34,7 @@ const Menu = ({ children, className }) => {
 				<Link to='/' onClick={handleHome}>
 					<h1 className='menu__title'>
 						{<Icons iconName='logo' className='menu__icon' />}
-						{`${system.component.menu.title}`}
+						{`${system.title}`}
 					</h1>
 				</Link>
 				<div className='menu__contentBtn'>

@@ -1,5 +1,5 @@
 .login {
-	width: 320px;
+	width: 20em;
 	font-size: 1rem;
 	display: flex;
 	justify-content: center;
@@ -8,14 +8,13 @@
 }
 
 .login__title {
-	font-size: 2em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .login__content {
-	width: 320px;
+	width: 20em;
 	padding: 1em;
 	display: flex;
 	justify-content: center;

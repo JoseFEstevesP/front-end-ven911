@@ -1,6 +1,7 @@
 .card {
 	font-size: 1rem;
 	width: 15em;
+	height: 10em;
 	padding: 0.5em;
 	display: grid;
 	grid-template-columns: repeat(2, auto);

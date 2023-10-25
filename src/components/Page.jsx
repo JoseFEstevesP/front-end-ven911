@@ -3,7 +3,7 @@ import { system } from '../data/system';
 
 const Page = ({ children, title }) => {
 	useEffect(() => {
-		document.title = `${system.component.page.title} | ${title}`;
+		document.title = `${system.title} | ${title}`;
 	}, [title]);
 	return <>{children}</>;
 };

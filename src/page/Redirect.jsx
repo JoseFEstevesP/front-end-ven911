@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import Btn from '../components/Btn';
 import CardModule from '../components/CardModule';
 import Page from '../components/Page';
+import Theme from '../components/Theme';
 import { ContextRol } from '../context/Rol.context';
 import { system } from '../data/system';
 import useExit from '../hooks/useExit';
@@ -19,12 +20,16 @@ const Redirect = () => {
 	return (
 		<Page title='Redirección'>
 			<div className='redirect'>
-				<h2 className='redirect_title'>{system.titleLarge}</h2>
-				<Btn
-					nameIcon='exit'
-					className='box redirect__btnExit'
-					handleClick={handleExit}
-				/>
+				<h2 className='redirect__title'>{system.titleLarge}</h2>
+				<div className='redirect__options'>
+					<Theme />
+					<Btn
+						nameIcon='exit'
+						className='box redirect__btnExit'
+						handleClick={handleExit}
+					/>
+				</div>
+
 				<div className='redirect__modules'>
 					{validatePermissions({ per: system.permissions.ocp }) && (
 						<CardModule

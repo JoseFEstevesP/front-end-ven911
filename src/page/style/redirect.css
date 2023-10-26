@@ -11,6 +11,14 @@
 	margin: 0;
 }
 
+.redirect__options {
+	width: 100%;
+	max-width: 48em;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .redirect__modules {
 	width: 100%;
 	max-width: 48em;

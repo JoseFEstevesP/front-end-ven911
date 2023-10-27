@@ -6,10 +6,10 @@ const TableCell = ({ children }) => {
 	);
 };
 
-export const Cell = ({ text, className = '' }) => {
+export const Cell = ({ className = '', children }) => {
 	return (
 		<>
-			<td className={`table__td ${className}`}>{text}</td>
+			<td className={`table__td ${className}`}>{children}</td>
 		</>
 	);
 };

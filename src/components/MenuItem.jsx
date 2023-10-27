@@ -5,9 +5,11 @@ const MenuItem = ({ to, text }) => {
 		<li className='menu__li'>
 			<NavLink
 				to={to}
-				className={({ isActive }) =>
-					`menu__a ${isActive ? 'menu__a--active' : ''}`
-				}
+				className={({ isActive }) => {
+					console.log('MenuItem -> isActive:', isActive);
+					return `menu__a ${isActive ? 'menu__a--active' : ''}`;
+				}}
+				end
 			>
 				{text}
 			</NavLink>

@@ -7,7 +7,7 @@ import Btn from './Btn';
 import Icons from './Icons';
 import Theme from './Theme';
 import './style/menu.css';
-const Menu = ({ children, className }) => {
+const Menu = ({ children, className, route }) => {
 	const menu = useRef(null);
 	const bar = useRef(null);
 	const profile = useRef(null);
@@ -55,10 +55,11 @@ const Menu = ({ children, className }) => {
 								<ul className='menu__profileAndExit' ref={profile}>
 									<li className='menu__profileAndExitItem'>
 										<NavLink
-											to={'/profile'}
+											to={`${route}/profile`}
 											className={({ isActive }) =>
 												`${isActive ? 'menu__a--active' : ''}`
 											}
+											end
 										>
 											<Icons iconName='user' />
 										</NavLink>

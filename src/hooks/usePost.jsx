@@ -4,7 +4,7 @@ import { fetchData } from '../helpers/fetch';
 const usePost = () => {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
-	const [data, setData] = useState({});
+	const [data, setData] = useState(null);
 	const { token } = useContext(ContextToken);
 	const handelFetch = useCallback(
 		({ url, form }) => {

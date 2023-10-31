@@ -1,3 +1,4 @@
+// TODO: refactorizar este componente para que sea un "select" personalizado para su fácil manejo de los datos
 import Icons from './Icons';
 import './style/input.css';
 const Select = ({
@@ -8,13 +9,16 @@ const Select = ({
 	label,
 	title,
 	children,
+	className,
 }) => {
 	return (
 		<>
-			<div className='input'>
-				<label htmlFor={name} className='input__label'>
-					{label || name}:
-				</label>
+			<div className={`input ${className}`}>
+				{label && (
+					<label htmlFor={name} className='input__label'>
+						{label}:
+					</label>
+				)}
 				<div className={`input__style ${error && 'input__style--show'}`}>
 					<select
 						className='input__select'

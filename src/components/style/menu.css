@@ -12,7 +12,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 2em;
+	font-size: 1.5em;
 	gap: 0.25em;
 	font-weight: bold;
 	margin: 0;
@@ -88,7 +88,7 @@
 	align-items: flex-start;
 	visibility: hidden;
 	opacity: 0%;
-	z-index: 10;
+	z-index: 5;
 	top: 3.75em;
 	transition:
 		opacity 0.3s,
@@ -257,7 +257,7 @@
 .menu__submenu {
 	position: absolute;
 	left: 50%;
-	z-index: 3;
+	z-index: 5;
 	padding: 0;
 	opacity: 0%;
 	visibility: hidden;

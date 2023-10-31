@@ -4,3 +4,11 @@
 	width: var(--size);
 	height: var(--size);
 }
+
+.icon--delete {
+	color: var(--color-red);
+}
+
+.icon--edit {
+	color: var(--color-yellow);
+}

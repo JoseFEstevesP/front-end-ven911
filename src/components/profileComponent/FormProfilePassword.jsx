@@ -1,10 +1,10 @@
 import { system } from '../../data/system';
-import useUpdateData from '../../hooks/useUpdateData';
 import Btn from '../Btn';
 import Input from '../Input';
+import useUpdate from '../../hooks/useUpdate';
 
 const FormProfilePassword = ({ initForm }) => {
-	const { handleSubmit, handleChange, form, errors } = useUpdateData({
+	const { handleSubmit, handleChange, form, errors } = useUpdate({
 		initForm,
 		url:
 			import.meta.env.VITE_ULR_API +

@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from 'react';
 import { ContextToken } from '../context/Token.context';
 import { fetchData } from '../helpers/fetch';
-const useDel = () => {
+const usePut = () => {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState(null);
@@ -10,7 +10,7 @@ const useDel = () => {
 		({ url, form }) => {
 			setLoading(true);
 			fetchData()
-				.del({
+				.put({
 					url,
 					options: {
 						headers: {
@@ -35,4 +35,4 @@ const useDel = () => {
 	);
 	return { data, error, loading, handelFetch };
 };
-export default useDel;
+export default usePut;

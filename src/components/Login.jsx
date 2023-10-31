@@ -54,7 +54,6 @@ const Login = ({ title, to, url }) => {
 						error={errors.password}
 					/>
 					<Btn
-						typeIcon='module'
 						className='btnStyle'
 						text={system.component.btn.submit}
 						type='submit'

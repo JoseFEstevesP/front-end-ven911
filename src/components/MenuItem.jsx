@@ -6,7 +6,6 @@ const MenuItem = ({ to, text }) => {
 			<NavLink
 				to={to}
 				className={({ isActive }) => {
-					console.log('MenuItem -> isActive:', isActive);
 					return `menu__a ${isActive ? 'menu__a--active' : ''}`;
 				}}
 				end

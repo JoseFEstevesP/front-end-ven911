@@ -9,7 +9,7 @@ const useDelete = ({ url }) => {
 
 	useEffect(() => {
 		if (data) {
-			setMsg({ msg: system.msg.msgDele, type: false });
+			setMsg({ msg: system.msg.msgDele, type: true });
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
@@ -28,6 +28,7 @@ const useDelete = ({ url }) => {
 
 	return {
 		handleDelete,
+		data,
 	};
 };
 export default useDelete;

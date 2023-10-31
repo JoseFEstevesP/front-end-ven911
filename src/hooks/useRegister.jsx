@@ -11,8 +11,8 @@ const useRegister = ({ initForm, url }) => {
 
 	useEffect(() => {
 		if (data) {
-			setForm(initForm);
 			setMsg({ msg: system.msg.msgRegister, type: false });
+			setForm(initForm);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, initForm]);
@@ -49,6 +49,7 @@ const useRegister = ({ initForm, url }) => {
 		handleSubmit,
 		errors,
 		loading,
+		data,
 	};
 };
 export default useRegister;

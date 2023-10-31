@@ -1,18 +1,19 @@
 import { useEffect } from 'react';
 import { system } from '../../data/system';
-import useUpdateData from '../../hooks/useUpdateData';
 import Btn from '../Btn';
 import Input from '../Input';
+import useUpdate from '../../hooks/useUpdate';
 
 const FormProfileEmail = ({ initForm }) => {
-	const { handleSubmit, handleChange, form, errors, data, setForm } =
-		useUpdateData({
+	const { handleSubmit, handleChange, form, errors, data, setForm } = useUpdate(
+		{
 			initForm,
 			url:
 				import.meta.env.VITE_ULR_API +
 				system.routeApi.user.primary +
 				system.routeApi.user.updateEmail,
-		});
+		},
+	);
 	useEffect(() => {
 		if (data) {
 			setForm({ email: form.email, password: '' });

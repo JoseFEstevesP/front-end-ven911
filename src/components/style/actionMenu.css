@@ -16,10 +16,10 @@
 
 .popupMenu__menu {
 	position: absolute;
-	top: 35px;
+	top: 2.188em;
 	width: 2.5em;
 	padding: 0.625em;
-	z-index: 1;
+	z-index: 5;
 	border-radius: 0.625em;
 	border: 0.063em solid var(--color-primary-system);
 	background-color: var(--color-content);
@@ -56,4 +56,5 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	gap: 0.5em;
 }

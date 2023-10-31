@@ -45,6 +45,6 @@ const useGet = () => {
 			});
 		}
 	};
-	return { data, error, loading, handleController, handelFetch };
+	return { data, setData, error, loading, handleController, handelFetch };
 };
 export default useGet;

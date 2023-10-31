@@ -1,22 +1,21 @@
 import { useEffect } from 'react';
 import { system } from '../../data/system';
-import useUpdateData from '../../hooks/useUpdateData';
 import Btn from '../Btn';
 import Input from '../Input';
+import useUpdate from '../../hooks/useUpdate';
 
 const FormProfileData = ({ initForm }) => {
-	const { handleSubmit, handleChange, form, errors, data, setForm } =
-		useUpdateData({
+	const { handleSubmit, handleChange, form, errors, data, setForm } = useUpdate(
+		{
 			initForm,
 			url:
 				import.meta.env.VITE_ULR_API +
 				system.routeApi.user.primary +
 				system.routeApi.user.updateData,
-		});
+		},
+	);
 	useEffect(() => {
 		if (data) {
-			console.log('useEffect -> data:', data);
-			console.log('useEffect -> form:', form);
 			setForm(form);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

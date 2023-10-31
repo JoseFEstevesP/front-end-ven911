@@ -77,6 +77,7 @@ export const system = {
 				password: 'Ingrese su contaseña...',
 				name: 'Ingrese su nombre...',
 				surname: 'Ingrese su apellido...',
+				search: 'Buscar...',
 			},
 		},
 		btn: {
@@ -117,11 +118,26 @@ export const system = {
 	routeApi: {
 		user: {
 			primary: '/user',
+			register: '/register',
+			search: '/search',
+			list: '/list',
 			login: '/login',
 			profile: '/profile',
+			update: '/update',
 			updateData: '/update-data',
 			updateEmail: '/update-email',
 			updatePassword: '/update-password',
+			delete: '/delete',
+		},
+		rol: {
+			primary: '/rol',
+			list: '/list',
+			lisOfLimit: '/list_of_limit',
+		},
+		site: {
+			primary: '/site',
+			list: '/list',
+			lisOfLimit: '/list_of_limit',
 		},
 	},
 	permissions: {

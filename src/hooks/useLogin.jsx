@@ -4,11 +4,13 @@ import { ContextToken } from '../context/Token.context';
 import { ContextMsg } from '../context/msg.context';
 import { system } from '../data/system';
 import usePostLogin from './usePostLogin';
+import { ContextSite } from '../context/Site.context';
 
 const useLogin = ({ initForm, url }) => {
 	const { setToken } = useContext(ContextToken);
 	const { setMsg } = useContext(ContextMsg);
 	const { setRol } = useContext(ContextRol);
+	const { setSite } = useContext(ContextSite);
 	const { handelFetch, data, error, loading } = usePostLogin();
 	const [form, setForm] = useState(initForm);
 	const [errors, setErrors] = useState({});
@@ -17,8 +19,10 @@ const useLogin = ({ initForm, url }) => {
 		if (data?.JWT) {
 			setToken(data?.JWT);
 			setRol(data?.rol);
+			setSite(data?.site);
 			sessionStorage.setItem('token', data?.JWT);
 			sessionStorage.setItem('rol', data?.rol);
+			sessionStorage.setItem('site', data?.site);
 			setForm(initForm);
 			setMsg({ msg: system.msg.msgLogin, type: false });
 		}

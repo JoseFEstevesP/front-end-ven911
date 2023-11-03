@@ -70,6 +70,9 @@ export const system = {
 				password: 'Contraseña',
 				name: 'Nombre',
 				surname: 'Apellido',
+				permissions: 'Permisos',
+				rol: 'Rol',
+				site: 'Sede',
 			},
 			placeholder: {
 				ci: 'Ingrese su cedula...',
@@ -78,6 +81,12 @@ export const system = {
 				name: 'Ingrese su nombre...',
 				surname: 'Ingrese su apellido...',
 				search: 'Buscar...',
+			},
+			select: {
+				aria: 'Selecciona una opción',
+				rol: 'Seleccione el Rol',
+				site: 'Seleccione la Sede',
+				filter: 'Seleccione el filtro',
 			},
 		},
 		btn: {
@@ -133,6 +142,10 @@ export const system = {
 			primary: '/rol',
 			list: '/list',
 			lisOfLimit: '/list_of_limit',
+			register: '/register',
+			search: '/search',
+			update: '/update',
+			delete: '/delete',
 		},
 		site: {
 			primary: '/site',

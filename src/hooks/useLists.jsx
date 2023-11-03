@@ -17,11 +17,11 @@ const useLits = ({ url }) => {
 			}&orderProperty=${orderProperty}&order=${order}`,
 		});
 	};
-	const nex = () => {
-		handleList({ page: data?.nextPage });
+	const nex = ({ orderProperty = 'name' }) => {
+		handleList({ page: data?.nextPage, orderProperty });
 	};
-	const prev = () => {
-		handleList({ page: data?.previousPage });
+	const prev = ({ orderProperty }) => {
+		handleList({ page: data?.previousPage, orderProperty });
 	};
 	return {
 		data,

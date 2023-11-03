@@ -31,11 +31,11 @@ const useSearch = ({ url }) => {
 			}&orderProperty=${orderProperty}&order=${order}`,
 		});
 	};
-	const nex = e => {
-		handleSearch({ e, page: data?.nextPage });
+	const nex = ({ orderProperty = 'name' }) => {
+		handleSearch({ page: data?.nextPage, orderProperty });
 	};
-	const prev = e => {
-		handleSearch({ e, page: data?.previousPage });
+	const prev = ({ orderProperty }) => {
+		handleSearch({ page: data?.previousPage, orderProperty });
 	};
 	return {
 		data,

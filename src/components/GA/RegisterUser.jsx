@@ -18,7 +18,6 @@ const initForm = {
 const RegisterUser = ({
 	isOpen,
 	handelClose,
-	setData,
 	handleList,
 	siteValue,
 	order,
@@ -29,7 +28,6 @@ const RegisterUser = ({
 			import.meta.env.VITE_ULR_API +
 			system.routeApi.user.primary +
 			system.routeApi.user.register,
-		setData,
 	});
 	const { handelFetch: handelFetchRol, data: dataRol } = useGet();
 	const { handelFetch: handelFetchSite, data: dataSite } = useGet();
@@ -117,34 +115,24 @@ const RegisterUser = ({
 				/>
 				<Select
 					className='register__input'
-					label={'Rol del usuario'}
+					label={system.component.form.label.rol}
 					name={'uidRol'}
-					title={'Seleccione el Rol'}
+					title={system.component.form.select.rol}
 					value={form.uidRol}
 					onChange={handleChange}
 					error={errors.uidRol}
-				>
-					{dataRol?.map(item => (
-						<option key={item.uid} value={item.uid}>
-							{item.name}
-						</option>
-					))}
-				</Select>
+					data={dataRol?.map(item => ({ value: item.uid, label: item.name }))}
+				/>
 				<Select
 					className='register__input'
-					label={'Sede del usuario'}
+					label={system.component.form.label.site}
 					name={'uidSite'}
-					title={'Seleccione la sede'}
+					title={system.component.form.select.site}
 					value={form.uidSite}
 					onChange={handleChange}
 					error={errors.uidSite}
-				>
-					{dataSite?.map(item => (
-						<option key={item.uid} value={item.uid}>
-							{item.name}
-						</option>
-					))}
-				</Select>
+					data={dataSite?.map(item => ({ value: item.uid, label: item.name }))}
+				/>
 				<Btn
 					className='btnStyle'
 					text={system.component.btn.submit}

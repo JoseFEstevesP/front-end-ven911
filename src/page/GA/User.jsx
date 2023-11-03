@@ -1,8 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
 import RegisterUser from '../../components/GA/RegisterUser';
 import TableDataUser from '../../components/GA/TableDataUser';
+import UpdateUser from '../../components/GA/UpdateUser';
+import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
@@ -14,8 +17,7 @@ import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
-import './style/user.css';
-import UpdateUser from '../../components/GA/UpdateUser';
+import './style/page.css';
 
 const heads = ['Nombre', 'Apellido', 'CI', 'Correo', 'Rol', 'Acción'];
 const dataOrder = [
@@ -102,35 +104,35 @@ const User = () => {
 	const renderPaginate = useCallback(() => {
 		if (search) {
 			return (
-				<div className='user__paginate'>
+				<div className='page__paginate'>
 					<Btn
-						handleClick={prevSearch}
+						handleClick={() => prevSearch({ orderProperty: order })}
 						nameIcon={'arrow'}
-						classIcon={!dataPrevSearch ? 'user__icon--hidden' : ''}
+						classIcon={!dataPrevSearch ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={nexSearch}
+						handleClick={() => nexSearch({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={`${
-							!dataNextSearch ? 'user__icon--hidden' : ''
-						} user__icon--nex`}
+							!dataNextSearch ? 'page__icon--hidden' : ''
+						} page__icon--nex`}
 					/>
 				</div>
 			);
 		} else {
 			return (
-				<div className='user__paginate'>
+				<div className='page__paginate'>
 					<Btn
-						handleClick={prev}
+						handleClick={() => prev({ orderProperty: order })}
 						nameIcon={'arrow'}
-						classIcon={!dataPrev ? 'user__icon--hidden' : ''}
+						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={nex}
+						handleClick={() => nex({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={`${
-							!dataNext ? 'user__icon--hidden' : ''
-						} user__icon--nex`}
+							!dataNext ? 'page__icon--hidden' : ''
+						} page__icon--nex`}
 					/>
 				</div>
 			);
@@ -171,49 +173,47 @@ const User = () => {
 					/>
 				</Modal>
 			)}
-			<div className='box user'>
-				<div className='user__contentBtn'>
+			<div className='box page'>
+				<div className='page__options'>
 					<Btn
 						text={'Crear usuario'}
 						nameIcon={'user_add'}
 						className='btnStyle'
 						handleClick={handleOpenRegister}
 					/>
+					<Link to='/ga/rol' className='btnStyle page__link'>
+						Ir a Rol <Icons iconName={'rol'} />
+					</Link>
 				</div>
-				<div className='user__options'>
+				<div className='page__options'>
 					<Select
-						className='user__input'
+						className='page__input'
 						name={'uidSite'}
-						title={'Seleccione la sede'}
+						title={system.component.form.select.site}
 						value={siteValue}
 						onChange={handleChangeSite}
-					>
-						{dataSite?.map(item => (
-							<option key={item.uid} value={item.uid}>
-								{item.name}
-							</option>
-						))}
-					</Select>
+						data={dataSite?.map(item => ({
+							value: item.uid,
+							label: item.name,
+						}))}
+						valueDefault={site}
+					/>
 					<Search
 						value={search}
 						handleChange={handleChangeSearch}
 						handleSearch={handleSearchComponent}
 					/>
 				</div>
-				<div className='user__filter'>
+				<div className='page__filter'>
 					<Select
-						className='user__input--filter'
+						className='page__input--filter'
 						name={'orderProperty'}
-						title={'Filtro'}
+						title={system.component.form.select.filter}
 						value={order}
 						onChange={handleChangeOrder}
-					>
-						{dataOrder?.map(item => (
-							<option key={item.uid} value={item.value}>
-								{item.label}
-							</option>
-						))}
-					</Select>
+						data={dataOrder}
+						valueDefault={dataOrder[0].value}
+					/>
 				</div>
 				<Table heads={heads}>{renderData()}</Table>
 				{renderPaginate()}

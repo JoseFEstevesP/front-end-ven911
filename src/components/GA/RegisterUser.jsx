@@ -5,7 +5,7 @@ import useRegister from '../../hooks/useRegister';
 import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
-import './style/registerUser.css';
+import './style/register.css';
 const initForm = {
 	ci: '',
 	name: '',
@@ -57,9 +57,9 @@ const RegisterUser = ({
 	}, [isOpen]);
 
 	return (
-		<section className='registerUser'>
-			<h2 className='registerUser__title'>Registro de usuario</h2>
-			<form onSubmit={handleSubmit} className='register'>
+		<section className='register'>
+			<h2 className='register__title'>Registro de usuario</h2>
+			<form onSubmit={handleSubmit} className='register__form'>
 				<Input
 					className='register__input'
 					iconName={'ci'}
@@ -134,7 +134,7 @@ const RegisterUser = ({
 					data={dataSite?.map(item => ({ value: item.uid, label: item.name }))}
 				/>
 				<Btn
-					className='btnStyle'
+					className='btnStyle register__btn'
 					text={system.component.btn.submit}
 					type='submit'
 				/>

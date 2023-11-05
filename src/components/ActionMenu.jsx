@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Btn from './Btn';
 import './style/actionMenu.css';
-const ActionMenu = ({ children }) => {
+const ActionMenu = ({ children, close }) => {
 	const [show, setShow] = useState(false);
+	useEffect(() => {
+		setShow(close);
+	}, [close]);
 	const handelMenu = () => setShow(!show);
 	return (
 		<>

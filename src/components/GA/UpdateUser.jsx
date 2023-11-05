@@ -6,7 +6,7 @@ import useUpdate from '../../hooks/useUpdate';
 import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
-import './style/registerUser.css';
+import './style/register.css';
 const initForm = {
 	uid: '',
 	ci: '',
@@ -62,10 +62,14 @@ const UpdateUser = ({
 			});
 		}
 	}, [isOpen]);
+
 	return (
-		<section className='registerUser'>
-			<h2 className='registerUser__title'>Actualizar de usuario</h2>
-			<form onSubmit={handleSubmit} className='register'>
+		<section className='register'>
+			<h2 className='register__title'>Actualizar de usuario</h2>
+			<form
+				onSubmit={handleSubmit}
+				className='register__form register__form--update'
+			>
 				<Input
 					className='register__input'
 					iconName={'ci'}
@@ -110,36 +114,28 @@ const UpdateUser = ({
 				/>
 				<Select
 					className='register__input'
-					label={'Rol del usuario'}
+					label={system.component.form.label.rol}
 					name={'uidRol'}
-					title={'Seleccione el Rol'}
+					title={system.component.form.select.rol}
 					value={form.uidRol}
+					valueDefault={form.uidRol}
 					onChange={handleChange}
 					error={errors.uidRol}
-				>
-					{dataRol?.map(item => (
-						<option key={item.uid} value={item.uid}>
-							{item.name}
-						</option>
-					))}
-				</Select>
+					data={dataRol?.map(item => ({ value: item.uid, label: item.name }))}
+				/>
 				<Select
 					className='register__input'
-					label={'Sede del usuario'}
+					label={system.component.form.label.site}
 					name={'uidSite'}
-					title={'Seleccione la sede'}
+					title={system.component.form.select.site}
 					value={form.uidSite}
+					valueDefault={form.uidSite}
 					onChange={handleChange}
 					error={errors.uidSite}
-				>
-					{dataSite?.map(item => (
-						<option key={item.uid} value={item.uid}>
-							{item.name}
-						</option>
-					))}
-				</Select>
+					data={dataSite?.map(item => ({ value: item.uid, label: item.name }))}
+				/>
 				<Btn
-					className='btnStyle'
+					className='btnStyle register__btn'
 					text={system.component.btn.submit}
 					type='submit'
 				/>

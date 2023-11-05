@@ -16,8 +16,11 @@ const Select = ({
 	error,
 	iconName = 'arrow',
 }) => {
-	const [defaultValue, setDefaultValue] = useState(valueDefault);
+	const [defaultValue, setDefaultValue] = useState('');
 	const [open, setOpen] = useState(false);
+	useEffect(() => {
+		setDefaultValue(valueDefault);
+	}, [valueDefault]);
 	const handleOpen = () => setOpen(!open);
 	const handleFocus = e => e.target.setAttribute('aria-selected', 'true');
 	const handleKeyDown = e => {

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
 import ActionMenu from '../ActionMenu';
@@ -7,6 +7,7 @@ import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
 
 const TableDataUser = ({ data, handleList, setNewData, handleOpenUpdate }) => {
+	const [close, SetClose] = useState(null);
 	const { handleDelete, data: dataDelete } = useDelete({
 		url:
 			import.meta.env.VITE_ULR_API +
@@ -30,6 +31,7 @@ const TableDataUser = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 			uidSite: data.uidSite,
 		});
 		handleOpenUpdate();
+		SetClose(false);
 	};
 	const handleDeleteUser = () => handleDelete({ uid: data.uid });
 	return (
@@ -40,7 +42,7 @@ const TableDataUser = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 			<Cell>{data.email}</Cell>
 			<Cell>{data.nameRol}</Cell>
 			<Cell>
-				<ActionMenu>
+				<ActionMenu close={close}>
 					<ActionMenuItem>
 						<Btn
 							nameIcon={'delete'}

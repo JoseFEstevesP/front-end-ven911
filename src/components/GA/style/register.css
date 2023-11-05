@@ -1,0 +1,49 @@
+.register {
+	font-size: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.register__title {
+	margin: 0;
+	text-align: center;
+}
+
+.register__form {
+	width: 100%;
+	height: auto;
+	max-height: 80vh;
+	overflow: auto;
+	font-size: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
+	place-items: flex-end stretch;
+	gap: 1em;
+}
+
+@media screen and (width >= 768px) {
+	.register__form {
+		width: 48em;
+	}
+
+	.register__form--rol {
+		align-items: start;
+	}
+
+	.register__form--update {
+		grid-template-columns: repeat(2, minmax(20em, 1fr));
+	}
+
+	.register__input--length {
+		grid-column: 1/-1;
+	}
+
+	.register__btn {
+		grid-column: 1/-1;
+	}
+}
+
+.register__btn {
+	height: 3.125em;
+}

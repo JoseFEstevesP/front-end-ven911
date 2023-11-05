@@ -1,27 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const usePermission = ({ data }) => {
-	const [permissions, setPermissions] = useState(data);
+const usePermission = ({ onChange }) => {
+	const [data, setData] = useState([]);
 
-	const handleChangePer = event => {
-		const { value, checked } = event.target;
-		setPermissions(
-			permissions.map(permission => {
-				if (permission.name === value) {
-					permission.checked = checked;
-				}
-				return permission;
-			}),
-		);
+	const handleClick = value => {
+		if (!data.includes(value)) {
+			setData([...data, value]);
+		} else {
+			setData(olValue => olValue.filter(item => item !== value));
+		}
 	};
-	const getPermissions = () => {
-		const permissionsString = permissions
-			.filter(permission => permission.checked)
-			.map(permission => permission.name)
-			.join(',');
-
-		return { permissions: permissionsString };
-	};
-	return { permissions, handleChangePer, getPermissions };
+	useEffect(() => {
+		const event = {
+			target: {
+				name: 'permissions',
+				value: data.toString(),
+			},
+		};
+		onChange(event);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data]);
+	return { handleClick, setData };
 };
 export default usePermission;

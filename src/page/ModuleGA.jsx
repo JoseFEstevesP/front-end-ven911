@@ -3,6 +3,7 @@ import Menu from '../components/Menu';
 import MenuItem from '../components/MenuItem';
 import Page from '../components/Page';
 import Init from './GA/Init';
+import Rol from './GA/Rol';
 import User from './GA/User';
 import Profile from './profile';
 
@@ -17,6 +18,7 @@ const ModuleGA = () => {
 				<Routes>
 					<Route path='/' element={<Init />} />
 					<Route path='/user' element={<User />} />
+					<Route path='/rol' element={<Rol />} />
 					<Route path='/profile' element={<Profile />} />
 				</Routes>
 			</div>

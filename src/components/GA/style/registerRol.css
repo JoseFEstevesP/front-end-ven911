@@ -1,0 +1,16 @@
+.register__permission {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(9.375em, 1fr));
+	place-items: center start;
+	gap: 0.5em;
+}
+
+.register__permission--module {
+	grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+}
+
+.register__label {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+}

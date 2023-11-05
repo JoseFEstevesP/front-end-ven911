@@ -1,0 +1,16 @@
+.checkbox {
+	width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1em;
+	cursor: pointer;
+	padding: 0;
+	border: 0;
+}
+
+.checkbox__icon {
+	--size: 1.5em;
+
+	color: var(--color-primary-system);
+}

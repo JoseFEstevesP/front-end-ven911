@@ -1,49 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
-import RegisterUser from '../../components/GA/RegisterUser';
-import TableDataUser from '../../components/GA/TableDataUser';
-import UpdateUser from '../../components/GA/UpdateUser';
+import RegisterSite from '../../components/GA/RegisterSite';
+import TableDataSite from '../../components/GA/TableDataSite';
+import UpdateSite from '../../components/GA/UpdateSite';
 import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
 import Table from '../../components/Table';
-import { ContextSite } from '../../context/Site.context';
 import { system } from '../../data/system';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
-import useSite from '../../hooks/useSite';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
 import './style/page.css';
 
-const heads = ['Nombre', 'Apellido', 'CI', 'Correo', 'Rol', 'Acción'];
-const headsOfAction = ['Nombre', 'Apellido', 'CI', 'Correo', 'Rol'];
+const heads = ['Nombre', 'Dirección', 'Acción'];
+const headsOfAction = ['Nombre', 'Dirección'];
 const dataOrder = [
 	{ uid: crypto.randomUUID(), label: 'Nombre', value: 'name' },
-	{ uid: crypto.randomUUID(), label: 'Apellido', value: 'surname' },
-	{ uid: crypto.randomUUID(), label: 'Correo', value: 'email' },
-	{ uid: crypto.randomUUID(), label: 'CI', value: 'ci' },
+	{ uid: crypto.randomUUID(), label: 'Dirección', value: 'direction' },
 ];
 const url =
 	import.meta.env.VITE_ULR_API +
-	system.routeApi.user.primary +
-	system.routeApi.user.list;
-const User = () => {
+	system.routeApi.site.primary +
+	system.routeApi.site.list;
+const Site = () => {
 	const { validatePermissions } = useValidatePermissions();
-	const { site } = useContext(ContextSite);
 	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
 	const [isOpenRegister, handleOpenRegister, handelCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handelCloseUpdate] = useModal();
-	const {
-		data: dataSite,
-		siteValue,
-		handelFetch: handelFetchSite,
-		handleChange: handleChangeSite,
-	} = useSite({ site });
 	const {
 		search,
 		handleChange: handleChangeSearch,
@@ -57,8 +46,8 @@ const User = () => {
 	} = useSearch({
 		url:
 			import.meta.env.VITE_ULR_API +
-			system.routeApi.user.primary +
-			system.routeApi.user.search,
+			system.routeApi.site.primary +
+			system.routeApi.site.search,
 	});
 	const { order, handleChange: handleChangeOrder } = useOrder({
 		orderDefault: dataOrder[0].value,
@@ -67,26 +56,20 @@ const User = () => {
 	useEffect(() => {
 		if (validatePermissions({ per: system.permissions.read })) {
 			handleList({});
-			handelFetchSite({
-				url:
-					import.meta.env.VITE_ULR_API +
-					system.routeApi.site.primary +
-					system.routeApi.site.lisOfLimit,
-			});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	useEffect(() => {
-		handleList({ uidSite: siteValue, orderProperty: order });
+		handleList({ orderProperty: order });
 		if (searchSubmit) {
-			handleSearch({ uidSite: siteValue, orderProperty: order });
+			handleSearch({ orderProperty: order });
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [siteValue, order]);
+	}, [order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(item => (
-				<TableDataUser
+				<TableDataSite
 					key={item.uid}
 					data={item}
 					handleList={handleList}
@@ -96,7 +79,7 @@ const User = () => {
 			));
 		} else {
 			return data?.rows?.map(item => (
-				<TableDataUser
+				<TableDataSite
 					key={item.uid}
 					data={item}
 					handleList={handleList}
@@ -153,29 +136,24 @@ const User = () => {
 		prevSearch,
 		search,
 	]);
-	const handleSearchComponent = e =>
-		handleSearch({ e, uidSite: siteValue, orderProperty: order });
+	const handleSearchComponent = e => handleSearch({ e, orderProperty: order });
 	return (
 		<>
 			{validatePermissions({ per: system.permissions.create }) && (
 				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
-					<RegisterUser
+					<RegisterSite
 						order={order}
-						siteValue={siteValue}
 						handleList={handleList}
-						isOpen={isOpenRegister}
 						handelClose={handelCloseRegister}
 					/>
 				</Modal>
 			)}
 			{validatePermissions({ per: system.permissions.update }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
-					<UpdateUser
+					<UpdateSite
 						order={order}
-						siteValue={siteValue}
 						newData={newData}
 						handleList={handleList}
-						isOpen={isOpenUpdate}
 						handelClose={handelCloseUpdate}
 					/>
 				</Modal>
@@ -184,33 +162,18 @@ const User = () => {
 				<div className='page__options'>
 					{validatePermissions({ per: system.permissions.create }) && (
 						<Btn
-							text={'Crear usuario'}
-							nameIcon={'user_add'}
+							text={'Registrar Sede'}
+							nameIcon={'building'}
 							className='btnStyle'
 							handleClick={handleOpenRegister}
 						/>
 					)}
-					<Link to='/ga/rol' className='btnStyle page__link'>
-						Ir a Rol <Icons iconName={'rol'} />
-					</Link>
-					<Link to='/ga/site' className='btnStyle page__link'>
-						Ir a Sede <Icons iconName={'building'} />
+					<Link to='/ga/user' className='btnStyle page__link'>
+						Ir a usuarios <Icons iconName={'user'} />
 					</Link>
 				</div>
 				{validatePermissions({ per: system.permissions.read }) && (
 					<div className='page__options'>
-						<Select
-							className='page__input'
-							name={'uidSite'}
-							title={system.component.form.select.site}
-							value={siteValue}
-							onChange={handleChangeSite}
-							data={dataSite?.map(item => ({
-								value: item.uid,
-								label: item.name,
-							}))}
-							valueDefault={site}
-						/>
 						<Select
 							className='page__input--filter'
 							name={'orderProperty'}
@@ -244,4 +207,4 @@ const User = () => {
 		</>
 	);
 };
-export default User;
+export default Site;

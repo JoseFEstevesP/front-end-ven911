@@ -6,6 +6,7 @@ import Init from './GA/Init';
 import Rol from './GA/Rol';
 import User from './GA/User';
 import Profile from './profile';
+import Site from './GA/Site';
 
 const ModuleGA = () => {
 	return (
@@ -19,6 +20,7 @@ const ModuleGA = () => {
 					<Route path='/' element={<Init />} />
 					<Route path='/user' element={<User />} />
 					<Route path='/rol' element={<Rol />} />
+					<Route path='/site' element={<Site />} />
 					<Route path='/profile' element={<Profile />} />
 				</Routes>
 			</div>

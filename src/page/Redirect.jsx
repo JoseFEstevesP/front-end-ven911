@@ -1,26 +1,21 @@
-import { useContext } from 'react';
 import Btn from '../components/Btn';
 import CardModule from '../components/CardModule';
 import Page from '../components/Page';
 import Theme from '../components/Theme';
-import { ContextRol } from '../context/Rol.context';
 import { system } from '../data/system';
 import useExit from '../hooks/useExit';
+import useValidatePermissions from '../hooks/useValidatePermissions';
 import './style/redirect.css';
 
 const Redirect = () => {
 	const { handelClickExit } = useExit();
 	const handleExit = () => handelClickExit();
-	const { rol } = useContext(ContextRol);
-	const validatePermissions = ({ per }) =>
-		rol
-			.split(',')
-			.some(item => item === per || item === system.permissions.super);
+	const { validatePermissions } = useValidatePermissions();
 
 	return (
 		<Page title='Redirección'>
 			<div className='redirect'>
-				<h2 className='redirect__title'>{system.titleLarge}</h2>
+				<h2 className='redirect__title'>{system.titleLarge}</h2> 
 				<div className='redirect__options'>
 					<Theme />
 					<Btn

@@ -3,11 +3,13 @@ import { Link, NavLink } from 'react-router-dom';
 import { ContextToken } from '../context/Token.context';
 import { system } from '../data/system';
 import useExit from '../hooks/useExit';
+import useValidatePermissions from '../hooks/useValidatePermissions';
 import Btn from './Btn';
 import Icons from './Icons';
 import Theme from './Theme';
 import './style/menu.css';
 const Menu = ({ children, className, route }) => {
+	const { validatePermissions } = useValidatePermissions();
 	const menu = useRef(null);
 	const bar = useRef(null);
 	const profile = useRef(null);
@@ -53,17 +55,19 @@ const Menu = ({ children, className, route }) => {
 									handleClick={handleProfile}
 								/>
 								<ul className='menu__profileAndExit' ref={profile}>
-									<li className='menu__profileAndExitItem'>
-										<NavLink
-											to={`${route}/profile`}
-											className={({ isActive }) =>
-												`${isActive ? 'menu__a--active' : ''}`
-											}
-											end
-										>
-											<Icons iconName='user' />
-										</NavLink>
-									</li>
+									{validatePermissions({ per: system.permissions.profile }) && (
+										<li className='menu__profileAndExitItem'>
+											<NavLink
+												to={route + system.routeApi.user.profile}
+												className={({ isActive }) =>
+													`${isActive ? 'menu__a--active' : ''}`
+												}
+												end
+											>
+												<Icons iconName='user' />
+											</NavLink>
+										</li>
+									)}
 									<li className='menu__profileAndExitItem'>
 										<Btn
 											nameIcon='exit'

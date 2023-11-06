@@ -17,9 +17,11 @@ import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
+import useValidatePermissions from '../../hooks/useValidatePermissions';
 import './style/page.css';
 
 const heads = ['Nombre', 'Apellido', 'CI', 'Correo', 'Rol', 'Acción'];
+const headsOfAction = ['Nombre', 'Apellido', 'CI', 'Correo', 'Rol'];
 const dataOrder = [
 	{ uid: crypto.randomUUID(), label: 'Nombre', value: 'name' },
 	{ uid: crypto.randomUUID(), label: 'Apellido', value: 'surname' },
@@ -31,6 +33,7 @@ const url =
 	system.routeApi.user.primary +
 	system.routeApi.user.list;
 const User = () => {
+	const { validatePermissions } = useValidatePermissions();
 	const { site } = useContext(ContextSite);
 	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
 	const [isOpenRegister, handleOpenRegister, handelCloseRegister] = useModal();
@@ -62,13 +65,15 @@ const User = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		handleList({});
-		handelFetchSite({
-			url:
-				import.meta.env.VITE_ULR_API +
-				system.routeApi.site.primary +
-				system.routeApi.site.lisOfLimit,
-		});
+		if (validatePermissions({ per: system.permissions.read })) {
+			handleList({});
+			handelFetchSite({
+				url:
+					import.meta.env.VITE_ULR_API +
+					system.routeApi.site.primary +
+					system.routeApi.site.lisOfLimit,
+			});
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	useEffect(() => {
@@ -152,16 +157,18 @@ const User = () => {
 		handleSearch({ e, uidSite: siteValue, orderProperty: order });
 	return (
 		<>
-			<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
-				<RegisterUser
-					order={order}
-					siteValue={siteValue}
-					handleList={handleList}
-					isOpen={isOpenRegister}
-					handelClose={handelCloseRegister}
-				/>
-			</Modal>
-			{newData && (
+			{validatePermissions({ per: system.permissions.create }) && (
+				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
+					<RegisterUser
+						order={order}
+						siteValue={siteValue}
+						handleList={handleList}
+						isOpen={isOpenRegister}
+						handelClose={handelCloseRegister}
+					/>
+				</Modal>
+			)}
+			{validatePermissions({ per: system.permissions.update }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
 					<UpdateUser
 						order={order}
@@ -175,47 +182,60 @@ const User = () => {
 			)}
 			<div className='box page'>
 				<div className='page__options'>
-					<Btn
-						text={'Crear usuario'}
-						nameIcon={'user_add'}
-						className='btnStyle'
-						handleClick={handleOpenRegister}
-					/>
+					{validatePermissions({ per: system.permissions.create }) && (
+						<Btn
+							text={'Crear usuario'}
+							nameIcon={'user_add'}
+							className='btnStyle'
+							handleClick={handleOpenRegister}
+						/>
+					)}
 					<Link to='/ga/rol' className='btnStyle page__link'>
 						Ir a Rol <Icons iconName={'rol'} />
 					</Link>
 				</div>
-				<div className='page__options'>
-					<Select
-						className='page__input'
-						name={'uidSite'}
-						title={system.component.form.select.site}
-						value={siteValue}
-						onChange={handleChangeSite}
-						data={dataSite?.map(item => ({
-							value: item.uid,
-							label: item.name,
-						}))}
-						valueDefault={site}
-					/>
-					<Search
-						value={search}
-						handleChange={handleChangeSearch}
-						handleSearch={handleSearchComponent}
-					/>
-				</div>
-				<div className='page__filter'>
-					<Select
-						className='page__input--filter'
-						name={'orderProperty'}
-						title={system.component.form.select.filter}
-						value={order}
-						onChange={handleChangeOrder}
-						data={dataOrder}
-						valueDefault={dataOrder[0].value}
-					/>
-				</div>
-				<Table heads={heads}>{renderData()}</Table>
+				{validatePermissions({ per: system.permissions.read }) && (
+					<div className='page__options'>
+						<Select
+							className='page__input'
+							name={'uidSite'}
+							title={system.component.form.select.site}
+							value={siteValue}
+							onChange={handleChangeSite}
+							data={dataSite?.map(item => ({
+								value: item.uid,
+								label: item.name,
+							}))}
+							valueDefault={site}
+						/>
+						<Select
+							className='page__input--filter'
+							name={'orderProperty'}
+							title={system.component.form.select.filter}
+							value={order}
+							onChange={handleChangeOrder}
+							data={dataOrder}
+							valueDefault={dataOrder[0].value}
+						/>
+						<Search
+							value={search}
+							handleChange={handleChangeSearch}
+							handleSearch={handleSearchComponent}
+						/>
+					</div>
+				)}
+				{validatePermissions({ per: system.permissions.read }) && (
+					<Table
+						heads={
+							validatePermissions({ per: system.permissions.delete }) ||
+							validatePermissions({ per: system.permissions.update })
+								? heads
+								: headsOfAction
+						}
+					>
+						{renderData()}
+					</Table>
+				)}
 				{renderPaginate()}
 			</div>
 		</>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
 import RegisterRol from '../../components/GA/RegisterRol';
 import TableDataRol from '../../components/GA/TableDataRol';
+import UpdateRol from '../../components/GA/UpdateRol';
 import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
@@ -14,9 +15,10 @@ import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
-import UpdateRol from '../../components/GA/UpdateRol';
+import useValidatePermissions from '../../hooks/useValidatePermissions';
 
 const heads = ['Nombre', 'Permisos', 'Acción'];
+const headsOfAction = ['Nombre', 'Permisos'];
 const dataOrder = [
 	{ uid: crypto.randomUUID(), label: 'Nombre', value: 'name' },
 	{ uid: crypto.randomUUID(), label: 'Permisos', value: 'permissions' },
@@ -26,6 +28,7 @@ const url =
 	system.routeApi.rol.primary +
 	system.routeApi.rol.list;
 const Rol = () => {
+	const { validatePermissions } = useValidatePermissions();
 	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
 	const [isOpenRegister, handleOpenRegister, handelCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handelCloseUpdate] = useModal();
@@ -50,7 +53,9 @@ const Rol = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		handleList({});
+		if (validatePermissions({ per: system.permissions.read })) {
+			handleList({});
+		}
 	}, []);
 	useEffect(() => {
 		handleList({ orderProperty: order });
@@ -131,13 +136,15 @@ const Rol = () => {
 	const handleSearchComponent = e => handleSearch({ e, orderProperty: order });
 	return (
 		<>
-			<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
-				<RegisterRol
-					order={order}
-					handleList={handleList}
-					handelClose={handelCloseRegister}
-				/>
-			</Modal>
+			{validatePermissions({ per: system.permissions.create }) && (
+				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
+					<RegisterRol
+						order={order}
+						handleList={handleList}
+						handelClose={handelCloseRegister}
+					/>
+				</Modal>
+			)}
 			{newData && (
 				<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
 					<UpdateRol
@@ -150,33 +157,48 @@ const Rol = () => {
 			)}
 			<div className='box page'>
 				<div className='page__options'>
-					<Btn
-						text={'Crear Rol'}
-						nameIcon={'user_add'}
-						className='btnStyle'
-						handleClick={handleOpenRegister}
-					/>
+					{validatePermissions({ per: system.permissions.create }) && (
+						<Btn
+							text={'Crear Rol'}
+							nameIcon={'user_add'}
+							className='btnStyle'
+							handleClick={handleOpenRegister}
+						/>
+					)}
 					<Link to='/ga/user' className='btnStyle page__link'>
 						Ir a usuario <Icons iconName={'user'} />
 					</Link>
 				</div>
-				<div className='page__options'>
-					<Select
-						className='page__input--filter'
-						name={'orderProperty'}
-						title={system.component.form.select.filter}
-						value={order}
-						onChange={handleChangeOrder}
-						data={dataOrder}
-						valueDefault={dataOrder[0].value}
-					/>
-					<Search
-						value={search}
-						handleChange={handleChangeSearch}
-						handleSearch={handleSearchComponent}
-					/>
-				</div>
-				<Table heads={heads}>{renderData()}</Table>
+				{validatePermissions({ per: system.permissions.read }) && (
+					<div className='page__options'>
+						<Select
+							className='page__input--filter'
+							name={'orderProperty'}
+							title={system.component.form.select.filter}
+							value={order}
+							onChange={handleChangeOrder}
+							data={dataOrder}
+							valueDefault={dataOrder[0].value}
+						/>
+						<Search
+							value={search}
+							handleChange={handleChangeSearch}
+							handleSearch={handleSearchComponent}
+						/>
+					</div>
+				)}
+				{validatePermissions({ per: system.permissions.read }) && (
+					<Table
+						heads={
+							validatePermissions({ per: system.permissions.delete }) ||
+							validatePermissions({ per: system.permissions.update })
+								? heads
+								: headsOfAction
+						}
+					>
+						{renderData()}
+					</Table>
+				)}
 				{renderPaginate()}
 			</div>
 		</>

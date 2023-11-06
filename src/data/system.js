@@ -158,6 +158,8 @@ export const system = {
 		profile: 'PROFILE',
 		create: 'CREATE',
 		update: 'UPDATE',
+		read: 'READ',
+		delete: 'DELETE',
 		ocp: 'OCP',
 		ga: 'GA',
 		gh_aj: 'GH_AJ',

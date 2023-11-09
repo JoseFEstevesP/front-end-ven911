@@ -22,18 +22,20 @@ const RegisterUser = ({
 	siteValue,
 	order,
 }) => {
-	const { form, handleChange, handleSubmit, errors, data } = useRegister({
-		initForm,
-		url:
-			import.meta.env.VITE_ULR_API +
-			system.routeApi.user.primary +
-			system.routeApi.user.register,
-	});
+	const { form, setForm, handleChange, handleSubmit, errors, data } =
+		useRegister({
+			initForm,
+			url:
+				import.meta.env.VITE_ULR_API +
+				system.routeApi.user.primary +
+				system.routeApi.user.register,
+		});
 	const { handelFetch: handelFetchRol, data: dataRol } = useGet();
 	const { handelFetch: handelFetchSite, data: dataSite } = useGet();
 	useEffect(() => {
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
+			setForm(initForm);
 			handelClose();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -86,6 +86,7 @@ const UpdateRol = ({ handelClose, handleList, order, newData }) => {
 	useEffect(() => {
 		if (data) {
 			handleList({ orderProperty: order });
+			setForm(initForm);
 			handelClose();
 		}
 	}, [data]);

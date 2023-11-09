@@ -28,6 +28,7 @@ const UpdateSite = ({ handelClose, newData, handleList, order }) => {
 	useEffect(() => {
 		if (data) {
 			handleList({ orderProperty: order });
+			setForm(initForm);
 			handelClose();
 		}
 	}, [data]);

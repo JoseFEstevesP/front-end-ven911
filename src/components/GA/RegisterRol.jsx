@@ -71,17 +71,19 @@ const perModule = [
 	},
 ];
 const RegisterRol = ({ handelClose, handleList, order }) => {
-	const { form, handleChange, handleSubmit, errors, data } = useRegister({
-		initForm,
-		url:
-			import.meta.env.VITE_ULR_API +
-			system.routeApi.rol.primary +
-			system.routeApi.rol.register,
-	});
+	const { form, setForm, handleChange, handleSubmit, errors, data } =
+		useRegister({
+			initForm,
+			url:
+				import.meta.env.VITE_ULR_API +
+				system.routeApi.rol.primary +
+				system.routeApi.rol.register,
+		});
 	const { handleClick } = usePermission({ onChange: handleChange });
 	useEffect(() => {
 		if (data) {
 			handleList({ orderProperty: order });
+			setForm(initForm);
 			handelClose();
 		}
 	}, [data]);

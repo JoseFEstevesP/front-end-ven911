@@ -51,6 +51,8 @@ const Select = ({
 	useEffect(() => {
 		if (value === '') {
 			titleSelect.current.textContent = title;
+			const items = document.querySelectorAll('.selectPer__item');
+			items.forEach(item => item.classList.remove('selectPer__item--active'));
 		}
 	}, [value]);
 	const titleDefault =
@@ -83,34 +85,32 @@ const Select = ({
 						/>
 					</div>
 				</div>
-				{open && (
-					<nav
-						className={`selectPer__options ${
-							open ? 'selectPer__options--show' : ''
-						}`}
-						role='menu'
-					>
-						<ul className='selectPer__ul'>
-							{data?.map(item => (
-								<li
-									tabIndex='0'
-									key={item.value}
-									className={`selectPer__item ${
-										item.value === defaultValue ? 'selectPer__item--active' : ''
-									}`}
-									role='option'
-									aria-selected={item.value === defaultValue}
-									data-value={item.value}
-									onClick={handleClick}
-									onKeyDown={handleKeyDownItem}
-									onFocus={handleFocus}
-								>
-									{item.label}
-								</li>
-							))}
-						</ul>
-					</nav>
-				)}
+				<nav
+					className={`selectPer__options ${
+						open ? 'selectPer__options--show' : ''
+					}`}
+					role='menu'
+				>
+					<ul className='selectPer__ul'>
+						{data?.map(item => (
+							<li
+								tabIndex='0'
+								key={item.value}
+								className={`selectPer__item ${
+									item.value === defaultValue ? 'selectPer__item--active' : ''
+								}`}
+								role='option'
+								aria-selected={item.value === defaultValue}
+								data-value={item.value}
+								onClick={handleClick}
+								onKeyDown={handleKeyDownItem}
+								onFocus={handleFocus}
+							>
+								{item.label}
+							</li>
+						))}
+					</ul>
+				</nav>
 				<input type='hidden' name={name} value={value} />
 			</section>
 			{error && <p className='input__error'>{error.msg}</p>}

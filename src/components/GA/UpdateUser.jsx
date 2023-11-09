@@ -43,6 +43,7 @@ const UpdateUser = ({
 	useEffect(() => {
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
+			setForm(initForm);
 			handelClose();
 		}
 	}, [data]);

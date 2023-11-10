@@ -9,6 +9,7 @@ import Site from './GA/Site';
 import Technology from './GA/Technology';
 import User from './GA/User';
 import Profile from './profile';
+import Consumables from './GA/Consumables';
 
 const ModuleGA = () => {
 	return (
@@ -19,6 +20,7 @@ const ModuleGA = () => {
 					<MenuItem text={'Usuario'} to={'/ga/user'} />
 					<MenuSubItem text={'Inventarios'}>
 						<MenuItem text={'Tecnología'} to={'/ga/technology'} />
+						<MenuItem text={'Consumible'} to={'/ga/consumables'} />
 					</MenuSubItem>
 				</Menu>
 				<Routes>
@@ -27,6 +29,7 @@ const ModuleGA = () => {
 					<Route path='/rol' element={<Rol />} />
 					<Route path='/site' element={<Site />} />
 					<Route path='/technology' element={<Technology />} />
+					<Route path='/consumables' element={<Consumables />} />
 					<Route path='/profile' element={<Profile />} />
 				</Routes>
 			</div>

@@ -191,6 +191,14 @@ export const system = {
 			update: '/update',
 			delete: '/delete',
 		},
+		consumables: {
+			primary: '/consumables',
+			list: '/list',
+			register: '/register',
+			search: '/search',
+			update: '/update',
+			delete: '/delete',
+		},
 	},
 	permissions: {
 		super: 'SUPER',

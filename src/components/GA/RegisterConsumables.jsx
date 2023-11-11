@@ -6,6 +6,7 @@ import Input from '../Input';
 import './style/register.css';
 const initForm = {
 	description: '',
+	serial: '',
 	brand: '',
 	quantity: '',
 	value: '',
@@ -43,6 +44,17 @@ const RegisterConsumables = ({ handelClose, handleList, siteValue, order }) => {
 					onChange={handleChange}
 					value={form.description}
 					error={errors.description}
+				/>
+				<Input
+					className='register__input'
+					iconName={'code'}
+					name={'serial'}
+					label={system.component.form.label.serial}
+					placeholder={system.component.form.placeholder.serial}
+					type='number'
+					onChange={handleChange}
+					value={form.serial}
+					error={errors.serial}
 				/>
 				<Input
 					className='register__input'

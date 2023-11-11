@@ -55,7 +55,7 @@ const TableDataTechnology = ({
 			<Cell>{data.model}</Cell>
 			<Cell>{data.serial}</Cell>
 			<Cell>{data.quantity}</Cell>
-			<Cell>{data.value}</Cell>
+			<Cell>{data.value} BS</Cell>
 			<Cell>{data.state}</Cell>
 			<Cell>{data.location}</Cell>
 			<Cell>{data.dateOfAcquisition}</Cell>

@@ -32,6 +32,7 @@ const TableDataConsumables = ({
 		setNewData({
 			uid: data.uid,
 			description: data.description,
+			serial: data.serial,
 			brand: data.brand,
 			quantity: data.quantity,
 			value: data.value,
@@ -46,9 +47,10 @@ const TableDataConsumables = ({
 	return (
 		<TableCell>
 			<Cell>{data.description}</Cell>
+			<Cell>{data.serial}</Cell>
 			<Cell>{data.brand}</Cell>
 			<Cell>{data.quantity}</Cell>
-			<Cell>{data.value}</Cell>
+			<Cell>{data.value} BS</Cell>
 			<Cell>{data.location}</Cell>
 			<Cell>{data.dateOfAcquisition}</Cell>
 			<Cell>{data.remarks}</Cell>

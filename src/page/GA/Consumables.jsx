@@ -20,9 +20,10 @@ import './style/page.css';
 
 const heads = [
 	'Descripción',
+	'Serial',
 	'Marca',
 	'Cantidad',
-	'valor',
+	'valor BS',
 	'Ubicación',
 	'Fecha de Adquisición',
 	'Observaciones',
@@ -30,18 +31,20 @@ const heads = [
 ];
 const headsOfAction = [
 	'Descripción',
+	'Serial',
 	'Marca',
 	'Cantidad',
-	'valor',
+	'valor BS',
 	'Ubicación',
 	'Fecha de Adquisición',
 	'Observaciones',
 ];
 const dataOrder = [
 	{ uid: crypto.randomUUID(), label: 'Descripción', value: 'description' },
+	{ uid: crypto.randomUUID(), label: 'Serial', value: 'serial' },
 	{ uid: crypto.randomUUID(), label: 'Marca', value: 'brand' },
 	{ uid: crypto.randomUUID(), label: 'Cantidad', value: 'quantity' },
-	{ uid: crypto.randomUUID(), label: 'valor', value: 'value' },
+	{ uid: crypto.randomUUID(), label: 'valor BS', value: 'value' },
 	{ uid: crypto.randomUUID(), label: 'Ubicación', value: 'location' },
 	{
 		uid: crypto.randomUUID(),
@@ -99,14 +102,12 @@ const Consumables = () => {
 					system.routeApi.site.lisOfLimit,
 			});
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	useEffect(() => {
 		handleList({ uidSite: siteValue, orderProperty: order });
 		if (searchSubmit) {
 			handleSearch({ uidSite: siteValue, orderProperty: order });
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [siteValue, order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {

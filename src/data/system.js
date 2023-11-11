@@ -78,7 +78,7 @@ export const system = {
 				brand: 'Marca',
 				model: 'Modelo',
 				quantity: 'Cantidad',
-				value: 'Valor',
+				value: 'valor BS',
 				state: 'Estado',
 				dateOfAcquisition: 'Fecha de Adquisición',
 				location: 'Ubicación',

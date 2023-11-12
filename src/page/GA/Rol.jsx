@@ -17,11 +17,26 @@ import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
 
-const heads = ['Nombre', 'Permisos', 'Acción'];
-const headsOfAction = ['Nombre', 'Permisos'];
+const heads = [
+	system.component.form.label.name,
+	system.component.form.label.permissions,
+	system.component.form.label.action,
+];
+const headsOfAction = [
+	system.component.form.label.name,
+	system.component.form.label.permissions,
+];
 const dataOrder = [
-	{ uid: crypto.randomUUID(), label: 'Nombre', value: 'name' },
-	{ uid: crypto.randomUUID(), label: 'Permisos', value: 'permissions' },
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.name,
+		value: 'name',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.permissions,
+		value: 'permissions',
+	},
 ];
 const url =
 	import.meta.env.VITE_ULR_API +

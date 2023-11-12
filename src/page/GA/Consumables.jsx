@@ -19,39 +19,67 @@ import useValidatePermissions from '../../hooks/useValidatePermissions';
 import './style/page.css';
 
 const heads = [
-	'Descripción',
-	'Serial',
-	'Marca',
-	'Cantidad',
-	'valor BS',
-	'Ubicación',
-	'Fecha de Adquisición',
-	'Observaciones',
-	'Acción',
+	system.component.form.label.description,
+	system.component.form.label.serial,
+	system.component.form.label.brand,
+	system.component.form.label.quantity,
+	system.component.form.label.value,
+	system.component.form.label.location,
+	system.component.form.label.dateOfAcquisition,
+	system.component.form.label.remarks,
+	system.component.form.label.action,
 ];
 const headsOfAction = [
-	'Descripción',
-	'Serial',
-	'Marca',
-	'Cantidad',
-	'valor BS',
-	'Ubicación',
-	'Fecha de Adquisición',
-	'Observaciones',
+	system.component.form.label.description,
+	system.component.form.label.serial,
+	system.component.form.label.brand,
+	system.component.form.label.quantity,
+	system.component.form.label.value,
+	system.component.form.label.location,
+	system.component.form.label.dateOfAcquisition,
+	system.component.form.label.remarks,
 ];
 const dataOrder = [
-	{ uid: crypto.randomUUID(), label: 'Descripción', value: 'description' },
-	{ uid: crypto.randomUUID(), label: 'Serial', value: 'serial' },
-	{ uid: crypto.randomUUID(), label: 'Marca', value: 'brand' },
-	{ uid: crypto.randomUUID(), label: 'Cantidad', value: 'quantity' },
-	{ uid: crypto.randomUUID(), label: 'valor BS', value: 'value' },
-	{ uid: crypto.randomUUID(), label: 'Ubicación', value: 'location' },
 	{
 		uid: crypto.randomUUID(),
-		label: 'Fecha de Adquisición',
+		label: system.component.form.label.description,
+		value: 'description',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.serial,
+		value: 'serial',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.brand,
+		value: 'brand',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.quantity,
+		value: 'quantity',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.value,
+		value: 'value',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.location,
+		value: 'location',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.dateOfAcquisition,
 		value: 'dateOfAcquisition',
 	},
-	{ uid: crypto.randomUUID(), label: 'Observaciones', value: 'remarks' },
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.remarks,
+		value: 'remarks',
+	},
 ];
 const url =
 	import.meta.env.VITE_ULR_API +

@@ -19,14 +19,42 @@ import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
 import './style/page.css';
-
-const heads = ['Nombre', 'Apellido', 'CI', 'Correo', 'Rol', 'Acción'];
-const headsOfAction = ['Nombre', 'Apellido', 'CI', 'Correo', 'Rol'];
+const heads = [
+	system.component.form.label.name,
+	system.component.form.label.surname,
+	system.component.form.label.ci,
+	system.component.form.label.email,
+	system.component.form.label.rol,
+	system.component.form.label.action,
+];
+const headsOfAction = [
+	system.component.form.label.name,
+	system.component.form.label.surname,
+	system.component.form.label.ci,
+	system.component.form.label.email,
+	system.component.form.label.rol,
+];
 const dataOrder = [
-	{ uid: crypto.randomUUID(), label: 'Nombre', value: 'name' },
-	{ uid: crypto.randomUUID(), label: 'Apellido', value: 'surname' },
-	{ uid: crypto.randomUUID(), label: 'Correo', value: 'email' },
-	{ uid: crypto.randomUUID(), label: 'CI', value: 'ci' },
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.name,
+		value: 'name',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.surname,
+		value: 'surname',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.email,
+		value: 'email',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.ci,
+		value: 'ci',
+	},
 ];
 const url =
 	import.meta.env.VITE_ULR_API +

@@ -86,6 +86,7 @@ export const system = {
 				remarks: 'Observaciones',
 				codeBN: 'Código BN',
 				serial: 'Serial',
+				action: 'Acción',
 			},
 			placeholder: {
 				ci: 'Ingrese cedula...',
@@ -185,6 +186,14 @@ export const system = {
 		},
 		technology: {
 			primary: '/technology',
+			list: '/list',
+			register: '/register',
+			search: '/search',
+			update: '/update',
+			delete: '/delete',
+		},
+		furniture: {
+			primary: '/furniture',
 			list: '/list',
 			register: '/register',
 			search: '/search',

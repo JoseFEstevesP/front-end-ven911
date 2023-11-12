@@ -65,9 +65,11 @@ const Select = ({
 					{label}:
 				</label>
 			)}
-			<section className={`selectPer`} role='listbox'>
+			<section className={`selectPer `} role='listbox'>
 				<div
-					className='selectPer__content'
+					className={`selectPer__content ${
+						error && 'selectPer__content--error'
+					}`}
 					aria-label={system.component.form.select.aria}
 					onClick={handleOpen}
 					onKeyDown={handleKeyDown}
@@ -113,7 +115,12 @@ const Select = ({
 				</nav>
 				<input type='hidden' name={name} value={value} />
 			</section>
-			{error && <p className='input__error'>{error.msg}</p>}
+			{error &&
+				error.map((err, i) => (
+					<p key={i} className='input__error'>
+						{err[name]}
+					</p>
+				))}
 		</div>
 	);
 };

@@ -18,6 +18,10 @@
 	border-radius: 0.625em;
 }
 
+.selectPer__content--error {
+	border: 0.125em solid var(--color-red);
+}
+
 .selectPer__options {
 	width: 100%;
 	z-index: 5;

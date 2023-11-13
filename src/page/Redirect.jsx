@@ -15,7 +15,7 @@ const Redirect = () => {
 	return (
 		<Page title='Redirección'>
 			<div className='redirect'>
-				<h2 className='redirect__title'>{system.titleLarge}</h2> 
+				<h2 className='redirect__title'>{system.titleLarge}</h2>
 				<div className='redirect__options'>
 					<Theme />
 					<Btn

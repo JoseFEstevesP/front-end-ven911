@@ -43,7 +43,7 @@ const RegisterVehicle = ({ handelClose, handleList, siteValue, order }) => {
 	}, [data]);
 	return (
 		<section className='register'>
-			<h2 className='register__title'>Registro de Vehículo</h2>
+			<h2 className='register__title'>{system.component.vehicle.register}</h2>
 			<form onSubmit={handleSubmit} className='register__form'>
 				<Input
 					className='register__input'

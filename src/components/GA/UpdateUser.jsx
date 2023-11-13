@@ -66,7 +66,7 @@ const UpdateUser = ({
 
 	return (
 		<section className='register'>
-			<h2 className='register__title'>Actualizar de usuario</h2>
+			<h2 className='register__title'>{system.component.user.update}</h2>
 			<form
 				onSubmit={handleSubmit}
 				className='register__form register__form--update'

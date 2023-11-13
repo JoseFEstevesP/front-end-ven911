@@ -123,10 +123,25 @@ export const system = {
 			submit: 'Enviar',
 		},
 		rol: {
-			register: 'Registro de Rol',
+			register: 'Registro Rol',
 			permission: 'Permisos para el rol',
 			module: 'Modulo para el rol',
-			update: 'Actualizar de Rol',
+			update: 'Actualizar Rol',
+		},
+		site: { register: 'Registro Sede', update: 'Actualizar Sede' },
+		user: { register: 'Registro usuario', update: 'Actualizar usuario' },
+		vehicle: { register: 'Registro vehículo', update: 'Actualizar vehículo' },
+		furniture: {
+			register: 'Registro mobiliario',
+			update: 'Actualizar mobiliario',
+		},
+		technology: {
+			register: 'Registro tecnologia',
+			update: 'Actualizar tecnologia',
+		},
+		consumables: {
+			register: 'Registro consumible',
+			update: 'Actualizar consumible',
 		},
 		loading: 'Cargando...',
 	},

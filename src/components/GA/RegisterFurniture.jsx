@@ -41,7 +41,7 @@ const RegisterFurniture = ({ handelClose, handleList, siteValue, order }) => {
 	}, [data]);
 	return (
 		<section className='register'>
-			<h2 className='register__title'>Registro de Mobiliario</h2>
+			<h2 className='register__title'>{system.component.furniture.register}</h2>
 			<form onSubmit={handleSubmit} className='register__form'>
 				<Input
 					className='register__input'

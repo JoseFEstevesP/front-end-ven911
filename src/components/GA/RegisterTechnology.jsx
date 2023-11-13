@@ -43,7 +43,9 @@ const RegisterTechnology = ({ handelClose, handleList, siteValue, order }) => {
 	}, [data]);
 	return (
 		<section className='register'>
-			<h2 className='register__title'>Registro de Tecnologia</h2>
+			<h2 className='register__title'>
+				{system.component.technology.register}
+			</h2>
 			<form onSubmit={handleSubmit} className='register__form'>
 				<Input
 					className='register__input'

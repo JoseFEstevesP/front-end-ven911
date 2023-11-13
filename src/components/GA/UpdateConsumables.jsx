@@ -46,7 +46,7 @@ const UpdateConsumables = ({
 	}, [data]);
 	return (
 		<section className='register'>
-			<h2 className='register__title'>Actualizar de Consumible</h2>
+			<h2 className='register__title'>{system.component.consumables.update}</h2>
 			<form
 				onSubmit={handleSubmit}
 				className='register__form register__form--update'

@@ -56,7 +56,7 @@ const UpdateVehicle = ({
 	}, [data]);
 	return (
 		<section className='register'>
-			<h2 className='register__title'>Actualizar de Vehículo</h2>
+			<h2 className='register__title'>{system.component.vehicle.update}</h2>
 			<form
 				onSubmit={handleSubmit}
 				className='register__form register__form--update'

@@ -35,7 +35,7 @@ const UpdateSite = ({ handelClose, newData, handleList, order }) => {
 
 	return (
 		<section className='register'>
-			<h2 className='register__title'>Actualizar de Sede</h2>
+			<h2 className='register__title'>{system.component.site.update}</h2>
 			<form
 				onSubmit={handleSubmit}
 				className='register__form register__form--update'

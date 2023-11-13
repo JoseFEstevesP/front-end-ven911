@@ -98,7 +98,7 @@ const UpdateRol = ({ handelClose, handleList, order, newData }) => {
 	}, [newData]);
 	return (
 		<section className='register'>
-			<h2 className='register__title'>Actualizar el Rol</h2>
+			<h2 className='register__title'>{system.component.rol.update}</h2>
 			<form
 				onSubmit={handleSubmit}
 				className='register__form register__form--rol'
@@ -114,7 +114,7 @@ const UpdateRol = ({ handelClose, handleList, order, newData }) => {
 					error={errors.name}
 				/>
 				<div className='register__label'>
-					<strong>Permisos para el rol:</strong>
+					<strong>{system.component.rol.permission}:</strong>
 					<div className='register__permission'>
 						{perSystem?.map(item => (
 							<Checkbox
@@ -128,7 +128,7 @@ const UpdateRol = ({ handelClose, handleList, order, newData }) => {
 					</div>
 				</div>
 				<div className='register__label'>
-					<strong>Modulo del rol:</strong>
+					<strong>{system.component.rol.module}:</strong>
 					<div className='register__permission register__permission--module'>
 						{perModule?.map(item => (
 							<Checkbox

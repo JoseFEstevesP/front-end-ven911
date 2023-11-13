@@ -68,6 +68,7 @@ export const system = {
 				ci: 'CI',
 				email: 'Correo',
 				password: 'Contraseña',
+				place: 'Placa',
 				name: 'Nombre',
 				surname: 'Apellido',
 				permissions: 'Permisos',
@@ -91,6 +92,7 @@ export const system = {
 			placeholder: {
 				ci: 'Ingrese cedula...',
 				email: 'Ingrese correo...',
+				place: 'Placa...',
 				password: 'Ingrese contaseña...',
 				name: 'Ingrese nombre...',
 				surname: 'Ingrese apellido...',
@@ -119,6 +121,12 @@ export const system = {
 		},
 		btn: {
 			submit: 'Enviar',
+		},
+		rol: {
+			register: 'Registro de Rol',
+			permission: 'Permisos para el rol',
+			module: 'Modulo para el rol',
+			update: 'Actualizar de Rol',
 		},
 		loading: 'Cargando...',
 	},
@@ -202,6 +210,14 @@ export const system = {
 		},
 		consumables: {
 			primary: '/consumables',
+			list: '/list',
+			register: '/register',
+			search: '/search',
+			update: '/update',
+			delete: '/delete',
+		},
+		vehicle: {
+			primary: '/vehicle',
 			list: '/list',
 			register: '/register',
 			search: '/search',

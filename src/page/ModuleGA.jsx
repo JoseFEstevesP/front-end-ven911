@@ -11,6 +11,7 @@ import User from './GA/User';
 import Profile from './profile';
 import Consumables from './GA/Consumables';
 import Furniture from './GA/Furniture';
+import Vehicle from './GA/Vehicle';
 
 const ModuleGA = () => {
 	return (
@@ -23,6 +24,7 @@ const ModuleGA = () => {
 						<MenuItem text={'Tecnología'} to={'/ga/technology'} />
 						<MenuItem text={'Consumible'} to={'/ga/consumables'} />
 						<MenuItem text={'Mobiliario'} to={'/ga/furniture'} />
+						<MenuItem text={'Vehículo'} to={'/ga/vehicle'} />
 					</MenuSubItem>
 				</Menu>
 				<Routes>
@@ -33,6 +35,7 @@ const ModuleGA = () => {
 					<Route path='/technology' element={<Technology />} />
 					<Route path='/consumables' element={<Consumables />} />
 					<Route path='/furniture' element={<Furniture />} />
+					<Route path='/vehicle' element={<Vehicle />} />
 					<Route path='/profile' element={<Profile />} />
 				</Routes>
 			</div>

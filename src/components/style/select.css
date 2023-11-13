@@ -69,3 +69,19 @@
 .selectPer__item:focus {
 	background-color: var(--color-primary-system);
 }
+
+.selectPer__icon {
+	rotate: -90deg;
+}
+
+.selectPer__icon--select {
+	rotate: 0deg;
+}
+
+.selectPer__icon--show {
+	color: var(--color-red);
+}
+
+.selectPer__title--disabled {
+	color: var(--color-text-footer);
+}

@@ -152,10 +152,14 @@ const Technology = () => {
 		) {
 			handleList({ orderProperty: order });
 			handelFetchSite({
-				url:
-					import.meta.env.VITE_ULR_API +
-					system.routeApi.site.primary +
-					system.routeApi.site.lisOfLimit,
+				url: validatePermissions({ per: system.permissions.site })
+					? import.meta.env.VITE_ULR_API +
+					  system.routeApi.site.primary +
+					  system.routeApi.site.lisOfLimit
+					: import.meta.env.VITE_ULR_API +
+					  system.routeApi.site.primary +
+					  system.routeApi.site.item +
+					  site,
 			});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -289,11 +293,16 @@ const Technology = () => {
 								title={system.component.form.select.site}
 								value={siteValue}
 								onChange={handleChangeSite}
-								data={dataSite?.map(item => ({
-									value: item.uid,
-									label: item.name,
-								}))}
+								data={
+									validatePermissions({ per: system.permissions.site })
+										? dataSite?.map(item => ({
+												value: item.uid,
+												label: item.name,
+										  }))
+										: [{ value: dataSite?.uid, label: dataSite?.name }]
+								}
 								valueDefault={site}
+								disabled={validatePermissions({ per: system.permissions.site })}
 							/>
 							<Select
 								className='page__input--filter'

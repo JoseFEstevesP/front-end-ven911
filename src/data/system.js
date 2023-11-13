@@ -200,6 +200,7 @@ export const system = {
 		},
 		site: {
 			primary: '/site',
+			item: '/item/',
 			list: '/list',
 			lisOfLimit: '/list_of_limit',
 			register: '/register',
@@ -247,6 +248,7 @@ export const system = {
 		update: 'UPDATE',
 		read: 'READ',
 		delete: 'DELETE',
+		site: 'SITE',
 		ocp: 'OCP',
 		ga: 'GA',
 		gh_aj: 'GH_AJ',

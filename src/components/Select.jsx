@@ -15,6 +15,7 @@ const Select = ({
 	label,
 	error,
 	iconName = 'arrow',
+	disabled = true,
 }) => {
 	const [defaultValue, setDefaultValue] = useState('');
 	const [open, setOpen] = useState(false);
@@ -75,44 +76,56 @@ const Select = ({
 					onKeyDown={handleKeyDown}
 					tabIndex='0'
 				>
-					<strong className='selectPer__title' ref={titleSelect}>
+					<strong
+						className={`selectPer__title ${
+							!disabled && 'selectPer__title--disabled'
+						}`}
+						ref={titleSelect}
+					>
 						{titleDefault}
 					</strong>
 					<div className='selectPer__contentIcon'>
 						<Icons
-							iconName={`${(error && 'interrogant') || iconName}`}
-							className={`input__icon ${
-								error && 'input__icon--show input__icon--select'
+							iconName={`${
+								(error && 'interrogant') || !disabled ? 'padlock' : iconName
+							}`}
+							className={`selectPer__icon ${
+								(error && 'selectPer__icon--show selectPer__icon--select') ||
+								!disabled
+									? 'selectPer__icon--select'
+									: ''
 							}`}
 						/>
 					</div>
 				</div>
-				<nav
-					className={`selectPer__options ${
-						open ? 'selectPer__options--show' : ''
-					}`}
-					role='menu'
-				>
-					<ul className='selectPer__ul'>
-						{data?.map(item => (
-							<li
-								tabIndex='0'
-								key={item.value}
-								className={`selectPer__item ${
-									item.value === defaultValue ? 'selectPer__item--active' : ''
-								}`}
-								role='option'
-								aria-selected={item.value === defaultValue}
-								data-value={item.value}
-								onClick={handleClick}
-								onKeyDown={handleKeyDownItem}
-								onFocus={handleFocus}
-							>
-								{item.label}
-							</li>
-						))}
-					</ul>
-				</nav>
+				{disabled && (
+					<nav
+						className={`selectPer__options ${
+							open ? 'selectPer__options--show' : ''
+						}`}
+						role='menu'
+					>
+						<ul className='selectPer__ul'>
+							{data?.map((item, index) => (
+								<li
+									tabIndex='0'
+									key={item.value || index}
+									className={`selectPer__item ${
+										item.value === defaultValue ? 'selectPer__item--active' : ''
+									}`}
+									role='option'
+									aria-selected={item.value === defaultValue}
+									data-value={item.value}
+									onClick={handleClick}
+									onKeyDown={handleKeyDownItem}
+									onFocus={handleFocus}
+								>
+									{item.label}
+								</li>
+							))}
+						</ul>
+					</nav>
+				)}
 				<input type='hidden' name={name} value={value} />
 			</section>
 			{error &&

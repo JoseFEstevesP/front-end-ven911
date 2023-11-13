@@ -56,10 +56,14 @@ const UpdateUser = ({
 					system.routeApi.rol.lisOfLimit,
 			});
 			handelFetchSite({
-				url:
-					import.meta.env.VITE_ULR_API +
-					system.routeApi.site.primary +
-					system.routeApi.site.lisOfLimit,
+				url: validatePermissions({ per: system.permissions.site })
+					? import.meta.env.VITE_ULR_API +
+					  system.routeApi.site.primary +
+					  system.routeApi.site.lisOfLimit
+					: import.meta.env.VITE_ULR_API +
+					  system.routeApi.site.primary +
+					  system.routeApi.site.item +
+					  site,
 			});
 		}
 	}, [isOpen]);

@@ -42,7 +42,7 @@ export const system = {
 				},
 			},
 			creator: {
-				title: 'Croadores',
+				title: 'Creadores',
 				creators: {
 					JE: {
 						data: 'José Esteves CI: 27793193',

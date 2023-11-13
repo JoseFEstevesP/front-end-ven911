@@ -39,7 +39,7 @@ const perSystem = [
 	},
 	{
 		uid: crypto.randomUUID(),
-		label: 'Site',
+		label: 'Sede',
 		value: 'SITE',
 	},
 ];

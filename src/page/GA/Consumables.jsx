@@ -8,7 +8,7 @@ import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
 import Table from '../../components/Table';
-import { ContextSite } from '../../context/Site.context';
+import { ContextSite } from '../../context/SiteContext';
 import { system } from '../../data/system';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';

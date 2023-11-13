@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { ContextMsg } from '../context/msg.context';
+import { ContextMsg } from '../context/MsgContext';
 import { system } from '../data/system';
 import usePut from './usePut';
 

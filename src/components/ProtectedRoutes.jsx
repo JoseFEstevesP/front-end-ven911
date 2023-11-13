@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { ContextToken } from '../context/Token.context';
+import { ContextToken } from '../context/TokenContext';
 
 const ProtectedRoutes = () => {
 	const { token } = useContext(ContextToken);

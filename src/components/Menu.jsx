@@ -1,6 +1,6 @@
 import { useContext, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { ContextToken } from '../context/Token.context';
+import { ContextToken } from '../context/TokenContext';
 import { system } from '../data/system';
 import useExit from '../hooks/useExit';
 import useValidatePermissions from '../hooks/useValidatePermissions';

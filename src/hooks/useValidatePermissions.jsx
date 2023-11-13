@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ContextRol } from '../context/Rol.context';
+import { ContextRol } from '../context/RolContext';
 import { system } from '../data/system';
 
 const useValidatePermissions = () => {

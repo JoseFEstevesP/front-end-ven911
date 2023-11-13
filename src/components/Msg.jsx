@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { ContextMsg } from '../context/msg.context';
+import { ContextMsg } from '../context/MsgContext';
 import Btn from './Btn';
 import './style/msg.css';
 const Msg = () => {

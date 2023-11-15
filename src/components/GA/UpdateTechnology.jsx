@@ -125,9 +125,9 @@ const UpdateTechnology = ({
 				/>
 				<Select
 					className='register__input'
-					label={system.component.form.label.state}
-					name={'state'}
-					title={system.component.form.select.state}
+					label={system.component.form.label.condition}
+					name={'condition'}
+					title={system.component.form.select.condition}
 					value={form.state}
 					valueDefault={form.state}
 					onChange={handleChange}

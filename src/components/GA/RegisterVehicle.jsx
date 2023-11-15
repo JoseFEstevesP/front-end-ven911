@@ -110,7 +110,7 @@ const RegisterVehicle = ({ handelClose, handleList, siteValue, order }) => {
 				<Select
 					className='register__input'
 					label={system.component.form.label.state}
-					name={'state'}
+					name={'condition'}
 					title={system.component.form.select.state}
 					value={form.state}
 					onChange={handleChange}

@@ -62,7 +62,7 @@ const dataOrder = [
 	{
 		uid: crypto.randomUUID(),
 		label: system.component.form.label.state,
-		value: 'state',
+		value: 'condition',
 	},
 	{
 		uid: crypto.randomUUID(),

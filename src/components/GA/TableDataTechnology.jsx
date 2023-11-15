@@ -37,7 +37,7 @@ const TableDataTechnology = ({
 			serial: data.serial,
 			quantity: data.quantity,
 			value: data.value,
-			state: data.state,
+			condition: data.condition,
 			dateOfAcquisition: data.dateOfAcquisition,
 			location: data.location,
 			warranty: data.warranty,
@@ -56,7 +56,7 @@ const TableDataTechnology = ({
 			<Cell>{data.serial}</Cell>
 			<Cell>{data.quantity}</Cell>
 			<Cell>{data.value} BS</Cell>
-			<Cell>{data.state}</Cell>
+			<Cell>{data.condition}</Cell>
 			<Cell>{data.location}</Cell>
 			<Cell>{data.dateOfAcquisition}</Cell>
 			<Cell>{data.warranty}</Cell>

@@ -7,7 +7,7 @@ import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
 
-const TableDataReport = ({
+const TableDataBreakdownReport = ({
 	data,
 	order,
 	handleList,
@@ -86,4 +86,4 @@ const TableDataReport = ({
 		</TableCell>
 	);
 };
-export default TableDataReport;
+export default TableDataBreakdownReport;

@@ -67,7 +67,6 @@ const UpdateConsumables = ({
 					name={'serial'}
 					label={system.component.form.label.serial}
 					placeholder={system.component.form.placeholder.serial}
-					type='number'
 					onChange={handleChange}
 					value={form.serial}
 					error={errors.serial}

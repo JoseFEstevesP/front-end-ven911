@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
 import Btn from '../../components/Btn';
-import RegisterReport from '../../components/GA/RegisterReport';
-import TableDataReport from '../../components/GA/TableDataReport';
-import UpdateTechnology from '../../components/GA/UpdateTechnology';
+import RegisterBreakdownReport from '../../components/GA/RegisterBreakdownReport';
+import TableDataBreakdownReport from '../../components/GA/TableDataBreakdownReport';
+import UpdateBreakdownReport from '../../components/GA/UpdateBreakdownReport';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
@@ -85,7 +85,7 @@ const url =
 	import.meta.env.VITE_ULR_API +
 	system.routeApi.breakdownReport.primary +
 	system.routeApi.breakdownReport.list;
-const Report = () => {
+const BreakdownReport = () => {
 	const { validatePermissions } = useValidatePermissions();
 	const { site } = useContext(ContextSite);
 	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
@@ -146,7 +146,7 @@ const Report = () => {
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(item => (
-				<TableDataReport
+				<TableDataBreakdownReport
 					key={item.uid}
 					order={order}
 					data={item}
@@ -157,7 +157,7 @@ const Report = () => {
 			));
 		} else {
 			return data?.rows?.map(item => (
-				<TableDataReport
+				<TableDataBreakdownReport
 					key={item.uid}
 					order={order}
 					data={item}
@@ -222,7 +222,7 @@ const Report = () => {
 			{validatePermissions({ per: system.permissions.create }) &&
 				validatePermissions({ per: system.permissions.ga }) && (
 					<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
-						<RegisterReport
+						<RegisterBreakdownReport
 							order={order}
 							siteValue={siteValue}
 							handleList={handleList}
@@ -234,7 +234,7 @@ const Report = () => {
 				validatePermissions({ per: system.permissions.ga }) &&
 				newData && (
 					<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
-						<UpdateTechnology
+						<UpdateBreakdownReport
 							order={order}
 							siteValue={siteValue}
 							newData={newData}
@@ -249,7 +249,7 @@ const Report = () => {
 					{validatePermissions({ per: system.permissions.create }) &&
 						validatePermissions({ per: system.permissions.ga }) && (
 							<Btn
-								text={'Roporte Averia'}
+								text={'Reporte Averia'}
 								nameIcon={'gears'}
 								className='btnStyle'
 								handleClick={handleOpenRegister}
@@ -312,4 +312,4 @@ const Report = () => {
 		</>
 	);
 };
-export default Report;
+export default BreakdownReport;

@@ -14,14 +14,14 @@ const initForm = {
 	serial: '',
 	quantity: '',
 	value: '',
-	state: '',
+	condition: '',
 	dateOfAcquisition: '',
 	location: '',
 	warranty: '',
 	remarks: '',
 	codeBN: '',
 };
-const state = [
+const condition = [
 	{ label: 'Operativo', value: 'operativo' },
 	{ label: 'Averiado', value: 'averiado' },
 	{ label: 'Desincorporado', value: 'desincorporado' },
@@ -128,11 +128,11 @@ const UpdateTechnology = ({
 					label={system.component.form.label.condition}
 					name={'condition'}
 					title={system.component.form.select.condition}
-					value={form.state}
-					valueDefault={form.state}
+					value={form.condition}
+					valueDefault={form.condition}
 					onChange={handleChange}
-					error={errors.state}
-					data={state}
+					error={errors.condition}
+					data={condition}
 				/>
 				<Input
 					className='register__input'

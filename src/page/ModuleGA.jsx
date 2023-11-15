@@ -3,16 +3,16 @@ import Menu from '../components/Menu';
 import MenuSubItem from '../components/MenuISubItem';
 import MenuItem from '../components/MenuItem';
 import Page from '../components/Page';
+import BreakdownReport from './GA/BreakdownReport';
+import Consumables from './GA/Consumables';
+import Furniture from './GA/Furniture';
 import Init from './GA/Init';
 import Rol from './GA/Rol';
 import Site from './GA/Site';
 import Technology from './GA/Technology';
 import User from './GA/User';
-import Profile from './profile';
-import Consumables from './GA/Consumables';
-import Furniture from './GA/Furniture';
 import Vehicle from './GA/Vehicle';
-import Report from './GA/Report';
+import Profile from './profile';
 
 const ModuleGA = () => {
 	return (
@@ -37,7 +37,7 @@ const ModuleGA = () => {
 					<Route path='/consumables' element={<Consumables />} />
 					<Route path='/furniture' element={<Furniture />} />
 					<Route path='/vehicle' element={<Vehicle />} />
-					<Route path='/report' element={<Report />} />
+					<Route path='/report' element={<BreakdownReport />} />
 					<Route path='/profile' element={<Profile />} />
 				</Routes>
 			</div>

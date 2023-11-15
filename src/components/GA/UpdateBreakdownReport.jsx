@@ -1,11 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { system } from '../../data/system';
-import useRegister from '../../hooks/useRegister';
+import useUpdate from '../../hooks/useUpdate';
 import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
 import './style/register.css';
 const initForm = {
+	uid: '',
 	goods: '',
 	description: '',
 	proposedSolution: '',
@@ -19,29 +21,43 @@ const condition = [
 	{ label: 'Averia menor', value: 'averia menor' },
 	{ label: 'Averia mayor', value: 'averia mayor' },
 ];
-const RegisterReport = ({ handelClose, handleList, siteValue, order }) => {
-	const { form, setForm, handleChange, handleSubmit, errors, data } =
-		useRegister({
+const UpdateBreakdownReport = ({
+	handelClose,
+	newData,
+	handleList,
+	siteValue,
+	order,
+}) => {
+	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
+		{
 			initForm,
 			url:
 				import.meta.env.VITE_ULR_API +
 				system.routeApi.breakdownReport.primary +
-				system.routeApi.breakdownReport.register,
-		});
+				system.routeApi.breakdownReport.update,
+		},
+	);
+	useEffect(() => {
+		if (newData) {
+			setForm(newData);
+		}
+	}, [newData]);
 	useEffect(() => {
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
 			handelClose();
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 	return (
 		<section className='register'>
 			<h2 className='register__title'>
-				{system.component.breakdownReport.register}
+				{system.component.breakdownReport.update}
 			</h2>
-			<form onSubmit={handleSubmit} className='register__form'>
+			<form
+				onSubmit={handleSubmit}
+				className='register__form register__form--update'
+			>
 				<Input
 					className='register__input'
 					iconName={'furniture'}
@@ -78,6 +94,7 @@ const RegisterReport = ({ handelClose, handleList, siteValue, order }) => {
 					name={'condition'}
 					title={system.component.form.select.condition}
 					value={form.condition}
+					valueDefault={form.condition}
 					onChange={handleChange}
 					error={errors.condition}
 					data={condition}
@@ -132,4 +149,4 @@ const RegisterReport = ({ handelClose, handleList, siteValue, order }) => {
 		</section>
 	);
 };
-export default RegisterReport;
+export default UpdateBreakdownReport;

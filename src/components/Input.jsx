@@ -52,9 +52,7 @@ const Input = ({
 						placeholder={placeholder}
 						onChange={onChange}
 						value={value}
-						className={`input__input 
-						${type === 'date' ? 'input__input--date' : ''}
-						`}
+						className={`input__input `}
 					/>
 					<div className='input__contentIcon'>{renderBtn({ type })}</div>
 				</div>

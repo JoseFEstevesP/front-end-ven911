@@ -88,6 +88,11 @@ export const system = {
 				codeBN: 'Código BN',
 				serial: 'Serial',
 				action: 'Acción',
+				goods: 'Bienes',
+				proposedSolution: 'Solución propuesta',
+				dateOfReport: 'Fecha del reporte',
+				timeOfReport: 'Hora del reporte',
+				serialOrCodeBN: 'Seria o Código BN',
 			},
 			placeholder: {
 				ci: 'Ingrese cedula...',
@@ -110,13 +115,16 @@ export const system = {
 				codeBN: 'Código BN...',
 				date: 'DD/MM/AA',
 				serial: 'Serial...',
+				goods: 'Bienen...',
+				serialOrCodeBN: 'Seria o Código BN...',
+				proposedSolution: 'Solución propuesta...',
 			},
 			select: {
 				aria: 'Selecciona una Opción',
 				rol: 'Seleccione el Rol',
 				site: 'Seleccione la Sede',
 				filter: 'Seleccione el Filtro',
-				condition: 'Seleccione el Condición',
+				condition: 'Seleccione la Condición',
 			},
 		},
 		btn: {
@@ -138,6 +146,10 @@ export const system = {
 		technology: {
 			register: 'Registro tecnologia',
 			update: 'Actualizar tecnologia',
+		},
+		breakdownReport: {
+			register: 'Reporte de avería',
+			update: 'Reporte de avería',
 		},
 		consumables: {
 			register: 'Registro consumible',
@@ -234,6 +246,14 @@ export const system = {
 		},
 		vehicle: {
 			primary: '/vehicle',
+			list: '/list',
+			register: '/register',
+			search: '/search',
+			update: '/update',
+			delete: '/delete',
+		},
+		breakdownReport: {
+			primary: '/breakdownReport',
 			list: '/list',
 			register: '/register',
 			search: '/search',

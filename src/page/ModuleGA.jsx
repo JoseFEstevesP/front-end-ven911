@@ -12,6 +12,7 @@ import Profile from './profile';
 import Consumables from './GA/Consumables';
 import Furniture from './GA/Furniture';
 import Vehicle from './GA/Vehicle';
+import Report from './GA/Report';
 
 const ModuleGA = () => {
 	return (
@@ -36,6 +37,7 @@ const ModuleGA = () => {
 					<Route path='/consumables' element={<Consumables />} />
 					<Route path='/furniture' element={<Furniture />} />
 					<Route path='/vehicle' element={<Vehicle />} />
+					<Route path='/report' element={<Report />} />
 					<Route path='/profile' element={<Profile />} />
 				</Routes>
 			</div>

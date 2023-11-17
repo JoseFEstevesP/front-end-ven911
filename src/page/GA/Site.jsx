@@ -72,14 +72,14 @@ const Site = () => {
 		if (validatePermissions({ per: system.permissions.read })) {
 			handleList({});
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		 
 	}, []);
 	useEffect(() => {
 		handleList({ orderProperty: order });
 		if (searchSubmit) {
 			handleSearch({ orderProperty: order });
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		 
 	}, [order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {

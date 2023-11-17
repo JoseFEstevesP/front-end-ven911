@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { ContextSite } from '../../context/SiteContext';
 import { system } from '../../data/system';
 import useGet from '../../hooks/useGet';
 import useUpdate from '../../hooks/useUpdate';
+import useValidatePermissions from '../../hooks/useValidatePermissions';
 import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
@@ -24,6 +26,8 @@ const UpdateUser = ({
 	siteValue,
 	order,
 }) => {
+	const { validatePermissions } = useValidatePermissions();
+	const { site } = useContext(ContextSite);
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
 			initForm,

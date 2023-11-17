@@ -155,14 +155,14 @@ const Purchase = () => {
 					  site,
 			});
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		 
 	}, []);
 	useEffect(() => {
 		handleList({ uidSite: siteValue, orderProperty: order });
 		if (searchSubmit) {
 			handleSearch({ uidSite: siteValue, orderProperty: order });
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		 
 	}, [siteValue, order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {

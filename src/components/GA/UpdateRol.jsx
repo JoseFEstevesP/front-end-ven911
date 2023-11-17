@@ -37,6 +37,11 @@ const perSystem = [
 		label: 'Eliminar',
 		value: 'DELETE',
 	},
+	{
+		uid: crypto.randomUUID(),
+		label: 'Sede',
+		value: 'SITE',
+	},
 ];
 const perModule = [
 	{

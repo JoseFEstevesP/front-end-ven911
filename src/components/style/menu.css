@@ -158,8 +158,8 @@
 }
 
 .menu__a {
+	width: 100%;
 	padding: 1.125em 0.625em;
-	width: auto;
 	font-weight: bold;
 	text-align: center;
 	transition: color 0.3s;
@@ -172,6 +172,12 @@
 @media (hover: hover) {
 	.menu__a:hover {
 		color: var(--color-primary-system);
+	}
+}
+
+@media screen and (width >= 768px) {
+	.menu__a {
+		width: auto;
 	}
 }
 
@@ -243,9 +249,16 @@
 }
 
 .menu__subBtn {
+	width: 100%;
 	margin: 0 auto;
 	border: 0;
 	padding: 1.125em 0.625em;
+}
+
+@media screen and (width >= 768px) {
+	.menu__subBtn {
+		width: auto;
+	}
 }
 
 .menu__subIcon {

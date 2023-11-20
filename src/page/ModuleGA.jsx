@@ -28,6 +28,7 @@ const ModuleGA = () => {
 						<MenuItem text={'Mobiliario'} to={'/ga/furniture'} />
 						<MenuItem text={'Vehículo'} to={'/ga/vehicle'} />
 					</MenuSubItem>
+					<MenuItem text={'Reporte averia'} to={'/ga/report'} />
 					<MenuItem text={'Compras'} to={'/ga/purchase'} />
 				</Menu>
 				<Routes>

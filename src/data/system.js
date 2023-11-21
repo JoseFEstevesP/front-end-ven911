@@ -99,6 +99,7 @@ export const system = {
 				warranty: 'Garantia',
 			},
 			placeholder: {
+				timeOfReport: 'Hora...',
 				brand: 'Marca...',
 				ci: 'Ingrese cedula...',
 				codeBN: 'Código BN...',

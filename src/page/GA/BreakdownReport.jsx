@@ -20,23 +20,23 @@ import './style/page.css';
 
 const heads = [
 	system.component.form.label.goods,
-	system.component.form.label.description,
+	system.component.form.label.problem,
+	system.component.form.label.symptoms,
 	system.component.form.label.proposedSolution,
 	system.component.form.label.condition,
+	system.component.form.label.breakdownDepartment,
 	system.component.form.label.location,
-	system.component.form.label.dateOfReport,
-	system.component.form.label.timeOfReport,
 	system.component.form.label.serialOrCodeBN,
 	system.component.form.label.action,
 ];
 const headsOfAction = [
 	system.component.form.label.goods,
-	system.component.form.label.description,
+	system.component.form.label.problem,
+	system.component.form.label.symptoms,
 	system.component.form.label.proposedSolution,
 	system.component.form.label.condition,
+	system.component.form.label.breakdownDepartment,
 	system.component.form.label.location,
-	system.component.form.label.dateOfReport,
-	system.component.form.label.timeOfReport,
 	system.component.form.label.serialOrCodeBN,
 ];
 const dataOrder = [
@@ -47,8 +47,18 @@ const dataOrder = [
 	},
 	{
 		uid: crypto.randomUUID(),
-		label: system.component.form.label.description,
-		value: 'description',
+		label: system.component.form.label.problem,
+		value: 'problem',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.symptoms,
+		value: 'symptoms',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.breakdownDepartment,
+		value: 'breakdownDepartment',
 	},
 	{
 		uid: crypto.randomUUID(),
@@ -134,14 +144,12 @@ const BreakdownReport = () => {
 					  site,
 			});
 		}
-		 
 	}, []);
 	useEffect(() => {
 		handleList({ uidSite: siteValue, orderProperty: order });
 		if (searchSubmit) {
 			handleSearch({ uidSite: siteValue, orderProperty: order });
 		}
-		 
 	}, [siteValue, order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {

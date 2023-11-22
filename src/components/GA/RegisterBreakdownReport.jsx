@@ -7,18 +7,19 @@ import Select from '../Select';
 import './style/register.css';
 const initForm = {
 	goods: '',
-	description: '',
+	problem: '',
+	symptoms: '',
 	proposedSolution: '',
 	condition: '',
+	breakdownDepartment: '',
 	location: '',
-	dateOfReport: '',
-	timeOfReport: '',
 	serialOrCodeBN: '',
 };
 const condition = [
 	{ label: 'Averia menor', value: 'averia menor' },
 	{ label: 'Averia mayor', value: 'averia mayor' },
 ];
+const breakdownDepartment = [{ label: 'Tecnologia', value: 'tecnologia' }];
 const RegisterBreakdownReport = ({
 	handelClose,
 	handleList,
@@ -60,12 +61,22 @@ const RegisterBreakdownReport = ({
 				<Input
 					className='register__input'
 					iconName={'description'}
-					name={'description'}
-					label={system.component.form.label.description}
-					placeholder={system.component.form.placeholder.description}
+					name={'problem'}
+					label={system.component.form.label.problem}
+					placeholder={system.component.form.placeholder.problem}
 					onChange={handleChange}
-					value={form.description}
-					error={errors.description}
+					value={form.problem}
+					error={errors.problem}
+				/>
+				<Input
+					className='register__input'
+					iconName={'description'}
+					name={'symptoms'}
+					label={system.component.form.label.symptoms}
+					placeholder={system.component.form.placeholder.symptoms}
+					onChange={handleChange}
+					value={form.symptoms}
+					error={errors.symptoms}
 				/>
 				<Input
 					className='register__input'
@@ -87,6 +98,16 @@ const RegisterBreakdownReport = ({
 					error={errors.condition}
 					data={condition}
 				/>
+				<Select
+					className='register__input'
+					label={system.component.form.label.breakdownDepartment}
+					name={'breakdownDepartment'}
+					title={system.component.form.select.breakdownDepartment}
+					value={form.breakdownDepartment}
+					onChange={handleChange}
+					error={errors.breakdownDepartment}
+					data={breakdownDepartment}
+				/>
 				<Input
 					className='register__input'
 					iconName={'location'}
@@ -96,27 +117,6 @@ const RegisterBreakdownReport = ({
 					onChange={handleChange}
 					value={form.location}
 					error={errors.location}
-				/>
-				<Input
-					className='register__input'
-					iconName={'calendar'}
-					name={'dateOfReport'}
-					type='date'
-					label={system.component.form.label.dateOfReport}
-					onChange={handleChange}
-					value={form.dateOfReport}
-					error={errors.dateOfReport}
-				/>
-				<Input
-					className='register__input '
-					iconName={'number'}
-					name={'timeOfReport'}
-					type='time'
-					label={system.component.form.label.timeOfReport}
-					placeholder={system.component.form.placeholder.timeOfReport}
-					onChange={handleChange}
-					value={form.timeOfReport}
-					error={errors.timeOfReport}
 				/>
 				<Input
 					className='register__input'

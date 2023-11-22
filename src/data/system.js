@@ -65,6 +65,7 @@ export const system = {
 		},
 		form: {
 			label: {
+				breakdownDepartment: 'Departamento de avería',
 				action: 'Acción',
 				brand: 'Marca',
 				ci: 'CI',
@@ -97,6 +98,8 @@ export const system = {
 				timeOfReport: 'Hora del reporte',
 				value: 'valor BS',
 				warranty: 'Garantia',
+				symptoms: 'Sintomas',
+				problem: 'Problema',
 			},
 			placeholder: {
 				timeOfReport: 'Hora...',
@@ -127,6 +130,8 @@ export const system = {
 				surname: 'Ingrese apellido...',
 				value: 'Valor...',
 				warranty: 'Garantia...',
+				symptoms: 'Sintomas...',
+				problem: 'Problema...',
 			},
 			select: {
 				aria: 'Selecciona una Opción',
@@ -134,6 +139,7 @@ export const system = {
 				site: 'Seleccione la Sede',
 				filter: 'Seleccione el Filtro',
 				condition: 'Seleccione la Condición',
+				breakdownDepartment: 'Seleccione el Dpto. avería',
 			},
 		},
 		btn: {

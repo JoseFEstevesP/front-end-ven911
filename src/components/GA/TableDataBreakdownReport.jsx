@@ -32,12 +32,12 @@ const TableDataBreakdownReport = ({
 		setNewData({
 			uid: data.uid,
 			goods: data.goods,
-			description: data.description,
+			problem: data.problem,
+			symptoms: data.symptoms,
 			proposedSolution: data.proposedSolution,
 			condition: data.condition,
+			breakdownDepartment: data.breakdownDepartment,
 			location: data.location,
-			dateOfReport: data.dateOfReport,
-			timeOfReport: data.timeOfReport,
 			serialOrCodeBN: data.serialOrCodeBN,
 		});
 		handleOpenUpdate();
@@ -47,12 +47,12 @@ const TableDataBreakdownReport = ({
 	return (
 		<TableCell>
 			<Cell>{data.goods}</Cell>
-			<Cell>{data.description}</Cell>
+			<Cell>{data.problem}</Cell>
+			<Cell>{data.symptoms}</Cell>
 			<Cell>{data.proposedSolution}</Cell>
 			<Cell>{data.condition}</Cell>
+			<Cell>{data.breakdownDepartment}</Cell>
 			<Cell>{data.location}</Cell>
-			<Cell>{data.dateOfReport}</Cell>
-			<Cell>{data.timeOfReport}</Cell>
 			<Cell>{data.serialOrCodeBN}</Cell>
 			{((validatePermissions({ per: system.permissions.delete }) &&
 				validatePermissions({ per: system.permissions.ga })) ||

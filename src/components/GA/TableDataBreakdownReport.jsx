@@ -51,6 +51,8 @@ const TableDataBreakdownReport = ({
 			<Cell>{data.symptoms}</Cell>
 			<Cell>{data.proposedSolution}</Cell>
 			<Cell>{data.condition}</Cell>
+			<Cell>{data.dateOfReport}</Cell>
+			<Cell>{data.timeOfReport}</Cell>
 			<Cell>{data.breakdownDepartment}</Cell>
 			<Cell>{data.location}</Cell>
 			<Cell>{data.serialOrCodeBN}</Cell>

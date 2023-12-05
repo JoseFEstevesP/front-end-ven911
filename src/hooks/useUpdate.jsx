@@ -15,7 +15,7 @@ const useUpdate = ({ initForm, url }) => {
 			setMsg({ msg: system.msg.msgUpdate, type: false });
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data, initForm]);
+	}, [data]);
 	const handleChange = e => {
 		const { name, value } = e.target;
 		setForm({ ...form, [name]: value });

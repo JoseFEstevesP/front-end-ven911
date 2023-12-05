@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
 import Btn from '../../components/Btn';
-import RegisterFurniture from '../../components/GA/RegisterFurniture';
-import TableDataFurniture from '../../components/GA/TableDataFurniture';
-import UpdateFurniture from '../../components/GA/UpdateFurniture';
+import RegisterAssign from '../../components/GA/RegisterAssign';
+import TableDataAssign from '../../components/GA/TableDataAssign';
+import UpdateAssign from '../../components/GA/UpdateAssign';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
@@ -19,37 +19,37 @@ import useValidatePermissions from '../../hooks/useValidatePermissions';
 import './style/page.css';
 
 const heads = [
-	system.component.form.label.description,
-	system.component.form.label.serial,
+	system.component.form.label.inventory,
+	system.component.form.label.article,
+	system.component.form.label.department,
 	system.component.form.label.quantity,
-	system.component.form.label.assign,
-	system.component.form.label.value,
-	system.component.form.label.condition,
-	system.component.form.label.location,
-	system.component.form.label.dateOfAcquisition,
-	system.component.form.label.warranty,
+	system.component.form.label.description,
 	system.component.form.label.remarks,
-	system.component.form.label.codeBN,
 	system.component.form.label.action,
 ];
 const headsOfAction = [
-	system.component.form.label.description,
-	system.component.form.label.serial,
+	system.component.form.label.inventory,
+	system.component.form.label.article,
+	system.component.form.label.department,
 	system.component.form.label.quantity,
-	system.component.form.label.assign,
-	system.component.form.label.value,
-	system.component.form.label.condition,
-	system.component.form.label.location,
-	system.component.form.label.dateOfAcquisition,
-	system.component.form.label.warranty,
+	system.component.form.label.description,
 	system.component.form.label.remarks,
-	system.component.form.label.codeBN,
 ];
 const dataOrder = [
 	{
 		uid: crypto.randomUUID(),
-		label: system.component.form.label.description,
-		value: 'description',
+		label: system.component.form.label.inventory,
+		value: 'inventory',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.article,
+		value: 'article',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.department,
+		value: 'department',
 	},
 	{
 		uid: crypto.randomUUID(),
@@ -58,55 +58,20 @@ const dataOrder = [
 	},
 	{
 		uid: crypto.randomUUID(),
-		label: system.component.form.label.assign,
-		value: 'assign',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.value,
-		value: 'value',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.condition,
-		value: 'condition',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.serial,
-		value: 'serial',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.dateOfAcquisition,
-		value: 'dateOfAcquisition',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.location,
-		value: 'location',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.warranty,
-		value: 'warranty',
+		label: system.component.form.label.description,
+		value: 'description',
 	},
 	{
 		uid: crypto.randomUUID(),
 		label: system.component.form.label.remarks,
 		value: 'remarks',
 	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.codeBN,
-		value: 'codeBN',
-	},
 ];
 const url =
 	import.meta.env.VITE_ULR_API +
-	system.routeApi.furniture.primary +
-	system.routeApi.furniture.list;
-const Furniture = () => {
+	system.routeApi.assign.primary +
+	system.routeApi.assign.list;
+const Assign = () => {
 	const { validatePermissions } = useValidatePermissions();
 	const { site } = useContext(ContextSite);
 	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
@@ -131,8 +96,8 @@ const Furniture = () => {
 	} = useSearch({
 		url:
 			import.meta.env.VITE_ULR_API +
-			system.routeApi.furniture.primary +
-			system.routeApi.furniture.search,
+			system.routeApi.assign.primary +
+			system.routeApi.assign.search,
 	});
 	const { order, handleChange: handleChangeOrder } = useOrder({
 		orderDefault: dataOrder[0].value,
@@ -165,7 +130,7 @@ const Furniture = () => {
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(item => (
-				<TableDataFurniture
+				<TableDataAssign
 					key={item.uid}
 					order={order}
 					data={item}
@@ -176,7 +141,7 @@ const Furniture = () => {
 			));
 		} else {
 			return data?.rows?.map(item => (
-				<TableDataFurniture
+				<TableDataAssign
 					key={item.uid}
 					order={order}
 					data={item}
@@ -241,7 +206,7 @@ const Furniture = () => {
 			{validatePermissions({ per: system.permissions.create }) &&
 				validatePermissions({ per: system.permissions.ga }) && (
 					<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
-						<RegisterFurniture
+						<RegisterAssign
 							order={order}
 							siteValue={siteValue}
 							handleList={handleList}
@@ -253,7 +218,7 @@ const Furniture = () => {
 				validatePermissions({ per: system.permissions.ga }) &&
 				newData && (
 					<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
-						<UpdateFurniture
+						<UpdateAssign
 							order={order}
 							siteValue={siteValue}
 							newData={newData}
@@ -268,8 +233,8 @@ const Furniture = () => {
 					{validatePermissions({ per: system.permissions.create }) &&
 						validatePermissions({ per: system.permissions.ga }) && (
 							<Btn
-								text={'Registrar Mobiliario'}
-								nameIcon={'furniture'}
+								text={'Asignar'}
+								nameIcon={'assignment'}
 								className='btnStyle'
 								handleClick={handleOpenRegister}
 							/>
@@ -331,4 +296,4 @@ const Furniture = () => {
 		</>
 	);
 };
-export default Furniture;
+export default Assign;

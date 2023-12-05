@@ -24,6 +24,7 @@ const heads = [
 	system.component.form.label.model,
 	system.component.form.label.serial,
 	system.component.form.label.quantity,
+	system.component.form.label.assign,
 	system.component.form.label.value,
 	system.component.form.label.condition,
 	system.component.form.label.location,
@@ -39,6 +40,7 @@ const headsOfAction = [
 	system.component.form.label.model,
 	system.component.form.label.serial,
 	system.component.form.label.quantity,
+	system.component.form.label.assign,
 	system.component.form.label.value,
 	system.component.form.label.condition,
 	system.component.form.label.location,
@@ -72,6 +74,11 @@ const dataOrder = [
 		uid: crypto.randomUUID(),
 		label: system.component.form.label.quantity,
 		value: 'quantity',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.assign,
+		value: 'assign',
 	},
 	{
 		uid: crypto.randomUUID(),
@@ -162,14 +169,12 @@ const Technology = () => {
 					  site,
 			});
 		}
-		 
 	}, []);
 	useEffect(() => {
 		handleList({ uidSite: siteValue, orderProperty: order });
 		if (searchSubmit) {
 			handleSearch({ uidSite: siteValue, orderProperty: order });
 		}
-		 
 	}, [siteValue, order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {

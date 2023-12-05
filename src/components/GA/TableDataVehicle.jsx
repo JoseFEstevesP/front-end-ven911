@@ -55,6 +55,7 @@ const TableDataVehicle = ({
 			<Cell>{data.model}</Cell>
 			<Cell>{data.place}</Cell>
 			<Cell>{data.quantity}</Cell>
+			<Cell>{data.assign}</Cell>
 			<Cell>{data.value} BS</Cell>
 			<Cell>{data.condition}</Cell>
 			<Cell>{data.location}</Cell>

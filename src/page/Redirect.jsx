@@ -61,11 +61,18 @@ const Redirect = () => {
 							to={`/tci`}
 						/>
 					)}
-					{validatePermissions({ per: system.permissions.uri_p }) && (
+					{validatePermissions({ per: system.permissions.uri }) && (
 						<CardModule
-							iconName='URI_P'
-							title={system.page.redirect.cardModule.URI_P}
-							to={`/urip`}
+							iconName='URI'
+							title={system.page.redirect.cardModule.URI}
+							to={`/uri`}
+						/>
+					)}
+					{validatePermissions({ per: system.permissions.power }) && (
+						<CardModule
+							iconName='POWER'
+							title={system.page.redirect.cardModule.POWER}
+							to={`/power`}
 						/>
 					)}
 				</div>

@@ -23,6 +23,7 @@ const heads = [
 	system.component.form.label.serial,
 	system.component.form.label.brand,
 	system.component.form.label.quantity,
+	system.component.form.label.assign,
 	system.component.form.label.value,
 	system.component.form.label.location,
 	system.component.form.label.dateOfAcquisition,
@@ -34,6 +35,7 @@ const headsOfAction = [
 	system.component.form.label.serial,
 	system.component.form.label.brand,
 	system.component.form.label.quantity,
+	system.component.form.label.assign,
 	system.component.form.label.value,
 	system.component.form.label.location,
 	system.component.form.label.dateOfAcquisition,
@@ -59,6 +61,11 @@ const dataOrder = [
 		uid: crypto.randomUUID(),
 		label: system.component.form.label.quantity,
 		value: 'quantity',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.assign,
+		value: 'assign',
 	},
 	{
 		uid: crypto.randomUUID(),

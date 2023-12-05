@@ -50,6 +50,7 @@ const TableDataConsumables = ({
 			<Cell>{data.serial}</Cell>
 			<Cell>{data.brand}</Cell>
 			<Cell>{data.quantity}</Cell>
+			<Cell>{data.assign}</Cell>
 			<Cell>{data.value} BS</Cell>
 			<Cell>{data.location}</Cell>
 			<Cell>{data.dateOfAcquisition}</Cell>

@@ -19,7 +19,10 @@ const condition = [
 	{ label: 'Averia menor', value: 'averia menor' },
 	{ label: 'Averia mayor', value: 'averia mayor' },
 ];
-const breakdownDepartment = [{ label: 'Tecnologia', value: 'tecnologia' }];
+const breakdownDepartment = [
+	{ label: 'Tecnologia', value: 'tecnologia' },
+	{ label: 'Potencia', value: 'potencia' },
+];
 const RegisterBreakdownReport = ({
 	handelClose,
 	handleList,

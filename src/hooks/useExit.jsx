@@ -5,8 +5,8 @@ const useExit = () => {
 	const { setToken } = useContext(ContextToken);
 	const { setRol } = useContext(ContextRol);
 	const handelClickExit = () => {
-		sessionStorage.removeItem('token');
-		sessionStorage.removeItem('rol');
+		localStorage.removeItem('token');
+		localStorage.removeItem('rol');
 		setToken(null);
 		setRol(null);
 	};

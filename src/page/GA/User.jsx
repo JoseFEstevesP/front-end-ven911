@@ -106,14 +106,12 @@ const User = () => {
 					  site,
 			});
 		}
-		 
 	}, []);
 	useEffect(() => {
 		handleList({ uidSite: siteValue, orderProperty: order });
 		if (searchSubmit) {
 			handleSearch({ uidSite: siteValue, orderProperty: order });
 		}
-		 
 	}, [siteValue, order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
@@ -227,6 +225,9 @@ const User = () => {
 					</Link>
 					<Link to='/ga/site' className='btnStyle page__link'>
 						Ir a Sede <Icons iconName={'building'} />
+					</Link>
+					<Link className='btnStyle page__link' target='_blank' to='/pdf/user'>
+						PDF <Icons iconName={'pdf'} />
 					</Link>
 				</div>
 				{validatePermissions({ per: system.permissions.read }) && (

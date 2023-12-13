@@ -183,6 +183,9 @@ const Rol = () => {
 					<Link to='/ga/user' className='btnStyle page__link'>
 						Ir a usuario <Icons iconName={'user'} />
 					</Link>
+					<Link className='btnStyle page__link' target='_blank' to='/pdf/rol'>
+						PDF <Icons iconName={'pdf'} />
+					</Link>
 				</div>
 				{validatePermissions({ per: system.permissions.read }) && (
 					<div className='page__options'>

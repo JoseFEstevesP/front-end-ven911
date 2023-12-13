@@ -3,18 +3,18 @@ import Menu from '../components/Menu';
 import MenuSubItem from '../components/MenuISubItem';
 import MenuItem from '../components/MenuItem';
 import Page from '../components/Page';
+import Assign from './GA/Assign';
 import BreakdownReport from './GA/BreakdownReport';
 import Consumables from './GA/Consumables';
 import Furniture from './GA/Furniture';
 import Init from './GA/Init';
+import Purchase from './GA/Purchase';
 import Rol from './GA/Rol';
 import Site from './GA/Site';
 import Technology from './GA/Technology';
 import User from './GA/User';
 import Vehicle from './GA/Vehicle';
 import Profile from './profile';
-import Purchase from './GA/Purchase';
-import Assign from './GA/Assign';
 
 const ModuleGA = () => {
 	return (

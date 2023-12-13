@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
 import RegisterConsumables from '../../components/GA/RegisterConsumables';
 import TableDataConsumables from '../../components/GA/TableDataConsumables';
 import UpdateConsumables from '../../components/GA/UpdateConsumables';
+import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
@@ -260,6 +262,13 @@ const Consumables = () => {
 								handleClick={handleOpenRegister}
 							/>
 						)}
+					<Link
+						className='btnStyle page__link'
+						target='_blank'
+						to='/pdf/consumables'
+					>
+						PDF <Icons iconName={'pdf'} />
+					</Link>
 				</div>
 				{validatePermissions({ per: system.permissions.read }) &&
 					validatePermissions({ per: system.permissions.ga }) && (

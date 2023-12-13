@@ -11,7 +11,6 @@ const Redirect = () => {
 	const { handelClickExit } = useExit();
 	const handleExit = () => handelClickExit();
 	const { validatePermissions } = useValidatePermissions();
-
 	return (
 		<Page title='Redirección'>
 			<div className='redirect'>
@@ -24,7 +23,6 @@ const Redirect = () => {
 						handleClick={handleExit}
 					/>
 				</div>
-
 				<div className='redirect__modules'>
 					{validatePermissions({ per: system.permissions.ocp }) && (
 						<CardModule

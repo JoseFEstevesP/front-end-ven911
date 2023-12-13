@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
 import RegisterBreakdownReport from '../../components/GA/RegisterBreakdownReport';
 import TableDataBreakdownReport from '../../components/GA/TableDataBreakdownReport';
 import UpdateBreakdownReport from '../../components/GA/UpdateBreakdownReport';
+import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
@@ -267,6 +269,13 @@ const BreakdownReport = () => {
 								handleClick={handleOpenRegister}
 							/>
 						)}
+					<Link
+						className='btnStyle page__link'
+						target='_blank'
+						to='/pdf/breakdownReport'
+					>
+						PDF <Icons iconName={'pdf'} />
+					</Link>
 				</div>
 				{validatePermissions({ per: system.permissions.read }) &&
 					validatePermissions({ per: system.permissions.ga }) && (

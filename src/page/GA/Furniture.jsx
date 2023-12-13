@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
 import RegisterFurniture from '../../components/GA/RegisterFurniture';
 import TableDataFurniture from '../../components/GA/TableDataFurniture';
 import UpdateFurniture from '../../components/GA/UpdateFurniture';
+import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
@@ -274,6 +276,13 @@ const Furniture = () => {
 								handleClick={handleOpenRegister}
 							/>
 						)}
+					<Link
+						className='btnStyle page__link'
+						target='_blank'
+						to='/pdf/furniture'
+					>
+						PDF <Icons iconName={'pdf'} />
+					</Link>
 				</div>
 				{validatePermissions({ per: system.permissions.read }) &&
 					validatePermissions({ per: system.permissions.ga }) && (

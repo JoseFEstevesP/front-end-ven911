@@ -65,6 +65,7 @@ export const system = {
 		},
 		form: {
 			label: {
+				user: 'Usuario',
 				action: 'Acción',
 				article: 'Articulo',
 				assign: 'Asignado',
@@ -219,6 +220,7 @@ export const system = {
 		user: {
 			primary: '/user',
 			register: '/register',
+			report: '/report',
 			search: '/search',
 			list: '/list',
 			login: '/login',
@@ -230,6 +232,7 @@ export const system = {
 			delete: '/delete',
 		},
 		rol: {
+			report: '/report',
 			primary: '/rol',
 			list: '/list',
 			lisOfLimit: '/list_of_limit',
@@ -240,6 +243,7 @@ export const system = {
 		},
 		site: {
 			primary: '/site',
+			report: '/report',
 			item: '/item/',
 			list: '/list',
 			lisOfLimit: '/list_of_limit',
@@ -250,6 +254,7 @@ export const system = {
 		},
 		assign: {
 			primary: '/assign',
+			report: '/report',
 			item: '/item/',
 			list: '/list',
 			lisOfLimit: '/list_of_limit',
@@ -261,6 +266,7 @@ export const system = {
 		},
 		technology: {
 			primary: '/technology',
+			report: '/report',
 			list: '/list',
 			register: '/register',
 			search: '/search',
@@ -269,6 +275,7 @@ export const system = {
 		},
 		purchase: {
 			primary: '/purchase',
+			report: '/report',
 			list: '/list',
 			register: '/register',
 			search: '/search',
@@ -277,6 +284,7 @@ export const system = {
 		},
 		furniture: {
 			primary: '/furniture',
+			report: '/report',
 			list: '/list',
 			register: '/register',
 			search: '/search',
@@ -285,6 +293,7 @@ export const system = {
 		},
 		consumables: {
 			primary: '/consumables',
+			report: '/report',
 			list: '/list',
 			register: '/register',
 			search: '/search',
@@ -293,6 +302,7 @@ export const system = {
 		},
 		vehicle: {
 			primary: '/vehicle',
+			report: '/report',
 			list: '/list',
 			register: '/register',
 			search: '/search',
@@ -301,6 +311,7 @@ export const system = {
 		},
 		breakdownReport: {
 			primary: '/breakdownReport',
+			report: '/report',
 			list: '/list',
 			register: '/register',
 			search: '/search',

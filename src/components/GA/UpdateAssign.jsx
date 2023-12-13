@@ -74,8 +74,6 @@ const UpdateAssign = ({
 			});
 		}
 	}, [form?.articleUid]);
-	console.log('newData:', newData);
-	console.log('newData.inventory:', newData.inventory);
 	return (
 		<section className='register'>
 			<h2 className='register__title'>{system.component.assign.update}</h2>

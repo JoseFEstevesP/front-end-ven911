@@ -20,9 +20,9 @@ const useLogin = ({ initForm, url }) => {
 			setToken(data?.JWT);
 			setRol(data?.rol);
 			setSite(data?.site);
-			sessionStorage.setItem('token', data?.JWT);
-			sessionStorage.setItem('rol', data?.rol);
-			sessionStorage.setItem('site', data?.site);
+			localStorage.setItem('token', data?.JWT);
+			localStorage.setItem('rol', data?.rol);
+			localStorage.setItem('site', data?.site);
 			setForm(initForm);
 			setMsg({ msg: system.msg.msgLogin, type: false });
 		}

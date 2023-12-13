@@ -48,11 +48,6 @@ const TableDataAssign = ({
 		SetClose(false);
 	}, [data, handleOpenUpdate, setNewData]);
 	const handleDeleteUser = () => handleDelete({ uid: data.uid });
-	console.log(
-		'inventoryData[data?.inventory]:',
-		inventoryData[data?.inventory],
-	);
-	console.log('data?.inventory:', data?.inventory);
 	return (
 		<TableCell>
 			<Cell>{inventoryData[data?.inventory]}</Cell>

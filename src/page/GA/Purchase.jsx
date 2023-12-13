@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
 import RegisterPurchase from '../../components/GA/RegisterPurchase';
 import TableDataPurchase from '../../components/GA/TableDataPurchase';
 import UpdatePurchase from '../../components/GA/UpdatePurchase';
+import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
@@ -155,14 +157,12 @@ const Purchase = () => {
 					  site,
 			});
 		}
-		 
 	}, []);
 	useEffect(() => {
 		handleList({ uidSite: siteValue, orderProperty: order });
 		if (searchSubmit) {
 			handleSearch({ uidSite: siteValue, orderProperty: order });
 		}
-		 
 	}, [siteValue, order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
@@ -276,6 +276,13 @@ const Purchase = () => {
 								handleClick={handleOpenRegister}
 							/>
 						)}
+					<Link
+						className='btnStyle page__link'
+						target='_blank'
+						to='/pdf/purchase'
+					>
+						PDF <Icons iconName={'pdf'} />
+					</Link>
 				</div>
 				{validatePermissions({ per: system.permissions.read }) &&
 					validatePermissions({ per: system.permissions.ga }) && (

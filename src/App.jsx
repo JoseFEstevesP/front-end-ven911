@@ -10,6 +10,7 @@ import TokenProvider from './context/TokenContext';
 import Error404 from './page/Error404';
 import Home from './page/Home';
 import ModuleGA from './page/ModuleGA';
+import Pdf from './page/Pdf';
 import Redirect from './page/Redirect';
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
 							<Route element={<ProtectedRoutes />}>
 								<Route path='/redirect' element={<Redirect />} />
 								<Route path='/ga/*' element={<ModuleGA />} />
+								<Route path='/pdf/:report' element={<Pdf />} />
 								{/* coopiar la ruta del perfil y pegarga en la pagina de redirección de los modulos de cada ruta */}
 								{/* <Route path='/profile' element={<Profile />} /> */}
 							</Route>

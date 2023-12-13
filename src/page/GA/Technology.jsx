@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
 import RegisterTechnology from '../../components/GA/RegisterTechnology';
 import TableDataTechnology from '../../components/GA/TableDataTechnology';
 import UpdateTechnology from '../../components/GA/UpdateTechnology';
+import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
@@ -288,6 +290,13 @@ const Technology = () => {
 								handleClick={handleOpenRegister}
 							/>
 						)}
+					<Link
+						className='btnStyle page__link'
+						target='_blank'
+						to='/pdf/technology'
+					>
+						PDF <Icons iconName={'pdf'} />
+					</Link>
 				</div>
 				{validatePermissions({ per: system.permissions.read }) &&
 					validatePermissions({ per: system.permissions.ga }) && (

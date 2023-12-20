@@ -127,6 +127,7 @@ const header = {
 	assign: [
 		system.component.form.label.inventory,
 		system.component.form.label.article,
+		system.component.form.label.serialOrCodeBN,
 		system.component.form.label.department,
 		system.component.form.label.quantity,
 		system.component.form.label.description,

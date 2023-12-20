@@ -11,6 +11,9 @@ const AssignRow = ({ data }) => {
 				<Text style={styles.tableCell}>{item.article}</Text>
 			</View>
 			<View style={styles.tableCol}>
+				<Text style={styles.tableCell}>{item.serialOrCodeBN}</Text>
+			</View>
+			<View style={styles.tableCol}>
 				<Text style={styles.tableCell}>{item.department}</Text>
 			</View>
 			<View style={styles.tableCol}>

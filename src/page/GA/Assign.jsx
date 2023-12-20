@@ -23,6 +23,7 @@ import './style/page.css';
 const heads = [
 	system.component.form.label.inventory,
 	system.component.form.label.article,
+	system.component.form.label.serialOrCodeBN,
 	system.component.form.label.department,
 	system.component.form.label.quantity,
 	system.component.form.label.description,
@@ -32,6 +33,7 @@ const heads = [
 const headsOfAction = [
 	system.component.form.label.inventory,
 	system.component.form.label.article,
+	system.component.form.label.serialOrCodeBN,
 	system.component.form.label.department,
 	system.component.form.label.quantity,
 	system.component.form.label.description,
@@ -47,6 +49,11 @@ const dataOrder = [
 		uid: crypto.randomUUID(),
 		label: system.component.form.label.article,
 		value: 'article',
+	},
+	{
+		uid: crypto.randomUUID(),
+		label: system.component.form.label.serialOrCodeBN,
+		value: 'Serial o CódigoBN',
 	},
 	{
 		uid: crypto.randomUUID(),

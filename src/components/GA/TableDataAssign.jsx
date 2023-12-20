@@ -52,6 +52,7 @@ const TableDataAssign = ({
 		<TableCell>
 			<Cell>{inventoryData[data?.inventory]}</Cell>
 			<Cell>{data.article}</Cell>
+			<Cell>{data.serialOrCodeBN}</Cell>
 			<Cell>{data.department}</Cell>
 			<Cell>{data.quantity}</Cell>
 			<Cell>{data.description}</Cell>

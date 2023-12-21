@@ -53,11 +53,15 @@ export const system = {
 						portfolio: '',
 					},
 					CF: {
-						data: 'Jose contreras Carlos r flores CI: 5.902.143',
+						data: 'Carlos r flores CI: 5.902.143',
 						portfolio: '',
 					},
 					FM: {
 						data: 'Freddy moreno C.I: 20.096.150',
+						portfolio: '',
+					},
+					BM: {
+						data: 'Bethzaida Muñoz C.I: 7.954.799',
 						portfolio: '',
 					},
 				},

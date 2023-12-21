@@ -115,7 +115,6 @@ const header = {
 		system.component.form.label.goods,
 		system.component.form.label.problem,
 		system.component.form.label.symptoms,
-		system.component.form.label.proposedSolution,
 		system.component.form.label.condition,
 		system.component.form.label.dateOfReport,
 		system.component.form.label.timeOfReport,

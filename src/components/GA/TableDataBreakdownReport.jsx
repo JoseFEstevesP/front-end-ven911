@@ -34,7 +34,6 @@ const TableDataBreakdownReport = ({
 			goods: data.goods,
 			problem: data.problem,
 			symptoms: data.symptoms,
-			proposedSolution: data.proposedSolution,
 			condition: data.condition,
 			breakdownDepartment: data.breakdownDepartment,
 			location: data.location,
@@ -49,7 +48,6 @@ const TableDataBreakdownReport = ({
 			<Cell>{data.goods}</Cell>
 			<Cell>{data.problem}</Cell>
 			<Cell>{data.symptoms}</Cell>
-			<Cell>{data.proposedSolution}</Cell>
 			<Cell>{data.condition}</Cell>
 			<Cell>{data.dateOfReport}</Cell>
 			<Cell>{data.timeOfReport}</Cell>

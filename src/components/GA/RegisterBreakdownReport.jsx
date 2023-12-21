@@ -9,7 +9,6 @@ const initForm = {
 	goods: '',
 	problem: '',
 	symptoms: '',
-	proposedSolution: '',
 	condition: '',
 	breakdownDepartment: '',
 	location: '',
@@ -80,16 +79,6 @@ const RegisterBreakdownReport = ({
 					onChange={handleChange}
 					value={form.symptoms}
 					error={errors.symptoms}
-				/>
-				<Input
-					className='register__input'
-					iconName={'gears'}
-					name={'proposedSolution'}
-					label={system.component.form.label.proposedSolution}
-					placeholder={system.component.form.placeholder.proposedSolution}
-					onChange={handleChange}
-					value={form.proposedSolution}
-					error={errors.proposedSolution}
 				/>
 				<Select
 					className='register__input'

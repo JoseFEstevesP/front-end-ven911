@@ -23,7 +23,7 @@ const ModuleGA = () => {
 				<Menu route={'/ga'}>
 					<MenuItem text={'Inicio'} to={'/ga'} />
 					<MenuItem text={'Usuario'} to={'/ga/user'} />
-					<MenuSubItem text={'Inventarios'}>
+					<MenuSubItem text={'Bienes Nacionales'}>
 						<MenuItem text={'Tecnología'} to={'/ga/technology'} />
 						<MenuItem text={'Consumible'} to={'/ga/consumables'} />
 						<MenuItem text={'Mobiliario'} to={'/ga/furniture'} />

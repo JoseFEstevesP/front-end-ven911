@@ -24,7 +24,6 @@ const heads = [
 	system.component.form.label.goods,
 	system.component.form.label.problem,
 	system.component.form.label.symptoms,
-	system.component.form.label.proposedSolution,
 	system.component.form.label.condition,
 	system.component.form.label.dateOfReport,
 	system.component.form.label.timeOfReport,
@@ -37,7 +36,6 @@ const headsOfAction = [
 	system.component.form.label.goods,
 	system.component.form.label.problem,
 	system.component.form.label.symptoms,
-	system.component.form.label.proposedSolution,
 	system.component.form.label.condition,
 	system.component.form.label.dateOfReport,
 	system.component.form.label.timeOfReport,
@@ -65,11 +63,6 @@ const dataOrder = [
 		uid: crypto.randomUUID(),
 		label: system.component.form.label.breakdownDepartment,
 		value: 'breakdownDepartment',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.proposedSolution,
-		value: 'proposedSolution',
 	},
 	{
 		uid: crypto.randomUUID(),

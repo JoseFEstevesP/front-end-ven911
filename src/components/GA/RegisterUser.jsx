@@ -2,10 +2,12 @@ import { useEffect } from 'react';
 import { system } from '../../data/system';
 import useGet from '../../hooks/useGet';
 import useRegister from '../../hooks/useRegister';
+import useValidatePermissions from '../../hooks/useValidatePermissions';
 import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
 import './style/register.css';
+
 const initForm = {
 	ci: '',
 	name: '',
@@ -22,6 +24,7 @@ const RegisterUser = ({
 	siteValue,
 	order,
 }) => {
+	const { validatePermissions } = useValidatePermissions();
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -54,6 +57,7 @@ const RegisterUser = ({
 					system.routeApi.site.primary +
 					system.routeApi.site.lisOfLimit,
 			});
+			setForm({ ...form, uidSite: siteValue });
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isOpen]);
@@ -125,16 +129,21 @@ const RegisterUser = ({
 					error={errors.uidRol}
 					data={dataRol?.map(item => ({ value: item.uid, label: item.name }))}
 				/>
-				<Select
-					className='register__input'
-					label={system.component.form.label.site}
-					name={'uidSite'}
-					title={system.component.form.select.site}
-					value={form.uidSite}
-					onChange={handleChange}
-					error={errors.uidSite}
-					data={dataSite?.map(item => ({ value: item.uid, label: item.name }))}
-				/>
+				{validatePermissions({ per: system.permissions.site }) && (
+					<Select
+						className='register__input'
+						label={system.component.form.label.site}
+						name={'uidSite'}
+						title={system.component.form.select.site}
+						value={form.uidSite}
+						onChange={handleChange}
+						error={errors.uidSite}
+						data={dataSite?.map(item => ({
+							value: item.uid,
+							label: item.name,
+						}))}
+					/>
+				)}
 				<Btn
 					className='btnStyle register__btn'
 					text={system.component.btn.submit}

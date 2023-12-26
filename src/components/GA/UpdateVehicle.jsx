@@ -6,6 +6,7 @@ import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
 import './style/register.css';
+import InputCalendar from '../InputCalendar';
 const initForm = {
 	uid: '',
 	description: '',
@@ -134,11 +135,9 @@ const UpdateVehicle = ({
 					error={errors.condition}
 					data={condition}
 				/>
-				<Input
+				<InputCalendar
 					className='register__input'
-					iconName={'calendar'}
 					name={'dateOfAcquisition'}
-					type='date'
 					label={system.component.form.label.dateOfAcquisition}
 					onChange={handleChange}
 					value={form.dateOfAcquisition}

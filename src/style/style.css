@@ -13,6 +13,7 @@
 	--color-sub-content: #f0f0f0;
 	--color-text-footer: #333;
 	--color-yellow: #fde71e;
+	--color-calendar-disable: #757575;
 }
 
 html[data-theme='dark'] {

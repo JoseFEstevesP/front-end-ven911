@@ -3,6 +3,7 @@ import { system } from '../../data/system';
 import useRegister from '../../hooks/useRegister';
 import Btn from '../Btn';
 import Input from '../Input';
+import InputCalendar from '../InputCalendar';
 import './style/register.css';
 const initForm = {
 	product: '',
@@ -78,11 +79,9 @@ const RegisterPurchase = ({ handelClose, handleList, siteValue, order }) => {
 					value={form.model}
 					error={errors.model}
 				/>
-				<Input
+				<InputCalendar
 					className='register__input'
-					iconName={'calendar'}
 					name={'dateOfPurchase'}
-					type='date'
 					label={system.component.form.label.dateOfPurchase}
 					onChange={handleChange}
 					value={form.dateOfPurchase}

@@ -4,6 +4,7 @@ import { system } from '../../data/system';
 import useUpdate from '../../hooks/useUpdate';
 import Btn from '../Btn';
 import Input from '../Input';
+import InputCalendar from '../InputCalendar';
 import Select from '../Select';
 import './style/register.css';
 const initForm = {
@@ -112,11 +113,9 @@ const UpdateFurniture = ({
 					error={errors.condition}
 					data={condition}
 				/>
-				<Input
+				<InputCalendar
 					className='register__input'
-					iconName={'calendar'}
 					name={'dateOfAcquisition'}
-					type='date'
 					label={system.component.form.label.dateOfAcquisition}
 					onChange={handleChange}
 					value={form.dateOfAcquisition}

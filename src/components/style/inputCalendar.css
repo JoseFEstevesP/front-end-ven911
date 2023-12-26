@@ -1,0 +1,26 @@
+.inputCalendar {
+	width: 100%;
+	font-size: 1rem;
+	position: relative;
+}
+
+.inputCalendar__calendar {
+	width: 100%;
+	z-index: 5;
+	position: absolute;
+	opacity: 0%;
+	visibility: hidden;
+	overflow: hidden;
+	margin-top: 0.5em;
+	background-color: var(--color-sub-content);
+	border: 0.125em solid var(--color-primary-system);
+	border-radius: 0.625em;
+	transition:
+		opacity 0.3s,
+		visibility 0.3s;
+}
+
+.inputCalendar__calendar--show {
+	opacity: 100%;
+	visibility: visible;
+}

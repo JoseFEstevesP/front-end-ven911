@@ -5,6 +5,7 @@ import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
 import './style/register.css';
+import InputCalendar from '../InputCalendar';
 const initForm = {
 	description: '',
 	brand: '',
@@ -117,11 +118,9 @@ const RegisterVehicle = ({ handelClose, handleList, siteValue, order }) => {
 					error={errors.condition}
 					data={condition}
 				/>
-				<Input
+				<InputCalendar
 					className='register__input'
-					iconName={'calendar'}
 					name={'dateOfAcquisition'}
-					type='date'
 					label={system.component.form.label.dateOfAcquisition}
 					onChange={handleChange}
 					value={form.dateOfAcquisition}

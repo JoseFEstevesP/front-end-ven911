@@ -10,6 +10,7 @@ import Modal from '../../components/Modal';
 import Search from '../../components/Search';
 import Select from '../../components/Select';
 import Table from '../../components/Table';
+import { dataOrderRol } from '../../data/dataOrder';
 import { system } from '../../data/system';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
@@ -25,18 +26,6 @@ const heads = [
 const headsOfAction = [
 	system.component.form.label.name,
 	system.component.form.label.permissions,
-];
-const dataOrder = [
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.name,
-		value: 'name',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.permissions,
-		value: 'permissions',
-	},
 ];
 const url =
 	import.meta.env.VITE_ULR_API +
@@ -64,7 +53,7 @@ const Rol = () => {
 			system.routeApi.rol.search,
 	});
 	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrder[0].value,
+		orderDefault: dataOrderRol[0].value,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
@@ -195,8 +184,8 @@ const Rol = () => {
 							title={system.component.form.select.filter}
 							value={order}
 							onChange={handleChangeOrder}
-							data={dataOrder}
-							valueDefault={dataOrder[0].value}
+							data={dataOrderRol}
+							valueDefault={dataOrderRol[0].value}
 						/>
 						<Search
 							value={search}

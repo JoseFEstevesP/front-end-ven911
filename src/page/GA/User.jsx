@@ -11,6 +11,7 @@ import Search from '../../components/Search';
 import Select from '../../components/Select';
 import Table from '../../components/Table';
 import { ContextSite } from '../../context/SiteContext';
+import { dataOrderUser } from '../../data/dataOrder';
 import { system } from '../../data/system';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
@@ -33,28 +34,6 @@ const headsOfAction = [
 	system.component.form.label.ci,
 	system.component.form.label.email,
 	system.component.form.label.rol,
-];
-const dataOrder = [
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.name,
-		value: 'name',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.surname,
-		value: 'surname',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.email,
-		value: 'email',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.ci,
-		value: 'ci',
-	},
 ];
 const url =
 	import.meta.env.VITE_ULR_API +
@@ -89,7 +68,7 @@ const User = () => {
 			system.routeApi.user.search,
 	});
 	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrder[0].value,
+		orderDefault: dataOrderUser[0].value,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
@@ -256,8 +235,8 @@ const User = () => {
 							title={system.component.form.select.filter}
 							value={order}
 							onChange={handleChangeOrder}
-							data={dataOrder}
-							valueDefault={dataOrder[0].value}
+							data={dataOrderUser}
+							valueDefault={dataOrderUser[0].value}
 						/>
 						<Search
 							value={search}

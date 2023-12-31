@@ -25,9 +25,6 @@ const AssignRow = ({ data }) => {
 			<View style={styles.tableCol}>
 				<Text style={styles.tableCell}>{item.remarks}</Text>
 			</View>
-			<View style={styles.tableCol}>
-				<Text style={styles.tableCell}>{item.user.ci}</Text>
-			</View>
 		</View>
 	));
 };

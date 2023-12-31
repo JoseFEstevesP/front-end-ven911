@@ -19,6 +19,7 @@ import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
 import './style/page.css';
+import { dataOrderBreakdownReport } from '../../data/dataOrder';
 
 const heads = [
 	system.component.form.label.goods,
@@ -42,53 +43,6 @@ const headsOfAction = [
 	system.component.form.label.breakdownDepartment,
 	system.component.form.label.location,
 	system.component.form.label.serialOrCodeBN,
-];
-const dataOrder = [
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.goods,
-		value: 'goods',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.problem,
-		value: 'problem',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.symptoms,
-		value: 'symptoms',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.breakdownDepartment,
-		value: 'breakdownDepartment',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.condition,
-		value: 'condition',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.location,
-		value: 'location',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.dateOfReport,
-		value: 'dateOfReport',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.timeOfReport,
-		value: 'timeOfReport',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.serialOrCodeBN,
-		value: 'serialOrCodeBN',
-	},
 ];
 const url =
 	import.meta.env.VITE_ULR_API +
@@ -123,7 +77,7 @@ const BreakdownReport = () => {
 			system.routeApi.breakdownReport.search,
 	});
 	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrder[0].value,
+		orderDefault: dataOrderBreakdownReport[0].value,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
@@ -296,8 +250,8 @@ const BreakdownReport = () => {
 								title={system.component.form.select.filter}
 								value={order}
 								onChange={handleChangeOrder}
-								data={dataOrder}
-								valueDefault={dataOrder[0].value}
+								data={dataOrderBreakdownReport}
+								valueDefault={dataOrderBreakdownReport[0].value}
 							/>
 							<Search
 								value={search}

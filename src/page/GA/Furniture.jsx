@@ -11,6 +11,7 @@ import Search from '../../components/Search';
 import Select from '../../components/Select';
 import Table from '../../components/Table';
 import { ContextSite } from '../../context/SiteContext';
+import { dataOrderFurniture } from '../../data/dataOrder';
 import { system } from '../../data/system';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
@@ -47,63 +48,6 @@ const headsOfAction = [
 	system.component.form.label.remarks,
 	system.component.form.label.codeBN,
 ];
-const dataOrder = [
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.description,
-		value: 'description',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.quantity,
-		value: 'quantity',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.assign,
-		value: 'assign',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.value,
-		value: 'value',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.condition,
-		value: 'condition',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.serial,
-		value: 'serial',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.dateOfAcquisition,
-		value: 'dateOfAcquisition',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.location,
-		value: 'location',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.warranty,
-		value: 'warranty',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.remarks,
-		value: 'remarks',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.codeBN,
-		value: 'codeBN',
-	},
-];
 const url =
 	import.meta.env.VITE_ULR_API +
 	system.routeApi.furniture.primary +
@@ -137,7 +81,7 @@ const Furniture = () => {
 			system.routeApi.furniture.search,
 	});
 	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrder[0].value,
+		orderDefault: dataOrderFurniture[0].value,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
@@ -310,8 +254,8 @@ const Furniture = () => {
 								title={system.component.form.select.filter}
 								value={order}
 								onChange={handleChangeOrder}
-								data={dataOrder}
-								valueDefault={dataOrder[0].value}
+								data={dataOrderFurniture}
+								valueDefault={dataOrderFurniture[0].value}
 							/>
 							<Search
 								value={search}

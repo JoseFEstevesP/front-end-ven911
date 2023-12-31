@@ -37,9 +37,6 @@ const PurchaseRow = ({ data }) => {
 			<View style={styles.tableCol}>
 				<Text style={styles.tableCell}>{item.location}</Text>
 			</View>
-			<View style={styles.tableCol}>
-				<Text style={styles.tableCell}>{item.user.ci}</Text>
-			</View>
 		</View>
 	));
 };

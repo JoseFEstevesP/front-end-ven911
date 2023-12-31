@@ -19,6 +19,7 @@ import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
 import './style/page.css';
+import { dataOrderPurchase } from '../../data/dataOrder';
 
 const heads = [
 	system.component.form.label.product,
@@ -46,63 +47,6 @@ const headsOfAction = [
 	system.component.form.label.warranty,
 	system.component.form.label.orderNumber,
 	system.component.form.label.location,
-];
-const dataOrder = [
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.product,
-		value: 'product',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.serial,
-		value: 'serial',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.brand,
-		value: 'brand',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.model,
-		value: 'model',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.dateOfPurchase,
-		value: 'dateOfPurchase',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.value,
-		value: 'value',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.quantity,
-		value: 'quantity',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.supplier,
-		value: 'supplier',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.warranty,
-		value: 'warranty',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.orderNumber,
-		value: 'orderNumber',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.location,
-		value: 'location',
-	},
 ];
 const url =
 	import.meta.env.VITE_ULR_API +
@@ -137,7 +81,7 @@ const Purchase = () => {
 			system.routeApi.purchase.search,
 	});
 	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrder[0].value,
+		orderDefault: dataOrderPurchase[0].value,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
@@ -310,8 +254,8 @@ const Purchase = () => {
 								title={system.component.form.select.filter}
 								value={order}
 								onChange={handleChangeOrder}
-								data={dataOrder}
-								valueDefault={dataOrder[0].value}
+								data={dataOrderPurchase}
+								valueDefault={dataOrderPurchase[0].value}
 							/>
 							<Search
 								value={search}

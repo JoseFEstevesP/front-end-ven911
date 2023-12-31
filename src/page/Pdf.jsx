@@ -8,9 +8,21 @@ import {
 } from '@react-pdf/renderer';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Btn from '../components/Btn';
+import Modal from '../components/Modal';
 import AssignRow from '../components/pdf/AssignRow';
 import BreakdownReportRow from '../components/pdf/BreakdownReportRow';
 import ConsumableRow from '../components/pdf/ConsumableRow';
+import FilterAssign from '../components/pdf/FilterAssign';
+import FilterBreakdownReport from '../components/pdf/FilterBreakdownReport';
+import FilterConsumables from '../components/pdf/FilterConsumables';
+import FilterFurniture from '../components/pdf/FilterFurniture';
+import FilterPurchase from '../components/pdf/FilterPurchase';
+import FilterRol from '../components/pdf/FilterRol';
+import FilterSite from '../components/pdf/FilterSite';
+import FilterTechnology from '../components/pdf/FilterTechnology';
+import FilterUser from '../components/pdf/FilterUser';
+import FilterVehicle from '../components/pdf/FilterVehicle';
 import FurnitureRow from '../components/pdf/FurnitureRow';
 import PurchaseRow from '../components/pdf/PurchaseRow';
 import RolRow from '../components/pdf/RolRow';
@@ -20,8 +32,10 @@ import UserRow from '../components/pdf/UserRow';
 import VehicleRow from '../components/pdf/VehicleRow';
 import { styles } from '../components/pdf/pdfStyle';
 import { system } from '../data/system';
+import useModal from '../hooks/useModal';
 import usePdf from '../hooks/usePdf';
 import head from './../assets/img/logo.png';
+import './style/pdf.css';
 
 const header = {
 	user: [
@@ -53,7 +67,6 @@ const header = {
 		system.component.form.label.warranty,
 		system.component.form.label.remarks,
 		system.component.form.label.codeBN,
-		system.component.form.label.user,
 	],
 	vehicle: [
 		system.component.form.label.description,
@@ -149,18 +162,119 @@ const row = ({ itemData, report }) => {
 	};
 	return rowItem[report];
 };
+const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
+	const rowItem = {
+		user: (
+			<FilterUser
+				handelClose={handelClosePdf}
+				handelFetch={handelFetch}
+				isOpen={isOpenPdf}
+				url={`${import.meta.env.VITE_ULR_API}${
+					system.routeApi[report].primary
+				}${system.routeApi[report].report}`}
+			/>
+		),
+		rol: (
+			<FilterRol
+				handelClose={handelClosePdf}
+				handelFetch={handelFetch}
+				isOpen={isOpenPdf}
+				url={`${import.meta.env.VITE_ULR_API}${
+					system.routeApi[report].primary
+				}${system.routeApi[report].report}`}
+			/>
+		),
+		site: (
+			<FilterSite
+				handelClose={handelClosePdf}
+				handelFetch={handelFetch}
+				isOpen={isOpenPdf}
+				url={`${import.meta.env.VITE_ULR_API}${
+					system.routeApi[report].primary
+				}${system.routeApi[report].report}`}
+			/>
+		),
+		technology: (
+			<FilterTechnology
+				handelClose={handelClosePdf}
+				handelFetch={handelFetch}
+				isOpen={isOpenPdf}
+				url={`${import.meta.env.VITE_ULR_API}${
+					system.routeApi[report].primary
+				}${system.routeApi[report].report}`}
+			/>
+		),
+		vehicle: (
+			<FilterVehicle
+				handelClose={handelClosePdf}
+				handelFetch={handelFetch}
+				isOpen={isOpenPdf}
+				url={`${import.meta.env.VITE_ULR_API}${
+					system.routeApi[report].primary
+				}${system.routeApi[report].report}`}
+			/>
+		),
+		purchase: (
+			<FilterPurchase
+				handelClose={handelClosePdf}
+				handelFetch={handelFetch}
+				isOpen={isOpenPdf}
+				url={`${import.meta.env.VITE_ULR_API}${
+					system.routeApi[report].primary
+				}${system.routeApi[report].report}`}
+			/>
+		),
+		furniture: (
+			<FilterFurniture
+				handelClose={handelClosePdf}
+				handelFetch={handelFetch}
+				isOpen={isOpenPdf}
+				url={`${import.meta.env.VITE_ULR_API}${
+					system.routeApi[report].primary
+				}${system.routeApi[report].report}`}
+			/>
+		),
+		consumables: (
+			<FilterConsumables
+				handelClose={handelClosePdf}
+				handelFetch={handelFetch}
+				isOpen={isOpenPdf}
+				url={`${import.meta.env.VITE_ULR_API}${
+					system.routeApi[report].primary
+				}${system.routeApi[report].report}`}
+			/>
+		),
+		breakdownReport: (
+			<FilterBreakdownReport
+				handelClose={handelClosePdf}
+				handelFetch={handelFetch}
+				isOpen={isOpenPdf}
+				url={`${import.meta.env.VITE_ULR_API}${
+					system.routeApi[report].primary
+				}${system.routeApi[report].report}`}
+			/>
+		),
+		assign: (
+			<FilterAssign
+				handelClose={handelClosePdf}
+				handelFetch={handelFetch}
+				isOpen={isOpenPdf}
+				url={`${import.meta.env.VITE_ULR_API}${
+					system.routeApi[report].primary
+				}${system.routeApi[report].report}`}
+			/>
+		),
+	};
+	return rowItem[report];
+};
 const Pdf = () => {
-	const [loader, setLoader] = useState(true);
+	const [loader, setLoader] = useState(false);
 	const [loaderPDF, setLoaderPDF] = useState(false);
-	const { handelFetch, dataPDF: data } = usePdf();
+	const { dataPDF: data, handelFetch } = usePdf();
 	const { report } = useParams();
+	const [isOpenPdf, handleOpenPdf, handelClosePdf] = useModal();
 	useEffect(() => {
-		handelFetch({
-			url:
-				import.meta.env.VITE_ULR_API +
-				system.routeApi[report].primary +
-				system.routeApi[report].report,
-		});
+		handleOpenPdf();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	useEffect(() => {
@@ -169,6 +283,11 @@ const Pdf = () => {
 			setLoaderPDF(true);
 		}
 	}, [data]);
+	useEffect(() => {
+		if (!isOpenPdf) {
+			setLoader(true);
+		}
+	}, [isOpenPdf]);
 	const handleLoadPDF = () => {
 		setLoaderPDF(false);
 	};
@@ -176,54 +295,64 @@ const Pdf = () => {
 		<>
 			{loader && <h1>Cargando data...</h1>}
 			{loaderPDF && <h1>Cargando pdf...</h1>}
-			<PDFViewer style={{ width: '100%', height: '99vh' }}>
-				{!loader && (
-					<Document onRender={handleLoadPDF}>
-						{data?.rows?.map((itemData, index) => (
-							<Page orientation='landscape' key={index} style={styles.body}>
-								<Image style={styles.head} src={head} />
-								<Text style={styles.text}>
-									República bolivariana de Venezuela ministerio del poder
-									popular para Relaciones interiores, justicia y paz Centro de
-									comando, control y telecomunicaciones VEN 9-1-1
-								</Text>
-								<View style={styles.contentInfo}>
-									<View style={styles.info}>
-										<View>
-											<Text style={styles.font}>Reporte: {data.report}</Text>
-											<Text style={styles.font}>Sede: {data.siteName}</Text>
-										</View>
-										<View>
-											<Text style={styles.font}>Fecha: {data.date}</Text>
-											<Text style={styles.font}>Hora: {data.time}</Text>
-										</View>
-									</View>
-									<Text style={styles.font}>
-										Autor del reporte: {data.author}
+			<Modal isOpen={isOpenPdf} close={handelClosePdf}>
+				{filter({ report, handelClosePdf, handelFetch, isOpenPdf })}
+			</Modal>
+			<Btn
+				handleClick={handleOpenPdf}
+				text={'Abrir filtros'}
+				className='btnStyle pdf__btn'
+			/>
+			{!isOpenPdf && (
+				<PDFViewer style={{ width: '100%', height: '99vh' }}>
+					{!loader && (
+						<Document onRender={handleLoadPDF}>
+							{data?.rows?.map((itemData, index) => (
+								<Page orientation='landscape' key={index} style={styles.body}>
+									<Image style={styles.head} src={head} />
+									<Text style={styles.text}>
+										República bolivariana de Venezuela ministerio del poder
+										popular para Relaciones interiores, justicia y paz Centro de
+										comando, control y telecomunicaciones VEN 9-1-1
 									</Text>
-								</View>
-								<View style={styles.table}>
-									<View style={styles.tableHeadRow}>
-										{header[report]?.map((item, index) => (
-											<View key={index} style={styles.tableCol}>
-												<Text style={styles.tableCell}>{item}</Text>
+									<View style={styles.contentInfo}>
+										<View style={styles.info}>
+											<View>
+												<Text style={styles.font}>Reporte: {data.report}</Text>
+												<Text style={styles.font}>Sede: {data.siteName}</Text>
 											</View>
-										))}
+											<View>
+												<Text style={styles.font}>Fecha: {data.date}</Text>
+												<Text style={styles.font}>Hora: {data.time}</Text>
+											</View>
+										</View>
+										<Text style={styles.font}>
+											Autor del reporte: {data.author}
+										</Text>
 									</View>
-									{row({ itemData, report })}
-								</View>
-								<Text
-									style={styles.paginate}
-									render={({ pageNumber, totalPages }) =>
-										`${pageNumber} / ${totalPages}`
-									}
-									fixed
-								/>
-							</Page>
-						))}
-					</Document>
-				)}
-			</PDFViewer>
+									<View style={styles.table}>
+										<View style={styles.tableHeadRow}>
+											{header[report]?.map((item, index) => (
+												<View key={index} style={styles.tableCol}>
+													<Text style={styles.tableCell}>{item}</Text>
+												</View>
+											))}
+										</View>
+										{row({ itemData, report })}
+									</View>
+									<Text
+										style={styles.paginate}
+										render={({ pageNumber, totalPages }) =>
+											`${pageNumber} / ${totalPages}`
+										}
+										fixed
+									/>
+								</Page>
+							))}
+						</Document>
+					)}
+				</PDFViewer>
+			)}
 		</>
 	);
 };

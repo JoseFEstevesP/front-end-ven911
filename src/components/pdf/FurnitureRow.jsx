@@ -37,9 +37,6 @@ const FurnitureRow = ({ data }) => {
 			<View style={styles.tableCol}>
 				<Text style={styles.tableCell}>{item.codeBN}</Text>
 			</View>
-			<View style={styles.tableCol}>
-				<Text style={styles.tableCell}>{item.user.ci}</Text>
-			</View>
 		</View>
 	));
 };

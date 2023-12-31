@@ -13,8 +13,7 @@ const BreakdownReportRow = ({ data }) => {
 			<View style={styles.tableCol}>
 				<Text style={styles.tableCell}>{item.symptoms}</Text>
 			</View>
-			<View style={styles.tableCol}>
-			</View>
+			<View style={styles.tableCol}></View>
 			<View style={styles.tableCol}>
 				<Text style={styles.tableCell}>{item.condition}</Text>
 			</View>
@@ -32,9 +31,6 @@ const BreakdownReportRow = ({ data }) => {
 			</View>
 			<View style={styles.tableCol}>
 				<Text style={styles.tableCell}>{item.serialOrCodeBN}</Text>
-			</View>
-			<View style={styles.tableCol}>
-				<Text style={styles.tableCell}>{item.user.ci}</Text>
 			</View>
 		</View>
 	));

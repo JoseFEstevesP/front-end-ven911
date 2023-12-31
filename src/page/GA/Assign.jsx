@@ -11,6 +11,7 @@ import Search from '../../components/Search';
 import Select from '../../components/Select';
 import Table from '../../components/Table';
 import { ContextSite } from '../../context/SiteContext';
+import { dataOrderAssign } from '../../data/dataOrder';
 import { system } from '../../data/system';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
@@ -38,43 +39,6 @@ const headsOfAction = [
 	system.component.form.label.quantity,
 	system.component.form.label.description,
 	system.component.form.label.remarks,
-];
-const dataOrder = [
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.inventory,
-		value: 'inventory',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.article,
-		value: 'article',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.serialOrCodeBN,
-		value: 'Serial o CódigoBN',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.department,
-		value: 'department',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.quantity,
-		value: 'quantity',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.description,
-		value: 'description',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.remarks,
-		value: 'remarks',
-	},
 ];
 const url =
 	import.meta.env.VITE_ULR_API +
@@ -109,7 +73,7 @@ const Assign = () => {
 			system.routeApi.assign.search,
 	});
 	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrder[0].value,
+		orderDefault: dataOrderAssign[0].value,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
@@ -282,8 +246,8 @@ const Assign = () => {
 								title={system.component.form.select.filter}
 								value={order}
 								onChange={handleChangeOrder}
-								data={dataOrder}
-								valueDefault={dataOrder[0].value}
+								data={dataOrderAssign}
+								valueDefault={dataOrderAssign[0].value}
 							/>
 							<Search
 								value={search}

@@ -19,6 +19,7 @@ import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
 import './style/page.css';
+import { dataOrderConsumables } from '../../data/dataOrder';
 
 const heads = [
 	system.component.form.label.description,
@@ -42,53 +43,6 @@ const headsOfAction = [
 	system.component.form.label.location,
 	system.component.form.label.dateOfAcquisition,
 	system.component.form.label.remarks,
-];
-const dataOrder = [
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.description,
-		value: 'description',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.serial,
-		value: 'serial',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.brand,
-		value: 'brand',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.quantity,
-		value: 'quantity',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.assign,
-		value: 'assign',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.value,
-		value: 'value',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.location,
-		value: 'location',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.dateOfAcquisition,
-		value: 'dateOfAcquisition',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: system.component.form.label.remarks,
-		value: 'remarks',
-	},
 ];
 const url =
 	import.meta.env.VITE_ULR_API +
@@ -123,7 +77,7 @@ const Consumables = () => {
 			system.routeApi.consumables.search,
 	});
 	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrder[0].value,
+		orderDefault: dataOrderConsumables[0].value,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
@@ -296,8 +250,8 @@ const Consumables = () => {
 								title={system.component.form.select.filter}
 								value={order}
 								onChange={handleChangeOrder}
-								data={dataOrder}
-								valueDefault={dataOrder[0].value}
+								data={dataOrderConsumables}
+								valueDefault={dataOrderConsumables[0].value}
 							/>
 							<Search
 								value={search}

@@ -8,7 +8,6 @@ const useFilter = ({ initForm, options, handelClose, handelFetch }) => {
 	};
 	const handleSubmit = ({ url, e }) => {
 		e.preventDefault();
-
 		handelFetch({
 			url: `${url}?${Object.entries(filterOptions)
 				.filter(([key, value]) => value !== '')

@@ -13,6 +13,7 @@ const options = {
 	dataQuantity: 'dataQuantity',
 	startDate: 'startDate',
 	endDate: 'endDate',
+	search: 'search',
 };
 const initForm = {
 	orderProperty: '',
@@ -21,6 +22,7 @@ const initForm = {
 	dataQuantity: 17,
 	startDate: '',
 	endDate: '',
+	search: '',
 };
 const FilterRol = ({ handelClose, handelFetch, url }) => {
 	const { filterOptions, handleChange, handleSubmit } = useFilter({
@@ -91,6 +93,16 @@ const FilterRol = ({ handelClose, handelFetch, url }) => {
 					label={system.component.form.label.endDate}
 					onChange={handleChange}
 					value={filterOptions.endDate}
+				/>
+				<Input
+					className='register__input'
+					iconName={'search'}
+					name={'search'}
+					type='search'
+					label={system.component.form.label.search}
+					placeholder={system.component.form.placeholder.search}
+					value={filterOptions.search}
+					onChange={handleChange}
 				/>
 				<Btn
 					className='btnStyle register__btn'

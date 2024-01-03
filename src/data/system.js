@@ -70,6 +70,7 @@ export const system = {
 		form: {
 			label: {
 				user: 'Usuario',
+				search: 'Buscar',
 				active: 'Activo',
 				inactive: 'Inactivo',
 				asc: 'Ascendente',

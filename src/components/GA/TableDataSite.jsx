@@ -6,6 +6,7 @@ import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
+import { permissions } from '../../data/dataPermissions';
 
 const TableDataSite = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 	const { validatePermissions } = useValidatePermissions();
@@ -31,25 +32,25 @@ const TableDataSite = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 		handleOpenUpdate();
 		SetClose(false);
 	};
-	const handleDeleteUser = () => handleDelete({ uid: data.uid });
+	const handleDeleteSite = () => handleDelete({ uid: data.uid });
 	return (
 		<TableCell>
 			<Cell>{data.name}</Cell>
 			<Cell>{data.direction}</Cell>
-			{(validatePermissions({ per: system.permissions.delete }) ||
-				validatePermissions({ per: system.permissions.update })) && (
+			{(validatePermissions({ per: permissions.deleteSite }) ||
+				validatePermissions({ per: permissions.updateSite })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: system.permissions.delete }) && (
+						{validatePermissions({ per: permissions.deleteSite }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'delete'}
 									classIcon='icon--delete'
-									handleClick={handleDeleteUser}
+									handleClick={handleDeleteSite}
 								/>
 							</ActionMenuItem>
 						)}
-						{validatePermissions({ per: system.permissions.update }) && (
+						{validatePermissions({ per: permissions.updateSite }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'edit'}

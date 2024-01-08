@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
@@ -47,7 +48,7 @@ const TableDataAssign = ({
 		handleOpenUpdate();
 		SetClose(false);
 	}, [data, handleOpenUpdate, setNewData]);
-	const handleDeleteUser = () => handleDelete({ uid: data.uid });
+	const handleDeleteAssign = () => handleDelete({ uid: data.uid });
 	return (
 		<TableCell>
 			<Cell>{inventoryData[data?.inventory]}</Cell>
@@ -57,32 +58,28 @@ const TableDataAssign = ({
 			<Cell>{data.quantity}</Cell>
 			<Cell>{data.description}</Cell>
 			<Cell>{data.remarks}</Cell>
-			{((validatePermissions({ per: system.permissions.delete }) &&
-				validatePermissions({ per: system.permissions.ga })) ||
-				(validatePermissions({ per: system.permissions.update }) &&
-					validatePermissions({ per: system.permissions.ga }))) && (
+			{(validatePermissions({ per: permissions.deleteAssign }) ||
+				validatePermissions({ per: permissions.updateAssign })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: system.permissions.delete }) &&
-							validatePermissions({ per: system.permissions.ga }) && (
-								<ActionMenuItem>
-									<Btn
-										nameIcon={'delete'}
-										classIcon='icon--delete'
-										handleClick={handleDeleteUser}
-									/>
-								</ActionMenuItem>
-							)}
-						{validatePermissions({ per: system.permissions.update }) &&
-							validatePermissions({ per: system.permissions.ga }) && (
-								<ActionMenuItem>
-									<Btn
-										nameIcon={'edit'}
-										classIcon='icon--edit'
-										handleClick={handleEdit}
-									/>
-								</ActionMenuItem>
-							)}
+						{validatePermissions({ per: permissions.deleteAssign }) && (
+							<ActionMenuItem>
+								<Btn
+									nameIcon={'delete'}
+									classIcon='icon--delete'
+									handleClick={handleDeleteAssign}
+								/>
+							</ActionMenuItem>
+						)}
+						{validatePermissions({ per: permissions.updateAssign }) && (
+							<ActionMenuItem>
+								<Btn
+									nameIcon={'edit'}
+									classIcon='icon--edit'
+									handleClick={handleEdit}
+								/>
+							</ActionMenuItem>
+						)}
 					</ActionMenu>
 				</Cell>
 			)}

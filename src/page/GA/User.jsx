@@ -12,6 +12,7 @@ import Select from '../../components/Select';
 import Table from '../../components/Table';
 import { ContextSite } from '../../context/SiteContext';
 import { dataOrderUser } from '../../data/dataOrder';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
@@ -72,10 +73,10 @@ const User = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (validatePermissions({ per: system.permissions.read })) {
+		if (validatePermissions({ per: permissions.readUser })) {
 			handleList({});
 			handelFetchSite({
-				url: validatePermissions({ per: system.permissions.site })
+				url: validatePermissions({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
 					  system.routeApi.site.lisOfLimit
@@ -87,32 +88,40 @@ const User = () => {
 		}
 	}, []);
 	useEffect(() => {
-		handleList({ uidSite: siteValue, orderProperty: order });
-		if (searchSubmit) {
+		if (validatePermissions({ per: permissions.readUser })) {
+			handleList({ uidSite: siteValue, orderProperty: order });
+		}
+		if (validatePermissions({ per: permissions.user }) && searchSubmit) {
 			handleSearch({ uidSite: siteValue, orderProperty: order });
 		}
 	}, [siteValue, order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
-			return dataSearch?.rows?.map(item => (
-				<TableDataUser
-					key={item.uid}
-					data={item}
-					handleList={handleList}
-					setNewData={setNewData}
-					handleOpenUpdate={handleOpenUpdate}
-				/>
-			));
+			return dataSearch?.rows?.map(
+				item =>
+					validatePermissions({ per: permissions.readUser }) && (
+						<TableDataUser
+							key={item.uid}
+							data={item}
+							handleList={handleList}
+							setNewData={setNewData}
+							handleOpenUpdate={handleOpenUpdate}
+						/>
+					),
+			);
 		} else {
-			return data?.rows?.map(item => (
-				<TableDataUser
-					key={item.uid}
-					data={item}
-					handleList={handleList}
-					setNewData={setNewData}
-					handleOpenUpdate={handleOpenUpdate}
-				/>
-			));
+			return data?.rows?.map(
+				item =>
+					validatePermissions({ per: permissions.readUser }) && (
+						<TableDataUser
+							key={item.uid}
+							data={item}
+							handleList={handleList}
+							setNewData={setNewData}
+							handleOpenUpdate={handleOpenUpdate}
+						/>
+					),
+			);
 		}
 	}, [data?.rows, dataSearch?.rows, searchSubmit]);
 	const renderPaginate = useCallback(() => {
@@ -166,7 +175,7 @@ const User = () => {
 		handleSearch({ e, uidSite: siteValue, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: system.permissions.create }) && (
+			{validatePermissions({ per: permissions.createUser }) && (
 				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
 					<RegisterUser
 						order={order}
@@ -177,7 +186,7 @@ const User = () => {
 					/>
 				</Modal>
 			)}
-			{validatePermissions({ per: system.permissions.update }) && newData && (
+			{validatePermissions({ per: permissions.updateUser }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
 					<UpdateUser
 						order={order}
@@ -191,7 +200,7 @@ const User = () => {
 			)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: system.permissions.create }) && (
+					{validatePermissions({ per: permissions.createUser }) && (
 						<Btn
 							text={'Crear usuario'}
 							nameIcon={'user_add'}
@@ -199,17 +208,27 @@ const User = () => {
 							handleClick={handleOpenRegister}
 						/>
 					)}
-					<Link to='/ga/rol' className='btnStyle page__link'>
-						Ir a Rol <Icons iconName={'rol'} />
-					</Link>
-					<Link to='/ga/site' className='btnStyle page__link'>
-						Ir a Sede <Icons iconName={'building'} />
-					</Link>
-					<Link className='btnStyle page__link' target='_blank' to='/pdf/user'>
-						PDF <Icons iconName={'pdf'} />
-					</Link>
+					{validatePermissions({ per: permissions.rol }) && (
+						<Link to='/ga/rol' className='btnStyle page__link'>
+							Ir a Rol <Icons iconName={'rol'} />
+						</Link>
+					)}
+					{validatePermissions({ per: permissions.site }) && (
+						<Link to='/ga/site' className='btnStyle page__link'>
+							Ir a Sede <Icons iconName={'building'} />
+						</Link>
+					)}
+					{validatePermissions({ per: permissions.pdfUser }) && (
+						<Link
+							className='btnStyle page__link'
+							target='_blank'
+							to='/ga/pdf/user'
+						>
+							PDF <Icons iconName={'pdf'} />
+						</Link>
+					)}
 				</div>
-				{validatePermissions({ per: system.permissions.read }) && (
+				{validatePermissions({ per: permissions.readUser }) && (
 					<div className='page__options'>
 						<Select
 							className='page__input'
@@ -218,7 +237,7 @@ const User = () => {
 							value={siteValue}
 							onChange={handleChangeSite}
 							data={
-								validatePermissions({ per: system.permissions.site })
+								validatePermissions({ per: permissions.site })
 									? dataSite?.map(item => ({
 											value: item.uid,
 											label: item.name,
@@ -226,9 +245,8 @@ const User = () => {
 									: [{ value: dataSite?.uid, label: dataSite?.name }]
 							}
 							valueDefault={site}
-							disabled={validatePermissions({ per: system.permissions.site })}
+							disabled={validatePermissions({ per: permissions.site })}
 						/>
-
 						<Select
 							className='page__input--filter'
 							name={'orderProperty'}
@@ -245,11 +263,11 @@ const User = () => {
 						/>
 					</div>
 				)}
-				{validatePermissions({ per: system.permissions.read }) && (
+				{validatePermissions({ per: permissions.readUser }) && (
 					<Table
 						heads={
-							validatePermissions({ per: system.permissions.delete }) ||
-							validatePermissions({ per: system.permissions.update })
+							validatePermissions({ per: permissions.deleteUser }) ||
+							validatePermissions({ per: permissions.updateUser })
 								? heads
 								: headsOfAction
 						}

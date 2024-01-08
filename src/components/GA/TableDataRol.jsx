@@ -6,6 +6,7 @@ import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
+import { permissions } from '../../data/dataPermissions';
 
 const TableDataRol = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 	const { validatePermissions } = useValidatePermissions();
@@ -37,11 +38,11 @@ const TableDataRol = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 		<TableCell>
 			<Cell>{data.name}</Cell>
 			<Cell>{data.permissions}</Cell>
-			{(validatePermissions({ per: system.permissions.delete }) ||
-				validatePermissions({ per: system.permissions.update })) && (
+			{(validatePermissions({ per: permissions.deleteRol }) ||
+				validatePermissions({ per: permissions.updateRol })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: system.permissions.delete }) && (
+						{validatePermissions({ per: permissions.deleteRol }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'delete'}
@@ -50,7 +51,7 @@ const TableDataRol = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 								/>
 							</ActionMenuItem>
 						)}
-						{validatePermissions({ per: system.permissions.update }) && (
+						{validatePermissions({ per: permissions.updateRol }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'edit'}

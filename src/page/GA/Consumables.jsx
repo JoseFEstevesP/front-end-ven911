@@ -11,6 +11,8 @@ import Search from '../../components/Search';
 import Select from '../../components/Select';
 import Table from '../../components/Table';
 import { ContextSite } from '../../context/SiteContext';
+import { dataOrderConsumables } from '../../data/dataOrder';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
@@ -19,7 +21,6 @@ import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
 import './style/page.css';
-import { dataOrderConsumables } from '../../data/dataOrder';
 
 const heads = [
 	system.component.form.label.description,
@@ -81,13 +82,10 @@ const Consumables = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (
-			validatePermissions({ per: system.permissions.read }) &&
-			validatePermissions({ per: system.permissions.ga })
-		) {
+		if (validatePermissions({ per: permissions.readConsumables })) {
 			handleList({ orderProperty: order });
 			handelFetchSite({
-				url: validatePermissions({ per: system.permissions.site })
+				url: validatePermissions({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
 					  system.routeApi.site.lisOfLimit
@@ -99,34 +97,42 @@ const Consumables = () => {
 		}
 	}, []);
 	useEffect(() => {
-		handleList({ uidSite: siteValue, orderProperty: order });
+		if (validatePermissions({ per: permissions.readConsumables })) {
+			handleList({ uidSite: siteValue, orderProperty: order });
+		}
 		if (searchSubmit) {
 			handleSearch({ uidSite: siteValue, orderProperty: order });
 		}
 	}, [siteValue, order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
-			return dataSearch?.rows?.map(item => (
-				<TableDataConsumables
-					key={item.uid}
-					order={order}
-					data={item}
-					handleList={handleList}
-					setNewData={setNewData}
-					handleOpenUpdate={handleOpenUpdate}
-				/>
-			));
+			return dataSearch?.rows?.map(
+				item =>
+					validatePermissions({ per: permissions.readConsumables }) && (
+						<TableDataConsumables
+							key={item.uid}
+							order={order}
+							data={item}
+							handleList={handleList}
+							setNewData={setNewData}
+							handleOpenUpdate={handleOpenUpdate}
+						/>
+					),
+			);
 		} else {
-			return data?.rows?.map(item => (
-				<TableDataConsumables
-					key={item.uid}
-					order={order}
-					data={item}
-					handleList={handleList}
-					setNewData={setNewData}
-					handleOpenUpdate={handleOpenUpdate}
-				/>
-			));
+			return data?.rows?.map(
+				item =>
+					validatePermissions({ per: permissions.readConsumables }) && (
+						<TableDataConsumables
+							key={item.uid}
+							order={order}
+							data={item}
+							handleList={handleList}
+							setNewData={setNewData}
+							handleOpenUpdate={handleOpenUpdate}
+						/>
+					),
+			);
 		}
 	}, [data?.rows, dataSearch?.rows, searchSubmit]);
 	const renderPaginate = useCallback(() => {
@@ -180,19 +186,17 @@ const Consumables = () => {
 		handleSearch({ e, uidSite: siteValue, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: system.permissions.create }) &&
-				validatePermissions({ per: system.permissions.ga }) && (
-					<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
-						<RegisterConsumables
-							order={order}
-							siteValue={siteValue}
-							handleList={handleList}
-							handelClose={handelCloseRegister}
-						/>
-					</Modal>
-				)}
-			{validatePermissions({ per: system.permissions.update }) &&
-				validatePermissions({ per: system.permissions.ga }) &&
+			{validatePermissions({ per: permissions.createConsumables }) && (
+				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
+					<RegisterConsumables
+						order={order}
+						siteValue={siteValue}
+						handleList={handleList}
+						handelClose={handelCloseRegister}
+					/>
+				</Modal>
+			)}
+			{validatePermissions({ per: permissions.updateConsumables }) &&
 				newData && (
 					<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
 						<UpdateConsumables
@@ -207,74 +211,71 @@ const Consumables = () => {
 				)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: system.permissions.create }) &&
-						validatePermissions({ per: system.permissions.ga }) && (
-							<Btn
-								text={'Registrar Consumible'}
-								nameIcon={'paperclip'}
-								className='btnStyle'
-								handleClick={handleOpenRegister}
-							/>
-						)}
-					<Link
-						className='btnStyle page__link'
-						target='_blank'
-						to='/pdf/consumables'
-					>
-						PDF <Icons iconName={'pdf'} />
-					</Link>
-				</div>
-				{validatePermissions({ per: system.permissions.read }) &&
-					validatePermissions({ per: system.permissions.ga }) && (
-						<div className='page__options'>
-							<Select
-								className='page__input'
-								name={'uidSite'}
-								title={system.component.form.select.site}
-								value={siteValue}
-								onChange={handleChangeSite}
-								data={
-									validatePermissions({ per: system.permissions.site })
-										? dataSite?.map(item => ({
-												value: item.uid,
-												label: item.name,
-										  }))
-										: [{ value: dataSite?.uid, label: dataSite?.name }]
-								}
-								valueDefault={site}
-								disabled={validatePermissions({ per: system.permissions.site })}
-							/>
-							<Select
-								className='page__input--filter'
-								name={'orderProperty'}
-								title={system.component.form.select.filter}
-								value={order}
-								onChange={handleChangeOrder}
-								data={dataOrderConsumables}
-								valueDefault={dataOrderConsumables[0].value}
-							/>
-							<Search
-								value={search}
-								handleChange={handleChangeSearch}
-								handleSearch={handleSearchComponent}
-							/>
-						</div>
+					{validatePermissions({ per: permissions.createConsumables }) && (
+						<Btn
+							text={'Registrar Consumible'}
+							nameIcon={'paperclip'}
+							className='btnStyle'
+							handleClick={handleOpenRegister}
+						/>
 					)}
-				{validatePermissions({ per: system.permissions.read }) &&
-					validatePermissions({ per: system.permissions.ga }) && (
-						<Table
-							heads={
-								(validatePermissions({ per: system.permissions.delete }) &&
-									validatePermissions({ per: system.permissions.ga })) ||
-								(validatePermissions({ per: system.permissions.update }) &&
-									validatePermissions({ per: system.permissions.ga }))
-									? heads
-									: headsOfAction
-							}
+					{validatePermissions({ per: permissions.pdfConsumables }) && (
+						<Link
+							className='btnStyle page__link'
+							target='_blank'
+							to='/ga/pdf/consumables'
 						>
-							{renderData()}
-						</Table>
+							PDF <Icons iconName={'pdf'} />
+						</Link>
 					)}
+				</div>
+				{validatePermissions({ per: permissions.readConsumables }) && (
+					<div className='page__options'>
+						<Select
+							className='page__input'
+							name={'uidSite'}
+							title={system.component.form.select.site}
+							value={siteValue}
+							onChange={handleChangeSite}
+							data={
+								validatePermissions({ per: permissions.site })
+									? dataSite?.map(item => ({
+											value: item.uid,
+											label: item.name,
+									  }))
+									: [{ value: dataSite?.uid, label: dataSite?.name }]
+							}
+							valueDefault={site}
+							disabled={validatePermissions({ per: permissions.site })}
+						/>
+						<Select
+							className='page__input--filter'
+							name={'orderProperty'}
+							title={system.component.form.select.filter}
+							value={order}
+							onChange={handleChangeOrder}
+							data={dataOrderConsumables}
+							valueDefault={dataOrderConsumables[0].value}
+						/>
+						<Search
+							value={search}
+							handleChange={handleChangeSearch}
+							handleSearch={handleSearchComponent}
+						/>
+					</div>
+				)}
+				{validatePermissions({ per: permissions.readConsumables }) && (
+					<Table
+						heads={
+							validatePermissions({ per: permissions.deleteConsumables }) ||
+							validatePermissions({ per: permissions.updateConsumables })
+								? heads
+								: headsOfAction
+						}
+					>
+						{renderData()}
+					</Table>
+				)}
 				{renderPaginate()}
 			</div>
 		</>

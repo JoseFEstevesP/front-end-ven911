@@ -6,6 +6,7 @@ import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
+import { permissions } from '../../data/dataPermissions';
 
 const TableDataTechnology = ({
 	data,
@@ -47,7 +48,7 @@ const TableDataTechnology = ({
 		handleOpenUpdate();
 		SetClose(false);
 	};
-	const handleDeleteUser = () => handleDelete({ uid: data.uid });
+	const handleDeleteTechnology = () => handleDelete({ uid: data.uid });
 	return (
 		<TableCell>
 			<Cell>{data.description}</Cell>
@@ -63,32 +64,28 @@ const TableDataTechnology = ({
 			<Cell>{data.warranty}</Cell>
 			<Cell>{data.remarks}</Cell>
 			<Cell>{data.codeBN}</Cell>
-			{((validatePermissions({ per: system.permissions.delete }) &&
-				validatePermissions({ per: system.permissions.ga })) ||
-				(validatePermissions({ per: system.permissions.update }) &&
-					validatePermissions({ per: system.permissions.ga }))) && (
+			{(validatePermissions({ per: permissions.deleteTechnology }) ||
+				validatePermissions({ per: permissions.updateTechnology })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: system.permissions.delete }) &&
-							validatePermissions({ per: system.permissions.ga }) && (
-								<ActionMenuItem>
-									<Btn
-										nameIcon={'delete'}
-										classIcon='icon--delete'
-										handleClick={handleDeleteUser}
-									/>
-								</ActionMenuItem>
-							)}
-						{validatePermissions({ per: system.permissions.update }) &&
-							validatePermissions({ per: system.permissions.ga }) && (
-								<ActionMenuItem>
-									<Btn
-										nameIcon={'edit'}
-										classIcon='icon--edit'
-										handleClick={handleEdit}
-									/>
-								</ActionMenuItem>
-							)}
+						{validatePermissions({ per: permissions.deleteTechnology }) && (
+							<ActionMenuItem>
+								<Btn
+									nameIcon={'delete'}
+									classIcon='icon--delete'
+									handleClick={handleDeleteTechnology}
+								/>
+							</ActionMenuItem>
+						)}
+						{validatePermissions({ per: permissions.updateTechnology }) && (
+							<ActionMenuItem>
+								<Btn
+									nameIcon={'edit'}
+									classIcon='icon--edit'
+									handleClick={handleEdit}
+								/>
+							</ActionMenuItem>
+						)}
 					</ActionMenu>
 				</Cell>
 			)}

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useGet from '../../hooks/useGet';
 import useRegister from '../../hooks/useRegister';
@@ -129,7 +130,7 @@ const RegisterUser = ({
 					error={errors.uidRol}
 					data={dataRol?.map(item => ({ value: item.uid, label: item.name }))}
 				/>
-				{validatePermissions({ per: system.permissions.site }) && (
+				{validatePermissions({ per: permissions.site }) && (
 					<Select
 						className='register__input'
 						label={system.component.form.label.site}

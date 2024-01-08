@@ -6,6 +6,7 @@ import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
+import { permissions } from '../../data/dataPermissions';
 
 const TableDataBreakdownReport = ({
 	data,
@@ -54,14 +55,14 @@ const TableDataBreakdownReport = ({
 			<Cell>{data.breakdownDepartment}</Cell>
 			<Cell>{data.location}</Cell>
 			<Cell>{data.serialOrCodeBN}</Cell>
-			{((validatePermissions({ per: system.permissions.delete }) &&
-				validatePermissions({ per: system.permissions.ga })) ||
-				(validatePermissions({ per: system.permissions.update }) &&
-					validatePermissions({ per: system.permissions.ga }))) && (
+			{((validatePermissions({ per: permissions.delete }) &&
+				validatePermissions({ per: permissions.ga })) ||
+				(validatePermissions({ per: permissions.update }) &&
+					validatePermissions({ per: permissions.ga }))) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: system.permissions.delete }) &&
-							validatePermissions({ per: system.permissions.ga }) && (
+						{validatePermissions({ per: permissions.delete }) &&
+							validatePermissions({ per: permissions.ga }) && (
 								<ActionMenuItem>
 									<Btn
 										nameIcon={'delete'}
@@ -70,8 +71,8 @@ const TableDataBreakdownReport = ({
 									/>
 								</ActionMenuItem>
 							)}
-						{validatePermissions({ per: system.permissions.update }) &&
-							validatePermissions({ per: system.permissions.ga }) && (
+						{validatePermissions({ per: permissions.update }) &&
+							validatePermissions({ per: permissions.ga }) && (
 								<ActionMenuItem>
 									<Btn
 										nameIcon={'edit'}

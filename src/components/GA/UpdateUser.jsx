@@ -9,6 +9,7 @@ import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
 import './style/register.css';
+import { permissions } from '../../data/dataPermissions';
 const initForm = {
 	uid: '',
 	ci: '',
@@ -60,7 +61,7 @@ const UpdateUser = ({
 					system.routeApi.rol.lisOfLimit,
 			});
 			handelFetchSite({
-				url: validatePermissions({ per: system.permissions.site })
+				url: validatePermissions({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
 					  system.routeApi.site.lisOfLimit

@@ -10,6 +10,7 @@ import '../GA/style/register.css';
 import Input from '../Input';
 import InputCalendar from '../InputCalendar';
 import Select from '../Select';
+import { permissions } from '../../data/dataPermissions';
 const options = {
 	uidSite: 'uidSite',
 	orderProperty: 'orderProperty',
@@ -63,7 +64,7 @@ const FilterAssign = ({ isOpen, handelClose, handelFetch, url }) => {
 		<section className='register'>
 			<h2 className='register__title'>{system.component.user.register}</h2>
 			<form onSubmit={submit} className='register__form'>
-				{validatePermissions({ per: system.permissions.site }) && (
+				{validatePermissions({ per: permissions.site }) && (
 					<Select
 						className='register__input'
 						label={system.component.form.label.site}

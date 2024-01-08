@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
@@ -47,7 +48,7 @@ const TableDataVehicle = ({
 		handleOpenUpdate();
 		SetClose(false);
 	};
-	const handleDeleteUser = () => handleDelete({ uid: data.uid });
+	const handleDeleteVehicle = () => handleDelete({ uid: data.uid });
 	return (
 		<TableCell>
 			<Cell>{data.description}</Cell>
@@ -63,32 +64,28 @@ const TableDataVehicle = ({
 			<Cell>{data.warranty}</Cell>
 			<Cell>{data.remarks}</Cell>
 			<Cell>{data.codeBN}</Cell>
-			{((validatePermissions({ per: system.permissions.delete }) &&
-				validatePermissions({ per: system.permissions.ga })) ||
-				(validatePermissions({ per: system.permissions.update }) &&
-					validatePermissions({ per: system.permissions.ga }))) && (
+			{(validatePermissions({ per: permissions.deleteVehicle }) ||
+				validatePermissions({ per: permissions.updateVehicle })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: system.permissions.delete }) &&
-							validatePermissions({ per: system.permissions.ga }) && (
-								<ActionMenuItem>
-									<Btn
-										nameIcon={'delete'}
-										classIcon='icon--delete'
-										handleClick={handleDeleteUser}
-									/>
-								</ActionMenuItem>
-							)}
-						{validatePermissions({ per: system.permissions.update }) &&
-							validatePermissions({ per: system.permissions.ga }) && (
-								<ActionMenuItem>
-									<Btn
-										nameIcon={'edit'}
-										classIcon='icon--edit'
-										handleClick={handleEdit}
-									/>
-								</ActionMenuItem>
-							)}
+						{validatePermissions({ per: permissions.deleteVehicle }) && (
+							<ActionMenuItem>
+								<Btn
+									nameIcon={'delete'}
+									classIcon='icon--delete'
+									handleClick={handleDeleteVehicle}
+								/>
+							</ActionMenuItem>
+						)}
+						{validatePermissions({ per: permissions.updateVehicle }) && (
+							<ActionMenuItem>
+								<Btn
+									nameIcon={'edit'}
+									classIcon='icon--edit'
+									handleClick={handleEdit}
+								/>
+							</ActionMenuItem>
+						)}
 					</ActionMenu>
 				</Cell>
 			)}

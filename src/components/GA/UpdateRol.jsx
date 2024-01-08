@@ -1,5 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
+import {
+	perAssign,
+	perBreakdownReport,
+	perConsumables,
+	perFurniture,
+	perModule,
+	perPurchase,
+	perRol,
+	perSite,
+	perSystem,
+	perTechnology,
+	perUser,
+	perVehicle,
+} from '../../data/permissions';
 import { system } from '../../data/system';
 import usePermission from '../../hooks/GA/usePermission';
 import useUpdate from '../../hooks/useUpdate';
@@ -14,67 +28,6 @@ const initForm = {
 	name: '',
 	permissions: '',
 };
-const perSystem = [
-	{
-		uid: crypto.randomUUID(),
-		label: 'Super usuario',
-		value: 'SUPER',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: 'Perfil',
-		value: 'PROFILE',
-	},
-	{ uid: crypto.randomUUID(), label: 'Crear', value: 'CREATE' },
-	{
-		uid: crypto.randomUUID(),
-		label: 'Actualizar',
-		value: 'UPDATE',
-	},
-	{ uid: crypto.randomUUID(), label: 'Leer', value: 'READ' },
-	{
-		uid: crypto.randomUUID(),
-		label: 'Eliminar',
-		value: 'DELETE',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: 'Sede',
-		value: 'SITE',
-	},
-];
-const perModule = [
-	{
-		uid: crypto.randomUUID(),
-		label: 'Operaciones cuadrantes de paz',
-		value: 'OCP',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: 'Gestión Administrativa',
-		value: 'GA',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: 'Gestión humana y asesoría jurídica',
-		value: 'GH_AJ',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: 'POP-PSI',
-		value: 'POP_PSI',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: 'Tecnología comunicación e información',
-		value: 'TCI',
-	},
-	{
-		uid: crypto.randomUUID(),
-		label: 'URI potencia',
-		value: 'URI_P',
-	},
-];
 const UpdateRol = ({ handelClose, handleList, order, newData }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
@@ -119,7 +72,7 @@ const UpdateRol = ({ handelClose, handleList, order, newData }) => {
 					error={errors.name}
 				/>
 				<div className='register__label'>
-					<strong>{system.component.rol.permission}:</strong>
+					<strong>{system.component.rol.permissionAll}:</strong>
 					<div className='register__permission'>
 						{perSystem?.map(item => (
 							<Checkbox
@@ -127,7 +80,169 @@ const UpdateRol = ({ handelClose, handleList, order, newData }) => {
 								title={item.label}
 								value={item.value}
 								onClick={handleClick}
-								checked={form?.permissions?.includes(item.value)}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
+							/>
+						))}
+					</div>
+				</div>
+				<div className='register__label'>
+					<strong>{system.component.rol.permissionUser}:</strong>
+					<div className='register__permission'>
+						{perUser?.map(item => (
+							<Checkbox
+								key={item.uid}
+								title={item.label}
+								value={item.value}
+								onClick={handleClick}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
+							/>
+						))}
+					</div>
+				</div>
+				<div className='register__label'>
+					<strong>{system.component.rol.permissionRol}:</strong>
+					<div className='register__permission'>
+						{perRol?.map(item => (
+							<Checkbox
+								key={item.uid}
+								title={item.label}
+								value={item.value}
+								onClick={handleClick}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
+							/>
+						))}
+					</div>
+				</div>
+				<div className='register__label'>
+					<strong>{system.component.rol.permissionSite}:</strong>
+					<div className='register__permission'>
+						{perSite?.map(item => (
+							<Checkbox
+								key={item.uid}
+								title={item.label}
+								value={item.value}
+								onClick={handleClick}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
+							/>
+						))}
+					</div>
+				</div>
+				<div className='register__label'>
+					<strong>{system.component.rol.permissionTechnology}:</strong>
+					<div className='register__permission'>
+						{perTechnology?.map(item => (
+							<Checkbox
+								key={item.uid}
+								title={item.label}
+								value={item.value}
+								onClick={handleClick}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
+							/>
+						))}
+					</div>
+				</div>
+				<div className='register__label'>
+					<strong>{system.component.rol.permissionConsumables}:</strong>
+					<div className='register__permission'>
+						{perConsumables?.map(item => (
+							<Checkbox
+								key={item.uid}
+								title={item.label}
+								value={item.value}
+								onClick={handleClick}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
+							/>
+						))}
+					</div>
+				</div>
+				<div className='register__label'>
+					<strong>{system.component.rol.permissionFurniture}:</strong>
+					<div className='register__permission'>
+						{perFurniture?.map(item => (
+							<Checkbox
+								key={item.uid}
+								title={item.label}
+								value={item.value}
+								onClick={handleClick}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
+							/>
+						))}
+					</div>
+				</div>
+				<div className='register__label'>
+					<strong>{system.component.rol.permissionVehicle}:</strong>
+					<div className='register__permission'>
+						{perVehicle?.map(item => (
+							<Checkbox
+								key={item.uid}
+								title={item.label}
+								value={item.value}
+								onClick={handleClick}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
+							/>
+						))}
+					</div>
+				</div>
+				<div className='register__label'>
+					<strong>{system.component.rol.permissionBreakdownReport}:</strong>
+					<div className='register__permission'>
+						{perBreakdownReport?.map(item => (
+							<Checkbox
+								key={item.uid}
+								title={item.label}
+								value={item.value}
+								onClick={handleClick}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
+							/>
+						))}
+					</div>
+				</div>
+				<div className='register__label'>
+					<strong>{system.component.rol.permissionPurchase}:</strong>
+					<div className='register__permission'>
+						{perPurchase?.map(item => (
+							<Checkbox
+								key={item.uid}
+								title={item.label}
+								value={item.value}
+								onClick={handleClick}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
+							/>
+						))}
+					</div>
+				</div>
+				<div className='register__label'>
+					<strong>{system.component.rol.permissionAssign}:</strong>
+					<div className='register__permission'>
+						{perAssign?.map(item => (
+							<Checkbox
+								key={item.uid}
+								title={item.label}
+								value={item.value}
+								onClick={handleClick}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
 							/>
 						))}
 					</div>
@@ -141,7 +256,9 @@ const UpdateRol = ({ handelClose, handleList, order, newData }) => {
 								title={item.label}
 								value={item.value}
 								onClick={handleClick}
-								checked={form.permissions?.includes(item.value)}
+								checked={form?.permissions
+									?.split(',')
+									.some(per => per === item.value)}
 							/>
 						))}
 					</div>

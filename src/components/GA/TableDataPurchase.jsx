@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
@@ -46,7 +47,7 @@ const TableDataPurchase = ({
 		handleOpenUpdate();
 		SetClose(false);
 	};
-	const handleDeleteUser = () => handleDelete({ uid: data.uid });
+	const handleDeletePurchase = () => handleDelete({ uid: data.uid });
 	return (
 		<TableCell>
 			<Cell>{data.product}</Cell>
@@ -60,32 +61,28 @@ const TableDataPurchase = ({
 			<Cell>{data.warranty}</Cell>
 			<Cell>{data.orderNumber}</Cell>
 			<Cell>{data.location}</Cell>
-			{((validatePermissions({ per: system.permissions.delete }) &&
-				validatePermissions({ per: system.permissions.ga })) ||
-				(validatePermissions({ per: system.permissions.update }) &&
-					validatePermissions({ per: system.permissions.ga }))) && (
+			{(validatePermissions({ per: permissions.deletePurchase }) ||
+				validatePermissions({ per: permissions.updatePurchase })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: system.permissions.delete }) &&
-							validatePermissions({ per: system.permissions.ga }) && (
-								<ActionMenuItem>
-									<Btn
-										nameIcon={'delete'}
-										classIcon='icon--delete'
-										handleClick={handleDeleteUser}
-									/>
-								</ActionMenuItem>
-							)}
-						{validatePermissions({ per: system.permissions.update }) &&
-							validatePermissions({ per: system.permissions.ga }) && (
-								<ActionMenuItem>
-									<Btn
-										nameIcon={'edit'}
-										classIcon='icon--edit'
-										handleClick={handleEdit}
-									/>
-								</ActionMenuItem>
-							)}
+						{validatePermissions({ per: permissions.deletePurchase }) && (
+							<ActionMenuItem>
+								<Btn
+									nameIcon={'delete'}
+									classIcon='icon--delete'
+									handleClick={handleDeletePurchase}
+								/>
+							</ActionMenuItem>
+						)}
+						{validatePermissions({ per: permissions.updatePurchase }) && (
+							<ActionMenuItem>
+								<Btn
+									nameIcon={'edit'}
+									classIcon='icon--edit'
+									handleClick={handleEdit}
+								/>
+							</ActionMenuItem>
+						)}
 					</ActionMenu>
 				</Cell>
 			)}

@@ -8,6 +8,7 @@ import Btn from './Btn';
 import Icons from './Icons';
 import Theme from './Theme';
 import './style/menu.css';
+import { permissions } from '../data/dataPermissions';
 const Menu = ({ children, className, route }) => {
 	const { validatePermissions } = useValidatePermissions();
 	const menu = useRef(null);
@@ -55,7 +56,7 @@ const Menu = ({ children, className, route }) => {
 									handleClick={handleProfile}
 								/>
 								<ul className='menu__profileAndExit' ref={profile}>
-									{validatePermissions({ per: system.permissions.profile }) && (
+									{validatePermissions({ per: permissions.profile }) && (
 										<li className='menu__profileAndExitItem'>
 											<NavLink
 												to={route + system.routeApi.user.profile}

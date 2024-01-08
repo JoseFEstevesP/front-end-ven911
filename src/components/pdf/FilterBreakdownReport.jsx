@@ -5,6 +5,7 @@ import {
 	dataOrderBreakdownReport,
 	dataStatus,
 } from '../../data/dataOrder';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useFilter from '../../hooks/useFilter';
 import useGet from '../../hooks/useGet';
@@ -67,7 +68,7 @@ const FilterBreakdownReport = ({ isOpen, handelClose, handelFetch, url }) => {
 		<section className='register'>
 			<h2 className='register__title'>{system.component.user.register}</h2>
 			<form onSubmit={submit} className='register__form'>
-				{validatePermissions({ per: system.permissions.site }) && (
+				{validatePermissions({ per: permissions.site }) && (
 					<Select
 						className='register__input'
 						label={system.component.form.label.site}

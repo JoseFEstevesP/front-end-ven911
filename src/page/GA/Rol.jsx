@@ -11,6 +11,7 @@ import Search from '../../components/Search';
 import Select from '../../components/Select';
 import Table from '../../components/Table';
 import { dataOrderRol } from '../../data/dataOrder';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
@@ -57,37 +58,45 @@ const Rol = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (validatePermissions({ per: system.permissions.read })) {
+		if (validatePermissions({ per: permissions.readRol })) {
 			handleList({});
 		}
 	}, []);
 	useEffect(() => {
-		handleList({ orderProperty: order });
+		if (validatePermissions({ per: permissions.readRol })) {
+			handleList({ orderProperty: order });
+		}
 		if (searchSubmit) {
 			handleSearch({ orderProperty: order });
 		}
 	}, [order]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
-			return dataSearch?.rows?.map(item => (
-				<TableDataRol
-					key={item.uid}
-					data={item}
-					handleList={handleList}
-					setNewData={setNewData}
-					handleOpenUpdate={handleOpenUpdate}
-				/>
-			));
+			return dataSearch?.rows?.map(
+				item =>
+					validatePermissions({ per: permissions.readRol }) && (
+						<TableDataRol
+							key={item.uid}
+							data={item}
+							handleList={handleList}
+							setNewData={setNewData}
+							handleOpenUpdate={handleOpenUpdate}
+						/>
+					),
+			);
 		} else {
-			return data?.rows?.map(item => (
-				<TableDataRol
-					key={item.uid}
-					data={item}
-					handleList={handleList}
-					setNewData={setNewData}
-					handleOpenUpdate={handleOpenUpdate}
-				/>
-			));
+			return data?.rows?.map(
+				item =>
+					validatePermissions({ per: permissions.readRol }) && (
+						<TableDataRol
+							key={item.uid}
+							data={item}
+							handleList={handleList}
+							setNewData={setNewData}
+							handleOpenUpdate={handleOpenUpdate}
+						/>
+					),
+			);
 		}
 	}, [data?.rows, dataSearch?.rows, searchSubmit]);
 	const renderPaginate = useCallback(() => {
@@ -140,7 +149,7 @@ const Rol = () => {
 	const handleSearchComponent = e => handleSearch({ e, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: system.permissions.create }) && (
+			{validatePermissions({ per: permissions.createRol }) && (
 				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
 					<RegisterRol
 						order={order}
@@ -149,7 +158,7 @@ const Rol = () => {
 					/>
 				</Modal>
 			)}
-			{newData && (
+			{validatePermissions({ per: permissions.updateRol }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
 					<UpdateRol
 						order={order}
@@ -161,7 +170,7 @@ const Rol = () => {
 			)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: system.permissions.create }) && (
+					{validatePermissions({ per: permissions.createRol }) && (
 						<Btn
 							text={'Crear Rol'}
 							nameIcon={'user_add'}
@@ -169,14 +178,22 @@ const Rol = () => {
 							handleClick={handleOpenRegister}
 						/>
 					)}
-					<Link to='/ga/user' className='btnStyle page__link'>
-						Ir a usuario <Icons iconName={'user'} />
-					</Link>
-					<Link className='btnStyle page__link' target='_blank' to='/pdf/rol'>
-						PDF <Icons iconName={'pdf'} />
-					</Link>
+					{validatePermissions({ per: permissions.user }) && (
+						<Link to='/ga/user' className='btnStyle page__link'>
+							Ir a usuario <Icons iconName={'user'} />
+						</Link>
+					)}
+					{validatePermissions({ per: permissions.pdfRol }) && (
+						<Link
+							className='btnStyle page__link'
+							target='_blank'
+							to='/ga/pdf/rol'
+						>
+							PDF <Icons iconName={'pdf'} />
+						</Link>
+					)}
 				</div>
-				{validatePermissions({ per: system.permissions.read }) && (
+				{validatePermissions({ per: permissions.readRol }) && (
 					<div className='page__options'>
 						<Select
 							className='page__input--filter'
@@ -194,11 +211,11 @@ const Rol = () => {
 						/>
 					</div>
 				)}
-				{validatePermissions({ per: system.permissions.read }) && (
+				{validatePermissions({ per: permissions.readRol }) && (
 					<Table
 						heads={
-							validatePermissions({ per: system.permissions.delete }) ||
-							validatePermissions({ per: system.permissions.update })
+							validatePermissions({ per: permissions.deleteRol }) ||
+							validatePermissions({ per: permissions.updateRol })
 								? heads
 								: headsOfAction
 						}

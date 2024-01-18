@@ -228,11 +228,7 @@ const Technology = () => {
 						/>
 					)}
 					{validatePermissions({ per: permissions.pdfTechnology }) && (
-						<Link
-							className='btnStyle page__link'
-							target='_blank'
-							to='/ga/pdf/technology'
-						>
+						<Link className='btnStyle page__link' to='/ga/pdf/technology'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}

@@ -227,11 +227,7 @@ const Vehicle = () => {
 						/>
 					)}
 					{validatePermissions({ per: permissions.pdfVehicle }) && (
-						<Link
-							className='btnStyle page__link'
-							target='_blank'
-							to='/ga/pdf/vehicle'
-						>
+						<Link className='btnStyle page__link' to='/ga/pdf/vehicle'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}

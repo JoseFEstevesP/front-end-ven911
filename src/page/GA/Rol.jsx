@@ -184,11 +184,7 @@ const Rol = () => {
 						</Link>
 					)}
 					{validatePermissions({ per: permissions.pdfRol }) && (
-						<Link
-							className='btnStyle page__link'
-							target='_blank'
-							to='/ga/pdf/rol'
-						>
+						<Link className='btnStyle page__link' to='/ga/pdf/rol'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}

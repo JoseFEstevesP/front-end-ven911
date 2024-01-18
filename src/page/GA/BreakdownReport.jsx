@@ -220,11 +220,7 @@ const BreakdownReport = () => {
 						/>
 					)}
 					{validatePermissions({ per: permissions.pdfBreakdownReport }) && (
-						<Link
-							className='btnStyle page__link'
-							target='_blank'
-							to='/ga/pdf/breakdownReport'
-						>
+						<Link className='btnStyle page__link' to='/ga/pdf/breakdownReport'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}

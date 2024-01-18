@@ -215,11 +215,7 @@ const Assign = () => {
 						/>
 					)}
 					{validatePermissions({ per: permissions.pdfAssign }) && (
-						<Link
-							className='btnStyle page__link'
-							target='_blank'
-							to='/ga/pdf/assign'
-						>
+						<Link className='btnStyle page__link' to='/ga/pdf/assign'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}

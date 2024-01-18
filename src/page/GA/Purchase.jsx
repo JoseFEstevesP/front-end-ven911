@@ -223,11 +223,7 @@ const Purchase = () => {
 						/>
 					)}{' '}
 					{validatePermissions({ per: permissions.pdfPurchase }) && (
-						<Link
-							className='btnStyle page__link'
-							target='_blank'
-							to='/ga/pdf/purchase'
-						>
+						<Link className='btnStyle page__link' to='/ga/pdf/purchase'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}

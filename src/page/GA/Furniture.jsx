@@ -223,11 +223,7 @@ const Furniture = () => {
 						/>
 					)}{' '}
 					{validatePermissions({ per: permissions.pdfFurniture }) && (
-						<Link
-							className='btnStyle page__link'
-							target='_blank'
-							to='/ga/pdf/furniture'
-						>
+						<Link className='btnStyle page__link' to='/ga/pdf/furniture'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}

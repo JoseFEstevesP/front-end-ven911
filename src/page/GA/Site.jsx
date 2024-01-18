@@ -185,11 +185,7 @@ const Site = () => {
 						</Link>
 					)}
 					{validatePermissions({ per: permissions.pdfSite }) && (
-						<Link
-							className='btnStyle page__link'
-							target='_blank'
-							to='/ga/pdf/site'
-						>
+						<Link className='btnStyle page__link' to='/ga/pdf/site'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}

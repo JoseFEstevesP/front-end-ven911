@@ -220,11 +220,7 @@ const Consumables = () => {
 						/>
 					)}
 					{validatePermissions({ per: permissions.pdfConsumables }) && (
-						<Link
-							className='btnStyle page__link'
-							target='_blank'
-							to='/ga/pdf/consumables'
-						>
+						<Link className='btnStyle page__link' to='/ga/pdf/consumables'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}

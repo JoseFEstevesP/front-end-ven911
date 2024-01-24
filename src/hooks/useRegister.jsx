@@ -5,7 +5,7 @@ import usePost from './usePost';
 
 const useRegister = ({ initForm, url }) => {
 	const { setMsg } = useContext(ContextMsg);
-	const { data, error, loading, handelFetch } = usePost();
+	const { data, error, setError, loading, handelFetch } = usePost();
 	const [form, setForm] = useState(initForm);
 	const [errors, setErrors] = useState({});
 
@@ -22,6 +22,8 @@ const useRegister = ({ initForm, url }) => {
 	};
 	const handleSubmit = e => {
 		e.preventDefault();
+		setError(null);
+		setErrors({});
 		form.uid = crypto.randomUUID();
 		handelFetch({
 			url,
@@ -39,6 +41,7 @@ const useRegister = ({ initForm, url }) => {
 			}
 			setErrors(errors);
 			setMsg({ ...error[0], type: true });
+			console.log('useEffect -> errors:', errors);
 		}
 	}, [error, setMsg, initForm]);
 

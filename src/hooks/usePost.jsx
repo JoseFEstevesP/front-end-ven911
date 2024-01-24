@@ -33,6 +33,6 @@ const usePost = () => {
 		},
 		[token],
 	);
-	return { data, error, loading, handelFetch };
+	return { data, error, setError, loading, handelFetch };
 };
 export default usePost;

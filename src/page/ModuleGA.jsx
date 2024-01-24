@@ -29,6 +29,14 @@ const ModuleGA = () => {
 					{validatePermissions({ per: permissions.user }) && (
 						<MenuItem text={'Usuario'} to={'/ga/user'} />
 					)}
+					{!validatePermissions({ per: permissions.user }) &&
+						validatePermissions({ per: permissions.rol }) && (
+							<MenuItem text={'Rol'} to={'/ga/rol'} />
+						)}
+					{!validatePermissions({ per: permissions.user }) &&
+						validatePermissions({ per: permissions.site }) && (
+							<MenuItem text={'Site'} to={'/ga/site'} />
+						)}
 					{(validatePermissions({ per: permissions.technology }) ||
 						validatePermissions({ per: permissions.consumables }) ||
 						validatePermissions({ per: permissions.furniture }) ||

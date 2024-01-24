@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
 import useValidatePermissions from '../../hooks/useValidatePermissions';
@@ -6,7 +7,6 @@ import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
-import { permissions } from '../../data/dataPermissions';
 
 const TableDataRol = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 	const { validatePermissions } = useValidatePermissions();
@@ -33,7 +33,6 @@ const TableDataRol = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 		SetClose(false);
 	};
 	const handleDeleteUser = () => handleDelete({ uid: data.uid });
-
 	return (
 		<TableCell>
 			<Cell>{data.name}</Cell>

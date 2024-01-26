@@ -3,9 +3,9 @@ import { system } from '../../data/system';
 import useRegister from '../../hooks/useRegister';
 import Btn from '../Btn';
 import Input from '../Input';
+import InputCalendar from '../InputCalendar';
 import Select from '../Select';
 import './style/register.css';
-import InputCalendar from '../InputCalendar';
 const initForm = {
 	description: '',
 	brand: '',
@@ -25,7 +25,7 @@ const condition = [
 	{ label: 'Averiado', value: 'averiado' },
 	{ label: 'Desincorporado', value: 'desincorporado' },
 ];
-const RegisterVehicle = ({ handelClose, handleList, siteValue, order }) => {
+const RegisterVehicle = ({ handleClose, handleList, siteValue, order }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -38,7 +38,7 @@ const RegisterVehicle = ({ handelClose, handleList, siteValue, order }) => {
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);

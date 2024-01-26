@@ -36,8 +36,8 @@ const url =
 const Site = () => {
 	const { validatePermissions } = useValidatePermissions();
 	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
-	const [isOpenRegister, handleOpenRegister, handelCloseRegister] = useModal();
-	const [isOpenUpdate, handleOpenUpdate, handelCloseUpdate] = useModal();
+	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
+	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
 		search,
 		handleChange: handleChangeSearch,
@@ -151,21 +151,21 @@ const Site = () => {
 	return (
 		<>
 			{validatePermissions({ per: permissions.createSite }) && (
-				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
+				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterSite
 						order={order}
 						handleList={handleList}
-						handelClose={handelCloseRegister}
+						handleClose={handleCloseRegister}
 					/>
 				</Modal>
 			)}
 			{validatePermissions({ per: permissions.updateSite }) && newData && (
-				<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
+				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateSite
 						order={order}
 						newData={newData}
 						handleList={handleList}
-						handelClose={handelCloseUpdate}
+						handleClose={handleCloseUpdate}
 					/>
 				</Modal>
 			)}

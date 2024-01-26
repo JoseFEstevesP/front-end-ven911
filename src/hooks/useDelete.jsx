@@ -5,7 +5,7 @@ import useDel from './useDel';
 
 const useDelete = ({ url }) => {
 	const { setMsg } = useContext(ContextMsg);
-	const { data, error, handelFetch } = useDel();
+	const { data, error, handleFetch } = useDel();
 
 	useEffect(() => {
 		if (data) {
@@ -15,7 +15,7 @@ const useDelete = ({ url }) => {
 	}, [data]);
 
 	const handleDelete = ({ uid }) => {
-		handelFetch({
+		handleFetch({
 			url,
 			form: { uid },
 		});

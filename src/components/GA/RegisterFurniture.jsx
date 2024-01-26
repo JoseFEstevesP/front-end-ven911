@@ -23,7 +23,7 @@ const condition = [
 	{ label: 'Averiado', value: 'averiado' },
 	{ label: 'Desincorporado', value: 'desincorporado' },
 ];
-const RegisterFurniture = ({ handelClose, handleList, siteValue, order }) => {
+const RegisterFurniture = ({ handleClose, handleList, siteValue, order }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -36,7 +36,7 @@ const RegisterFurniture = ({ handelClose, handleList, siteValue, order }) => {
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);

@@ -5,6 +5,7 @@ import {
 	dataOrderConsumables,
 	dataStatus,
 } from '../../data/dataOrder';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useFilter from '../../hooks/useFilter';
 import useGet from '../../hooks/useGet';
@@ -14,7 +15,6 @@ import '../GA/style/register.css';
 import Input from '../Input';
 import InputCalendar from '../InputCalendar';
 import Select from '../Select';
-import { permissions } from '../../data/dataPermissions';
 const options = {
 	uidSite: 'uidSite',
 	orderProperty: 'orderProperty',
@@ -35,25 +35,25 @@ const initForm = {
 	endDate: '',
 	search: '',
 };
-const FilterConsumables = ({ isOpen, handelClose, handelFetch, url }) => {
+const FilterConsumables = ({ isOpen, handleClose, handleFetch, url }) => {
 	const { validatePermissions } = useValidatePermissions();
-	const { handelFetch: handelFetchSite, data: dataSite } = useGet();
+	const { handleFetch: handleFetchSite, data: dataSite } = useGet();
 	const { site } = useContext(ContextSite);
 
 	const { filterOptions, handleChange, handleSubmit } = useFilter({
-		handelClose,
+		handleClose,
 		initForm: {
 			...initForm,
 			uidSite: site,
 			orderProperty: dataOrderConsumables[0].value,
 		},
 		options,
-		handelFetch,
+		handleFetch,
 	});
 
 	useEffect(() => {
 		if (isOpen) {
-			handelFetchSite({
+			handleFetchSite({
 				url:
 					import.meta.env.VITE_ULR_API +
 					system.routeApi.site.primary +

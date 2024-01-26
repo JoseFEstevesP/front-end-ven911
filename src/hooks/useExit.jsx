@@ -4,12 +4,12 @@ import { ContextToken } from '../context/TokenContext';
 const useExit = () => {
 	const { setToken } = useContext(ContextToken);
 	const { setRol } = useContext(ContextRol);
-	const handelClickExit = () => {
+	const handleClickExit = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('rol');
 		setToken(null);
 		setRol(null);
 	};
-	return { handelClickExit };
+	return { handleClickExit };
 };
 export default useExit;

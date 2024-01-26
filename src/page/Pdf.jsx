@@ -162,12 +162,12 @@ const row = ({ itemData, report }) => {
 	};
 	return rowItem[report];
 };
-const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
+const filter = ({ report, handleClosePdf, handleFetch, isOpenPdf }) => {
 	const rowItem = {
 		user: (
 			<FilterUser
-				handelClose={handelClosePdf}
-				handelFetch={handelFetch}
+				handleClose={handleClosePdf}
+				handleFetch={handleFetch}
 				isOpen={isOpenPdf}
 				url={`${import.meta.env.VITE_ULR_API}${
 					system.routeApi[report].primary
@@ -176,8 +176,8 @@ const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
 		),
 		rol: (
 			<FilterRol
-				handelClose={handelClosePdf}
-				handelFetch={handelFetch}
+				handleClose={handleClosePdf}
+				handleFetch={handleFetch}
 				isOpen={isOpenPdf}
 				url={`${import.meta.env.VITE_ULR_API}${
 					system.routeApi[report].primary
@@ -186,8 +186,8 @@ const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
 		),
 		site: (
 			<FilterSite
-				handelClose={handelClosePdf}
-				handelFetch={handelFetch}
+				handleClose={handleClosePdf}
+				handleFetch={handleFetch}
 				isOpen={isOpenPdf}
 				url={`${import.meta.env.VITE_ULR_API}${
 					system.routeApi[report].primary
@@ -196,8 +196,8 @@ const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
 		),
 		technology: (
 			<FilterTechnology
-				handelClose={handelClosePdf}
-				handelFetch={handelFetch}
+				handleClose={handleClosePdf}
+				handleFetch={handleFetch}
 				isOpen={isOpenPdf}
 				url={`${import.meta.env.VITE_ULR_API}${
 					system.routeApi[report].primary
@@ -206,8 +206,8 @@ const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
 		),
 		vehicle: (
 			<FilterVehicle
-				handelClose={handelClosePdf}
-				handelFetch={handelFetch}
+				handleClose={handleClosePdf}
+				handleFetch={handleFetch}
 				isOpen={isOpenPdf}
 				url={`${import.meta.env.VITE_ULR_API}${
 					system.routeApi[report].primary
@@ -216,8 +216,8 @@ const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
 		),
 		purchase: (
 			<FilterPurchase
-				handelClose={handelClosePdf}
-				handelFetch={handelFetch}
+				handleClose={handleClosePdf}
+				handleFetch={handleFetch}
 				isOpen={isOpenPdf}
 				url={`${import.meta.env.VITE_ULR_API}${
 					system.routeApi[report].primary
@@ -226,8 +226,8 @@ const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
 		),
 		furniture: (
 			<FilterFurniture
-				handelClose={handelClosePdf}
-				handelFetch={handelFetch}
+				handleClose={handleClosePdf}
+				handleFetch={handleFetch}
 				isOpen={isOpenPdf}
 				url={`${import.meta.env.VITE_ULR_API}${
 					system.routeApi[report].primary
@@ -236,8 +236,8 @@ const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
 		),
 		consumables: (
 			<FilterConsumables
-				handelClose={handelClosePdf}
-				handelFetch={handelFetch}
+				handleClose={handleClosePdf}
+				handleFetch={handleFetch}
 				isOpen={isOpenPdf}
 				url={`${import.meta.env.VITE_ULR_API}${
 					system.routeApi[report].primary
@@ -246,8 +246,8 @@ const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
 		),
 		breakdownReport: (
 			<FilterBreakdownReport
-				handelClose={handelClosePdf}
-				handelFetch={handelFetch}
+				handleClose={handleClosePdf}
+				handleFetch={handleFetch}
 				isOpen={isOpenPdf}
 				url={`${import.meta.env.VITE_ULR_API}${
 					system.routeApi[report].primary
@@ -256,8 +256,8 @@ const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
 		),
 		assign: (
 			<FilterAssign
-				handelClose={handelClosePdf}
-				handelFetch={handelFetch}
+				handleClose={handleClosePdf}
+				handleFetch={handleFetch}
 				isOpen={isOpenPdf}
 				url={`${import.meta.env.VITE_ULR_API}${
 					system.routeApi[report].primary
@@ -270,9 +270,9 @@ const filter = ({ report, handelClosePdf, handelFetch, isOpenPdf }) => {
 const Pdf = () => {
 	const [loader, setLoader] = useState(false);
 	const [loaderPDF, setLoaderPDF] = useState(false);
-	const { dataPDF: data, handelFetch } = usePdf();
+	const { dataPDF: data, handleFetch } = usePdf();
 	const { report } = useParams();
-	const [isOpenPdf, handleOpenPdf, handelClosePdf] = useModal();
+	const [isOpenPdf, handleOpenPdf, handleClosePdf] = useModal();
 	useEffect(() => {
 		handleOpenPdf();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -295,8 +295,8 @@ const Pdf = () => {
 		<>
 			{loader && <h1>Cargando data...</h1>}
 			{loaderPDF && <h1>Cargando pdf...</h1>}
-			<Modal isOpen={isOpenPdf} close={handelClosePdf}>
-				{filter({ report, handelClosePdf, handelFetch, isOpenPdf })}
+			<Modal isOpen={isOpenPdf} close={handleClosePdf}>
+				{filter({ report, handleClosePdf, handleFetch, isOpenPdf })}
 			</Modal>
 			<Btn
 				handleClick={handleOpenPdf}

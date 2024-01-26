@@ -24,15 +24,15 @@ const initForm = {
 	endDate: '',
 	search: '',
 };
-const FilterRol = ({ handelClose, handelFetch, url }) => {
+const FilterRol = ({ handleClose, handleFetch, url }) => {
 	const { filterOptions, handleChange, handleSubmit } = useFilter({
-		handelClose,
+		handleClose,
 		initForm: {
 			...initForm,
 			orderProperty: dataOrderRol[0].value,
 		},
 		options,
-		handelFetch,
+		handleFetch,
 	});
 
 	const submit = e => handleSubmit({ url, e });

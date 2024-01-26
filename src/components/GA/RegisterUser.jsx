@@ -20,7 +20,7 @@ const initForm = {
 };
 const RegisterUser = ({
 	isOpen,
-	handelClose,
+	handleClose,
 	handleList,
 	siteValue,
 	order,
@@ -34,25 +34,25 @@ const RegisterUser = ({
 				system.routeApi.user.primary +
 				system.routeApi.user.register,
 		});
-	const { handelFetch: handelFetchRol, data: dataRol } = useGet();
-	const { handelFetch: handelFetchSite, data: dataSite } = useGet();
+	const { handleFetch: handleFetchRol, data: dataRol } = useGet();
+	const { handleFetch: handleFetchSite, data: dataSite } = useGet();
 	useEffect(() => {
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 	useEffect(() => {
 		if (isOpen) {
-			handelFetchRol({
+			handleFetchRol({
 				url:
 					import.meta.env.VITE_ULR_API +
 					system.routeApi.rol.primary +
 					system.routeApi.rol.lisOfLimit,
 			});
-			handelFetchSite({
+			handleFetchSite({
 				url:
 					import.meta.env.VITE_ULR_API +
 					system.routeApi.site.primary +

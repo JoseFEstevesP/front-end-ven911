@@ -7,14 +7,14 @@ import Icons from './Icons';
 import Modal from './Modal';
 import './style/footer.css';
 const Footer = ({ className }) => {
-	const [isOpenCredit, handleOpenCredit, handelCloseCredit] = useModal();
-	const [isOpenCreator, handleOpenCreator, handelCloseCreator] = useModal();
+	const [isOpenCredit, handleOpenCredit, handleCloseCredit] = useModal();
+	const [isOpenCreator, handleOpenCreator, handleCloseCreator] = useModal();
 	return (
 		<>
-			<Modal isOpen={isOpenCredit} close={handelCloseCredit}>
+			<Modal isOpen={isOpenCredit} close={handleCloseCredit}>
 				<Credit />
 			</Modal>
-			<Modal isOpen={isOpenCreator} close={handelCloseCreator}>
+			<Modal isOpen={isOpenCreator} close={handleCloseCreator}>
 				<Creators />
 			</Modal>
 			<section className={`footer ${className}`}>

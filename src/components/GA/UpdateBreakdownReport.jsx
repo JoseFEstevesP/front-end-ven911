@@ -21,7 +21,7 @@ const condition = [
 ];
 const breakdownDepartment = [{ label: 'Tecnologia', value: 'tecnologia' }];
 const UpdateBreakdownReport = ({
-	handelClose,
+	handleClose,
 	newData,
 	handleList,
 	siteValue,
@@ -45,7 +45,7 @@ const UpdateBreakdownReport = ({
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 	return (

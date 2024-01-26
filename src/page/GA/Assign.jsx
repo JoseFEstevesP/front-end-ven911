@@ -49,12 +49,12 @@ const Assign = () => {
 	const { validatePermissions } = useValidatePermissions();
 	const { site } = useContext(ContextSite);
 	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
-	const [isOpenRegister, handleOpenRegister, handelCloseRegister] = useModal();
-	const [isOpenUpdate, handleOpenUpdate, handelCloseUpdate] = useModal();
+	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
+	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
 		data: dataSite,
 		siteValue,
-		handelFetch: handelFetchSite,
+		handleFetch: handleFetchSite,
 		handleChange: handleChangeSite,
 	} = useSite({ site });
 	const {
@@ -80,7 +80,7 @@ const Assign = () => {
 	useEffect(() => {
 		if (validatePermissions({ per: permissions.readAssign })) {
 			handleList({ orderProperty: order });
-			handelFetchSite({
+			handleFetchSite({
 				url: validatePermissions({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
@@ -183,24 +183,24 @@ const Assign = () => {
 	return (
 		<>
 			{validatePermissions({ per: permissions.createAssign }) && (
-				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
+				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterAssign
 						order={order}
 						siteValue={siteValue}
 						handleList={handleList}
-						handelClose={handelCloseRegister}
+						handleClose={handleCloseRegister}
 					/>
 				</Modal>
 			)}
 			{validatePermissions({ per: permissions.updateAssign }) && newData && (
-				<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
+				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateAssign
 						order={order}
 						siteValue={siteValue}
 						newData={newData}
 						handleList={handleList}
 						isOpen={isOpenUpdate}
-						handelClose={handelCloseUpdate}
+						handleClose={handleCloseUpdate}
 					/>
 				</Modal>
 			)}

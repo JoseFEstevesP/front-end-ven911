@@ -57,12 +57,12 @@ const Purchase = () => {
 	const { validatePermissions } = useValidatePermissions();
 	const { site } = useContext(ContextSite);
 	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
-	const [isOpenRegister, handleOpenRegister, handelCloseRegister] = useModal();
-	const [isOpenUpdate, handleOpenUpdate, handelCloseUpdate] = useModal();
+	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
+	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
 		data: dataSite,
 		siteValue,
-		handelFetch: handelFetchSite,
+		handleFetch: handleFetchSite,
 		handleChange: handleChangeSite,
 	} = useSite({ site });
 	const {
@@ -88,7 +88,7 @@ const Purchase = () => {
 	useEffect(() => {
 		if (validatePermissions({ per: permissions.readPurchase })) {
 			handleList({ orderProperty: order });
-			handelFetchSite({
+			handleFetchSite({
 				url: validatePermissions({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
@@ -191,24 +191,24 @@ const Purchase = () => {
 	return (
 		<>
 			{validatePermissions({ per: permissions.createPurchase }) && (
-				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
+				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterPurchase
 						order={order}
 						siteValue={siteValue}
 						handleList={handleList}
-						handelClose={handelCloseRegister}
+						handleClose={handleCloseRegister}
 					/>
 				</Modal>
 			)}
 			{validatePermissions({ per: permissions.updatePurchase }) && newData && (
-				<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
+				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdatePurchase
 						order={order}
 						siteValue={siteValue}
 						newData={newData}
 						handleList={handleList}
 						isOpen={isOpenUpdate}
-						handelClose={handelCloseUpdate}
+						handleClose={handleCloseUpdate}
 					/>
 				</Modal>
 			)}

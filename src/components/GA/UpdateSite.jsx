@@ -10,7 +10,7 @@ const initForm = {
 	name: '',
 	direction: '',
 };
-const UpdateSite = ({ handelClose, newData, handleList, order }) => {
+const UpdateSite = ({ handleClose, newData, handleList, order }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
 			initForm,
@@ -29,7 +29,7 @@ const UpdateSite = ({ handelClose, newData, handleList, order }) => {
 		if (data) {
 			handleList({ orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 

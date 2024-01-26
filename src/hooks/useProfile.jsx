@@ -3,10 +3,10 @@ import { system } from '../data/system';
 import useGet from './useGet';
 
 const useProfile = () => {
-	const { handelFetch, data } = useGet();
+	const { handleFetch, data } = useGet();
 	const [dataDefault, setDataDefault] = useState(null);
 	useEffect(() => {
-		handelFetch({
+		handleFetch({
 			url:
 				import.meta.env.VITE_ULR_API +
 				system.routeApi.user.primary +

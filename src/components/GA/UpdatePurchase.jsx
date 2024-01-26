@@ -21,7 +21,7 @@ const initForm = {
 	location: '',
 };
 const UpdatePurchase = ({
-	handelClose,
+	handleClose,
 	newData,
 	handleList,
 	siteValue,
@@ -45,7 +45,7 @@ const UpdatePurchase = ({
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 	return (

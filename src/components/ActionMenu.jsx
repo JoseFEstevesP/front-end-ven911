@@ -6,7 +6,7 @@ const ActionMenu = ({ children, close }) => {
 	useEffect(() => {
 		setShow(close);
 	}, [close]);
-	const handelMenu = () => setShow(!show);
+	const handleMenu = () => setShow(!show);
 	return (
 		<>
 			<section className='popupMenu'>
@@ -18,7 +18,7 @@ const ActionMenu = ({ children, close }) => {
 				<h2 className='popupMenu__title'>
 					<Btn
 						className={'popupMenu__btn'}
-						handleClick={handelMenu}
+						handleClick={handleMenu}
 						nameIcon={'interrogant'}
 					/>
 				</h2>

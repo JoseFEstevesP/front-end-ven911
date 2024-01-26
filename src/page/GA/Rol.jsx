@@ -35,8 +35,8 @@ const url =
 const Rol = () => {
 	const { validatePermissions } = useValidatePermissions();
 	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
-	const [isOpenRegister, handleOpenRegister, handelCloseRegister] = useModal();
-	const [isOpenUpdate, handleOpenUpdate, handelCloseUpdate] = useModal();
+	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
+	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
 		search,
 		handleChange: handleChangeSearch,
@@ -150,21 +150,21 @@ const Rol = () => {
 	return (
 		<>
 			{validatePermissions({ per: permissions.createRol }) && (
-				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
+				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterRol
 						order={order}
 						handleList={handleList}
-						handelClose={handelCloseRegister}
+						handleClose={handleCloseRegister}
 					/>
 				</Modal>
 			)}
 			{validatePermissions({ per: permissions.updateRol }) && newData && (
-				<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
+				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateRol
 						order={order}
 						newData={newData}
 						handleList={handleList}
-						handelClose={handelCloseUpdate}
+						handleClose={handleCloseUpdate}
 					/>
 				</Modal>
 			)}

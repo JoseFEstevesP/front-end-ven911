@@ -1,7 +1,7 @@
 import useGet from './useGet';
 const usePdf = () => {
-	const { data, handelFetch } = useGet();
+	const { data, handleFetch } = useGet();
 
-	return { handelFetch, dataPDF: data };
+	return { handleFetch, dataPDF: data };
 };
 export default usePdf;

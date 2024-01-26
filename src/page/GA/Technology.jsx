@@ -61,12 +61,12 @@ const Technology = () => {
 	const { validatePermissions } = useValidatePermissions();
 	const { site } = useContext(ContextSite);
 	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
-	const [isOpenRegister, handleOpenRegister, handelCloseRegister] = useModal();
-	const [isOpenUpdate, handleOpenUpdate, handelCloseUpdate] = useModal();
+	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
+	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
 		data: dataSite,
 		siteValue,
-		handelFetch: handelFetchSite,
+		handleFetch: handleFetchSite,
 		handleChange: handleChangeSite,
 	} = useSite({ site });
 	const {
@@ -92,7 +92,7 @@ const Technology = () => {
 	useEffect(() => {
 		if (validatePermissions({ per: permissions.readTechnology })) {
 			handleList({ orderProperty: order });
-			handelFetchSite({
+			handleFetchSite({
 				url: validatePermissions({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
@@ -195,25 +195,25 @@ const Technology = () => {
 	return (
 		<>
 			{validatePermissions({ per: permissions.createTechnology }) && (
-				<Modal isOpen={isOpenRegister} close={handelCloseRegister}>
+				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterTechnology
 						order={order}
 						siteValue={siteValue}
 						handleList={handleList}
-						handelClose={handelCloseRegister}
+						handleClose={handleCloseRegister}
 					/>
 				</Modal>
 			)}
 			{validatePermissions({ per: permissions.updateTechnology }) &&
 				newData && (
-					<Modal isOpen={isOpenUpdate} close={handelCloseUpdate}>
+					<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 						<UpdateTechnology
 							order={order}
 							siteValue={siteValue}
 							newData={newData}
 							handleList={handleList}
 							isOpen={isOpenUpdate}
-							handelClose={handelCloseUpdate}
+							handleClose={handleCloseUpdate}
 						/>
 					</Modal>
 				)}

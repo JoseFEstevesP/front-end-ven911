@@ -6,7 +6,7 @@ const usePost = () => {
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState(null);
 	const { token } = useContext(ContextToken);
-	const handelFetch = useCallback(
+	const handleFetch = useCallback(
 		({ url, form }) => {
 			setLoading(true);
 			fetchData()
@@ -33,6 +33,6 @@ const usePost = () => {
 		},
 		[token],
 	);
-	return { data, error, setError, loading, handelFetch };
+	return { data, error, setError, loading, handleFetch };
 };
 export default usePost;

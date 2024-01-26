@@ -1,10 +1,10 @@
 import useGet from './useGet';
 
 const useDataInventory = ({ url }) => {
-	const { data, handelFetch } = useGet();
-	const handelDataInventory = ({ inventory }) => {
-		handelFetch({ url: `${url}/${inventory}` });
+	const { data, handleFetch } = useGet();
+	const handleDataInventory = ({ inventory }) => {
+		handleFetch({ url: `${url}/${inventory}` });
 	};
-	return { data, handelDataInventory };
+	return { data, handleDataInventory };
 };
 export default useDataInventory;

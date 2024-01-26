@@ -5,7 +5,7 @@ import usePut from './usePut';
 
 const useUpdate = ({ initForm, url }) => {
 	const { setMsg } = useContext(ContextMsg);
-	const { data, error, loading, handelFetch } = usePut();
+	const { data, error, loading, handleFetch } = usePut();
 	const [form, setForm] = useState(initForm);
 	const [errors, setErrors] = useState({});
 
@@ -22,7 +22,7 @@ const useUpdate = ({ initForm, url }) => {
 	};
 	const handleSubmit = e => {
 		e.preventDefault();
-		handelFetch({
+		handleFetch({
 			url,
 			form,
 		});

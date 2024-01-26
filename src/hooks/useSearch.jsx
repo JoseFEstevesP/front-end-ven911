@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useGet from './useGet';
 
 const useSearch = ({ url }) => {
-	const { handelFetch, data, error } = useGet();
+	const { handleFetch, data, error } = useGet();
 	const [search, setSearch] = useState('');
 	const [searchSubmit, setSearchSubmit] = useState(false);
 	const handleChange = e => {
@@ -23,7 +23,7 @@ const useSearch = ({ url }) => {
 	}) => {
 		e && e.preventDefault();
 		setSearchSubmit(true);
-		handelFetch({
+		handleFetch({
 			url: `${url}/${search}${page ? `?page=${page}` : ''}${
 				limit ? `&limit=${limit}` : ''
 			}${

@@ -9,8 +9,8 @@ import useValidatePermissions from '../hooks/useValidatePermissions';
 import './style/redirect.css';
 
 const Redirect = () => {
-	const { handelClickExit } = useExit();
-	const handleExit = () => handelClickExit();
+	const { handleClickExit } = useExit();
+	const handleExit = () => handleClickExit();
 	const { validatePermissions } = useValidatePermissions();
 	return (
 		<Page title='Redirección'>

@@ -6,7 +6,7 @@ const usePut = () => {
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState(null);
 	const { token } = useContext(ContextToken);
-	const handelFetch = useCallback(
+	const handleFetch = useCallback(
 		({ url, form }) => {
 			setLoading(true);
 			fetchData()
@@ -33,6 +33,6 @@ const usePut = () => {
 		},
 		[token],
 	);
-	return { data, error, loading, handelFetch };
+	return { data, error, loading, handleFetch };
 };
 export default usePut;

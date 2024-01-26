@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from 'react';
 import { ContextSite } from '../../context/SiteContext';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useGet from '../../hooks/useGet';
 import useUpdate from '../../hooks/useUpdate';
@@ -9,7 +10,6 @@ import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
 import './style/register.css';
-import { permissions } from '../../data/dataPermissions';
 const initForm = {
 	uid: '',
 	ci: '',
@@ -21,7 +21,7 @@ const initForm = {
 };
 const UpdateUser = ({
 	isOpen,
-	handelClose,
+	handleClose,
 	newData,
 	handleList,
 	siteValue,
@@ -38,8 +38,8 @@ const UpdateUser = ({
 				system.routeApi.user.update,
 		},
 	);
-	const { handelFetch: handelFetchRol, data: dataRol } = useGet();
-	const { handelFetch: handelFetchSite, data: dataSite } = useGet();
+	const { handleFetch: handleFetchRol, data: dataRol } = useGet();
+	const { handleFetch: handleFetchSite, data: dataSite } = useGet();
 	useEffect(() => {
 		if (newData) {
 			setForm(newData);
@@ -49,18 +49,18 @@ const UpdateUser = ({
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 	useEffect(() => {
 		if (isOpen) {
-			handelFetchRol({
+			handleFetchRol({
 				url:
 					import.meta.env.VITE_ULR_API +
 					system.routeApi.rol.primary +
 					system.routeApi.rol.lisOfLimit,
 			});
-			handelFetchSite({
+			handleFetchSite({
 				url: validatePermissions({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +

@@ -26,7 +26,7 @@ const condition = [
 	{ label: 'Desincorporado', value: 'desincorporado' },
 ];
 const UpdateFurniture = ({
-	handelClose,
+	handleClose,
 	newData,
 	handleList,
 	siteValue,
@@ -50,7 +50,7 @@ const UpdateFurniture = ({
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 	return (

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useFilter = ({ initForm, options, handelClose, handelFetch }) => {
+const useFilter = ({ initForm, options, handleClose, handleFetch }) => {
 	const [filterOptions, setFilterOptions] = useState(initForm);
 	const handleChange = e => {
 		const { name, value } = e.target;
@@ -8,14 +8,14 @@ const useFilter = ({ initForm, options, handelClose, handelFetch }) => {
 	};
 	const handleSubmit = ({ url, e }) => {
 		e.preventDefault();
-		handelFetch({
+		handleFetch({
 			url: `${url}?${Object.entries(filterOptions)
 				.filter(([key, value]) => value !== '')
 				.map(([key, value]) => `${options[key] || key}=${value}`)
 				.join('&')}`,
 		});
 
-		handelClose();
+		handleClose();
 		setFilterOptions(initForm);
 	};
 

@@ -1,6 +1,7 @@
 import { useContext, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ContextToken } from '../context/TokenContext';
+import { permissions } from '../data/dataPermissions';
 import { system } from '../data/system';
 import useExit from '../hooks/useExit';
 import useValidatePermissions from '../hooks/useValidatePermissions';
@@ -8,13 +9,12 @@ import Btn from './Btn';
 import Icons from './Icons';
 import Theme from './Theme';
 import './style/menu.css';
-import { permissions } from '../data/dataPermissions';
 const Menu = ({ children, className, route }) => {
 	const { validatePermissions } = useValidatePermissions();
 	const menu = useRef(null);
 	const bar = useRef(null);
 	const profile = useRef(null);
-	const { handelClickExit } = useExit();
+	const { handleClickExit } = useExit();
 	const { token } = useContext(ContextToken);
 	const handleClick = () => {
 		document.body.classList.toggle('none');
@@ -29,7 +29,7 @@ const Menu = ({ children, className, route }) => {
 	const handleProfile = () => {
 		profile.current.classList.toggle('menu__profileAndExit--show');
 	};
-	const handleExit = () => handelClickExit();
+	const handleExit = () => handleClickExit();
 
 	return (
 		<>

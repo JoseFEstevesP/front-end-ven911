@@ -4,9 +4,9 @@ import { system } from '../../data/system';
 import useUpdate from '../../hooks/useUpdate';
 import Btn from '../Btn';
 import Input from '../Input';
+import InputCalendar from '../InputCalendar';
 import Select from '../Select';
 import './style/register.css';
-import InputCalendar from '../InputCalendar';
 const initForm = {
 	uid: '',
 	description: '',
@@ -28,7 +28,7 @@ const condition = [
 	{ label: 'Desincorporado', value: 'desincorporado' },
 ];
 const UpdateVehicle = ({
-	handelClose,
+	handleClose,
 	newData,
 	handleList,
 	siteValue,
@@ -52,7 +52,7 @@ const UpdateVehicle = ({
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 	return (

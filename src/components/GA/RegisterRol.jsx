@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import {
+	perAssign,
+	perBreakdownReport,
 	perConsumables,
 	perFurniture,
 	perModule,
+	perPurchase,
 	perRol,
 	perSite,
 	perSystem,
 	perTechnology,
 	perUser,
 	perVehicle,
-	perBreakdownReport,
-	perPurchase,
-	perAssign,
 } from '../../data/permissions';
 import { system } from '../../data/system';
 import usePermission from '../../hooks/GA/usePermission';
@@ -28,7 +28,7 @@ const initForm = {
 	name: '',
 	permissions: '',
 };
-const RegisterRol = ({ handelClose, handleList, order }) => {
+const RegisterRol = ({ handleClose, handleList, order }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -42,7 +42,7 @@ const RegisterRol = ({ handelClose, handleList, order }) => {
 		if (data) {
 			handleList({ orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 

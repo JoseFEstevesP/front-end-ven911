@@ -24,7 +24,7 @@ const inventory = [
 	{ label: 'Vehículo', value: 'vehicle' },
 ];
 const UpdateAssign = ({
-	handelClose,
+	handleClose,
 	newData,
 	handleList,
 	siteValue,
@@ -39,7 +39,7 @@ const UpdateAssign = ({
 				system.routeApi.assign.update,
 		},
 	);
-	const { data: dataInventory, handelDataInventory } = useDataInventory({
+	const { data: dataInventory, handleDataInventory } = useDataInventory({
 		url:
 			import.meta.env.VITE_ULR_API +
 			system.routeApi.assign.primary +
@@ -48,19 +48,19 @@ const UpdateAssign = ({
 	useEffect(() => {
 		if (newData) {
 			setForm(newData);
-			handelDataInventory({ inventory: newData.inventory });
+			handleDataInventory({ inventory: newData.inventory });
 		}
 	}, [newData]);
 	useEffect(() => {
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 	useEffect(() => {
 		if (form.inventory) {
-			handelDataInventory({ inventory: form.inventory });
+			handleDataInventory({ inventory: form.inventory });
 		}
 	}, [form.inventory]);
 	useEffect(() => {

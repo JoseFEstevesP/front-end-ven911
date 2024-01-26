@@ -4,7 +4,7 @@ const usePostLogin = () => {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState({});
-	const handelFetch = useCallback(({ url, form }) => {
+	const handleFetch = useCallback(({ url, form }) => {
 		setLoading(true);
 		fetchData()
 			.post({
@@ -27,6 +27,6 @@ const usePostLogin = () => {
 			.catch(err => console.error(err))
 			.finally(() => setLoading(false));
 	}, []);
-	return { data, error, loading, handelFetch };
+	return { data, error, loading, handleFetch };
 };
 export default usePostLogin;

@@ -35,25 +35,25 @@ const initForm = {
 	endDate: '',
 	search: '',
 };
-const FilterBreakdownReport = ({ isOpen, handelClose, handelFetch, url }) => {
+const FilterBreakdownReport = ({ isOpen, handleClose, handleFetch, url }) => {
 	const { validatePermissions } = useValidatePermissions();
-	const { handelFetch: handelFetchSite, data: dataSite } = useGet();
+	const { handleFetch: handleFetchSite, data: dataSite } = useGet();
 	const { site } = useContext(ContextSite);
 
 	const { filterOptions, handleChange, handleSubmit } = useFilter({
-		handelClose,
+		handleClose,
 		initForm: {
 			...initForm,
 			uidSite: site,
 			orderProperty: dataOrderBreakdownReport[0].value,
 		},
 		options,
-		handelFetch,
+		handleFetch,
 	});
 
 	useEffect(() => {
 		if (isOpen) {
-			handelFetchSite({
+			handleFetchSite({
 				url:
 					import.meta.env.VITE_ULR_API +
 					system.routeApi.site.primary +

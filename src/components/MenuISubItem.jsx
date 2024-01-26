@@ -3,7 +3,7 @@ import Btn from './Btn';
 
 const MenuSubItem = ({ text, children }) => {
 	const subMenu = useRef(null);
-	const handelClick = useCallback(() => {
+	const handleClick = useCallback(() => {
 		subMenu.current.classList.toggle('menu__submenu--show');
 	}, []);
 	return (
@@ -13,7 +13,7 @@ const MenuSubItem = ({ text, children }) => {
 				classIcon='menu__subIcon'
 				text={text}
 				nameIcon='arrow'
-				handleClick={handelClick}
+				handleClick={handleClick}
 			/>
 			<ul className='box menu__submenu' ref={subMenu}>
 				{children}

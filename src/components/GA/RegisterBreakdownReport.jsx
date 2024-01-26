@@ -23,7 +23,7 @@ const breakdownDepartment = [
 	{ label: 'Potencia', value: 'potencia' },
 ];
 const RegisterBreakdownReport = ({
-	handelClose,
+	handleClose,
 	handleList,
 	siteValue,
 	order,
@@ -40,7 +40,7 @@ const RegisterBreakdownReport = ({
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);

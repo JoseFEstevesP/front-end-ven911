@@ -18,7 +18,7 @@ const initForm = {
 	remarks: '',
 };
 const UpdateConsumables = ({
-	handelClose,
+	handleClose,
 	newData,
 	handleList,
 	siteValue,
@@ -42,7 +42,7 @@ const UpdateConsumables = ({
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 	return (

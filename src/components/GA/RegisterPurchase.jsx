@@ -18,7 +18,7 @@ const initForm = {
 	orderNumber: '',
 	location: '',
 };
-const RegisterPurchase = ({ handelClose, handleList, siteValue, order }) => {
+const RegisterPurchase = ({ handleClose, handleList, siteValue, order }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -31,7 +31,7 @@ const RegisterPurchase = ({ handelClose, handleList, siteValue, order }) => {
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);

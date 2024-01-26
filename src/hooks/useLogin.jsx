@@ -11,7 +11,7 @@ const useLogin = ({ initForm, url }) => {
 	const { setMsg } = useContext(ContextMsg);
 	const { setRol } = useContext(ContextRol);
 	const { setSite } = useContext(ContextSite);
-	const { handelFetch, data, error, loading } = usePostLogin();
+	const { handleFetch, data, error, loading } = usePostLogin();
 	const [form, setForm] = useState(initForm);
 	const [errors, setErrors] = useState({});
 
@@ -34,7 +34,7 @@ const useLogin = ({ initForm, url }) => {
 	};
 	const handleSubmit = e => {
 		e.preventDefault();
-		handelFetch({
+		handleFetch({
 			url,
 			form,
 		});

@@ -28,7 +28,7 @@ const initForm = {
 	name: '',
 	permissions: '',
 };
-const UpdateRol = ({ handelClose, handleList, order, newData }) => {
+const UpdateRol = ({ handleClose, handleList, order, newData }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
 			initForm,
@@ -45,7 +45,7 @@ const UpdateRol = ({ handelClose, handleList, order, newData }) => {
 		if (data) {
 			handleList({ orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 	useEffect(() => {

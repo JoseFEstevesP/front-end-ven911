@@ -1,7 +1,7 @@
 import useGet from './useGet';
 
 const useLits = ({ url }) => {
-	const { handelFetch, data, setData, error } = useGet();
+	const { handleFetch, data, setData, error } = useGet();
 	const handleList = ({
 		page = 1,
 		limit = 10,
@@ -9,7 +9,7 @@ const useLits = ({ url }) => {
 		orderProperty = 'name',
 		order = 'ASC',
 	}) => {
-		handelFetch({
+		handleFetch({
 			url: `${url}${page ? `?page=${page}` : ''}${
 				limit ? `&limit=${limit}` : ''
 			}${

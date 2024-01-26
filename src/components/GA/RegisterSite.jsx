@@ -8,7 +8,7 @@ const initForm = {
 	name: '',
 	direction: '',
 };
-const RegisterSite = ({ handelClose, handleList, order }) => {
+const RegisterSite = ({ handleClose, handleList, order }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -21,7 +21,7 @@ const RegisterSite = ({ handelClose, handleList, order }) => {
 		if (data) {
 			handleList({ orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);

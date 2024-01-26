@@ -8,7 +8,7 @@ const useGet = () => {
 	const [controller, setController] = useState(null);
 	const [data, setData] = useState(null);
 	const { token } = useContext(ContextToken);
-	const handelFetch = useCallback(
+	const handleFetch = useCallback(
 		({ url }) => {
 			setLoading(true);
 			const abortController = new AbortController();
@@ -45,6 +45,6 @@ const useGet = () => {
 			});
 		}
 	};
-	return { data, setData, error, loading, handleController, handelFetch };
+	return { data, setData, error, loading, handleController, handleFetch };
 };
 export default useGet;

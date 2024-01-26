@@ -22,7 +22,7 @@ const inventory = [
 	{ label: 'Tecnología', value: 'technology' },
 	{ label: 'Vehículo', value: 'vehicle' },
 ];
-const RegisterAssign = ({ handelClose, handleList, siteValue, order }) => {
+const RegisterAssign = ({ handleClose, handleList, siteValue, order }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -31,7 +31,7 @@ const RegisterAssign = ({ handelClose, handleList, siteValue, order }) => {
 				system.routeApi.assign.primary +
 				system.routeApi.assign.register,
 		});
-	const { data: dataInventory, handelDataInventory } = useDataInventory({
+	const { data: dataInventory, handleDataInventory } = useDataInventory({
 		url:
 			import.meta.env.VITE_ULR_API +
 			system.routeApi.assign.primary +
@@ -41,12 +41,12 @@ const RegisterAssign = ({ handelClose, handleList, siteValue, order }) => {
 		if (data) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 			setForm(initForm);
-			handelClose();
+			handleClose();
 		}
 	}, [data]);
 	useEffect(() => {
 		if (form.inventory) {
-			handelDataInventory({ inventory: form.inventory });
+			handleDataInventory({ inventory: form.inventory });
 		}
 	}, [form.inventory]);
 	useEffect(() => {

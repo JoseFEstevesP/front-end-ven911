@@ -105,6 +105,17 @@ const UpdatePurchase = ({
 				/>
 				<Input
 					className='register__input'
+					iconName={'number'}
+					name={'orderNumber'}
+					label={system.component.form.label.orderNumber}
+					placeholder={system.component.form.placeholder.orderNumber}
+					type='number'
+					onChange={handleChange}
+					value={form.orderNumber}
+					error={errors.orderNumber}
+				/>
+				<Input
+					className='register__input'
 					iconName={'bs'}
 					name={'value'}
 					type='number'
@@ -146,17 +157,6 @@ const UpdatePurchase = ({
 					onChange={handleChange}
 					value={form.warranty}
 					error={errors.warranty}
-				/>
-				<Input
-					className='register__input'
-					iconName={'number'}
-					name={'orderNumber'}
-					label={system.component.form.label.orderNumber}
-					placeholder={system.component.form.placeholder.orderNumber}
-					type='number'
-					onChange={handleChange}
-					value={form.orderNumber}
-					error={errors.orderNumber}
 				/>
 				<Input
 					className='register__input'

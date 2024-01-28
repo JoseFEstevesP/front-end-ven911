@@ -89,6 +89,17 @@ const RegisterPurchase = ({ handleClose, handleList, siteValue, order }) => {
 				/>
 				<Input
 					className='register__input'
+					iconName={'number'}
+					name={'orderNumber'}
+					label={system.component.form.label.orderNumber}
+					placeholder={system.component.form.placeholder.orderNumber}
+					type='number'
+					onChange={handleChange}
+					value={form.orderNumber}
+					error={errors.orderNumber}
+				/>
+				<Input
+					className='register__input'
 					iconName={'bs'}
 					name={'value'}
 					type='number'
@@ -130,17 +141,6 @@ const RegisterPurchase = ({ handleClose, handleList, siteValue, order }) => {
 					onChange={handleChange}
 					value={form.warranty}
 					error={errors.warranty}
-				/>
-				<Input
-					className='register__input'
-					iconName={'number'}
-					name={'orderNumber'}
-					label={system.component.form.label.orderNumber}
-					placeholder={system.component.form.placeholder.orderNumber}
-					type='number'
-					onChange={handleChange}
-					value={form.orderNumber}
-					error={errors.orderNumber}
 				/>
 				<Input
 					className='register__input'

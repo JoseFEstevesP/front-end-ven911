@@ -55,11 +55,11 @@ const TableDataPurchase = ({
 			<Cell>{data.brand}</Cell>
 			<Cell>{data.model}</Cell>
 			<Cell>{data.dateOfPurchase}</Cell>
+			<Cell>{data.orderNumber}</Cell>
 			<Cell>{data.value} BS</Cell>
 			<Cell>{data.quantity}</Cell>
 			<Cell>{data.supplier}</Cell>
 			<Cell>{data.warranty}</Cell>
-			<Cell>{data.orderNumber}</Cell>
 			<Cell>{data.location}</Cell>
 			{(validatePermissions({ per: permissions.deletePurchase }) ||
 				validatePermissions({ per: permissions.updatePurchase })) && (

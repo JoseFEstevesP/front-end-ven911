@@ -2,36 +2,45 @@ import useGet from './useGet';
 
 const useLits = ({ url }) => {
 	const { handleFetch, data, setData, error } = useGet();
+
 	const handleList = ({
 		page = 1,
 		limit = 10,
 		uidSite,
 		orderProperty = 'name',
+		status = '1',
 		order = 'ASC',
 	}) => {
-		handleFetch({
-			url: `${url}${page ? `?page=${page}` : ''}${
-				limit ? `&limit=${limit}` : ''
-			}${
-				uidSite ? `&uidSite=${uidSite}` : ''
-			}&orderProperty=${orderProperty}&order=${order}`,
+		const params = new URLSearchParams({
+			page,
+			limit,
+			uidSite,
+			orderProperty,
+			order,
+			status,
 		});
+		const urlWithParams = `${url}?${params}`;
+		handleFetch({ url: urlWithParams });
 	};
-	const nex = ({ orderProperty = 'name' }) => {
-		handleList({ page: data?.nextPage, orderProperty });
+
+	const next = ({ orderProperty = 'name' }) => {
+		handleList({ page: data?.nextPage, orderProperty, status });
 	};
-	const prev = ({ orderProperty }) => {
-		handleList({ page: data?.previousPage, orderProperty });
+
+	const previous = ({ orderProperty = 'name' }) => {
+		handleList({ page: data?.previousPage, orderProperty, status });
 	};
+
 	return {
 		data,
 		setData,
 		handleList,
-		nex,
-		prev,
+		next,
+		previous,
 		error,
 		dataNext: data?.nextPage,
 		dataPrev: data?.previousPage,
 	};
 };
+
 export default useLits;

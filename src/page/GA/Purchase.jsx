@@ -28,11 +28,11 @@ const heads = [
 	system.component.form.label.brand,
 	system.component.form.label.model,
 	system.component.form.label.dateOfPurchase,
+	system.component.form.label.orderNumber,
 	system.component.form.label.value,
 	system.component.form.label.quantity,
 	system.component.form.label.supplier,
 	system.component.form.label.warranty,
-	system.component.form.label.orderNumber,
 	system.component.form.label.location,
 	system.component.form.label.action,
 ];
@@ -42,11 +42,11 @@ const headsOfAction = [
 	system.component.form.label.brand,
 	system.component.form.label.model,
 	system.component.form.label.dateOfPurchase,
+	system.component.form.label.orderNumber,
 	system.component.form.label.value,
 	system.component.form.label.quantity,
 	system.component.form.label.supplier,
 	system.component.form.label.warranty,
-	system.component.form.label.orderNumber,
 	system.component.form.label.location,
 ];
 const url =
@@ -221,7 +221,7 @@ const Purchase = () => {
 							className='btnStyle'
 							handleClick={handleOpenRegister}
 						/>
-					)}{' '}
+					)}
 					{validatePermissions({ per: permissions.pdfPurchase }) && (
 						<Link className='btnStyle page__link' to='/ga/pdf/purchase'>
 							PDF <Icons iconName={'pdf'} />

@@ -17,7 +17,7 @@ import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
 const heads = [
@@ -34,8 +34,10 @@ const url =
 	system.routeApi.site.primary +
 	system.routeApi.site.list;
 const Site = () => {
-	const { validatePermissions } = useValidatePermissions();
-	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
+	const { validate } = useValidate();
+	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
+		url,
+	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
@@ -59,12 +61,12 @@ const Site = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readSite })) {
+		if (validate({ per: permissions.readSite })) {
 			handleList({});
 		}
 	}, []);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readSite })) {
+		if (validate({ per: permissions.readSite })) {
 			handleList({ orderProperty: order });
 		}
 		if (searchSubmit) {
@@ -75,7 +77,7 @@ const Site = () => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readSite }) && (
+					validate({ per: permissions.readSite }) && (
 						<TableDataSite
 							key={item.uid}
 							data={item}
@@ -88,7 +90,7 @@ const Site = () => {
 		} else {
 			return data?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readSite }) && (
+					validate({ per: permissions.readSite }) && (
 						<TableDataSite
 							key={item.uid}
 							data={item}
@@ -122,12 +124,12 @@ const Site = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prev({ orderProperty: order })}
+						handleClick={() => previous({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nex({ orderProperty: order })}
+						handleClick={() => next({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -141,16 +143,16 @@ const Site = () => {
 		dataNextSearch,
 		dataPrev,
 		dataPrevSearch,
-		nex,
+		next,
 		nexSearch,
-		prev,
+		previous,
 		prevSearch,
 		search,
 	]);
 	const handleSearchComponent = e => handleSearch({ e, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: permissions.createSite }) && (
+			{validate({ per: permissions.createSite }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterSite
 						order={order}
@@ -159,7 +161,7 @@ const Site = () => {
 					/>
 				</Modal>
 			)}
-			{validatePermissions({ per: permissions.updateSite }) && newData && (
+			{validate({ per: permissions.updateSite }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateSite
 						order={order}
@@ -171,7 +173,7 @@ const Site = () => {
 			)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: permissions.createSite }) && (
+					{validate({ per: permissions.createSite }) && (
 						<Btn
 							text={'Registrar Sede'}
 							nameIcon={'building'}
@@ -179,18 +181,18 @@ const Site = () => {
 							handleClick={handleOpenRegister}
 						/>
 					)}
-					{validatePermissions({ per: permissions.user }) && (
+					{validate({ per: permissions.user }) && (
 						<Link to='/ga/user' className='btnStyle page__link'>
 							Ir a usuarios <Icons iconName={'user'} />
 						</Link>
 					)}
-					{validatePermissions({ per: permissions.pdfSite }) && (
+					{validate({ per: permissions.pdfSite }) && (
 						<Link className='btnStyle page__link' to='/ga/pdf/site'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}
 				</div>
-				{validatePermissions({ per: permissions.readSite }) && (
+				{validate({ per: permissions.readSite }) && (
 					<div className='page__options'>
 						<Select
 							className='page__input--filter'
@@ -208,11 +210,11 @@ const Site = () => {
 						/>
 					</div>
 				)}
-				{validatePermissions({ per: permissions.readSite }) && (
+				{validate({ per: permissions.readSite }) && (
 					<Table
 						heads={
-							validatePermissions({ per: permissions.deleteSite }) ||
-							validatePermissions({ per: permissions.updateSite })
+							validate({ per: permissions.deleteSite }) ||
+							validate({ per: permissions.updateSite })
 								? heads
 								: headsOfAction
 						}

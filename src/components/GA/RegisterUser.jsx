@@ -3,7 +3,7 @@ import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useGet from '../../hooks/useGet';
 import useRegister from '../../hooks/useRegister';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
@@ -25,7 +25,7 @@ const RegisterUser = ({
 	siteValue,
 	order,
 }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -130,7 +130,7 @@ const RegisterUser = ({
 					error={errors.uidRol}
 					data={dataRol?.map(item => ({ value: item.uid, label: item.name }))}
 				/>
-				{validatePermissions({ per: permissions.site }) && (
+				{validate({ per: permissions.site }) && (
 					<Select
 						className='register__input'
 						label={system.component.form.label.site}

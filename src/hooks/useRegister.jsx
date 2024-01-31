@@ -41,7 +41,6 @@ const useRegister = ({ initForm, url }) => {
 			}
 			setErrors(errors);
 			setMsg({ ...error[0], type: true });
-			console.log('useEffect -> errors:', errors);
 		}
 	}, [error, setMsg, initForm]);
 

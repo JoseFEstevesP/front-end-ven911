@@ -17,7 +17,7 @@ import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 
 const heads = [
 	system.component.form.label.name,
@@ -33,8 +33,10 @@ const url =
 	system.routeApi.rol.primary +
 	system.routeApi.rol.list;
 const Rol = () => {
-	const { validatePermissions } = useValidatePermissions();
-	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
+	const { validate } = useValidate();
+	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
+		url,
+	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
@@ -58,12 +60,12 @@ const Rol = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readRol })) {
+		if (validate({ per: permissions.readRol })) {
 			handleList({});
 		}
 	}, []);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readRol })) {
+		if (validate({ per: permissions.readRol })) {
 			handleList({ orderProperty: order });
 		}
 		if (searchSubmit) {
@@ -74,7 +76,7 @@ const Rol = () => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readRol }) && (
+					validate({ per: permissions.readRol }) && (
 						<TableDataRol
 							key={item.uid}
 							data={item}
@@ -87,7 +89,7 @@ const Rol = () => {
 		} else {
 			return data?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readRol }) && (
+					validate({ per: permissions.readRol }) && (
 						<TableDataRol
 							key={item.uid}
 							data={item}
@@ -121,12 +123,12 @@ const Rol = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prev({ orderProperty: order })}
+						handleClick={() => previous({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nex({ orderProperty: order })}
+						handleClick={() => next({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -140,16 +142,16 @@ const Rol = () => {
 		dataNextSearch,
 		dataPrev,
 		dataPrevSearch,
-		nex,
+		next,
 		nexSearch,
-		prev,
+		previous,
 		prevSearch,
 		search,
 	]);
 	const handleSearchComponent = e => handleSearch({ e, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: permissions.createRol }) && (
+			{validate({ per: permissions.createRol }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterRol
 						order={order}
@@ -158,7 +160,7 @@ const Rol = () => {
 					/>
 				</Modal>
 			)}
-			{validatePermissions({ per: permissions.updateRol }) && newData && (
+			{validate({ per: permissions.updateRol }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateRol
 						order={order}
@@ -170,7 +172,7 @@ const Rol = () => {
 			)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: permissions.createRol }) && (
+					{validate({ per: permissions.createRol }) && (
 						<Btn
 							text={'Crear Rol'}
 							nameIcon={'user_add'}
@@ -178,18 +180,18 @@ const Rol = () => {
 							handleClick={handleOpenRegister}
 						/>
 					)}
-					{validatePermissions({ per: permissions.user }) && (
+					{validate({ per: permissions.user }) && (
 						<Link to='/ga/user' className='btnStyle page__link'>
 							Ir a usuario <Icons iconName={'user'} />
 						</Link>
 					)}
-					{validatePermissions({ per: permissions.pdfRol }) && (
+					{validate({ per: permissions.pdfRol }) && (
 						<Link className='btnStyle page__link' to='/ga/pdf/rol'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}
 				</div>
-				{validatePermissions({ per: permissions.readRol }) && (
+				{validate({ per: permissions.readRol }) && (
 					<div className='page__options'>
 						<Select
 							className='page__input--filter'
@@ -207,11 +209,11 @@ const Rol = () => {
 						/>
 					</div>
 				)}
-				{validatePermissions({ per: permissions.readRol }) && (
+				{validate({ per: permissions.readRol }) && (
 					<Table
 						heads={
-							validatePermissions({ per: permissions.deleteRol }) ||
-							validatePermissions({ per: permissions.updateRol })
+							validate({ per: permissions.deleteRol }) ||
+							validate({ per: permissions.updateRol })
 								? heads
 								: headsOfAction
 						}

@@ -440,3 +440,8 @@ export const system = {
 		pdfVehicle: 'PDF_VEHICLE',
 	},
 };
+
+export const filterText = {
+	active: '1',
+	inactive: '0',
+};

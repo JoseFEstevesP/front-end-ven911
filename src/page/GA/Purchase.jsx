@@ -19,7 +19,7 @@ import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
 const heads = [
@@ -54,9 +54,11 @@ const url =
 	system.routeApi.purchase.primary +
 	system.routeApi.purchase.list;
 const Purchase = () => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const { site } = useContext(ContextSite);
-	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
+	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
+		url,
+	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
@@ -86,10 +88,10 @@ const Purchase = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readPurchase })) {
+		if (validate({ per: permissions.readPurchase })) {
 			handleList({ orderProperty: order });
 			handleFetchSite({
-				url: validatePermissions({ per: permissions.site })
+				url: validate({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
 					  system.routeApi.site.lisOfLimit
@@ -101,7 +103,7 @@ const Purchase = () => {
 		}
 	}, []);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readPurchase })) {
+		if (validate({ per: permissions.readPurchase })) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 		}
 		if (searchSubmit) {
@@ -112,7 +114,7 @@ const Purchase = () => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readPurchase }) && (
+					validate({ per: permissions.readPurchase }) && (
 						<TableDataPurchase
 							key={item.uid}
 							order={order}
@@ -126,7 +128,7 @@ const Purchase = () => {
 		} else {
 			return data?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readPurchase }) && (
+					validate({ per: permissions.readPurchase }) && (
 						<TableDataPurchase
 							key={item.uid}
 							order={order}
@@ -161,12 +163,12 @@ const Purchase = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prev({ orderProperty: order })}
+						handleClick={() => previous({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nex({ orderProperty: order })}
+						handleClick={() => next({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -180,9 +182,9 @@ const Purchase = () => {
 		dataNextSearch,
 		dataPrev,
 		dataPrevSearch,
-		nex,
+		next,
 		nexSearch,
-		prev,
+		previous,
 		prevSearch,
 		search,
 	]);
@@ -190,7 +192,7 @@ const Purchase = () => {
 		handleSearch({ e, uidSite: siteValue, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: permissions.createPurchase }) && (
+			{validate({ per: permissions.createPurchase }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterPurchase
 						order={order}
@@ -200,7 +202,7 @@ const Purchase = () => {
 					/>
 				</Modal>
 			)}
-			{validatePermissions({ per: permissions.updatePurchase }) && newData && (
+			{validate({ per: permissions.updatePurchase }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdatePurchase
 						order={order}
@@ -214,7 +216,7 @@ const Purchase = () => {
 			)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: permissions.createPurchase }) && (
+					{validate({ per: permissions.createPurchase }) && (
 						<Btn
 							text={'Registrar Compra'}
 							nameIcon={'box'}
@@ -222,13 +224,13 @@ const Purchase = () => {
 							handleClick={handleOpenRegister}
 						/>
 					)}
-					{validatePermissions({ per: permissions.pdfPurchase }) && (
+					{validate({ per: permissions.pdfPurchase }) && (
 						<Link className='btnStyle page__link' to='/ga/pdf/purchase'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}
 				</div>
-				{validatePermissions({ per: permissions.readPurchase }) && (
+				{validate({ per: permissions.readPurchase }) && (
 					<div className='page__options'>
 						<Select
 							className='page__input'
@@ -237,7 +239,7 @@ const Purchase = () => {
 							value={siteValue}
 							onChange={handleChangeSite}
 							data={
-								validatePermissions({ per: permissions.site })
+								validate({ per: permissions.site })
 									? dataSite?.map(item => ({
 											value: item.uid,
 											label: item.name,
@@ -245,7 +247,7 @@ const Purchase = () => {
 									: [{ value: dataSite?.uid, label: dataSite?.name }]
 							}
 							valueDefault={site}
-							disabled={validatePermissions({ per: permissions.site })}
+							disabled={validate({ per: permissions.site })}
 						/>
 						<Select
 							className='page__input--filter'
@@ -263,11 +265,11 @@ const Purchase = () => {
 						/>
 					</div>
 				)}
-				{validatePermissions({ per: permissions.readPurchase }) && (
+				{validate({ per: permissions.readPurchase }) && (
 					<Table
 						heads={
-							validatePermissions({ per: permissions.deletePurchase }) &&
-							validatePermissions({ per: permissions.updatePurchase })
+							validate({ per: permissions.deletePurchase }) &&
+							validate({ per: permissions.updatePurchase })
 								? heads
 								: headsOfAction
 						}

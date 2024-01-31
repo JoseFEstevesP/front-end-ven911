@@ -19,7 +19,7 @@ import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
 const heads = [
@@ -50,9 +50,11 @@ const url =
 	system.routeApi.consumables.primary +
 	system.routeApi.consumables.list;
 const Consumables = () => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const { site } = useContext(ContextSite);
-	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
+	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
+		url,
+	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
@@ -82,10 +84,10 @@ const Consumables = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readConsumables })) {
+		if (validate({ per: permissions.readConsumables })) {
 			handleList({ orderProperty: order });
 			handleFetchSite({
-				url: validatePermissions({ per: permissions.site })
+				url: validate({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
 					  system.routeApi.site.lisOfLimit
@@ -97,7 +99,7 @@ const Consumables = () => {
 		}
 	}, []);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readConsumables })) {
+		if (validate({ per: permissions.readConsumables })) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 		}
 		if (searchSubmit) {
@@ -108,7 +110,7 @@ const Consumables = () => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readConsumables }) && (
+					validate({ per: permissions.readConsumables }) && (
 						<TableDataConsumables
 							key={item.uid}
 							order={order}
@@ -122,7 +124,7 @@ const Consumables = () => {
 		} else {
 			return data?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readConsumables }) && (
+					validate({ per: permissions.readConsumables }) && (
 						<TableDataConsumables
 							key={item.uid}
 							order={order}
@@ -157,12 +159,12 @@ const Consumables = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prev({ orderProperty: order })}
+						handleClick={() => previous({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nex({ orderProperty: order })}
+						handleClick={() => next({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -176,9 +178,9 @@ const Consumables = () => {
 		dataNextSearch,
 		dataPrev,
 		dataPrevSearch,
-		nex,
+		next,
 		nexSearch,
-		prev,
+		previous,
 		prevSearch,
 		search,
 	]);
@@ -186,7 +188,7 @@ const Consumables = () => {
 		handleSearch({ e, uidSite: siteValue, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: permissions.createConsumables }) && (
+			{validate({ per: permissions.createConsumables }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterConsumables
 						order={order}
@@ -196,22 +198,21 @@ const Consumables = () => {
 					/>
 				</Modal>
 			)}
-			{validatePermissions({ per: permissions.updateConsumables }) &&
-				newData && (
-					<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
-						<UpdateConsumables
-							order={order}
-							siteValue={siteValue}
-							newData={newData}
-							handleList={handleList}
-							isOpen={isOpenUpdate}
-							handleClose={handleCloseUpdate}
-						/>
-					</Modal>
-				)}
+			{validate({ per: permissions.updateConsumables }) && newData && (
+				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
+					<UpdateConsumables
+						order={order}
+						siteValue={siteValue}
+						newData={newData}
+						handleList={handleList}
+						isOpen={isOpenUpdate}
+						handleClose={handleCloseUpdate}
+					/>
+				</Modal>
+			)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: permissions.createConsumables }) && (
+					{validate({ per: permissions.createConsumables }) && (
 						<Btn
 							text={'Registrar Consumible'}
 							nameIcon={'paperclip'}
@@ -219,13 +220,13 @@ const Consumables = () => {
 							handleClick={handleOpenRegister}
 						/>
 					)}
-					{validatePermissions({ per: permissions.pdfConsumables }) && (
+					{validate({ per: permissions.pdfConsumables }) && (
 						<Link className='btnStyle page__link' to='/ga/pdf/consumables'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}
 				</div>
-				{validatePermissions({ per: permissions.readConsumables }) && (
+				{validate({ per: permissions.readConsumables }) && (
 					<div className='page__options'>
 						<Select
 							className='page__input'
@@ -234,7 +235,7 @@ const Consumables = () => {
 							value={siteValue}
 							onChange={handleChangeSite}
 							data={
-								validatePermissions({ per: permissions.site })
+								validate({ per: permissions.site })
 									? dataSite?.map(item => ({
 											value: item.uid,
 											label: item.name,
@@ -242,7 +243,7 @@ const Consumables = () => {
 									: [{ value: dataSite?.uid, label: dataSite?.name }]
 							}
 							valueDefault={site}
-							disabled={validatePermissions({ per: permissions.site })}
+							disabled={validate({ per: permissions.site })}
 						/>
 						<Select
 							className='page__input--filter'
@@ -260,11 +261,11 @@ const Consumables = () => {
 						/>
 					</div>
 				)}
-				{validatePermissions({ per: permissions.readConsumables }) && (
+				{validate({ per: permissions.readConsumables }) && (
 					<Table
 						heads={
-							validatePermissions({ per: permissions.deleteConsumables }) ||
-							validatePermissions({ per: permissions.updateConsumables })
+							validate({ per: permissions.deleteConsumables }) ||
+							validate({ per: permissions.updateConsumables })
 								? heads
 								: headsOfAction
 						}

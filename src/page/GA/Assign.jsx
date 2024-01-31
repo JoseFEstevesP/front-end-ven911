@@ -19,7 +19,7 @@ import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
 const heads = [
@@ -46,9 +46,11 @@ const url =
 	system.routeApi.assign.primary +
 	system.routeApi.assign.list;
 const Assign = () => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const { site } = useContext(ContextSite);
-	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
+	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
+		url,
+	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
@@ -78,10 +80,10 @@ const Assign = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readAssign })) {
+		if (validate({ per: permissions.readAssign })) {
 			handleList({ orderProperty: order });
 			handleFetchSite({
-				url: validatePermissions({ per: permissions.site })
+				url: validate({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
 					  system.routeApi.site.lisOfLimit
@@ -93,7 +95,7 @@ const Assign = () => {
 		}
 	}, []);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readAssign })) {
+		if (validate({ per: permissions.readAssign })) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 		}
 		if (searchSubmit) {
@@ -104,7 +106,7 @@ const Assign = () => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readAssign }) && (
+					validate({ per: permissions.readAssign }) && (
 						<TableDataAssign
 							key={item.uid}
 							order={order}
@@ -118,7 +120,7 @@ const Assign = () => {
 		} else {
 			return data?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readAssign }) && (
+					validate({ per: permissions.readAssign }) && (
 						<TableDataAssign
 							key={item.uid}
 							order={order}
@@ -153,12 +155,12 @@ const Assign = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prev({ orderProperty: order })}
+						handleClick={() => previous({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nex({ orderProperty: order })}
+						handleClick={() => next({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -172,9 +174,9 @@ const Assign = () => {
 		dataNextSearch,
 		dataPrev,
 		dataPrevSearch,
-		nex,
+		next,
 		nexSearch,
-		prev,
+		previous,
 		prevSearch,
 		search,
 	]);
@@ -182,7 +184,7 @@ const Assign = () => {
 		handleSearch({ e, uidSite: siteValue, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: permissions.createAssign }) && (
+			{validate({ per: permissions.createAssign }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterAssign
 						order={order}
@@ -192,7 +194,7 @@ const Assign = () => {
 					/>
 				</Modal>
 			)}
-			{validatePermissions({ per: permissions.updateAssign }) && newData && (
+			{validate({ per: permissions.updateAssign }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateAssign
 						order={order}
@@ -206,7 +208,7 @@ const Assign = () => {
 			)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: permissions.createAssign }) && (
+					{validate({ per: permissions.createAssign }) && (
 						<Btn
 							text={'Asignar'}
 							nameIcon={'assignment'}
@@ -214,13 +216,13 @@ const Assign = () => {
 							handleClick={handleOpenRegister}
 						/>
 					)}
-					{validatePermissions({ per: permissions.pdfAssign }) && (
+					{validate({ per: permissions.pdfAssign }) && (
 						<Link className='btnStyle page__link' to='/ga/pdf/assign'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}
 				</div>
-				{validatePermissions({ per: permissions.readAssign }) && (
+				{validate({ per: permissions.readAssign }) && (
 					<div className='page__options'>
 						<Select
 							className='page__input'
@@ -229,7 +231,7 @@ const Assign = () => {
 							value={siteValue}
 							onChange={handleChangeSite}
 							data={
-								validatePermissions({ per: permissions.site })
+								validate({ per: permissions.site })
 									? dataSite?.map(item => ({
 											value: item.uid,
 											label: item.name,
@@ -237,7 +239,7 @@ const Assign = () => {
 									: [{ value: dataSite?.uid, label: dataSite?.name }]
 							}
 							valueDefault={site}
-							disabled={validatePermissions({ per: permissions.site })}
+							disabled={validate({ per: permissions.site })}
 						/>
 						<Select
 							className='page__input--filter'
@@ -255,11 +257,11 @@ const Assign = () => {
 						/>
 					</div>
 				)}
-				{validatePermissions({ per: permissions.readAssign }) && (
+				{validate({ per: permissions.readAssign }) && (
 					<Table
 						heads={
-							validatePermissions({ per: permissions.deleteAssign }) ||
-							validatePermissions({ per: permissions.updateAssign })
+							validate({ per: permissions.deleteAssign }) ||
+							validate({ per: permissions.updateAssign })
 								? heads
 								: headsOfAction
 						}

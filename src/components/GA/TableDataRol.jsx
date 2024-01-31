@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
 
 const TableDataRol = ({ data, handleList, setNewData, handleOpenUpdate }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const [close, SetClose] = useState(null);
 	const { handleDelete, data: dataDelete } = useDelete({
 		url:
@@ -37,11 +37,11 @@ const TableDataRol = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 		<TableCell>
 			<Cell>{data.name}</Cell>
 			<Cell>{data.permissions}</Cell>
-			{(validatePermissions({ per: permissions.deleteRol }) ||
-				validatePermissions({ per: permissions.updateRol })) && (
+			{(validate({ per: permissions.deleteRol }) ||
+				validate({ per: permissions.updateRol })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: permissions.deleteRol }) && (
+						{validate({ per: permissions.deleteRol }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'delete'}
@@ -50,7 +50,7 @@ const TableDataRol = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 								/>
 							</ActionMenuItem>
 						)}
-						{validatePermissions({ per: permissions.updateRol }) && (
+						{validate({ per: permissions.updateRol }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'edit'}

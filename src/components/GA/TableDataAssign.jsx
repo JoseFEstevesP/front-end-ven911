@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
@@ -20,7 +20,7 @@ const TableDataAssign = ({
 	setNewData,
 	handleOpenUpdate,
 }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const [close, SetClose] = useState(null);
 	const { handleDelete, data: dataDelete } = useDelete({
 		url:
@@ -58,11 +58,11 @@ const TableDataAssign = ({
 			<Cell>{data.quantity}</Cell>
 			<Cell>{data.description}</Cell>
 			<Cell>{data.remarks}</Cell>
-			{(validatePermissions({ per: permissions.deleteAssign }) ||
-				validatePermissions({ per: permissions.updateAssign })) && (
+			{(validate({ per: permissions.deleteAssign }) ||
+				validate({ per: permissions.updateAssign })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: permissions.deleteAssign }) && (
+						{validate({ per: permissions.deleteAssign }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'delete'}
@@ -71,7 +71,7 @@ const TableDataAssign = ({
 								/>
 							</ActionMenuItem>
 						)}
-						{validatePermissions({ per: permissions.updateAssign }) && (
+						{validate({ per: permissions.updateAssign }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'edit'}

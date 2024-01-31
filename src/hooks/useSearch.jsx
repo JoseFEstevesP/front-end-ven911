@@ -19,29 +19,36 @@ const useSearch = ({ url }) => {
 		limit = 10,
 		uidSite,
 		orderProperty = 'name',
+		status = '1',
 		order = 'ASC',
 	}) => {
 		e && e.preventDefault();
 		setSearchSubmit(true);
-		handleFetch({
-			url: `${url}/${search}${page ? `?page=${page}` : ''}${
-				limit ? `&limit=${limit}` : ''
-			}${
-				uidSite ? `&uidSite=${uidSite}` : ''
-			}&orderProperty=${orderProperty}&order=${order}`,
+		const params = new URLSearchParams({
+			page,
+			limit,
+			uidSite,
+			orderProperty,
+			order,
+			status,
 		});
+		const urlWithParams = `${url}?${params}`;
+		handleFetch({ url: urlWithParams });
 	};
-	const nex = ({ orderProperty = 'name' }) => {
-		handleSearch({ page: data?.nextPage, orderProperty });
+
+	const next = ({ orderProperty = 'name' }) => {
+		handleSearch({ page: data?.nextPage, orderProperty, status });
 	};
-	const prev = ({ orderProperty }) => {
-		handleSearch({ page: data?.previousPage, orderProperty });
+
+	const previous = ({ orderProperty = 'name' }) => {
+		handleSearch({ page: data?.previousPage, orderProperty, status });
 	};
+
 	return {
 		data,
 		handleSearch,
-		nex,
-		prev,
+		next,
+		previous,
 		error,
 		dataNext: data?.nextPage,
 		dataPrev: data?.previousPage,

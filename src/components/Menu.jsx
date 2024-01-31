@@ -4,13 +4,13 @@ import { ContextToken } from '../context/TokenContext';
 import { permissions } from '../data/dataPermissions';
 import { system } from '../data/system';
 import useExit from '../hooks/useExit';
-import useValidatePermissions from '../hooks/useValidatePermissions';
+import useValidate from '../hooks/useValidate';
 import Btn from './Btn';
 import Icons from './Icons';
 import Theme from './Theme';
 import './style/menu.css';
 const Menu = ({ children, className, route }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const menu = useRef(null);
 	const bar = useRef(null);
 	const profile = useRef(null);
@@ -56,7 +56,7 @@ const Menu = ({ children, className, route }) => {
 									handleClick={handleProfile}
 								/>
 								<ul className='menu__profileAndExit' ref={profile}>
-									{validatePermissions({ per: permissions.profile }) && (
+									{validate({ per: permissions.profile }) && (
 										<li className='menu__profileAndExitItem'>
 											<NavLink
 												to={route + system.routeApi.user.profile}

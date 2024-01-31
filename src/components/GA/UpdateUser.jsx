@@ -5,7 +5,7 @@ import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useGet from '../../hooks/useGet';
 import useUpdate from '../../hooks/useUpdate';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import Btn from '../Btn';
 import Input from '../Input';
 import Select from '../Select';
@@ -27,7 +27,7 @@ const UpdateUser = ({
 	siteValue,
 	order,
 }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const { site } = useContext(ContextSite);
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
@@ -61,7 +61,7 @@ const UpdateUser = ({
 					system.routeApi.rol.lisOfLimit,
 			});
 			handleFetchSite({
-				url: validatePermissions({ per: permissions.site })
+				url: validate({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
 					  system.routeApi.site.lisOfLimit

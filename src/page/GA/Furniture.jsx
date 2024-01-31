@@ -19,7 +19,7 @@ import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
 const heads = [
@@ -54,9 +54,11 @@ const url =
 	system.routeApi.furniture.primary +
 	system.routeApi.furniture.list;
 const Furniture = () => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const { site } = useContext(ContextSite);
-	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
+	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
+		url,
+	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
@@ -86,10 +88,10 @@ const Furniture = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readFurniture })) {
+		if (validate({ per: permissions.readFurniture })) {
 			handleList({ orderProperty: order });
 			handleFetchSite({
-				url: validatePermissions({ per: permissions.site })
+				url: validate({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
 					  system.routeApi.site.lisOfLimit
@@ -101,7 +103,7 @@ const Furniture = () => {
 		}
 	}, []);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readFurniture })) {
+		if (validate({ per: permissions.readFurniture })) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 		}
 		if (searchSubmit) {
@@ -112,7 +114,7 @@ const Furniture = () => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readFurniture }) && (
+					validate({ per: permissions.readFurniture }) && (
 						<TableDataFurniture
 							key={item.uid}
 							order={order}
@@ -126,7 +128,7 @@ const Furniture = () => {
 		} else {
 			return data?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readFurniture }) && (
+					validate({ per: permissions.readFurniture }) && (
 						<TableDataFurniture
 							key={item.uid}
 							order={order}
@@ -161,12 +163,12 @@ const Furniture = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prev({ orderProperty: order })}
+						handleClick={() => previous({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nex({ orderProperty: order })}
+						handleClick={() => next({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -180,9 +182,9 @@ const Furniture = () => {
 		dataNextSearch,
 		dataPrev,
 		dataPrevSearch,
-		nex,
+		next,
 		nexSearch,
-		prev,
+		previous,
 		prevSearch,
 		search,
 	]);
@@ -190,7 +192,7 @@ const Furniture = () => {
 		handleSearch({ e, uidSite: siteValue, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: permissions.createFurniture }) && (
+			{validate({ per: permissions.createFurniture }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterFurniture
 						order={order}
@@ -200,7 +202,7 @@ const Furniture = () => {
 					/>
 				</Modal>
 			)}
-			{validatePermissions({ per: permissions.updateFurniture }) && newData && (
+			{validate({ per: permissions.updateFurniture }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateFurniture
 						order={order}
@@ -214,7 +216,7 @@ const Furniture = () => {
 			)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: permissions.createFurniture }) && (
+					{validate({ per: permissions.createFurniture }) && (
 						<Btn
 							text={'Registrar Mobiliario'}
 							nameIcon={'furniture'}
@@ -222,13 +224,13 @@ const Furniture = () => {
 							handleClick={handleOpenRegister}
 						/>
 					)}{' '}
-					{validatePermissions({ per: permissions.pdfFurniture }) && (
+					{validate({ per: permissions.pdfFurniture }) && (
 						<Link className='btnStyle page__link' to='/ga/pdf/furniture'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}
 				</div>
-				{validatePermissions({ per: permissions.readFurniture }) && (
+				{validate({ per: permissions.readFurniture }) && (
 					<div className='page__options'>
 						<Select
 							className='page__input'
@@ -237,7 +239,7 @@ const Furniture = () => {
 							value={siteValue}
 							onChange={handleChangeSite}
 							data={
-								validatePermissions({ per: permissions.site })
+								validate({ per: permissions.site })
 									? dataSite?.map(item => ({
 											value: item.uid,
 											label: item.name,
@@ -245,7 +247,7 @@ const Furniture = () => {
 									: [{ value: dataSite?.uid, label: dataSite?.name }]
 							}
 							valueDefault={site}
-							disabled={validatePermissions({ per: permissions.site })}
+							disabled={validate({ per: permissions.site })}
 						/>
 						<Select
 							className='page__input--filter'
@@ -263,11 +265,11 @@ const Furniture = () => {
 						/>
 					</div>
 				)}
-				{validatePermissions({ per: permissions.readFurniture }) && (
+				{validate({ per: permissions.readFurniture }) && (
 					<Table
 						heads={
-							validatePermissions({ per: permissions.deleteFurniture }) ||
-							validatePermissions({ per: permissions.updateFurniture })
+							validate({ per: permissions.deleteFurniture }) ||
+							validate({ per: permissions.updateFurniture })
 								? heads
 								: headsOfAction
 						}

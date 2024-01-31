@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
@@ -15,7 +15,7 @@ const TableDataVehicle = ({
 	setNewData,
 	handleOpenUpdate,
 }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const [close, SetClose] = useState(null);
 	const { handleDelete, data: dataDelete } = useDelete({
 		url:
@@ -64,11 +64,11 @@ const TableDataVehicle = ({
 			<Cell>{data.warranty}</Cell>
 			<Cell>{data.remarks}</Cell>
 			<Cell>{data.codeBN}</Cell>
-			{(validatePermissions({ per: permissions.deleteVehicle }) ||
-				validatePermissions({ per: permissions.updateVehicle })) && (
+			{(validate({ per: permissions.deleteVehicle }) ||
+				validate({ per: permissions.updateVehicle })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: permissions.deleteVehicle }) && (
+						{validate({ per: permissions.deleteVehicle }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'delete'}
@@ -77,7 +77,7 @@ const TableDataVehicle = ({
 								/>
 							</ActionMenuItem>
 						)}
-						{validatePermissions({ per: permissions.updateVehicle }) && (
+						{validate({ per: permissions.updateVehicle }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'edit'}

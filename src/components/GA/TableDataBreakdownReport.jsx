@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
-import { permissions } from '../../data/dataPermissions';
 
 const TableDataBreakdownReport = ({
 	data,
@@ -15,7 +15,7 @@ const TableDataBreakdownReport = ({
 	setNewData,
 	handleOpenUpdate,
 }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const [close, SetClose] = useState(null);
 	const { handleDelete, data: dataDelete } = useDelete({
 		url:
@@ -55,14 +55,14 @@ const TableDataBreakdownReport = ({
 			<Cell>{data.breakdownDepartment}</Cell>
 			<Cell>{data.location}</Cell>
 			<Cell>{data.serialOrCodeBN}</Cell>
-			{((validatePermissions({ per: permissions.delete }) &&
-				validatePermissions({ per: permissions.ga })) ||
-				(validatePermissions({ per: permissions.update }) &&
-					validatePermissions({ per: permissions.ga }))) && (
+			{((validate({ per: permissions.delete }) &&
+				validate({ per: permissions.ga })) ||
+				(validate({ per: permissions.update }) &&
+					validate({ per: permissions.ga }))) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: permissions.delete }) &&
-							validatePermissions({ per: permissions.ga }) && (
+						{validate({ per: permissions.delete }) &&
+							validate({ per: permissions.ga }) && (
 								<ActionMenuItem>
 									<Btn
 										nameIcon={'delete'}
@@ -71,8 +71,8 @@ const TableDataBreakdownReport = ({
 									/>
 								</ActionMenuItem>
 							)}
-						{validatePermissions({ per: permissions.update }) &&
-							validatePermissions({ per: permissions.ga }) && (
+						{validate({ per: permissions.update }) &&
+							validate({ per: permissions.ga }) && (
 								<ActionMenuItem>
 									<Btn
 										nameIcon={'edit'}

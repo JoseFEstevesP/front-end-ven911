@@ -19,7 +19,7 @@ import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
 const heads = [
@@ -58,9 +58,11 @@ const url =
 	system.routeApi.vehicle.primary +
 	system.routeApi.vehicle.list;
 const Vehicle = () => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const { site } = useContext(ContextSite);
-	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
+	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
+		url,
+	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
@@ -90,10 +92,10 @@ const Vehicle = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readVehicle })) {
+		if (validate({ per: permissions.readVehicle })) {
 			handleList({ orderProperty: order });
 			handleFetchSite({
-				url: validatePermissions({ per: permissions.site })
+				url: validate({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
 					  system.routeApi.site.lisOfLimit
@@ -105,7 +107,7 @@ const Vehicle = () => {
 		}
 	}, []);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readVehicle })) {
+		if (validate({ per: permissions.readVehicle })) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 		}
 		if (searchSubmit) {
@@ -116,7 +118,7 @@ const Vehicle = () => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readVehicle }) && (
+					validate({ per: permissions.readVehicle }) && (
 						<TableDataVehicle
 							key={item.uid}
 							order={order}
@@ -130,7 +132,7 @@ const Vehicle = () => {
 		} else {
 			return data?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readVehicle }) && (
+					validate({ per: permissions.readVehicle }) && (
 						<TableDataVehicle
 							key={item.uid}
 							order={order}
@@ -165,12 +167,12 @@ const Vehicle = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prev({ orderProperty: order })}
+						handleClick={() => previous({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nex({ orderProperty: order })}
+						handleClick={() => next({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -184,9 +186,9 @@ const Vehicle = () => {
 		dataNextSearch,
 		dataPrev,
 		dataPrevSearch,
-		nex,
+		next,
 		nexSearch,
-		prev,
+		previous,
 		prevSearch,
 		search,
 	]);
@@ -194,7 +196,7 @@ const Vehicle = () => {
 		handleSearch({ e, uidSite: siteValue, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: permissions.createVehicle }) && (
+			{validate({ per: permissions.createVehicle }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterVehicle
 						order={order}
@@ -204,7 +206,7 @@ const Vehicle = () => {
 					/>
 				</Modal>
 			)}
-			{validatePermissions({ per: permissions.updateVehicle }) && newData && (
+			{validate({ per: permissions.updateVehicle }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateVehicle
 						order={order}
@@ -218,7 +220,7 @@ const Vehicle = () => {
 			)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: permissions.createVehicle }) && (
+					{validate({ per: permissions.createVehicle }) && (
 						<Btn
 							text={'Registrar vehículo'}
 							nameIcon={'car'}
@@ -226,13 +228,13 @@ const Vehicle = () => {
 							handleClick={handleOpenRegister}
 						/>
 					)}
-					{validatePermissions({ per: permissions.pdfVehicle }) && (
+					{validate({ per: permissions.pdfVehicle }) && (
 						<Link className='btnStyle page__link' to='/ga/pdf/vehicle'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}
 				</div>
-				{validatePermissions({ per: permissions.readVehicle }) && (
+				{validate({ per: permissions.readVehicle }) && (
 					<div className='page__options'>
 						<Select
 							className='page__input'
@@ -241,7 +243,7 @@ const Vehicle = () => {
 							value={siteValue}
 							onChange={handleChangeSite}
 							data={
-								validatePermissions({ per: permissions.site })
+								validate({ per: permissions.site })
 									? dataSite?.map(item => ({
 											value: item.uid,
 											label: item.name,
@@ -249,7 +251,7 @@ const Vehicle = () => {
 									: [{ value: dataSite?.uid, label: dataSite?.name }]
 							}
 							valueDefault={site}
-							disabled={validatePermissions({ per: permissions.site })}
+							disabled={validate({ per: permissions.site })}
 						/>
 						<Select
 							className='page__input--filter'
@@ -267,11 +269,11 @@ const Vehicle = () => {
 						/>
 					</div>
 				)}
-				{validatePermissions({ per: permissions.readVehicle }) && (
+				{validate({ per: permissions.readVehicle }) && (
 					<Table
 						heads={
-							validatePermissions({ per: permissions.deleteVehicle }) ||
-							validatePermissions({ per: permissions.updateVehicle })
+							validate({ per: permissions.deleteVehicle }) ||
+							validate({ per: permissions.updateVehicle })
 								? heads
 								: headsOfAction
 						}

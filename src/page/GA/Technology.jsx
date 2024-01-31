@@ -19,7 +19,7 @@ import useModal from '../../hooks/useModal';
 import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
 import useSite from '../../hooks/useSite';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
 const heads = [
@@ -58,9 +58,11 @@ const url =
 	system.routeApi.technology.primary +
 	system.routeApi.technology.list;
 const Technology = () => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const { site } = useContext(ContextSite);
-	const { handleList, data, nex, prev, dataNext, dataPrev } = useLits({ url });
+	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
+		url,
+	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
 	const {
@@ -90,10 +92,10 @@ const Technology = () => {
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readTechnology })) {
+		if (validate({ per: permissions.readTechnology })) {
 			handleList({ orderProperty: order });
 			handleFetchSite({
-				url: validatePermissions({ per: permissions.site })
+				url: validate({ per: permissions.site })
 					? import.meta.env.VITE_ULR_API +
 					  system.routeApi.site.primary +
 					  system.routeApi.site.lisOfLimit
@@ -105,7 +107,7 @@ const Technology = () => {
 		}
 	}, []);
 	useEffect(() => {
-		if (validatePermissions({ per: permissions.readTechnology })) {
+		if (validate({ per: permissions.readTechnology })) {
 			handleList({ uidSite: siteValue, orderProperty: order });
 		}
 		if (searchSubmit) {
@@ -116,7 +118,7 @@ const Technology = () => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readTechnology }) && (
+					validate({ per: permissions.readTechnology }) && (
 						<TableDataTechnology
 							key={item.uid}
 							order={order}
@@ -130,7 +132,7 @@ const Technology = () => {
 		} else {
 			return data?.rows?.map(
 				item =>
-					validatePermissions({ per: permissions.readTechnology }) && (
+					validate({ per: permissions.readTechnology }) && (
 						<TableDataTechnology
 							key={item.uid}
 							order={order}
@@ -165,12 +167,12 @@ const Technology = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prev({ orderProperty: order })}
+						handleClick={() => previous({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nex({ orderProperty: order })}
+						handleClick={() => next({ orderProperty: order })}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -184,9 +186,9 @@ const Technology = () => {
 		dataNextSearch,
 		dataPrev,
 		dataPrevSearch,
-		nex,
+		next,
 		nexSearch,
-		prev,
+		previous,
 		prevSearch,
 		search,
 	]);
@@ -194,7 +196,7 @@ const Technology = () => {
 		handleSearch({ e, uidSite: siteValue, orderProperty: order });
 	return (
 		<>
-			{validatePermissions({ per: permissions.createTechnology }) && (
+			{validate({ per: permissions.createTechnology }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterTechnology
 						order={order}
@@ -204,22 +206,21 @@ const Technology = () => {
 					/>
 				</Modal>
 			)}
-			{validatePermissions({ per: permissions.updateTechnology }) &&
-				newData && (
-					<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
-						<UpdateTechnology
-							order={order}
-							siteValue={siteValue}
-							newData={newData}
-							handleList={handleList}
-							isOpen={isOpenUpdate}
-							handleClose={handleCloseUpdate}
-						/>
-					</Modal>
-				)}
+			{validate({ per: permissions.updateTechnology }) && newData && (
+				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
+					<UpdateTechnology
+						order={order}
+						siteValue={siteValue}
+						newData={newData}
+						handleList={handleList}
+						isOpen={isOpenUpdate}
+						handleClose={handleCloseUpdate}
+					/>
+				</Modal>
+			)}
 			<div className='box page'>
 				<div className='page__options'>
-					{validatePermissions({ per: permissions.createTechnology }) && (
+					{validate({ per: permissions.createTechnology }) && (
 						<Btn
 							text={'Registrar Tecnologia'}
 							nameIcon={'pc'}
@@ -227,13 +228,13 @@ const Technology = () => {
 							handleClick={handleOpenRegister}
 						/>
 					)}
-					{validatePermissions({ per: permissions.pdfTechnology }) && (
+					{validate({ per: permissions.pdfTechnology }) && (
 						<Link className='btnStyle page__link' to='/ga/pdf/technology'>
 							PDF <Icons iconName={'pdf'} />
 						</Link>
 					)}
 				</div>
-				{validatePermissions({ per: permissions.readTechnology }) && (
+				{validate({ per: permissions.readTechnology }) && (
 					<div className='page__options'>
 						<Select
 							className='page__input'
@@ -242,7 +243,7 @@ const Technology = () => {
 							value={siteValue}
 							onChange={handleChangeSite}
 							data={
-								validatePermissions({ per: permissions.site })
+								validate({ per: permissions.site })
 									? dataSite?.map(item => ({
 											value: item.uid,
 											label: item.name,
@@ -250,7 +251,7 @@ const Technology = () => {
 									: [{ value: dataSite?.uid, label: dataSite?.name }]
 							}
 							valueDefault={site}
-							disabled={validatePermissions({ per: permissions.site })}
+							disabled={validate({ per: permissions.site })}
 						/>
 						<Select
 							className='page__input--filter'
@@ -268,11 +269,11 @@ const Technology = () => {
 						/>
 					</div>
 				)}
-				{validatePermissions({ per: permissions.readTechnology }) && (
+				{validate({ per: permissions.readTechnology }) && (
 					<Table
 						heads={
-							validatePermissions({ per: permissions.deleteTechnology }) &&
-							validatePermissions({ per: permissions.updateTechnology })
+							validate({ per: permissions.deleteTechnology }) &&
+							validate({ per: permissions.updateTechnology })
 								? heads
 								: headsOfAction
 						}

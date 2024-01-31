@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
@@ -15,7 +15,7 @@ const TableDataConsumables = ({
 	setNewData,
 	handleOpenUpdate,
 }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const [close, SetClose] = useState(null);
 	const { handleDelete, data: dataDelete } = useDelete({
 		url:
@@ -56,11 +56,11 @@ const TableDataConsumables = ({
 			<Cell>{data.location}</Cell>
 			<Cell>{data.dateOfAcquisition}</Cell>
 			<Cell>{data.remarks}</Cell>
-			{(validatePermissions({ per: permissions.deleteConsumables }) ||
-				validatePermissions({ per: permissions.updateConsumables })) && (
+			{(validate({ per: permissions.deleteConsumables }) ||
+				validate({ per: permissions.updateConsumables })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: permissions.deleteConsumables }) && (
+						{validate({ per: permissions.deleteConsumables }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'delete'}
@@ -69,7 +69,7 @@ const TableDataConsumables = ({
 								/>
 							</ActionMenuItem>
 						)}
-						{validatePermissions({ per: permissions.updateConsumables }) && (
+						{validate({ per: permissions.updateConsumables }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'edit'}

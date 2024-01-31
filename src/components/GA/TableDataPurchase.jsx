@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
@@ -15,7 +15,7 @@ const TableDataPurchase = ({
 	setNewData,
 	handleOpenUpdate,
 }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const [close, SetClose] = useState(null);
 	const { handleDelete, data: dataDelete } = useDelete({
 		url:
@@ -61,11 +61,11 @@ const TableDataPurchase = ({
 			<Cell>{data.supplier}</Cell>
 			<Cell>{data.warranty}</Cell>
 			<Cell>{data.location}</Cell>
-			{(validatePermissions({ per: permissions.deletePurchase }) ||
-				validatePermissions({ per: permissions.updatePurchase })) && (
+			{(validate({ per: permissions.deletePurchase }) ||
+				validate({ per: permissions.updatePurchase })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: permissions.deletePurchase }) && (
+						{validate({ per: permissions.deletePurchase }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'delete'}
@@ -74,7 +74,7 @@ const TableDataPurchase = ({
 								/>
 							</ActionMenuItem>
 						)}
-						{validatePermissions({ per: permissions.updatePurchase }) && (
+						{validate({ per: permissions.updatePurchase }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'edit'}

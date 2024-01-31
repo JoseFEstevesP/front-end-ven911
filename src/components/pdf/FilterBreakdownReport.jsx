@@ -9,7 +9,7 @@ import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useFilter from '../../hooks/useFilter';
 import useGet from '../../hooks/useGet';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import Btn from '../Btn';
 import '../GA/style/register.css';
 import Input from '../Input';
@@ -36,7 +36,7 @@ const initForm = {
 	search: '',
 };
 const FilterBreakdownReport = ({ isOpen, handleClose, handleFetch, url }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const { handleFetch: handleFetchSite, data: dataSite } = useGet();
 	const { site } = useContext(ContextSite);
 
@@ -68,7 +68,7 @@ const FilterBreakdownReport = ({ isOpen, handleClose, handleFetch, url }) => {
 		<section className='register'>
 			<h2 className='register__title'>{system.component.user.register}</h2>
 			<form onSubmit={submit} className='register__form'>
-				{validatePermissions({ per: permissions.site }) && (
+				{validate({ per: permissions.site }) && (
 					<Select
 						className='register__input'
 						label={system.component.form.label.site}

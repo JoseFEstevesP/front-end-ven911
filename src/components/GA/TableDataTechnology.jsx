@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
-import useValidatePermissions from '../../hooks/useValidatePermissions';
+import useValidate from '../../hooks/useValidate';
 import ActionMenu from '../ActionMenu';
 import ActionMenuItem from '../ActionMenuItem';
 import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
-import { permissions } from '../../data/dataPermissions';
 
 const TableDataTechnology = ({
 	data,
@@ -15,7 +15,7 @@ const TableDataTechnology = ({
 	setNewData,
 	handleOpenUpdate,
 }) => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	const [close, SetClose] = useState(null);
 	const { handleDelete, data: dataDelete } = useDelete({
 		url:
@@ -64,11 +64,11 @@ const TableDataTechnology = ({
 			<Cell>{data.warranty}</Cell>
 			<Cell>{data.remarks}</Cell>
 			<Cell>{data.codeBN}</Cell>
-			{(validatePermissions({ per: permissions.deleteTechnology }) ||
-				validatePermissions({ per: permissions.updateTechnology })) && (
+			{(validate({ per: permissions.deleteTechnology }) ||
+				validate({ per: permissions.updateTechnology })) && (
 				<Cell>
 					<ActionMenu close={close}>
-						{validatePermissions({ per: permissions.deleteTechnology }) && (
+						{validate({ per: permissions.deleteTechnology }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'delete'}
@@ -77,7 +77,7 @@ const TableDataTechnology = ({
 								/>
 							</ActionMenuItem>
 						)}
-						{validatePermissions({ per: permissions.updateTechnology }) && (
+						{validate({ per: permissions.updateTechnology }) && (
 							<ActionMenuItem>
 								<Btn
 									nameIcon={'edit'}

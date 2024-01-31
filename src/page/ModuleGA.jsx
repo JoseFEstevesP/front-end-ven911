@@ -4,7 +4,7 @@ import MenuSubItem from '../components/MenuISubItem';
 import MenuItem from '../components/MenuItem';
 import Page from '../components/Page';
 import { permissions } from '../data/dataPermissions';
-import useValidatePermissions from '../hooks/useValidatePermissions';
+import useValidate from '../hooks/useValidate';
 import Assign from './GA/Assign';
 import BreakdownReport from './GA/BreakdownReport';
 import Consumables from './GA/Consumables';
@@ -20,97 +20,97 @@ import Pdf from './Pdf';
 import Profile from './profile';
 
 const ModuleGA = () => {
-	const { validatePermissions } = useValidatePermissions();
+	const { validate } = useValidate();
 	return (
 		<Page title={'Gestión Administrativa'}>
 			<div className='ga'>
 				<Menu route={'/ga'}>
 					<MenuItem text={'Inicio'} to={'/ga'} />
-					{validatePermissions({ per: permissions.user }) && (
+					{validate({ per: permissions.user }) && (
 						<MenuItem text={'Usuario'} to={'/ga/user'} />
 					)}
-					{!validatePermissions({ per: permissions.user }) &&
-						validatePermissions({ per: permissions.rol }) && (
+					{!validate({ per: permissions.user }) &&
+						validate({ per: permissions.rol }) && (
 							<MenuItem text={'Rol'} to={'/ga/rol'} />
 						)}
-					{!validatePermissions({ per: permissions.user }) &&
-						validatePermissions({ per: permissions.site }) && (
+					{!validate({ per: permissions.user }) &&
+						validate({ per: permissions.site }) && (
 							<MenuItem text={'Site'} to={'/ga/site'} />
 						)}
-					{(validatePermissions({ per: permissions.technology }) ||
-						validatePermissions({ per: permissions.consumables }) ||
-						validatePermissions({ per: permissions.furniture }) ||
-						validatePermissions({ per: permissions.vehicle })) && (
+					{(validate({ per: permissions.technology }) ||
+						validate({ per: permissions.consumables }) ||
+						validate({ per: permissions.furniture }) ||
+						validate({ per: permissions.vehicle })) && (
 						<MenuSubItem text={'Bienes Nacionales'}>
-							{validatePermissions({ per: permissions.technology }) && (
+							{validate({ per: permissions.technology }) && (
 								<MenuItem text={'Tecnología'} to={'/ga/technology'} />
 							)}
-							{validatePermissions({ per: permissions.consumables }) && (
+							{validate({ per: permissions.consumables }) && (
 								<MenuItem text={'Consumible'} to={'/ga/consumables'} />
 							)}
-							{validatePermissions({ per: permissions.furniture }) && (
+							{validate({ per: permissions.furniture }) && (
 								<MenuItem text={'Mobiliario'} to={'/ga/furniture'} />
 							)}
-							{validatePermissions({ per: permissions.vehicle }) && (
+							{validate({ per: permissions.vehicle }) && (
 								<MenuItem text={'Vehículo'} to={'/ga/vehicle'} />
 							)}
 						</MenuSubItem>
 					)}
-					{validatePermissions({ per: permissions.breakdownReport }) && (
+					{validate({ per: permissions.breakdownReport }) && (
 						<MenuItem text={'Reporte averia'} to={'/ga/report'} />
 					)}
-					{validatePermissions({ per: permissions.purchase }) && (
+					{validate({ per: permissions.purchase }) && (
 						<MenuItem text={'Compras'} to={'/ga/purchase'} />
 					)}
-					{validatePermissions({ per: permissions.assign }) && (
+					{validate({ per: permissions.assign }) && (
 						<MenuItem text={'Asignación'} to={'/ga/assign'} />
 					)}
 				</Menu>
 				<Routes>
 					<Route path='/' element={<Init />} />
-					{validatePermissions({ per: permissions.user }) && (
+					{validate({ per: permissions.user }) && (
 						<Route path='/user' element={<User />} />
 					)}
-					{validatePermissions({ per: permissions.rol }) && (
+					{validate({ per: permissions.rol }) && (
 						<Route path='/rol' element={<Rol />} />
 					)}
-					{validatePermissions({ per: permissions.site }) && (
+					{validate({ per: permissions.site }) && (
 						<Route path='/site' element={<Site />} />
 					)}
-					{validatePermissions({ per: permissions.technology }) && (
+					{validate({ per: permissions.technology }) && (
 						<Route path='/technology' element={<Technology />} />
 					)}
-					{validatePermissions({ per: permissions.consumables }) && (
+					{validate({ per: permissions.consumables }) && (
 						<Route path='/consumables' element={<Consumables />} />
 					)}
-					{validatePermissions({ per: permissions.furniture }) && (
+					{validate({ per: permissions.furniture }) && (
 						<Route path='/furniture' element={<Furniture />} />
 					)}
-					{validatePermissions({ per: permissions.vehicle }) && (
+					{validate({ per: permissions.vehicle }) && (
 						<Route path='/vehicle' element={<Vehicle />} />
 					)}
-					{validatePermissions({ per: permissions.breakdownReport }) && (
+					{validate({ per: permissions.breakdownReport }) && (
 						<Route path='/report' element={<BreakdownReport />} />
 					)}
-					{validatePermissions({ per: permissions.purchase }) && (
+					{validate({ per: permissions.purchase }) && (
 						<Route path='/purchase' element={<Purchase />} />
 					)}
-					{validatePermissions({ per: permissions.assign }) && (
+					{validate({ per: permissions.assign }) && (
 						<Route path='/assign' element={<Assign />} />
 					)}
-					{validatePermissions({ per: permissions.profile }) && (
+					{validate({ per: permissions.profile }) && (
 						<Route path='/profile' element={<Profile />} />
 					)}
-					{/* {validatePermissions({ per: permissions.pdfAssign }) ||
-						validatePermissions({ per: permissions.pdfBreakdownReport }) ||
-						validatePermissions({ per: permissions.pdfConsumables }) ||
-						validatePermissions({ per: permissions.pdfFurniture }) ||
-						validatePermissions({ per: permissions.pdfPurchase }) ||
-						validatePermissions({ per: permissions.pdfRol }) ||
-						validatePermissions({ per: permissions.pdfSite }) ||
-						validatePermissions({ per: permissions.pdfTechnology }) ||
-						validatePermissions({ per: permissions.pdfUser }) ||
-						(validatePermissions({ per: permissions.pdfVehicle }) && ( */}
+					{/* {validate({ per: permissions.pdfAssign }) ||
+						validate({ per: permissions.pdfBreakdownReport }) ||
+						validate({ per: permissions.pdfConsumables }) ||
+						validate({ per: permissions.pdfFurniture }) ||
+						validate({ per: permissions.pdfPurchase }) ||
+						validate({ per: permissions.pdfRol }) ||
+						validate({ per: permissions.pdfSite }) ||
+						validate({ per: permissions.pdfTechnology }) ||
+						validate({ per: permissions.pdfUser }) ||
+						(validate({ per: permissions.pdfVehicle }) && ( */}
 					<Route path='/pdf/:report' element={<Pdf />} />
 					{/* ))} */}
 				</Routes>

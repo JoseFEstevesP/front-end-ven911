@@ -18,27 +18,26 @@ const initForm = {
 	uidRol: '',
 	uidSite: '',
 };
-const RegisterUser = ({
-	isOpen,
-	handleClose,
-	handleList,
-	siteValue,
-	order,
-}) => {
+const urlRol = import.meta.env.VITE_ULR_API + system.routeApi.rol.primary;
+const urlSite = import.meta.env.VITE_ULR_API + system.routeApi.site.primary;
+const urlUser = import.meta.env.VITE_ULR_API + system.routeApi.user.primary;
+
+const RegisterUser = ({ isOpen, handleClose, handleList, filter }) => {
 	const { validate } = useValidate();
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
-			url:
-				import.meta.env.VITE_ULR_API +
-				system.routeApi.user.primary +
-				system.routeApi.user.register,
+			url: urlUser + system.routeApi.user.register,
 		});
 	const { handleFetch: handleFetchRol, data: dataRol } = useGet();
 	const { handleFetch: handleFetchSite, data: dataSite } = useGet();
 	useEffect(() => {
 		if (data) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}
@@ -47,18 +46,12 @@ const RegisterUser = ({
 	useEffect(() => {
 		if (isOpen) {
 			handleFetchRol({
-				url:
-					import.meta.env.VITE_ULR_API +
-					system.routeApi.rol.primary +
-					system.routeApi.rol.lisOfLimit,
+				url: urlRol + system.routeApi.rol.lisOfLimit,
 			});
 			handleFetchSite({
-				url:
-					import.meta.env.VITE_ULR_API +
-					system.routeApi.site.primary +
-					system.routeApi.site.lisOfLimit,
+				url: urlSite + system.routeApi.site.lisOfLimit,
 			});
-			setForm({ ...form, uidSite: siteValue });
+			setForm({ ...form, uidSite: filter.site });
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isOpen]);

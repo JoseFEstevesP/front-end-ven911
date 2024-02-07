@@ -22,12 +22,7 @@ const breakdownDepartment = [
 	{ label: 'Tecnologia', value: 'tecnologia' },
 	{ label: 'Potencia', value: 'potencia' },
 ];
-const RegisterBreakdownReport = ({
-	handleClose,
-	handleList,
-	siteValue,
-	order,
-}) => {
+const RegisterBreakdownReport = ({ handleClose, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -38,7 +33,11 @@ const RegisterBreakdownReport = ({
 		});
 	useEffect(() => {
 		if (data) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter?.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}

@@ -1,40 +1,20 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
 import useValidate from '../../hooks/useValidate';
 import ActionMenu from '../ActionMenu';
-import ActionMenuItem from '../ActionMenuItem';
-import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
-const inventoryData = {
-	consumable: 'Consumibles',
-	furniture: 'Mobiliario',
-	technology: 'Tecnología',
-	vehicle: 'Vehículo',
+import OptionTable from './OptionTable';
+
+// Función para manejar la lógica de eliminación de usuario
+const handleDeleteAssign = (handleDelete, data) => {
+	return () => handleDelete({ uid: data.uid });
 };
-const TableDataAssign = ({
-	data,
-	order,
-	handleList,
-	setNewData,
-	handleOpenUpdate,
-}) => {
-	const { validate } = useValidate();
-	const [close, SetClose] = useState(null);
-	const { handleDelete, data: dataDelete } = useDelete({
-		url:
-			import.meta.env.VITE_ULR_API +
-			system.routeApi.assign.primary +
-			system.routeApi.assign.delete,
-	});
-	useEffect(() => {
-		if (dataDelete) {
-			handleList({ orderProperty: order });
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dataDelete]);
-	const handleEdit = useCallback(() => {
+
+// Función para manejar la lógica de edición de usuario
+const handleEdit = (setNewData, handleOpenUpdate, data) => {
+	return () => {
 		setNewData({
 			uid: data.uid,
 			inventory: data.inventory,
@@ -46,9 +26,39 @@ const TableDataAssign = ({
 			remarks: data.remarks,
 		});
 		handleOpenUpdate();
-		SetClose(false);
-	}, [data, handleOpenUpdate, setNewData]);
-	const handleDeleteAssign = () => handleDelete({ uid: data.uid });
+	};
+};
+
+const inventoryData = {
+	consumable: 'Consumibles',
+	furniture: 'Mobiliario',
+	technology: 'Tecnología',
+	vehicle: 'Vehículo',
+};
+const TableDataAssign = ({
+	data,
+	filter,
+	handleList,
+	setNewData,
+	handleOpenUpdate,
+}) => {
+	const { validate } = useValidate();
+	const { handleDelete, data: dataDelete } = useDelete({
+		url:
+			import.meta.env.VITE_ULR_API +
+			system.routeApi.assign.primary +
+			system.routeApi.assign.delete,
+	});
+	useEffect(() => {
+		if (dataDelete) {
+			handleList({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dataDelete]);
 	return (
 		<TableCell>
 			<Cell>{inventoryData[data?.inventory]}</Cell>
@@ -61,25 +71,12 @@ const TableDataAssign = ({
 			{(validate({ per: permissions.deleteAssign }) ||
 				validate({ per: permissions.updateAssign })) && (
 				<Cell>
-					<ActionMenu close={close}>
-						{validate({ per: permissions.deleteAssign }) && (
-							<ActionMenuItem>
-								<Btn
-									nameIcon={'delete'}
-									classIcon='icon--delete'
-									handleClick={handleDeleteAssign}
-								/>
-							</ActionMenuItem>
-						)}
-						{validate({ per: permissions.updateAssign }) && (
-							<ActionMenuItem>
-								<Btn
-									nameIcon={'edit'}
-									classIcon='icon--edit'
-									handleClick={handleEdit}
-								/>
-							</ActionMenuItem>
-						)}
+					<ActionMenu close={null}>
+						<OptionTable
+							filter={filter}
+							handleDelete={handleDeleteAssign(handleDelete, data)}
+							handleEdit={handleEdit(setNewData, handleOpenUpdate, data)}
+						/>
 					</ActionMenu>
 				</Cell>
 			)}

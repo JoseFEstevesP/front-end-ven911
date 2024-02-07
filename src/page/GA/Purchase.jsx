@@ -2,114 +2,88 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
+import Filter from '../../components/Filter';
 import RegisterPurchase from '../../components/GA/RegisterPurchase';
 import TableDataPurchase from '../../components/GA/TableDataPurchase';
 import UpdatePurchase from '../../components/GA/UpdatePurchase';
 import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
-import Select from '../../components/Select';
 import Table from '../../components/Table';
 import { ContextSite } from '../../context/SiteContext';
-import { dataOrderPurchase } from '../../data/dataOrder';
+import { dataOrderPurchase, dataStatus } from '../../data/dataOrder';
 import { permissions } from '../../data/dataPermissions';
-import { system } from '../../data/system';
+import { headsPurchase, system } from '../../data/system';
+import useGet from '../../hooks/useGet';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
-import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
-import useSite from '../../hooks/useSite';
 import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
-const heads = [
-	system.component.form.label.product,
-	system.component.form.label.serial,
-	system.component.form.label.brand,
-	system.component.form.label.model,
-	system.component.form.label.dateOfPurchase,
-	system.component.form.label.orderNumber,
-	system.component.form.label.value,
-	system.component.form.label.quantity,
-	system.component.form.label.supplier,
-	system.component.form.label.warranty,
-	system.component.form.label.location,
-	system.component.form.label.action,
-];
-const headsOfAction = [
-	system.component.form.label.product,
-	system.component.form.label.serial,
-	system.component.form.label.brand,
-	system.component.form.label.model,
-	system.component.form.label.dateOfPurchase,
-	system.component.form.label.orderNumber,
-	system.component.form.label.value,
-	system.component.form.label.quantity,
-	system.component.form.label.supplier,
-	system.component.form.label.warranty,
-	system.component.form.label.location,
-];
-const url =
-	import.meta.env.VITE_ULR_API +
-	system.routeApi.purchase.primary +
-	system.routeApi.purchase.list;
+const urlPurchase =
+	import.meta.env.VITE_ULR_API + system.routeApi.purchase.primary;
+const urlSite = import.meta.env.VITE_ULR_API + system.routeApi.site.primary;
+
 const Purchase = () => {
 	const { validate } = useValidate();
-	const { site } = useContext(ContextSite);
+	const { site: siteDefault } = useContext(ContextSite);
+	const [filter, setFilter] = useState({
+		status: dataStatus[0].value,
+		site: siteDefault,
+		order: dataOrderPurchase[0].value,
+	});
 	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
-		url,
+		url: urlPurchase + system.routeApi.purchase.list,
 	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
-	const {
-		data: dataSite,
-		siteValue,
-		handleFetch: handleFetchSite,
-		handleChange: handleChangeSite,
-	} = useSite({ site });
+	const { handleFetch, data: dataSite } = useGet();
+
 	const {
 		search,
 		handleChange: handleChangeSearch,
 		handleSearch,
 		data: dataSearch,
-		nex: nexSearch,
+		next: nexSearch,
 		dataNext: dataNextSearch,
 		dataPrev: dataPrevSearch,
-		prev: prevSearch,
+		previous: prevSearch,
 		searchSubmit,
 	} = useSearch({
-		url:
-			import.meta.env.VITE_ULR_API +
-			system.routeApi.purchase.primary +
-			system.routeApi.purchase.search,
-	});
-	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrderPurchase[0].value,
+		url: urlPurchase + system.routeApi.purchase.search,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
 		if (validate({ per: permissions.readPurchase })) {
-			handleList({ orderProperty: order });
-			handleFetchSite({
+			handleList({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
+			handleFetch({
 				url: validate({ per: permissions.site })
-					? import.meta.env.VITE_ULR_API +
-					  system.routeApi.site.primary +
-					  system.routeApi.site.lisOfLimit
-					: import.meta.env.VITE_ULR_API +
-					  system.routeApi.site.primary +
-					  system.routeApi.site.item +
-					  site,
+					? urlSite + system.routeApi.site.lisOfLimit
+					: urlSite + system.routeApi.site.item + filter?.site,
 			});
 		}
 	}, []);
 	useEffect(() => {
 		if (validate({ per: permissions.readPurchase })) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter?.status,
+			});
 		}
-		if (searchSubmit) {
-			handleSearch({ uidSite: siteValue, orderProperty: order });
+		if (validate({ per: permissions.purchase }) && searchSubmit) {
+			handleSearch({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
 		}
-	}, [siteValue, order]);
+	}, [filter?.order, filter?.site, filter?.status, searchSubmit]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
@@ -117,7 +91,7 @@ const Purchase = () => {
 					validate({ per: permissions.readPurchase }) && (
 						<TableDataPurchase
 							key={item.uid}
-							order={order}
+							filter={filter}
 							data={item}
 							handleList={handleList}
 							setNewData={setNewData}
@@ -131,7 +105,7 @@ const Purchase = () => {
 					validate({ per: permissions.readPurchase }) && (
 						<TableDataPurchase
 							key={item.uid}
-							order={order}
+							filter={filter}
 							data={item}
 							handleList={handleList}
 							setNewData={setNewData}
@@ -146,12 +120,24 @@ const Purchase = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prevSearch({ orderProperty: order })}
+						handleClick={() =>
+							prevSearch({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={!dataPrevSearch ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nexSearch({ orderProperty: order })}
+						handleClick={() =>
+							nexSearch({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNextSearch ? 'page__icon--hidden' : ''
@@ -163,12 +149,24 @@ const Purchase = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => previous({ orderProperty: order })}
+						handleClick={() =>
+							previous({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => next({ orderProperty: order })}
+						handleClick={() =>
+							next({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -189,14 +187,18 @@ const Purchase = () => {
 		search,
 	]);
 	const handleSearchComponent = e =>
-		handleSearch({ e, uidSite: siteValue, orderProperty: order });
+		handleSearch({
+			e,
+			uidSite: filter?.site,
+			orderProperty: filter?.order,
+			status: filter?.status,
+		});
 	return (
 		<>
 			{validate({ per: permissions.createPurchase }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterPurchase
-						order={order}
-						siteValue={siteValue}
+						filter={filter}
 						handleList={handleList}
 						handleClose={handleCloseRegister}
 					/>
@@ -205,8 +207,7 @@ const Purchase = () => {
 			{validate({ per: permissions.updatePurchase }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdatePurchase
-						order={order}
-						siteValue={siteValue}
+						filter={filter}
 						newData={newData}
 						handleList={handleList}
 						isOpen={isOpenUpdate}
@@ -232,31 +233,12 @@ const Purchase = () => {
 				</div>
 				{validate({ per: permissions.readPurchase }) && (
 					<div className='page__options'>
-						<Select
-							className='page__input'
-							name={'uidSite'}
-							title={system.component.form.select.site}
-							value={siteValue}
-							onChange={handleChangeSite}
-							data={
-								validate({ per: permissions.site })
-									? dataSite?.map(item => ({
-											value: item.uid,
-											label: item.name,
-									  }))
-									: [{ value: dataSite?.uid, label: dataSite?.name }]
-							}
-							valueDefault={site}
-							disabled={validate({ per: permissions.site })}
-						/>
-						<Select
-							className='page__input--filter'
-							name={'orderProperty'}
-							title={system.component.form.select.filter}
-							value={order}
-							onChange={handleChangeOrder}
-							data={dataOrderPurchase}
-							valueDefault={dataOrderPurchase[0].value}
+						<Filter
+							filter={filter}
+							setFilter={setFilter}
+							site={dataSite}
+							order={dataOrderPurchase}
+							status={dataStatus}
 						/>
 						<Search
 							value={search}
@@ -267,12 +249,12 @@ const Purchase = () => {
 				)}
 				{validate({ per: permissions.readPurchase }) && (
 					<Table
-						heads={
-							validate({ per: permissions.deletePurchase }) &&
-							validate({ per: permissions.updatePurchase })
-								? heads
-								: headsOfAction
-						}
+						heads={[
+							...headsPurchase,
+							(validate({ per: permissions.deletePurchase }) ||
+								validate({ per: permissions.updatePurchase })) &&
+								system.component.form.label.action,
+						].filter(Boolean)}
 					>
 						{renderData()}
 					</Table>

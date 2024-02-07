@@ -1,18 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useGet from './useGet';
 
 const useSearch = ({ url }) => {
+	// Utiliza el hook useGet para manejar las solicitudes GET
 	const { handleFetch, data, error } = useGet();
+
+	// Estado para almacenar el valor de búsqueda
 	const [search, setSearch] = useState('');
+
+	// Estado para controlar si se ha enviado la búsqueda
 	const [searchSubmit, setSearchSubmit] = useState(false);
+
+	// Función para manejar el cambio en el valor de búsqueda
 	const handleChange = e => {
 		setSearch(e.target.value);
 	};
-	useEffect(() => {
-		if (search === '') {
-			setSearchSubmit(false);
-		}
-	}, [search]);
+
+	// Efecto para controlar si se ha enviado la búsqueda
+	// useEffect(() => {
+	// 	console.log('useEffect -> search:', search);
+	// 	console.log('useEffect -> typeof search:', typeof search);
+	// 	console.log("useEffect -> search === '':", search === '');
+	// 	if (search === '') {
+	// 		setSearchSubmit(false);
+	// 	}
+	// }, [search]);
+
+	// Función para manejar la búsqueda
 	const handleSearch = ({
 		e,
 		page = 1,
@@ -24,6 +38,8 @@ const useSearch = ({ url }) => {
 	}) => {
 		e && e.preventDefault();
 		setSearchSubmit(true);
+
+		// Crea los parámetros de búsqueda
 		const params = new URLSearchParams({
 			page,
 			limit,
@@ -32,18 +48,37 @@ const useSearch = ({ url }) => {
 			order,
 			status,
 		});
-		const urlWithParams = `${url}?${params}`;
-		handleFetch({ url: urlWithParams });
+
+		// Crea la URL con los parámetros de búsqueda y el valor de búsqueda actual
+		const urlWithParams = `${url}/${search}?${params}`;
+
+		if (search === '') {
+			setSearchSubmit(false);
+		}
+
+		// Realiza la solicitud GET con los parámetros de búsqueda y el valor de búsqueda actual
+		if (search !== '') {
+			console.log("useSearch -> search !== '':", search !== '');
+			handleFetch({ url: urlWithParams });
+		}
 	};
 
-	const next = ({ orderProperty = 'name' }) => {
-		handleSearch({ page: data?.nextPage, orderProperty, status });
+	// Función para manejar la búsqueda de la siguiente página
+	const next = ({ orderProperty, uidSite, status }) => {
+		return handleSearch({
+			page: data?.nextPage,
+			uidSite,
+			orderProperty,
+			status,
+		});
 	};
 
-	const previous = ({ orderProperty = 'name' }) => {
-		handleSearch({ page: data?.previousPage, orderProperty, status });
+	// Función para manejar la búsqueda de la página anterior
+	const previous = ({ orderProperty, uidSite, status }) => {
+		handleSearch({ page: data?.previousPage, uidSite, orderProperty, status });
 	};
 
+	// Devuelve los datos, la función para manejar la búsqueda, la función para manejar la siguiente página, la función para manejar la página anterior, el error y los números de página anterior y siguiente
 	return {
 		data,
 		handleSearch,
@@ -57,4 +92,5 @@ const useSearch = ({ url }) => {
 		searchSubmit,
 	};
 };
+
 export default useSearch;

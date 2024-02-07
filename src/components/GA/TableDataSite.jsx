@@ -1,16 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
 import useValidate from '../../hooks/useValidate';
 import ActionMenu from '../ActionMenu';
-import ActionMenuItem from '../ActionMenuItem';
-import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
+import OptionTable from './OptionTable';
 
-const TableDataSite = ({ data, handleList, setNewData, handleOpenUpdate }) => {
+// Función para manejar la lógica de eliminación de rol
+const handleDeleteSite = (handleDelete, data) => {
+	return () => handleDelete({ uid: data.uid });
+};
+
+// Función para manejar la lógica de edición de rol
+const handleEdit = (setNewData, handleOpenUpdate, data) => {
+	return () => {
+		setNewData({
+			uid: data.uid,
+			name: data.name,
+			direction: data.direction,
+		});
+		handleOpenUpdate();
+	};
+};
+const TableDataSite = ({
+	data,
+	handleList,
+	setNewData,
+	handleOpenUpdate,
+	filter,
+}) => {
 	const { validate } = useValidate();
-	const [close, SetClose] = useState(null);
 	const { handleDelete, data: dataDelete } = useDelete({
 		url:
 			import.meta.env.VITE_ULR_API +
@@ -19,20 +39,11 @@ const TableDataSite = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 	});
 	useEffect(() => {
 		if (dataDelete) {
-			handleList({});
+			handleList({ orderProperty: filter?.order, status: filter?.status });
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dataDelete]);
-	const handleEdit = () => {
-		setNewData({
-			uid: data.uid,
-			name: data.name,
-			direction: data.direction,
-		});
-		handleOpenUpdate();
-		SetClose(false);
-	};
-	const handleDeleteSite = () => handleDelete({ uid: data.uid });
+
 	return (
 		<TableCell>
 			<Cell>{data.name}</Cell>
@@ -40,25 +51,12 @@ const TableDataSite = ({ data, handleList, setNewData, handleOpenUpdate }) => {
 			{(validate({ per: permissions.deleteSite }) ||
 				validate({ per: permissions.updateSite })) && (
 				<Cell>
-					<ActionMenu close={close}>
-						{validate({ per: permissions.deleteSite }) && (
-							<ActionMenuItem>
-								<Btn
-									nameIcon={'delete'}
-									classIcon='icon--delete'
-									handleClick={handleDeleteSite}
-								/>
-							</ActionMenuItem>
-						)}
-						{validate({ per: permissions.updateSite }) && (
-							<ActionMenuItem>
-								<Btn
-									nameIcon={'edit'}
-									classIcon='icon--edit'
-									handleClick={handleEdit}
-								/>
-							</ActionMenuItem>
-						)}
+					<ActionMenu close={null}>
+						<OptionTable
+							filter={filter}
+							handleDelete={handleDeleteSite(handleDelete, data)}
+							handleEdit={handleEdit(setNewData, handleOpenUpdate, data)}
+						/>
 					</ActionMenu>
 				</Cell>
 			)}

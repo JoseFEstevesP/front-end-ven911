@@ -25,18 +25,21 @@ const condition = [
 	{ label: 'Averiado', value: 'averiado' },
 	{ label: 'Desincorporado', value: 'desincorporado' },
 ];
-const RegisterVehicle = ({ handleClose, handleList, siteValue, order }) => {
+const urlVehicle =
+	import.meta.env.VITE_ULR_API + system.routeApi.vehicle.primary;
+const RegisterVehicle = ({ handleClose, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
-			url:
-				import.meta.env.VITE_ULR_API +
-				system.routeApi.vehicle.primary +
-				system.routeApi.vehicle.register,
+			url: urlVehicle + system.routeApi.vehicle.register,
 		});
 	useEffect(() => {
 		if (data) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}

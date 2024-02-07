@@ -25,13 +25,7 @@ const condition = [
 	{ label: 'Averiado', value: 'averiado' },
 	{ label: 'Desincorporado', value: 'desincorporado' },
 ];
-const UpdateFurniture = ({
-	handleClose,
-	newData,
-	handleList,
-	siteValue,
-	order,
-}) => {
+const UpdateFurniture = ({ handleClose, newData, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
 			initForm,
@@ -48,7 +42,11 @@ const UpdateFurniture = ({
 	}, [newData]);
 	useEffect(() => {
 		if (data) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter?.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}

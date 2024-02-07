@@ -15,7 +15,7 @@ const initForm = {
 	dateOfAcquisition: '',
 	remarks: '',
 };
-const RegisterConsumables = ({ handleClose, handleList, siteValue, order }) => {
+const RegisterConsumables = ({ handleClose, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -26,7 +26,11 @@ const RegisterConsumables = ({ handleClose, handleList, siteValue, order }) => {
 		});
 	useEffect(() => {
 		if (data) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter?.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}

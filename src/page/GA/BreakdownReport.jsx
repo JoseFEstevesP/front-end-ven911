@@ -2,110 +2,88 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
+import Filter from '../../components/Filter';
 import RegisterBreakdownReport from '../../components/GA/RegisterBreakdownReport';
 import TableDataBreakdownReport from '../../components/GA/TableDataBreakdownReport';
 import UpdateBreakdownReport from '../../components/GA/UpdateBreakdownReport';
 import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
-import Select from '../../components/Select';
 import Table from '../../components/Table';
 import { ContextSite } from '../../context/SiteContext';
-import { dataOrderBreakdownReport } from '../../data/dataOrder';
+import { dataOrderBreakdownReport, dataStatus } from '../../data/dataOrder';
 import { permissions } from '../../data/dataPermissions';
-import { system } from '../../data/system';
+import { headsBreakdownReport, system } from '../../data/system';
+import useGet from '../../hooks/useGet';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
-import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
-import useSite from '../../hooks/useSite';
 import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
-const heads = [
-	system.component.form.label.goods,
-	system.component.form.label.problem,
-	system.component.form.label.symptoms,
-	system.component.form.label.condition,
-	system.component.form.label.dateOfReport,
-	system.component.form.label.timeOfReport,
-	system.component.form.label.breakdownDepartment,
-	system.component.form.label.location,
-	system.component.form.label.serialOrCodeBN,
-	system.component.form.label.action,
-];
-const headsOfAction = [
-	system.component.form.label.goods,
-	system.component.form.label.problem,
-	system.component.form.label.symptoms,
-	system.component.form.label.condition,
-	system.component.form.label.dateOfReport,
-	system.component.form.label.timeOfReport,
-	system.component.form.label.breakdownDepartment,
-	system.component.form.label.location,
-	system.component.form.label.serialOrCodeBN,
-];
-const url =
-	import.meta.env.VITE_ULR_API +
-	system.routeApi.breakdownReport.primary +
-	system.routeApi.breakdownReport.list;
+const urlBreakdownReport =
+	import.meta.env.VITE_ULR_API + system.routeApi.breakdownReport.primary;
+const urlSite = import.meta.env.VITE_ULR_API + system.routeApi.site.primary;
+
 const BreakdownReport = () => {
 	const { validate } = useValidate();
-	const { site } = useContext(ContextSite);
+	const { site: siteDefault } = useContext(ContextSite);
+	const [filter, setFilter] = useState({
+		status: dataStatus[0].value,
+		site: siteDefault,
+		order: dataOrderBreakdownReport[0].value,
+	});
 	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
-		url,
+		url: urlBreakdownReport + system.routeApi.breakdownReport.list,
 	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
-	const {
-		data: dataSite,
-		siteValue,
-		handleFetch: handleFetchSite,
-		handleChange: handleChangeSite,
-	} = useSite({ site });
+	const { handleFetch, data: dataSite } = useGet();
+
 	const {
 		search,
 		handleChange: handleChangeSearch,
 		handleSearch,
 		data: dataSearch,
-		nex: nexSearch,
+		next: nexSearch,
 		dataNext: dataNextSearch,
 		dataPrev: dataPrevSearch,
-		prev: prevSearch,
+		previous: prevSearch,
 		searchSubmit,
 	} = useSearch({
-		url:
-			import.meta.env.VITE_ULR_API +
-			system.routeApi.breakdownReport.primary +
-			system.routeApi.breakdownReport.search,
-	});
-	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrderBreakdownReport[0].value,
+		url: urlBreakdownReport + system.routeApi.breakdownReport.search,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
 		if (validate({ per: permissions.readBreakdownReport })) {
-			handleList({ orderProperty: order });
-			handleFetchSite({
+			handleList({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
+			handleFetch({
 				url: validate({ per: permissions.site })
-					? import.meta.env.VITE_ULR_API +
-					  system.routeApi.site.primary +
-					  system.routeApi.site.lisOfLimit
-					: import.meta.env.VITE_ULR_API +
-					  system.routeApi.site.primary +
-					  system.routeApi.site.item +
-					  site,
+					? urlSite + system.routeApi.site.lisOfLimit
+					: urlSite + system.routeApi.site.item + filter.site,
 			});
 		}
 	}, []);
 	useEffect(() => {
 		if (validate({ per: permissions.readBreakdownReport })) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter?.status,
+			});
 		}
 		if (searchSubmit) {
-			handleSearch({ uidSite: siteValue, orderProperty: order });
+			handleSearch({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
 		}
-	}, [siteValue, order]);
+	}, [filter?.order, filter?.site, filter?.status, searchSubmit]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
@@ -113,7 +91,7 @@ const BreakdownReport = () => {
 					validate({ per: permissions.readBreakdownReport }) && (
 						<TableDataBreakdownReport
 							key={item.uid}
-							order={order}
+							filter={filter}
 							data={item}
 							handleList={handleList}
 							setNewData={setNewData}
@@ -127,7 +105,7 @@ const BreakdownReport = () => {
 					validate({ per: permissions.readBreakdownReport }) && (
 						<TableDataBreakdownReport
 							key={item.uid}
-							order={order}
+							filter={filter}
 							data={item}
 							handleList={handleList}
 							setNewData={setNewData}
@@ -142,12 +120,24 @@ const BreakdownReport = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prevSearch({ orderProperty: order })}
+						handleClick={() =>
+							prevSearch({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={!dataPrevSearch ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nexSearch({ orderProperty: order })}
+						handleClick={() =>
+							nexSearch({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNextSearch ? 'page__icon--hidden' : ''
@@ -159,12 +149,24 @@ const BreakdownReport = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => previous({ orderProperty: order })}
+						handleClick={() =>
+							previous({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => next({ orderProperty: order })}
+						handleClick={() =>
+							next({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -185,14 +187,18 @@ const BreakdownReport = () => {
 		search,
 	]);
 	const handleSearchComponent = e =>
-		handleSearch({ e, uidSite: siteValue, orderProperty: order });
+		handleSearch({
+			e,
+			uidSite: filter?.site,
+			orderProperty: filter?.order,
+			status: filter?.status,
+		});
 	return (
 		<>
 			{validate({ per: permissions.createBreakdownReport }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterBreakdownReport
-						order={order}
-						siteValue={siteValue}
+						filter={filter}
 						handleList={handleList}
 						handleClose={handleCloseRegister}
 					/>
@@ -201,8 +207,7 @@ const BreakdownReport = () => {
 			{validate({ per: permissions.updateBreakdownReport }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateBreakdownReport
-						order={order}
-						siteValue={siteValue}
+						filter={filter}
 						newData={newData}
 						handleList={handleList}
 						isOpen={isOpenUpdate}
@@ -228,31 +233,12 @@ const BreakdownReport = () => {
 				</div>
 				{validate({ per: permissions.readBreakdownReport }) && (
 					<div className='page__options'>
-						<Select
-							className='page__input'
-							name={'uidSite'}
-							title={system.component.form.select.site}
-							value={siteValue}
-							onChange={handleChangeSite}
-							data={
-								validate({ per: permissions.site })
-									? dataSite?.map(item => ({
-											value: item.uid,
-											label: item.name,
-									  }))
-									: [{ value: dataSite?.uid, label: dataSite?.name }]
-							}
-							valueDefault={site}
-							disabled={validate({ per: permissions.site })}
-						/>
-						<Select
-							className='page__input--filter'
-							name={'orderProperty'}
-							title={system.component.form.select.filter}
-							value={order}
-							onChange={handleChangeOrder}
-							data={dataOrderBreakdownReport}
-							valueDefault={dataOrderBreakdownReport[0].value}
+						<Filter
+							filter={filter}
+							setFilter={setFilter}
+							site={dataSite}
+							order={dataOrderBreakdownReport}
+							status={dataStatus}
 						/>
 						<Search
 							value={search}
@@ -263,12 +249,12 @@ const BreakdownReport = () => {
 				)}
 				{validate({ per: permissions.readBreakdownReport }) && (
 					<Table
-						heads={
-							validate({ per: permissions.deleteBreakdownReport }) &&
-							validate({ per: permissions.updateBreakdownReport })
-								? heads
-								: headsOfAction
-						}
+						heads={[
+							...headsBreakdownReport,
+							(validate({ per: permissions.deleteUser }) ||
+								validate({ per: permissions.updateUser })) &&
+								system.component.form.label.action,
+						].filter(Boolean)}
 					>
 						{renderData()}
 					</Table>

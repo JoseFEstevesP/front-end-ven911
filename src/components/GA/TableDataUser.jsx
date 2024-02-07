@@ -1,35 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { permissions } from '../../data/dataPermissions';
-import { filterText, system } from '../../data/system';
+import { system } from '../../data/system';
 import useDelete from '../../hooks/useDelete';
 import useValidate from '../../hooks/useValidate';
 import ActionMenu from '../ActionMenu';
-import ActionMenuItem from '../ActionMenuItem';
-import Btn from '../Btn';
 import TableCell, { Cell } from '../TableCell';
+import OptionTable from './OptionTable';
 
-const TableDataUser = ({
-	data,
-	handleList,
-	setNewData,
-	handleOpenUpdate,
-	filter,
-}) => {
-	const { validate } = useValidate();
-	const [close, SetClose] = useState(null);
-	const { handleDelete, data: dataDelete } = useDelete({
-		url:
-			import.meta.env.VITE_ULR_API +
-			system.routeApi.user.primary +
-			system.routeApi.user.delete,
-	});
-	useEffect(() => {
-		if (dataDelete) {
-			handleList({});
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dataDelete]);
-	const handleEdit = () => {
+// Función para manejar la lógica de eliminación de usuario
+const handleDeleteUser = (handleDelete, data) => {
+	return () => handleDelete({ uid: data.uid });
+};
+
+// Función para manejar la lógica de edición de usuario
+const handleEdit = (setNewData, handleOpenUpdate, data) => {
+	return () => {
 		setNewData({
 			uid: data.uid,
 			ci: data.ci,
@@ -40,9 +25,35 @@ const TableDataUser = ({
 			uidSite: data.uidSite,
 		});
 		handleOpenUpdate();
-		SetClose(false);
 	};
-	const handleDeleteUser = () => handleDelete({ uid: data.uid });
+};
+
+const TableDataUser = ({
+	data,
+	handleList,
+	setNewData,
+	handleOpenUpdate,
+	filter,
+}) => {
+	const { validate } = useValidate();
+	const { handleDelete, data: dataDelete } = useDelete({
+		url:
+			import.meta.env.VITE_ULR_API +
+			system.routeApi.user.primary +
+			system.routeApi.user.delete,
+	});
+
+	// Efecto para manejar la actualización de la lista después de eliminar un usuario
+	useEffect(() => {
+		if (dataDelete) {
+			handleList({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
+		}
+	}, [dataDelete, handleList, filter]);
+
 	return (
 		<TableCell>
 			<Cell>{data.name}</Cell>
@@ -53,30 +64,17 @@ const TableDataUser = ({
 			{(validate({ per: permissions.deleteUser }) ||
 				validate({ per: permissions.updateUser })) && (
 				<Cell>
-					<ActionMenu close={close}>
-						{validate({ per: permissions.deleteUser }) &&
-							filter?.status !== filterText.inactive && (
-								<ActionMenuItem>
-									<Btn
-										nameIcon={'delete'}
-										classIcon='icon--delete'
-										handleClick={handleDeleteUser}
-									/>
-								</ActionMenuItem>
-							)}
-						{validate({ per: permissions.updateUser }) && (
-							<ActionMenuItem>
-								<Btn
-									nameIcon={'edit'}
-									classIcon='icon--edit'
-									handleClick={handleEdit}
-								/>
-							</ActionMenuItem>
-						)}
+					<ActionMenu close={null}>
+						<OptionTable
+							filter={filter}
+							handleDelete={handleDeleteUser(handleDelete, data)}
+							handleEdit={handleEdit(setNewData, handleOpenUpdate, data)}
+						/>
 					</ActionMenu>
 				</Cell>
 			)}
 		</TableCell>
 	);
 };
+
 export default TableDataUser;

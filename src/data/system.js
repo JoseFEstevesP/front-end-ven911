@@ -445,3 +445,115 @@ export const filterText = {
 	active: '1',
 	inactive: '0',
 };
+
+export const headsUser = [
+	system.component.form.label.name,
+	system.component.form.label.surname,
+	system.component.form.label.ci,
+	system.component.form.label.email,
+	system.component.form.label.rol,
+];
+
+export const headsRol = [
+	system.component.form.label.name,
+	system.component.form.label.permissions,
+];
+
+export const headsSite = [
+	system.component.form.label.name,
+	system.component.form.label.direction,
+];
+
+export const headsVehicle = [
+	system.component.form.label.description,
+	system.component.form.label.brand,
+	system.component.form.label.model,
+	system.component.form.label.place,
+	system.component.form.label.quantity,
+	system.component.form.label.assign,
+	system.component.form.label.value,
+	system.component.form.label.condition,
+	system.component.form.label.location,
+	system.component.form.label.dateOfAcquisition,
+	system.component.form.label.warranty,
+	system.component.form.label.remarks,
+	system.component.form.label.codeBN,
+];
+
+export const headsTechnology = [
+	system.component.form.label.description,
+	system.component.form.label.brand,
+	system.component.form.label.model,
+	system.component.form.label.serial,
+	system.component.form.label.quantity,
+	system.component.form.label.assign,
+	system.component.form.label.value,
+	system.component.form.label.condition,
+	system.component.form.label.location,
+	system.component.form.label.dateOfAcquisition,
+	system.component.form.label.warranty,
+	system.component.form.label.remarks,
+	system.component.form.label.codeBN,
+];
+
+export const headsPurchase = [
+	system.component.form.label.product,
+	system.component.form.label.serial,
+	system.component.form.label.brand,
+	system.component.form.label.model,
+	system.component.form.label.dateOfPurchase,
+	system.component.form.label.orderNumber,
+	system.component.form.label.value,
+	system.component.form.label.quantity,
+	system.component.form.label.supplier,
+	system.component.form.label.warranty,
+	system.component.form.label.location,
+];
+
+export const headsFurniture = [
+	system.component.form.label.description,
+	system.component.form.label.serial,
+	system.component.form.label.quantity,
+	system.component.form.label.assign,
+	system.component.form.label.value,
+	system.component.form.label.condition,
+	system.component.form.label.location,
+	system.component.form.label.dateOfAcquisition,
+	system.component.form.label.warranty,
+	system.component.form.label.remarks,
+	system.component.form.label.codeBN,
+];
+
+export const headsConsumables = [
+	system.component.form.label.description,
+	system.component.form.label.serial,
+	system.component.form.label.brand,
+	system.component.form.label.quantity,
+	system.component.form.label.assign,
+	system.component.form.label.value,
+	system.component.form.label.location,
+	system.component.form.label.dateOfAcquisition,
+	system.component.form.label.remarks,
+];
+
+export const headsBreakdownReport = [
+	system.component.form.label.goods,
+	system.component.form.label.problem,
+	system.component.form.label.symptoms,
+	system.component.form.label.condition,
+	system.component.form.label.dateOfReport,
+	system.component.form.label.timeOfReport,
+	system.component.form.label.breakdownDepartment,
+	system.component.form.label.location,
+	system.component.form.label.serialOrCodeBN,
+];
+
+export const headsAssign = [
+	system.component.form.label.inventory,
+	system.component.form.label.article,
+	system.component.form.label.serialOrCodeBN,
+	system.component.form.label.department,
+	system.component.form.label.quantity,
+	system.component.form.label.description,
+	system.component.form.label.remarks,
+];

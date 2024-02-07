@@ -10,7 +10,7 @@ const initForm = {
 	name: '',
 	direction: '',
 };
-const UpdateSite = ({ handleClose, newData, handleList, order }) => {
+const UpdateSite = ({ handleClose, newData, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
 			initForm,
@@ -27,7 +27,10 @@ const UpdateSite = ({ handleClose, newData, handleList, order }) => {
 	}, [newData]);
 	useEffect(() => {
 		if (data) {
-			handleList({ orderProperty: order });
+			handleList({
+				orderProperty: filter.order,
+				status: filter.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}

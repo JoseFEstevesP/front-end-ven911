@@ -20,13 +20,7 @@ const initForm = {
 	orderNumber: '',
 	location: '',
 };
-const UpdatePurchase = ({
-	handleClose,
-	newData,
-	handleList,
-	siteValue,
-	order,
-}) => {
+const UpdatePurchase = ({ handleClose, newData, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
 			initForm,
@@ -43,7 +37,11 @@ const UpdatePurchase = ({
 	}, [newData]);
 	useEffect(() => {
 		if (data) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter?.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}

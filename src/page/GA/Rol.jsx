@@ -1,41 +1,32 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
+import Filter from '../../components/Filter';
 import RegisterRol from '../../components/GA/RegisterRol';
 import TableDataRol from '../../components/GA/TableDataRol';
 import UpdateRol from '../../components/GA/UpdateRol';
 import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
-import Select from '../../components/Select';
 import Table from '../../components/Table';
-import { dataOrderRol } from '../../data/dataOrder';
+import { dataOrderRol, dataStatus } from '../../data/dataOrder';
 import { permissions } from '../../data/dataPermissions';
-import { system } from '../../data/system';
+import { headsRol, system } from '../../data/system';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
-import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
 import useValidate from '../../hooks/useValidate';
 
-const heads = [
-	system.component.form.label.name,
-	system.component.form.label.permissions,
-	system.component.form.label.action,
-];
-const headsOfAction = [
-	system.component.form.label.name,
-	system.component.form.label.permissions,
-];
-const url =
-	import.meta.env.VITE_ULR_API +
-	system.routeApi.rol.primary +
-	system.routeApi.rol.list;
+const urlRol = import.meta.env.VITE_ULR_API + system.routeApi.rol.primary;
+
 const Rol = () => {
 	const { validate } = useValidate();
+	const [filter, setFilter] = useState({
+		status: dataStatus[0].value,
+		order: dataOrderRol[0].value,
+	});
 	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
-		url,
+		url: urlRol + system.routeApi.rol.list,
 	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
@@ -44,34 +35,30 @@ const Rol = () => {
 		handleChange: handleChangeSearch,
 		handleSearch,
 		data: dataSearch,
-		nex: nexSearch,
+		next: nexSearch,
 		dataNext: dataNextSearch,
 		dataPrev: dataPrevSearch,
-		prev: prevSearch,
+		previous: prevSearch,
 		searchSubmit,
 	} = useSearch({
-		url:
-			import.meta.env.VITE_ULR_API +
-			system.routeApi.rol.primary +
-			system.routeApi.rol.search,
-	});
-	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrderRol[0].value,
+		url: urlRol + system.routeApi.rol.search,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
 		if (validate({ per: permissions.readRol })) {
-			handleList({});
+			handleList({ orderProperty: filter?.order, status: filter?.status });
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	useEffect(() => {
 		if (validate({ per: permissions.readRol })) {
-			handleList({ orderProperty: order });
+			handleList({ orderProperty: filter?.order, status: filter?.status });
 		}
-		if (searchSubmit) {
-			handleSearch({ orderProperty: order });
+		if (validate({ per: permissions.rol }) && searchSubmit) {
+			handleSearch({ orderProperty: filter?.order, status: filter?.status });
 		}
-	}, [order]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [filter?.order, filter?.status, searchSubmit]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
@@ -83,6 +70,7 @@ const Rol = () => {
 							handleList={handleList}
 							setNewData={setNewData}
 							handleOpenUpdate={handleOpenUpdate}
+							filter={filter}
 						/>
 					),
 			);
@@ -96,22 +84,34 @@ const Rol = () => {
 							handleList={handleList}
 							setNewData={setNewData}
 							handleOpenUpdate={handleOpenUpdate}
+							filter={filter}
 						/>
 					),
 			);
 		}
-	}, [data?.rows, dataSearch?.rows, searchSubmit]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data?.rows, dataSearch?.rows, filter, searchSubmit]);
 	const renderPaginate = useCallback(() => {
 		if (search) {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prevSearch({ orderProperty: order })}
+						handleClick={() =>
+							prevSearch({
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={!dataPrevSearch ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nexSearch({ orderProperty: order })}
+						handleClick={() =>
+							nexSearch({
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNextSearch ? 'page__icon--hidden' : ''
@@ -123,12 +123,16 @@ const Rol = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => previous({ orderProperty: order })}
+						handleClick={() =>
+							previous({ orderProperty: filter?.order, status: filter?.status })
+						}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => next({ orderProperty: order })}
+						handleClick={() =>
+							next({ orderProperty: filter?.order, status: filter?.status })
+						}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -138,23 +142,26 @@ const Rol = () => {
 			);
 		}
 	}, [
-		dataNext,
-		dataNextSearch,
-		dataPrev,
-		dataPrevSearch,
-		next,
-		nexSearch,
-		previous,
-		prevSearch,
 		search,
+		dataPrevSearch,
+		dataNextSearch,
+		prevSearch,
+		filter?.order,
+		filter?.status,
+		nexSearch,
+		dataPrev,
+		dataNext,
+		previous,
+		next,
 	]);
-	const handleSearchComponent = e => handleSearch({ e, orderProperty: order });
+	const handleSearchComponent = e =>
+		handleSearch({ e, orderProperty: filter?.order, status: filter?.status });
 	return (
 		<>
 			{validate({ per: permissions.createRol }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterRol
-						order={order}
+						filter={filter}
 						handleList={handleList}
 						handleClose={handleCloseRegister}
 					/>
@@ -163,7 +170,7 @@ const Rol = () => {
 			{validate({ per: permissions.updateRol }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateRol
-						order={order}
+						filter={filter}
 						newData={newData}
 						handleList={handleList}
 						handleClose={handleCloseUpdate}
@@ -175,7 +182,7 @@ const Rol = () => {
 					{validate({ per: permissions.createRol }) && (
 						<Btn
 							text={'Crear Rol'}
-							nameIcon={'user_add'}
+							nameIcon={'rol'}
 							className='btnStyle'
 							handleClick={handleOpenRegister}
 						/>
@@ -193,14 +200,11 @@ const Rol = () => {
 				</div>
 				{validate({ per: permissions.readRol }) && (
 					<div className='page__options'>
-						<Select
-							className='page__input--filter'
-							name={'orderProperty'}
-							title={system.component.form.select.filter}
-							value={order}
-							onChange={handleChangeOrder}
-							data={dataOrderRol}
-							valueDefault={dataOrderRol[0].value}
+						<Filter
+							filter={filter}
+							setFilter={setFilter}
+							order={dataOrderRol}
+							status={dataStatus}
 						/>
 						<Search
 							value={search}
@@ -211,12 +215,12 @@ const Rol = () => {
 				)}
 				{validate({ per: permissions.readRol }) && (
 					<Table
-						heads={
-							validate({ per: permissions.deleteRol }) ||
-							validate({ per: permissions.updateRol })
-								? heads
-								: headsOfAction
-						}
+						heads={[
+							...headsRol,
+							(validate({ per: permissions.deleteRol }) ||
+								validate({ per: permissions.updateRol })) &&
+								system.component.form.label.action,
+						].filter(Boolean)}
 					>
 						{renderData()}
 					</Table>

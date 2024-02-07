@@ -2,118 +2,87 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
+import Filter from '../../components/Filter';
 import RegisterTechnology from '../../components/GA/RegisterTechnology';
 import TableDataTechnology from '../../components/GA/TableDataTechnology';
 import UpdateTechnology from '../../components/GA/UpdateTechnology';
 import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
-import Select from '../../components/Select';
 import Table from '../../components/Table';
 import { ContextSite } from '../../context/SiteContext';
-import { dataOrderTechnology } from '../../data/dataOrder';
+import { dataOrderTechnology, dataStatus } from '../../data/dataOrder';
 import { permissions } from '../../data/dataPermissions';
-import { system } from '../../data/system';
+import { headsTechnology, system } from '../../data/system';
+import useGet from '../../hooks/useGet';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
-import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
-import useSite from '../../hooks/useSite';
 import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
-const heads = [
-	system.component.form.label.description,
-	system.component.form.label.brand,
-	system.component.form.label.model,
-	system.component.form.label.serial,
-	system.component.form.label.quantity,
-	system.component.form.label.assign,
-	system.component.form.label.value,
-	system.component.form.label.condition,
-	system.component.form.label.location,
-	system.component.form.label.dateOfAcquisition,
-	system.component.form.label.warranty,
-	system.component.form.label.remarks,
-	system.component.form.label.codeBN,
-	system.component.form.label.action,
-];
-const headsOfAction = [
-	system.component.form.label.description,
-	system.component.form.label.brand,
-	system.component.form.label.model,
-	system.component.form.label.serial,
-	system.component.form.label.quantity,
-	system.component.form.label.assign,
-	system.component.form.label.value,
-	system.component.form.label.condition,
-	system.component.form.label.location,
-	system.component.form.label.dateOfAcquisition,
-	system.component.form.label.warranty,
-	system.component.form.label.remarks,
-	system.component.form.label.codeBN,
-];
-const url =
-	import.meta.env.VITE_ULR_API +
-	system.routeApi.technology.primary +
-	system.routeApi.technology.list;
+const urlTechnology =
+	import.meta.env.VITE_ULR_API + system.routeApi.technology.primary;
+const urlSite = import.meta.env.VITE_ULR_API + system.routeApi.site.primary;
 const Technology = () => {
 	const { validate } = useValidate();
-	const { site } = useContext(ContextSite);
+	const { site: siteDefault } = useContext(ContextSite);
+	const [filter, setFilter] = useState({
+		status: dataStatus[0].value,
+		site: siteDefault,
+		order: dataOrderTechnology[0].value,
+	});
 	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
-		url,
+		url: urlTechnology + system.routeApi.technology.list,
 	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
-	const {
-		data: dataSite,
-		siteValue,
-		handleFetch: handleFetchSite,
-		handleChange: handleChangeSite,
-	} = useSite({ site });
+	const { handleFetch, data: dataSite } = useGet();
+
 	const {
 		search,
 		handleChange: handleChangeSearch,
 		handleSearch,
 		data: dataSearch,
-		nex: nexSearch,
+		next: nexSearch,
 		dataNext: dataNextSearch,
 		dataPrev: dataPrevSearch,
-		prev: prevSearch,
+		previous: prevSearch,
 		searchSubmit,
 	} = useSearch({
-		url:
-			import.meta.env.VITE_ULR_API +
-			system.routeApi.technology.primary +
-			system.routeApi.technology.search,
-	});
-	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrderTechnology[0].value,
+		url: urlTechnology + system.routeApi.technology.search,
 	});
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
 		if (validate({ per: permissions.readTechnology })) {
-			handleList({ orderProperty: order });
-			handleFetchSite({
+			handleList({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
+			handleFetch({
 				url: validate({ per: permissions.site })
-					? import.meta.env.VITE_ULR_API +
-					  system.routeApi.site.primary +
-					  system.routeApi.site.lisOfLimit
-					: import.meta.env.VITE_ULR_API +
-					  system.routeApi.site.primary +
-					  system.routeApi.site.item +
-					  site,
+					? urlSite + system.routeApi.site.lisOfLimit
+					: urlSite + system.routeApi.site.item + filter.site,
 			});
 		}
 	}, []);
 	useEffect(() => {
 		if (validate({ per: permissions.readTechnology })) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter?.status,
+			});
 		}
 		if (searchSubmit) {
-			handleSearch({ uidSite: siteValue, orderProperty: order });
+			handleSearch({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
 		}
-	}, [siteValue, order]);
+	}, [filter?.order, filter?.site, filter?.status, searchSubmit]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
@@ -121,7 +90,7 @@ const Technology = () => {
 					validate({ per: permissions.readTechnology }) && (
 						<TableDataTechnology
 							key={item.uid}
-							order={order}
+							filter={filter}
 							data={item}
 							handleList={handleList}
 							setNewData={setNewData}
@@ -135,7 +104,7 @@ const Technology = () => {
 					validate({ per: permissions.readTechnology }) && (
 						<TableDataTechnology
 							key={item.uid}
-							order={order}
+							filter={filter}
 							data={item}
 							handleList={handleList}
 							setNewData={setNewData}
@@ -150,12 +119,24 @@ const Technology = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prevSearch({ orderProperty: order })}
+						handleClick={() =>
+							prevSearch({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={!dataPrevSearch ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nexSearch({ orderProperty: order })}
+						handleClick={() =>
+							nexSearch({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNextSearch ? 'page__icon--hidden' : ''
@@ -167,12 +148,24 @@ const Technology = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => previous({ orderProperty: order })}
+						handleClick={() =>
+							previous({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => next({ orderProperty: order })}
+						handleClick={() =>
+							next({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -193,14 +186,18 @@ const Technology = () => {
 		search,
 	]);
 	const handleSearchComponent = e =>
-		handleSearch({ e, uidSite: siteValue, orderProperty: order });
+		handleSearch({
+			e,
+			uidSite: filter?.site,
+			orderProperty: filter?.order,
+			status: filter?.status,
+		});
 	return (
 		<>
 			{validate({ per: permissions.createTechnology }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterTechnology
-						order={order}
-						siteValue={siteValue}
+						filter={filter}
 						handleList={handleList}
 						handleClose={handleCloseRegister}
 					/>
@@ -209,8 +206,7 @@ const Technology = () => {
 			{validate({ per: permissions.updateTechnology }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateTechnology
-						order={order}
-						siteValue={siteValue}
+						filter={filter}
 						newData={newData}
 						handleList={handleList}
 						isOpen={isOpenUpdate}
@@ -236,31 +232,12 @@ const Technology = () => {
 				</div>
 				{validate({ per: permissions.readTechnology }) && (
 					<div className='page__options'>
-						<Select
-							className='page__input'
-							name={'uidSite'}
-							title={system.component.form.select.site}
-							value={siteValue}
-							onChange={handleChangeSite}
-							data={
-								validate({ per: permissions.site })
-									? dataSite?.map(item => ({
-											value: item.uid,
-											label: item.name,
-									  }))
-									: [{ value: dataSite?.uid, label: dataSite?.name }]
-							}
-							valueDefault={site}
-							disabled={validate({ per: permissions.site })}
-						/>
-						<Select
-							className='page__input--filter'
-							name={'orderProperty'}
-							title={system.component.form.select.filter}
-							value={order}
-							onChange={handleChangeOrder}
-							data={dataOrderTechnology}
-							valueDefault={dataOrderTechnology[0].value}
+						<Filter
+							filter={filter}
+							setFilter={setFilter}
+							site={dataSite}
+							order={dataOrderTechnology}
+							status={dataStatus}
 						/>
 						<Search
 							value={search}
@@ -271,12 +248,12 @@ const Technology = () => {
 				)}
 				{validate({ per: permissions.readTechnology }) && (
 					<Table
-						heads={
-							validate({ per: permissions.deleteTechnology }) &&
-							validate({ per: permissions.updateTechnology })
-								? heads
-								: headsOfAction
-						}
+						heads={[
+							...headsTechnology,
+							(validate({ per: permissions.deleteTechnology }) ||
+								validate({ per: permissions.updateTechnology })) &&
+								system.component.form.label.action,
+						].filter(Boolean)}
 					>
 						{renderData()}
 					</Table>

@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect } from 'react';
-import { ContextSite } from '../../context/SiteContext';
+import { useEffect } from 'react';
 import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useGet from '../../hooks/useGet';
@@ -19,23 +18,15 @@ const initForm = {
 	uidRol: '',
 	uidSite: '',
 };
-const UpdateUser = ({
-	isOpen,
-	handleClose,
-	newData,
-	handleList,
-	siteValue,
-	order,
-}) => {
+const urlRol = import.meta.env.VITE_ULR_API + system.routeApi.rol.primary;
+const urlSite = import.meta.env.VITE_ULR_API + system.routeApi.site.primary;
+const urlUser = import.meta.env.VITE_ULR_API + system.routeApi.user.primary;
+const UpdateUser = ({ isOpen, handleClose, newData, handleList, filter }) => {
 	const { validate } = useValidate();
-	const { site } = useContext(ContextSite);
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
 			initForm,
-			url:
-				import.meta.env.VITE_ULR_API +
-				system.routeApi.user.primary +
-				system.routeApi.user.update,
+			url: urlUser + system.routeApi.user.update,
 		},
 	);
 	const { handleFetch: handleFetchRol, data: dataRol } = useGet();
@@ -47,7 +38,11 @@ const UpdateUser = ({
 	}, [newData]);
 	useEffect(() => {
 		if (data) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}
@@ -55,20 +50,12 @@ const UpdateUser = ({
 	useEffect(() => {
 		if (isOpen) {
 			handleFetchRol({
-				url:
-					import.meta.env.VITE_ULR_API +
-					system.routeApi.rol.primary +
-					system.routeApi.rol.lisOfLimit,
+				url: urlRol + system.routeApi.rol.lisOfLimit,
 			});
 			handleFetchSite({
 				url: validate({ per: permissions.site })
-					? import.meta.env.VITE_ULR_API +
-					  system.routeApi.site.primary +
-					  system.routeApi.site.lisOfLimit
-					: import.meta.env.VITE_ULR_API +
-					  system.routeApi.site.primary +
-					  system.routeApi.site.item +
-					  site,
+					? urlSite + system.routeApi.site.lisOfLimit
+					: urlSite + system.routeApi.site.item + filter.site,
 			});
 		}
 	}, [isOpen]);

@@ -28,7 +28,7 @@ const initForm = {
 	name: '',
 	permissions: '',
 };
-const RegisterRol = ({ handleClose, handleList, order }) => {
+const RegisterRol = ({ handleClose, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -40,7 +40,10 @@ const RegisterRol = ({ handleClose, handleList, order }) => {
 	const { handleClick } = usePermission({ onChange: handleChange });
 	useEffect(() => {
 		if (data) {
-			handleList({ orderProperty: order });
+			handleList({
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}

@@ -43,7 +43,11 @@ const UpdateRol = ({ handleClose, handleList, order, newData }) => {
 	});
 	useEffect(() => {
 		if (data) {
-			handleList({ orderProperty: order });
+			handleList({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}

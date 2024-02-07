@@ -8,7 +8,7 @@ const initForm = {
 	name: '',
 	direction: '',
 };
-const RegisterSite = ({ handleClose, handleList, order }) => {
+const RegisterSite = ({ handleClose, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -19,7 +19,10 @@ const RegisterSite = ({ handleClose, handleList, order }) => {
 		});
 	useEffect(() => {
 		if (data) {
-			handleList({ orderProperty: order });
+			handleList({
+				orderProperty: filter.order,
+				status: filter.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}

@@ -23,7 +23,7 @@ const condition = [
 	{ label: 'Averiado', value: 'averiado' },
 	{ label: 'Desincorporado', value: 'desincorporado' },
 ];
-const RegisterFurniture = ({ handleClose, handleList, siteValue, order }) => {
+const RegisterFurniture = ({ handleClose, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({
 			initForm,
@@ -34,7 +34,11 @@ const RegisterFurniture = ({ handleClose, handleList, siteValue, order }) => {
 		});
 	useEffect(() => {
 		if (data) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter?.status,
+			});
 			setForm(initForm);
 			handleClose();
 		}

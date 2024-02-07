@@ -2,106 +2,88 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Btn from '../../components/Btn';
+import Filter from '../../components/Filter';
 import RegisterAssign from '../../components/GA/RegisterAssign';
 import TableDataAssign from '../../components/GA/TableDataAssign';
 import UpdateAssign from '../../components/GA/UpdateAssign';
 import Icons from '../../components/Icons';
 import Modal from '../../components/Modal';
 import Search from '../../components/Search';
-import Select from '../../components/Select';
 import Table from '../../components/Table';
 import { ContextSite } from '../../context/SiteContext';
-import { dataOrderAssign } from '../../data/dataOrder';
+import { dataOrderAssign, dataStatus } from '../../data/dataOrder';
 import { permissions } from '../../data/dataPermissions';
-import { system } from '../../data/system';
+import { headsAssign, system } from '../../data/system';
+import useGet from '../../hooks/useGet';
 import useLits from '../../hooks/useLists';
 import useModal from '../../hooks/useModal';
-import useOrder from '../../hooks/useOrder';
 import useSearch from '../../hooks/useSearch';
-import useSite from '../../hooks/useSite';
 import useValidate from '../../hooks/useValidate';
 import './style/page.css';
 
-const heads = [
-	system.component.form.label.inventory,
-	system.component.form.label.article,
-	system.component.form.label.serialOrCodeBN,
-	system.component.form.label.department,
-	system.component.form.label.quantity,
-	system.component.form.label.description,
-	system.component.form.label.remarks,
-	system.component.form.label.action,
-];
-const headsOfAction = [
-	system.component.form.label.inventory,
-	system.component.form.label.article,
-	system.component.form.label.serialOrCodeBN,
-	system.component.form.label.department,
-	system.component.form.label.quantity,
-	system.component.form.label.description,
-	system.component.form.label.remarks,
-];
-const url =
-	import.meta.env.VITE_ULR_API +
-	system.routeApi.assign.primary +
-	system.routeApi.assign.list;
+const urlAssign = import.meta.env.VITE_ULR_API + system.routeApi.assign.primary;
+const urlSite = import.meta.env.VITE_ULR_API + system.routeApi.site.primary;
+
 const Assign = () => {
 	const { validate } = useValidate();
-	const { site } = useContext(ContextSite);
+	const { site: siteDefault } = useContext(ContextSite);
+	const [filter, setFilter] = useState({
+		status: dataStatus[0].value,
+		site: siteDefault,
+		order: dataOrderAssign[0].value,
+	});
 	const { handleList, data, next, previous, dataNext, dataPrev } = useLits({
-		url,
+		url: urlAssign + system.routeApi.assign.list,
 	});
 	const [isOpenRegister, handleOpenRegister, handleCloseRegister] = useModal();
 	const [isOpenUpdate, handleOpenUpdate, handleCloseUpdate] = useModal();
-	const {
-		data: dataSite,
-		siteValue,
-		handleFetch: handleFetchSite,
-		handleChange: handleChangeSite,
-	} = useSite({ site });
+	const { handleFetch, data: dataSite } = useGet();
+
 	const {
 		search,
 		handleChange: handleChangeSearch,
 		handleSearch,
 		data: dataSearch,
-		nex: nexSearch,
+		next: nexSearch,
 		dataNext: dataNextSearch,
 		dataPrev: dataPrevSearch,
-		prev: prevSearch,
+		previous: prevSearch,
 		searchSubmit,
 	} = useSearch({
-		url:
-			import.meta.env.VITE_ULR_API +
-			system.routeApi.assign.primary +
-			system.routeApi.assign.search,
+		url: urlAssign + system.routeApi.assign.search,
 	});
-	const { order, handleChange: handleChangeOrder } = useOrder({
-		orderDefault: dataOrderAssign[0].value,
-	});
+
 	const [newData, setNewData] = useState(null);
 	useEffect(() => {
 		if (validate({ per: permissions.readAssign })) {
-			handleList({ orderProperty: order });
-			handleFetchSite({
+			handleList({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
+			handleFetch({
 				url: validate({ per: permissions.site })
-					? import.meta.env.VITE_ULR_API +
-					  system.routeApi.site.primary +
-					  system.routeApi.site.lisOfLimit
-					: import.meta.env.VITE_ULR_API +
-					  system.routeApi.site.primary +
-					  system.routeApi.site.item +
-					  site,
+					? urlSite + system.routeApi.site.lisOfLimit
+					: urlSite + system.routeApi.site.item + filter?.site,
 			});
 		}
 	}, []);
 	useEffect(() => {
 		if (validate({ per: permissions.readAssign })) {
-			handleList({ uidSite: siteValue, orderProperty: order });
+			handleList({
+				uidSite: filter.site,
+				orderProperty: filter.order,
+				status: filter?.status,
+			});
 		}
 		if (searchSubmit) {
-			handleSearch({ uidSite: siteValue, orderProperty: order });
+			handleSearch({
+				uidSite: filter?.site,
+				orderProperty: filter?.order,
+				status: filter?.status,
+			});
 		}
-	}, [siteValue, order]);
+	}, [filter?.order, filter?.site, filter?.status, searchSubmit]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
 			return dataSearch?.rows?.map(
@@ -109,7 +91,7 @@ const Assign = () => {
 					validate({ per: permissions.readAssign }) && (
 						<TableDataAssign
 							key={item.uid}
-							order={order}
+							filter={filter}
 							data={item}
 							handleList={handleList}
 							setNewData={setNewData}
@@ -123,7 +105,7 @@ const Assign = () => {
 					validate({ per: permissions.readAssign }) && (
 						<TableDataAssign
 							key={item.uid}
-							order={order}
+							filter={filter}
 							data={item}
 							handleList={handleList}
 							setNewData={setNewData}
@@ -138,12 +120,24 @@ const Assign = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => prevSearch({ orderProperty: order })}
+						handleClick={() =>
+							prevSearch({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={!dataPrevSearch ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => nexSearch({ orderProperty: order })}
+						handleClick={() =>
+							nexSearch({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNextSearch ? 'page__icon--hidden' : ''
@@ -155,12 +149,24 @@ const Assign = () => {
 			return (
 				<div className='page__paginate'>
 					<Btn
-						handleClick={() => previous({ orderProperty: order })}
+						handleClick={() =>
+							previous({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={!dataPrev ? 'page__icon--hidden' : ''}
 					/>
 					<Btn
-						handleClick={() => next({ orderProperty: order })}
+						handleClick={() =>
+							next({
+								uidSite: filter?.site,
+								orderProperty: filter?.order,
+								status: filter?.status,
+							})
+						}
 						nameIcon={'arrow'}
 						classIcon={`${
 							!dataNext ? 'page__icon--hidden' : ''
@@ -181,14 +187,18 @@ const Assign = () => {
 		search,
 	]);
 	const handleSearchComponent = e =>
-		handleSearch({ e, uidSite: siteValue, orderProperty: order });
+		handleSearch({
+			e,
+			uidSite: filter?.site,
+			orderProperty: filter?.order,
+			status: filter?.status,
+		});
 	return (
 		<>
 			{validate({ per: permissions.createAssign }) && (
 				<Modal isOpen={isOpenRegister} close={handleCloseRegister}>
 					<RegisterAssign
-						order={order}
-						siteValue={siteValue}
+						filter={filter}
 						handleList={handleList}
 						handleClose={handleCloseRegister}
 					/>
@@ -197,8 +207,7 @@ const Assign = () => {
 			{validate({ per: permissions.updateAssign }) && newData && (
 				<Modal isOpen={isOpenUpdate} close={handleCloseUpdate}>
 					<UpdateAssign
-						order={order}
-						siteValue={siteValue}
+						filter={filter}
 						newData={newData}
 						handleList={handleList}
 						isOpen={isOpenUpdate}
@@ -224,31 +233,12 @@ const Assign = () => {
 				</div>
 				{validate({ per: permissions.readAssign }) && (
 					<div className='page__options'>
-						<Select
-							className='page__input'
-							name={'uidSite'}
-							title={system.component.form.select.site}
-							value={siteValue}
-							onChange={handleChangeSite}
-							data={
-								validate({ per: permissions.site })
-									? dataSite?.map(item => ({
-											value: item.uid,
-											label: item.name,
-									  }))
-									: [{ value: dataSite?.uid, label: dataSite?.name }]
-							}
-							valueDefault={site}
-							disabled={validate({ per: permissions.site })}
-						/>
-						<Select
-							className='page__input--filter'
-							name={'orderProperty'}
-							title={system.component.form.select.filter}
-							value={order}
-							onChange={handleChangeOrder}
-							data={dataOrderAssign}
-							valueDefault={dataOrderAssign[0].value}
+						<Filter
+							filter={filter}
+							setFilter={setFilter}
+							site={dataSite}
+							order={dataOrderAssign}
+							status={dataStatus}
 						/>
 						<Search
 							value={search}
@@ -259,12 +249,12 @@ const Assign = () => {
 				)}
 				{validate({ per: permissions.readAssign }) && (
 					<Table
-						heads={
-							validate({ per: permissions.deleteAssign }) ||
-							validate({ per: permissions.updateAssign })
-								? heads
-								: headsOfAction
-						}
+						heads={[
+							...headsAssign,
+							(validate({ per: permissions.deleteUser }) ||
+								validate({ per: permissions.updateUser })) &&
+								system.component.form.label.action,
+						].filter(Boolean)}
 					>
 						{renderData()}
 					</Table>

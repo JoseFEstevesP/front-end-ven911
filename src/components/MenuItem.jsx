@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const MenuItem = ({ to, text }) => {
+const MenuItem = memo(({ to, text }) => {
 	return (
 		<li className='menu__li'>
 			<NavLink
@@ -14,5 +15,6 @@ const MenuItem = ({ to, text }) => {
 			</NavLink>
 		</li>
 	);
-};
+});
+MenuItem.displayName = 'MenuItem';
 export default MenuItem;

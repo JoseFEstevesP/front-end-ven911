@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { memo, useCallback, useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ContextToken } from '../context/TokenContext';
 import { permissions } from '../data/dataPermissions';
@@ -9,27 +9,42 @@ import Btn from './Btn';
 import Icons from './Icons';
 import Theme from './Theme';
 import './style/menu.css';
-const Menu = ({ children, className, route }) => {
+
+const Menu = memo(({ children, className, route }) => {
+	// Obtiene la función de validación del contexto
 	const { validate } = useValidate();
-	const menu = useRef(null);
-	const bar = useRef(null);
-	const profile = useRef(null);
-	const { handleClickExit } = useExit();
+	// Obtiene el token del contexto
 	const { token } = useContext(ContextToken);
-	const handleClick = () => {
+	// Estado para el menú
+	const [menu, setMenu] = useState(null);
+	// Estado para la barra
+	const [bar, setBar] = useState(null);
+	// Estado para el perfil
+	const [profile, setProfile] = useState(null);
+	// Obtiene la función de salida del hook useExit
+	const { handleClickExit } = useExit();
+
+	// Función para manejar el clic en el botón del menú
+	const handleClick = useCallback(() => {
 		document.body.classList.toggle('none');
-		menu.current.classList.toggle('menu__menu--show');
-		bar.current.classList.toggle('menu__bar--show');
-	};
-	const handleHome = () => {
+		menu.classList.toggle('menu__menu--show');
+		bar.classList.toggle('menu__bar--show');
+	}, [menu, bar]);
+
+	// Función para manejar el clic en el enlace de inicio
+	const handleHome = useCallback(() => {
 		document.body.classList.remove('none');
-		menu.current.classList.remove('menu__menu--show');
-		bar.current.classList.remove('menu__bar--show');
-	};
-	const handleProfile = () => {
-		profile.current.classList.toggle('menu__profileAndExit--show');
-	};
-	const handleExit = () => handleClickExit();
+		menu.classList.remove('menu__menu--show');
+		bar.classList.remove('menu__bar--show');
+	}, [menu, bar]);
+
+	// Función para manejar el clic en el perfil
+	const handleProfile = useCallback(() => {
+		profile.classList.toggle('menu__profileAndExit--show');
+	}, [profile]);
+
+	// Función para manejar la salida
+	const handleExit = useCallback(() => handleClickExit(), []);
 
 	return (
 		<>
@@ -42,10 +57,10 @@ const Menu = ({ children, className, route }) => {
 				</Link>
 				<div className='menu__contentBtn'>
 					<button className='menu__btn' onClick={handleClick} type='button'>
-						<div className='menu__bar' ref={bar}></div>
+						<div className='menu__bar' ref={setBar}></div>
 					</button>
 				</div>
-				<nav className='menu__menu' ref={menu}>
+				<nav className='menu__menu' ref={setMenu}>
 					<ul className='menu__ul'>
 						{children}
 						{token && (
@@ -55,7 +70,7 @@ const Menu = ({ children, className, route }) => {
 									className='menu__btnProfile'
 									handleClick={handleProfile}
 								/>
-								<ul className='menu__profileAndExit' ref={profile}>
+								<ul className='menu__profileAndExit' ref={setProfile}>
 									{validate({ per: permissions.profile }) && (
 										<li className='menu__profileAndExitItem'>
 											<NavLink
@@ -85,5 +100,6 @@ const Menu = ({ children, className, route }) => {
 			</section>
 		</>
 	);
-};
+});
+Menu.displayName = 'Menu';
 export default Menu;

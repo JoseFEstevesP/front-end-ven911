@@ -94,6 +94,11 @@ export const perSite = [
 	},
 	{
 		uid: crypto.randomUUID(),
+		label: system.component.rol.permissionLabel.siteAssignation,
+		value: permissions.siteAssignation,
+	},
+	{
+		uid: crypto.randomUUID(),
 		label: system.component.rol.permissionLabel.create,
 		value: permissions.createSite,
 	},

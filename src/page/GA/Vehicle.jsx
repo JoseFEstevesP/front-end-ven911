@@ -57,7 +57,7 @@ const Vehicle = () => {
 		if (validate({ per: permissions.readVehicle })) {
 			handleList({ orderProperty: filter?.order, status: filter?.status });
 			handleFetch({
-				url: validate({ per: permissions.site })
+				url: validate({ per: permissions.siteAssignation })
 					? urlSite + system.routeApi.site.lisOfLimit
 					: urlSite + system.routeApi.site.item + filter?.site,
 			});

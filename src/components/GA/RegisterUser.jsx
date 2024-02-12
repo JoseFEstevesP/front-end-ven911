@@ -48,9 +48,11 @@ const RegisterUser = ({ isOpen, handleClose, handleList, filter }) => {
 			handleFetchRol({
 				url: urlRol + system.routeApi.rol.lisOfLimit,
 			});
-			handleFetchSite({
-				url: urlSite + system.routeApi.site.lisOfLimit,
-			});
+			if (validate({ per: permissions.siteAssignation })) {
+				handleFetchSite({
+					url: urlSite + system.routeApi.site.lisOfLimit,
+				});
+			}
 			setForm({ ...form, uidSite: filter.site });
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -123,7 +125,7 @@ const RegisterUser = ({ isOpen, handleClose, handleList, filter }) => {
 					error={errors.uidRol}
 					data={dataRol?.map(item => ({ value: item.uid, label: item.name }))}
 				/>
-				{validate({ per: permissions.site }) && (
+				{validate({ per: permissions.siteAssignation }) && (
 					<Select
 						className='register__input'
 						label={system.component.form.label.site}

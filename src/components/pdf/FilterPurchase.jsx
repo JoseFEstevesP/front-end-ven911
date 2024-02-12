@@ -48,7 +48,7 @@ const FilterPurchase = ({ isOpen, handleClose, handleFetch, url }) => {
 	});
 
 	useEffect(() => {
-		if (isOpen) {
+		if (isOpen && validate({ per: permissions.siteAssignation })) {
 			handleFetchSite({
 				url:
 					import.meta.env.VITE_ULR_API +
@@ -64,7 +64,7 @@ const FilterPurchase = ({ isOpen, handleClose, handleFetch, url }) => {
 		<section className='register'>
 			<h2 className='register__title'>{system.component.user.register}</h2>
 			<form onSubmit={submit} className='register__form'>
-				{validate({ per: permissions.site }) && (
+				{validate({ per: permissions.siteAssignation }) && (
 					<Select
 						className='register__input'
 						label={system.component.form.label.site}

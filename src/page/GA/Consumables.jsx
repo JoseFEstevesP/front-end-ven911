@@ -61,7 +61,7 @@ const Consumables = () => {
 				status: filter?.status,
 			});
 			handleFetch({
-				url: validate({ per: permissions.site })
+				url: validate({ per: permissions.siteAssignation })
 					? urlSite + system.routeApi.site.lisOfLimit
 					: urlSite + system.routeApi.site.item + filter.site,
 			});

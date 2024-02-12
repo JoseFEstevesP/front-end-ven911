@@ -52,11 +52,11 @@ const UpdateUser = ({ isOpen, handleClose, newData, handleList, filter }) => {
 			handleFetchRol({
 				url: urlRol + system.routeApi.rol.lisOfLimit,
 			});
-			handleFetchSite({
-				url: validate({ per: permissions.site })
-					? urlSite + system.routeApi.site.lisOfLimit
-					: urlSite + system.routeApi.site.item + filter.site,
-			});
+			if (validate({ per: permissions.siteAssignation })) {
+				handleFetchSite({
+					url: urlSite + system.routeApi.site.lisOfLimit,
+				});
+			}
 		}
 	}, [isOpen]);
 
@@ -120,17 +120,22 @@ const UpdateUser = ({ isOpen, handleClose, newData, handleList, filter }) => {
 					error={errors.uidRol}
 					data={dataRol?.map(item => ({ value: item.uid, label: item.name }))}
 				/>
-				<Select
-					className='register__input'
-					label={system.component.form.label.site}
-					name={'uidSite'}
-					title={system.component.form.select.site}
-					value={form.uidSite}
-					valueDefault={form.uidSite}
-					onChange={handleChange}
-					error={errors.uidSite}
-					data={dataSite?.map(item => ({ value: item.uid, label: item.name }))}
-				/>
+				{validate({ per: permissions.siteAssignation }) && (
+					<Select
+						className='register__input'
+						label={system.component.form.label.site}
+						name={'uidSite'}
+						title={system.component.form.select.site}
+						value={form.uidSite}
+						valueDefault={form.uidSite}
+						onChange={handleChange}
+						error={errors.uidSite}
+						data={dataSite?.map(item => ({
+							value: item.uid,
+							label: item.name,
+						}))}
+					/>
+				)}
 				<Btn
 					className='btnStyle register__btn'
 					text={system.component.btn.submit}

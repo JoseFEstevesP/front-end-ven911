@@ -188,6 +188,7 @@ export const system = {
 			permissionLabel: {
 				super: 'Super usuario',
 				user: 'Usuario',
+				siteAssignation: 'Asignación',
 				rol: 'Rol',
 				site: 'Sede',
 				profile: 'Perfil',

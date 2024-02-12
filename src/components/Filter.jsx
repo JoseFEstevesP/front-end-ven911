@@ -26,7 +26,7 @@ const Filter = ({ filter, setFilter, site, order, status }) => {
 					value={filter?.site}
 					onChange={handleFilter}
 					data={
-						validate({ per: permissions.site })
+						validate({ per: permissions.siteAssignation })
 							? site?.map(item => ({
 									value: item.uid,
 									label: item.name,
@@ -34,7 +34,7 @@ const Filter = ({ filter, setFilter, site, order, status }) => {
 							: [{ value: site?.uid, label: site?.name }]
 					}
 					valueDefault={filter?.site}
-					disabled={validate({ per: permissions.site })}
+					disabled={validate({ per: permissions.siteAssignation })}
 				/>
 			)}
 			{/* Select para filtrar por orden */}

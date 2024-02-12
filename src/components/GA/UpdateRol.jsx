@@ -28,7 +28,7 @@ const initForm = {
 	name: '',
 	permissions: '',
 };
-const UpdateRol = ({ handleClose, handleList, order, newData }) => {
+const UpdateRol = ({ handleClose, handleList, filter, newData }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
 			initForm,

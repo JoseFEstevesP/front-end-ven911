@@ -44,6 +44,7 @@ const Menu = memo(({ children, className, route }) => {
 	}, [profile]);
 
 	// Función para manejar la salida
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const handleExit = useCallback(() => handleClickExit(), []);
 
 	return (

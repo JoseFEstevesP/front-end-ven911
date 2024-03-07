@@ -65,7 +65,7 @@ export const system = {
 						portfolio: '',
 					},
 					OC: {
-						data: 'Oswaldo Chinchulla C.I: 9.324.039',
+						data: 'Oswaldo Chinchilla C.I: 9.324.039',
 						portfolio: '',
 					},
 				},
@@ -206,7 +206,7 @@ export const system = {
 				read: 'Leer',
 				rol: 'Rol',
 				site: 'Sede',
-				siteAssignation: 'Asignación',
+				siteAssignation: 'Asignación de sede',
 				super: 'Super usuario',
 				tci: 'Tecnología comunicación e información',
 				technology: 'Tecnología',

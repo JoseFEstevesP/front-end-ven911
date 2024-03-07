@@ -58,7 +58,6 @@ const useSearch = ({ url }) => {
 
 		// Realiza la solicitud GET con los parámetros de búsqueda y el valor de búsqueda actual
 		if (search !== '') {
-			console.log("useSearch -> search !== '':", search !== '');
 			handleFetch({ url: urlWithParams });
 		}
 	};

@@ -7,7 +7,6 @@ const useUpdate = ({ initForm, url }) => {
 	const { setMsg } = useContext(ContextMsg);
 	const { data, error, loading, handleFetch } = usePut();
 	const [form, setForm] = useState(initForm);
-	console.log('useUpdate -> form:', form);
 	const [errors, setErrors] = useState({});
 
 	useEffect(() => {

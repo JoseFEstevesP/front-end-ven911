@@ -31,7 +31,7 @@ const Creators = () => {
 						{system.component.footer.creator.creators.BM.data}
 					</li>
 					<li className='creators__item'>
-						{system.component.footer.creator.creators.BM.data}
+						{system.component.footer.creator.creators.OC.data}
 					</li>
 				</ul>
 			</div>

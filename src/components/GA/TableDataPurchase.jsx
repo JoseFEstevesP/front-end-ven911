@@ -27,7 +27,8 @@ const handleEdit = (setNewData, handleOpenUpdate, data) => {
 			supplier: data.supplier,
 			warranty: data.warranty,
 			orderNumber: data.orderNumber,
-			location: data.location,
+			status: data.status,
+			olStatus: data.status,
 		});
 		handleOpenUpdate();
 	};
@@ -69,7 +70,6 @@ const TableDataPurchase = ({
 			<Cell>{data.quantity}</Cell>
 			<Cell>{data.supplier}</Cell>
 			<Cell>{data.warranty}</Cell>
-			<Cell>{data.location}</Cell>
 			{(validate({ per: permissions.deletePurchase }) ||
 				validate({ per: permissions.updatePurchase })) && (
 				<Cell>

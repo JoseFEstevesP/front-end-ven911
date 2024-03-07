@@ -61,32 +61,32 @@ const Rol = () => {
 	}, [filter?.order, filter?.status, searchSubmit]);
 	const renderData = useCallback(() => {
 		if (searchSubmit) {
-			return dataSearch?.rows?.map(
-				item =>
-					validate({ per: permissions.readRol }) && (
-						<TableDataRol
-							key={item.uid}
-							data={item}
-							handleList={handleList}
-							setNewData={setNewData}
-							handleOpenUpdate={handleOpenUpdate}
-							filter={filter}
-						/>
-					),
+			return (
+				validate({ per: permissions.readRol }) &&
+				dataSearch?.rows?.map(item => (
+					<TableDataRol
+						key={crypto.randomUUID()}
+						data={item}
+						handleList={handleList}
+						setNewData={setNewData}
+						handleOpenUpdate={handleOpenUpdate}
+						filter={filter}
+					/>
+				))
 			);
 		} else {
-			return data?.rows?.map(
-				item =>
-					validate({ per: permissions.readRol }) && (
-						<TableDataRol
-							key={item.uid}
-							data={item}
-							handleList={handleList}
-							setNewData={setNewData}
-							handleOpenUpdate={handleOpenUpdate}
-							filter={filter}
-						/>
-					),
+			return (
+				validate({ per: permissions.readRol }) &&
+				data?.rows?.map(item => (
+					<TableDataRol
+						key={crypto.randomUUID()}
+						data={item}
+						handleList={handleList}
+						setNewData={setNewData}
+						handleOpenUpdate={handleOpenUpdate}
+						filter={filter}
+					/>
+				))
 			);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

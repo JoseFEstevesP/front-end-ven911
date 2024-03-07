@@ -20,12 +20,8 @@ const handleEdit = (setNewData, handleOpenUpdate, data) => {
 			description: data.description,
 			serial: data.serial,
 			quantity: data.quantity,
-			value: data.value,
 			condition: data.condition,
 			dateOfAcquisition: data.dateOfAcquisition,
-			location: data.location,
-			warranty: data.warranty,
-			remarks: data.remarks,
 			codeBN: data.codeBN,
 		});
 		handleOpenUpdate();
@@ -62,12 +58,8 @@ const TableDataFurniture = ({
 			<Cell>{data.serial}</Cell>
 			<Cell>{data.quantity}</Cell>
 			<Cell>{data.assign}</Cell>
-			<Cell>{data.value} BS</Cell>
 			<Cell>{data.condition}</Cell>
-			<Cell>{data.location}</Cell>
 			<Cell>{data.dateOfAcquisition}</Cell>
-			<Cell>{data.warranty}</Cell>
-			<Cell>{data.remarks}</Cell>
 			<Cell>{data.codeBN}</Cell>
 			{(validate({ per: permissions.deleteFurniture }) ||
 				validate({ per: permissions.updateFurniture })) && (

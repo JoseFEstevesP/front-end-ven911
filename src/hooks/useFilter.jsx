@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useFilter = ({ initForm, options, handleClose, handleFetch }) => {
+const useFilter = ({ initForm, handleClose, handleFetch }) => {
 	const [filterOptions, setFilterOptions] = useState(initForm);
 	const handleChange = e => {
 		const { name, value } = e.target;
@@ -8,11 +8,23 @@ const useFilter = ({ initForm, options, handleClose, handleFetch }) => {
 	};
 	const handleSubmit = ({ url, e }) => {
 		e.preventDefault();
+		// Crea los parámetros de búsqueda
+		const params = new URLSearchParams({
+			dataQuantity: filterOptions?.dataQuantity,
+			orderProperty: filterOptions?.orderProperty,
+			order: filterOptions?.order,
+			status: filterOptions?.dataStatus,
+			...(filterOptions?.uidSite && { uidSite: filterOptions.uidSite }),
+			...(filterOptions?.startDate && { startDate: filterOptions.startDate }),
+			...(filterOptions?.endDate && { endDate: filterOptions.endDate }),
+			...(filterOptions?.search && { search: filterOptions.search }),
+		});
+
+		// Crea la URL con los parámetros de búsqueda
+		const urlWithParams = `${url}?${params}`;
+
 		handleFetch({
-			url: `${url}?${Object.entries(filterOptions)
-				.filter(([key, value]) => value !== '')
-				.map(([key, value]) => `${options[key] || key}=${value}`)
-				.join('&')}`,
+			url: urlWithParams,
 		});
 
 		handleClose();

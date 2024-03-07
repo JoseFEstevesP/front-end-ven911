@@ -378,11 +378,6 @@ export const dataOrderBreakdownReport = [
 	},
 	{
 		uid: crypto.randomUUID(),
-		label: system.component.form.label.symptoms,
-		value: 'symptoms',
-	},
-	{
-		uid: crypto.randomUUID(),
 		label: system.component.form.label.breakdownDepartment,
 		value: 'breakdownDepartment',
 	},

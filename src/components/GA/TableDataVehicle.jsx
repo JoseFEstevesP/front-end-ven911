@@ -22,12 +22,8 @@ const handleEdit = (setNewData, handleOpenUpdate, data) => {
 			model: data.model,
 			place: data.place,
 			quantity: data.quantity,
-			value: data.value,
 			condition: data.condition,
 			dateOfAcquisition: data.dateOfAcquisition,
-			location: data.location,
-			warranty: data.warranty,
-			remarks: data.remarks,
 			codeBN: data.codeBN,
 		});
 		handleOpenUpdate();
@@ -67,12 +63,8 @@ const TableDataVehicle = ({
 			<Cell>{data.place}</Cell>
 			<Cell>{data.quantity}</Cell>
 			<Cell>{data.assign}</Cell>
-			<Cell>{data.value} BS</Cell>
 			<Cell>{data.condition}</Cell>
-			<Cell>{data.location}</Cell>
 			<Cell>{data.dateOfAcquisition}</Cell>
-			<Cell>{data.warranty}</Cell>
-			<Cell>{data.remarks}</Cell>
 			<Cell>{data.codeBN}</Cell>
 			{(validate({ per: permissions.deleteVehicle }) ||
 				validate({ per: permissions.updateVehicle })) && (

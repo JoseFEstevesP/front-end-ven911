@@ -1,10 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
+import { dataStatus } from '../../data/dataOrder';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useUpdate from '../../hooks/useUpdate';
+import useValidate from '../../hooks/useValidate';
 import Btn from '../Btn';
 import Input from '../Input';
 import InputCalendar from '../InputCalendar';
+import Select from '../Select';
 import './style/register.css';
 const initForm = {
 	uid: '',
@@ -18,9 +22,11 @@ const initForm = {
 	supplier: '',
 	warranty: '',
 	orderNumber: '',
-	location: '',
+	status: '',
+	olStatus: '',
 };
 const UpdatePurchase = ({ handleClose, newData, handleList, filter }) => {
+	const { validate } = useValidate();
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
 			initForm,
@@ -156,16 +162,18 @@ const UpdatePurchase = ({ handleClose, newData, handleList, filter }) => {
 					value={form.warranty}
 					error={errors.warranty}
 				/>
-				<Input
-					className='register__input'
-					iconName={'location'}
-					name={'location'}
-					label={system.component.form.label.location}
-					placeholder={system.component.form.placeholder.location}
-					onChange={handleChange}
-					value={form.location}
-					error={errors.location}
-				/>
+				{validate({ per: permissions.super }) && (
+					<Select
+						className='page__input'
+						name={'status'}
+						label={system.component.form.label.status}
+						title={system.component.form.select.status}
+						value={form.status}
+						valueDefault={form.status}
+						onChange={handleChange}
+						data={dataStatus}
+					/>
+				)}
 				<Btn
 					className='btnStyle register__btn'
 					text={system.component.btn.submit}

@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
+import { inventory } from '../../data/dataInventory';
 import { system } from '../../data/system';
 import useDataInventory from '../../hooks/useDataInventory';
 import useRegister from '../../hooks/useRegister';
@@ -16,12 +17,6 @@ const initForm = {
 	description: '',
 	remarks: '',
 };
-const inventory = [
-	{ label: 'Consumibles', value: 'consumable' },
-	{ label: 'Mobiliario', value: 'furniture' },
-	{ label: 'Tecnología', value: 'technology' },
-	{ label: 'Vehículo', value: 'vehicle' },
-];
 const RegisterAssign = ({ handleClose, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
 		useRegister({

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 const usePermission = ({ onChange }) => {
 	const [data, setData] = useState([]);
+	console.log('usePermission -> data:', data);
 
 	const handleClick = value => {
 		if (!data.includes(value)) {

@@ -8,7 +8,6 @@ import './style/register.css';
 const initForm = {
 	goods: '',
 	problem: '',
-	symptoms: '',
 	condition: '',
 	breakdownDepartment: '',
 	location: '',
@@ -68,16 +67,6 @@ const RegisterBreakdownReport = ({ handleClose, handleList, filter }) => {
 					onChange={handleChange}
 					value={form.problem}
 					error={errors.problem}
-				/>
-				<Input
-					className='register__input'
-					iconName={'description'}
-					name={'symptoms'}
-					label={system.component.form.label.symptoms}
-					placeholder={system.component.form.placeholder.symptoms}
-					onChange={handleChange}
-					value={form.symptoms}
-					error={errors.symptoms}
 				/>
 				<Select
 					className='register__input'

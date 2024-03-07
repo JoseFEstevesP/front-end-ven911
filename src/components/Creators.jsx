@@ -30,6 +30,9 @@ const Creators = () => {
 					<li className='creators__item'>
 						{system.component.footer.creator.creators.BM.data}
 					</li>
+					<li className='creators__item'>
+						{system.component.footer.creator.creators.BM.data}
+					</li>
 				</ul>
 			</div>
 		</>

@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
+import { inventory } from '../../data/dataInventory';
 import { system } from '../../data/system';
 import useRegister from '../../hooks/useRegister';
 import Btn from '../Btn';
 import Input from '../Input';
 import InputCalendar from '../InputCalendar';
+import Select from '../Select';
 import './style/register.css';
 const initForm = {
 	product: '',
@@ -16,7 +18,7 @@ const initForm = {
 	supplier: '',
 	warranty: '',
 	orderNumber: '',
-	location: '',
+	inventory: '',
 };
 const RegisterPurchase = ({ handleClose, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
@@ -146,15 +148,15 @@ const RegisterPurchase = ({ handleClose, handleList, filter }) => {
 					value={form.warranty}
 					error={errors.warranty}
 				/>
-				<Input
+				<Select
 					className='register__input'
-					iconName={'location'}
-					name={'location'}
-					label={system.component.form.label.location}
-					placeholder={system.component.form.placeholder.location}
+					label={system.component.form.label.inventory}
+					name={'inventory'}
+					title={system.component.form.select.inventory}
+					value={form.inventory}
 					onChange={handleChange}
-					value={form.location}
-					error={errors.location}
+					error={errors.inventory}
+					data={inventory}
 				/>
 				<Btn
 					className='btnStyle register__btn'

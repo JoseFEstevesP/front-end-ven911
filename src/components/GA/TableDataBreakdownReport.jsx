@@ -19,7 +19,6 @@ const handleEdit = (setNewData, handleOpenUpdate, data) => {
 			uid: data.uid,
 			goods: data.goods,
 			problem: data.problem,
-			symptoms: data.symptoms,
 			condition: data.condition,
 			breakdownDepartment: data.breakdownDepartment,
 			location: data.location,
@@ -57,7 +56,6 @@ const TableDataBreakdownReport = ({
 		<TableCell>
 			<Cell>{data.goods}</Cell>
 			<Cell>{data.problem}</Cell>
-			<Cell>{data.symptoms}</Cell>
 			<Cell>{data.condition}</Cell>
 			<Cell>{data.dateOfReport}</Cell>
 			<Cell>{data.timeOfReport}</Cell>

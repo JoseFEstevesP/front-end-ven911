@@ -10,10 +10,7 @@ const initForm = {
 	serial: '',
 	brand: '',
 	quantity: '',
-	value: '',
-	location: '',
 	dateOfAcquisition: '',
-	remarks: '',
 };
 const RegisterConsumables = ({ handleClose, handleList, filter }) => {
 	const { form, setForm, handleChange, handleSubmit, errors, data } =
@@ -83,27 +80,6 @@ const RegisterConsumables = ({ handleClose, handleList, filter }) => {
 					value={form.quantity}
 					error={errors.quantity}
 				/>
-				<Input
-					className='register__input'
-					iconName={'bs'}
-					name={'value'}
-					type='number'
-					label={system.component.form.label.value}
-					placeholder={system.component.form.placeholder.value}
-					onChange={handleChange}
-					value={form.value}
-					error={errors.value}
-				/>
-				<Input
-					className='register__input'
-					iconName={'location'}
-					name={'location'}
-					label={system.component.form.label.location}
-					placeholder={system.component.form.placeholder.location}
-					onChange={handleChange}
-					value={form.location}
-					error={errors.location}
-				/>
 				<InputCalendar
 					className='register__input'
 					name={'dateOfAcquisition'}
@@ -111,16 +87,6 @@ const RegisterConsumables = ({ handleClose, handleList, filter }) => {
 					onChange={handleChange}
 					value={form.dateOfAcquisition}
 					error={errors.dateOfAcquisition}
-				/>
-				<Input
-					className='register__input'
-					iconName={'shield'}
-					name={'remarks'}
-					label={system.component.form.label.remarks}
-					placeholder={system.component.form.placeholder.remarks}
-					onChange={handleChange}
-					value={form.remarks}
-					error={errors.remarks}
 				/>
 				<Btn
 					className='btnStyle register__btn'

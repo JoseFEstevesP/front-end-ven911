@@ -10,12 +10,8 @@ const initForm = {
 	description: '',
 	serial: '',
 	quantity: '',
-	value: '',
 	condition: '',
 	dateOfAcquisition: '',
-	location: '',
-	warranty: '',
-	remarks: '',
 	codeBN: '',
 };
 const condition = [
@@ -79,17 +75,6 @@ const RegisterFurniture = ({ handleClose, handleList, filter }) => {
 					value={form.quantity}
 					error={errors.quantity}
 				/>
-				<Input
-					className='register__input'
-					iconName={'bs'}
-					name={'value'}
-					type='number'
-					label={system.component.form.label.value}
-					placeholder={system.component.form.placeholder.value}
-					onChange={handleChange}
-					value={form.value}
-					error={errors.value}
-				/>
 				<Select
 					className='register__input'
 					label={system.component.form.label.condition}
@@ -107,36 +92,6 @@ const RegisterFurniture = ({ handleClose, handleList, filter }) => {
 					onChange={handleChange}
 					value={form.dateOfAcquisition}
 					error={errors.dateOfAcquisition}
-				/>
-				<Input
-					className='register__input'
-					iconName={'location'}
-					name={'location'}
-					label={system.component.form.label.location}
-					placeholder={system.component.form.placeholder.location}
-					onChange={handleChange}
-					value={form.location}
-					error={errors.location}
-				/>
-				<Input
-					className='register__input'
-					iconName={'shield'}
-					name={'warranty'}
-					label={system.component.form.label.warranty}
-					placeholder={system.component.form.placeholder.warranty}
-					onChange={handleChange}
-					value={form.warranty}
-					error={errors.warranty}
-				/>
-				<Input
-					className='register__input'
-					iconName={'shield'}
-					name={'remarks'}
-					label={system.component.form.label.remarks}
-					placeholder={system.component.form.placeholder.remarks}
-					onChange={handleChange}
-					value={form.remarks}
-					error={errors.remarks}
 				/>
 				<Input
 					className='register__input'

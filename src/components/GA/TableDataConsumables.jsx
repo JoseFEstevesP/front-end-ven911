@@ -21,10 +21,7 @@ const handleEdit = (setNewData, handleOpenUpdate, data) => {
 			serial: data.serial,
 			brand: data.brand,
 			quantity: data.quantity,
-			value: data.value,
-			location: data.location,
 			dateOfAcquisition: data.dateOfAcquisition,
-			remarks: data.remarks,
 		});
 		handleOpenUpdate();
 	};
@@ -62,10 +59,7 @@ const TableDataConsumables = ({
 			<Cell>{data.brand}</Cell>
 			<Cell>{data.quantity}</Cell>
 			<Cell>{data.assign}</Cell>
-			<Cell>{data.value} BS</Cell>
-			<Cell>{data.location}</Cell>
 			<Cell>{data.dateOfAcquisition}</Cell>
-			<Cell>{data.remarks}</Cell>
 			{(validate({ per: permissions.deleteConsumables }) ||
 				validate({ per: permissions.updateConsumables })) && (
 				<Cell>

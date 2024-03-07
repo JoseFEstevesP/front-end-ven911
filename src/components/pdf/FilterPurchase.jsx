@@ -94,7 +94,7 @@ const FilterPurchase = ({ isOpen, handleClose, handleFetch, url }) => {
 					name={'order'}
 					label={system.component.form.label.order}
 					title={system.component.form.select.order}
-					value={filterOptions.order || ''}
+					value={filterOptions?.order || ''}
 					onChange={handleChange}
 					data={dataOrder}
 					valueDefault={dataOrder[0].value}

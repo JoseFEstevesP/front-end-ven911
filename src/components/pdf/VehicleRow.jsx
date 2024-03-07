@@ -23,22 +23,10 @@ const VehicleRow = ({ data }) => {
 				<Text style={styles.tableCell}>{item.assign}</Text>
 			</View>
 			<View style={styles.tableCol}>
-				<Text style={styles.tableCell}>{item.value}BS</Text>
-			</View>
-			<View style={styles.tableCol}>
 				<Text style={styles.tableCell}>{item.condition}</Text>
 			</View>
 			<View style={styles.tableCol}>
-				<Text style={styles.tableCell}>{item.location}</Text>
-			</View>
-			<View style={styles.tableCol}>
 				<Text style={styles.tableCell}>{item.dateOfAcquisition}</Text>
-			</View>
-			<View style={styles.tableCol}>
-				<Text style={styles.tableCell}>{item.warranty}</Text>
-			</View>
-			<View style={styles.tableCol}>
-				<Text style={styles.tableCell}>{item.remarks}</Text>
 			</View>
 			<View style={styles.tableCol}>
 				<Text style={styles.tableCell}>{item.codeBN}</Text>

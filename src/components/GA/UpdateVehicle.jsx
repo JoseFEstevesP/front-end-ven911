@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
+import { dataStatus } from '../../data/dataOrder';
+import { permissions } from '../../data/dataPermissions';
 import { system } from '../../data/system';
 import useUpdate from '../../hooks/useUpdate';
+import useValidate from '../../hooks/useValidate';
 import Btn from '../Btn';
 import Input from '../Input';
 import InputCalendar from '../InputCalendar';
@@ -17,6 +20,8 @@ const initForm = {
 	condition: '',
 	dateOfAcquisition: '',
 	codeBN: '',
+	status: '',
+	olStatus: '',
 };
 const condition = [
 	{ label: 'Operativo', value: 'operativo' },
@@ -24,6 +29,7 @@ const condition = [
 	{ label: 'Desincorporado', value: 'desincorporado' },
 ];
 const UpdateVehicle = ({ handleClose, newData, handleList, filter }) => {
+	const { validate } = useValidate();
 	const { form, setForm, handleChange, handleSubmit, errors, data } = useUpdate(
 		{
 			initForm,
@@ -136,6 +142,18 @@ const UpdateVehicle = ({ handleClose, newData, handleList, filter }) => {
 					value={form.codeBN}
 					error={errors.codeBN}
 				/>
+				{validate({ per: permissions.super }) && (
+					<Select
+						className='page__input'
+						name={'status'}
+						label={system.component.form.label.status}
+						title={system.component.form.select.status}
+						value={form.status}
+						valueDefault={form.status}
+						onChange={handleChange}
+						data={dataStatus}
+					/>
+				)}
 				<Btn
 					className='btnStyle register__btn'
 					text={system.component.btn.submit}

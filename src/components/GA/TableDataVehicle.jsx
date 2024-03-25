@@ -25,6 +25,8 @@ const handleEdit = (setNewData, handleOpenUpdate, data) => {
 			condition: data.condition,
 			dateOfAcquisition: data.dateOfAcquisition,
 			codeBN: data.codeBN,
+			status: data.status,
+			olStatus: data.status,
 		});
 		handleOpenUpdate();
 	};

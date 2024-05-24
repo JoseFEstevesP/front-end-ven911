@@ -27,6 +27,8 @@ const handleEdit = (setNewData, handleOpenUpdate, data) => {
 			codeBN: data.codeBN,
 			status: data.status,
 			olStatus: data.status,
+			fuelCapacity: data.fuelCapacity,
+			currentFuel: data.currentFuel,
 		});
 		handleOpenUpdate();
 	};
@@ -68,6 +70,8 @@ const TableDataVehicle = ({
 			<Cell>{data.condition}</Cell>
 			<Cell>{data.dateOfAcquisition}</Cell>
 			<Cell>{data.codeBN}</Cell>
+			<Cell>{data.fuelCapacity}</Cell>
+			<Cell>{data.currentFuel}</Cell>
 			{(validate({ per: permissions.deleteVehicle }) ||
 				validate({ per: permissions.updateVehicle })) && (
 				<Cell>

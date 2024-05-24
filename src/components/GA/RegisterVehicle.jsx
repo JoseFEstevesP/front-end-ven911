@@ -15,6 +15,8 @@ const initForm = {
 	condition: '',
 	dateOfAcquisition: '',
 	codeBN: '',
+	fuelCapacity: '',
+	currentFuel: '',
 };
 const condition = [
 	{ label: 'Operativo', value: 'operativo' },
@@ -123,6 +125,26 @@ const RegisterVehicle = ({ handleClose, handleList, filter }) => {
 					onChange={handleChange}
 					value={form.codeBN}
 					error={errors.codeBN}
+				/>
+				<Input
+					className='register__input'
+					iconName={'fuel'}
+					name={'fuelCapacity'}
+					label={system.component.form.label.fuelCapacity}
+					placeholder={system.component.form.placeholder.fuelCapacity}
+					onChange={handleChange}
+					value={form.fuelCapacity}
+					error={errors.fuelCapacity}
+				/>
+				<Input
+					className='register__input'
+					iconName={'fuel'}
+					name={'currentFuel'}
+					label={system.component.form.label.currentFuel}
+					placeholder={system.component.form.placeholder.currentFuel}
+					onChange={handleChange}
+					value={form.currentFuel}
+					error={errors.currentFuel}
 				/>
 				<Btn
 					className='btnStyle register__btn'

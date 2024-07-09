@@ -22,8 +22,6 @@ const initForm = {
 	codeBN: '',
 	status: '',
 	olStatus: '',
-	fuelCapacity: '',
-	currentFuel: '',
 };
 const condition = [
 	{ label: 'Operativo', value: 'operativo' },
@@ -156,26 +154,6 @@ const UpdateVehicle = ({ handleClose, newData, handleList, filter }) => {
 						data={dataStatus}
 					/>
 				)}
-				<Input
-					className='register__input'
-					iconName={'fuel'}
-					name={'fuelCapacity'}
-					label={system.component.form.label.fuelCapacity}
-					placeholder={system.component.form.placeholder.fuelCapacity}
-					onChange={handleChange}
-					value={form.fuelCapacity}
-					error={errors.fuelCapacity}
-				/>
-				<Input
-					className='register__input'
-					iconName={'fuel'}
-					name={'currentFuel'}
-					label={system.component.form.label.currentFuel}
-					placeholder={system.component.form.placeholder.currentFuel}
-					onChange={handleChange}
-					value={form.currentFuel}
-					error={errors.currentFuel}
-				/>
 				<Btn
 					className='btnStyle register__btn'
 					text={system.component.btn.submit}

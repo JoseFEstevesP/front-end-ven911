@@ -122,8 +122,6 @@ export const system = {
 				warranty: 'Garantia',
 				startDate: 'Fecha inicio',
 				endDate: 'Fecha final',
-				fuelCapacity: 'Capacinad de combustible',
-				currentFuel: 'Capacidad actual de combustible',
 			},
 			placeholder: {
 				department: 'Departamento...',
@@ -156,8 +154,6 @@ export const system = {
 				value: 'Valor...',
 				warranty: 'Garantia...',
 				problem: 'Problema...',
-				fuelCapacity: 'Capacinad de combustible...',
-				currentFuel: 'Capacidad actual de combustible...',
 			},
 			select: {
 				inventory: 'Seleccione inventario',
@@ -481,8 +477,6 @@ export const headsVehicle = [
 	system.component.form.label.condition,
 	system.component.form.label.dateOfAcquisition,
 	system.component.form.label.codeBN,
-	system.component.form.label.fuelCapacity,
-	system.component.form.label.currentFuel,
 ];
 
 export const headsTechnology = [

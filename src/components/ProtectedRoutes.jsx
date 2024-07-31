@@ -4,8 +4,7 @@ import { ContextToken } from '../context/TokenContext';
 
 const ProtectedRoutes = () => {
 	const { token } = useContext(ContextToken);
-	if (!token) return <Navigate to='/autoLogin' />;
-	// if (token) return <Navigate to='/redirect' />;
+	if (token) return <Navigate to='/redirect' />;
 	return <Outlet />;
 };
 export default ProtectedRoutes;

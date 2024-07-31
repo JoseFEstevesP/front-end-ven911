@@ -7,7 +7,6 @@ import MsgProvider from './context/MsgContext';
 import RolProvider from './context/RolContext';
 import SiteProvider from './context/SiteContext';
 import TokenProvider from './context/TokenContext';
-import AutoLogin from './page/AutoLogin';
 import Error404 from './page/Error404';
 import Home from './page/Home';
 import ModuleGA from './page/ModuleGA';
@@ -23,7 +22,6 @@ const App = () => {
 						<Head />
 						<Routes>
 							<Route path='/' element={<Home />} />
-							<Route path='/autoLogin' element={<AutoLogin />} />
 							<Route element={<ProtectedRoutes />}>
 								<Route path='/ga/*' element={<ModuleGA />} />
 								<Route path='/redirect' element={<Redirect />} />

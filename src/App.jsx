@@ -23,8 +23,8 @@ const App = () => {
 						<Routes>
 							<Route path='/' element={<Home />} />
 							<Route element={<ProtectedRoutes />}>
-								<Route path='/ga/*' element={<ModuleGA />} />
 								<Route path='/redirect' element={<Redirect />} />
+								<Route path='/ga/*' element={<ModuleGA />} />
 								{/* <Route path='/pdf/:report' element={<Pdf />} /> */}
 								{/* coopiar la ruta del perfil y pegarga en la pagina de redirección de los modulos de cada ruta */}
 								{/* <Route path='/profile' element={<Profile />} /> */}

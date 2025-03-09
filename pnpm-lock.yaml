@@ -19,13 +19,13 @@ importers:
         version: 18.2.0
       react-calendar:
         specifier: 4.7.0
-        version: 4.7.0(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
+        version: 4.7.0(@types/react@18.2.37)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
         specifier: 6.18.0
-        version: 6.18.0(react-dom@18.2.0)(react@18.2.0)
+        version: 6.18.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     devDependencies:
       '@types/react':
         specifier: 18.2.37
@@ -47,7 +47,7 @@ importers:
         version: 9.0.0(eslint@8.53.0)
       eslint-config-standard:
         specifier: 17.1.0
-        version: 17.1.0(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.3.1)(eslint-plugin-promise@6.1.1)(eslint@8.53.0)
+        version: 17.1.0(eslint-plugin-import@2.29.0(eslint@8.53.0))(eslint-plugin-n@16.3.1(eslint@8.53.0))(eslint-plugin-promise@6.1.1(eslint@8.53.0))(eslint@8.53.0)
       eslint-plugin-import:
         specifier: 2.29.0
         version: 2.29.0(eslint@8.53.0)
@@ -599,8 +599,8 @@ packages:
     resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
     engines: {node: '>=10'}
 
-  caniuse-lite@1.0.30001551:
-    resolution: {integrity: sha512-vtBAez47BoGMMzlbYhfXrMV1kvRF2WP/lqiMuDu1Sb4EE4LKEgjopFDSRtZfdVnslNRpOqV/woE+Xgrwj6VQlg==}
+  caniuse-lite@1.0.30001697:
+    resolution: {integrity: sha512-GwNPlWJin8E+d7Gxq96jxM6w0w+VFeyyXRsjU58emtkYqnbwHqXm5uT2uCmO0RQE9htWknOP4xtBlLmM/gWxvQ==}
 
   chalk@2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -1964,7 +1964,7 @@ snapshots:
 
   '@csstools/css-tokenizer@2.2.1': {}
 
-  '@csstools/media-query-list-parser@2.1.5(@csstools/css-parser-algorithms@2.3.2)(@csstools/css-tokenizer@2.2.1)':
+  '@csstools/media-query-list-parser@2.1.5(@csstools/css-parser-algorithms@2.3.2(@csstools/css-tokenizer@2.2.1))(@csstools/css-tokenizer@2.2.1)':
     dependencies:
       '@csstools/css-parser-algorithms': 2.3.2(@csstools/css-tokenizer@2.2.1)
       '@csstools/css-tokenizer': 2.2.1
@@ -2392,7 +2392,7 @@ snapshots:
   autoprefixer@10.4.16(postcss@8.4.31):
     dependencies:
       browserslist: 4.22.1
-      caniuse-lite: 1.0.30001551
+      caniuse-lite: 1.0.30001697
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -2426,7 +2426,7 @@ snapshots:
 
   browserslist@4.22.1:
     dependencies:
-      caniuse-lite: 1.0.30001551
+      caniuse-lite: 1.0.30001697
       electron-to-chromium: 1.4.559
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
@@ -2453,7 +2453,7 @@ snapshots:
 
   camelcase@6.3.0: {}
 
-  caniuse-lite@1.0.30001551: {}
+  caniuse-lite@1.0.30001697: {}
 
   chalk@2.4.2:
     dependencies:
@@ -2688,7 +2688,7 @@ snapshots:
     dependencies:
       eslint: 8.53.0
 
-  eslint-config-standard@17.1.0(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.3.1)(eslint-plugin-promise@6.1.1)(eslint@8.53.0):
+  eslint-config-standard@17.1.0(eslint-plugin-import@2.29.0(eslint@8.53.0))(eslint-plugin-n@16.3.1(eslint@8.53.0))(eslint-plugin-promise@6.1.1(eslint@8.53.0))(eslint@8.53.0):
     dependencies:
       eslint: 8.53.0
       eslint-plugin-import: 2.29.0(eslint@8.53.0)
@@ -2706,6 +2706,7 @@ snapshots:
   eslint-module-utils@2.8.0(eslint-import-resolver-node@0.3.9)(eslint@8.53.0):
     dependencies:
       debug: 3.2.7
+    optionalDependencies:
       eslint: 8.53.0
       eslint-import-resolver-node: 0.3.9
     transitivePeerDependencies:
@@ -3470,9 +3471,8 @@ snapshots:
 
   quick-lru@5.1.1: {}
 
-  react-calendar@4.7.0(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0):
+  react-calendar@4.7.0(@types/react@18.2.37)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      '@types/react': 18.2.37
       '@wojtekmaj/date-utils': 1.5.1
       clsx: 2.0.0
       get-user-locale: 2.3.1
@@ -3480,6 +3480,8 @@ snapshots:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       tiny-warning: 1.0.3
+    optionalDependencies:
+      '@types/react': 18.2.37
 
   react-dom@18.2.0(react@18.2.0):
     dependencies:
@@ -3489,7 +3491,7 @@ snapshots:
 
   react-is@16.13.1: {}
 
-  react-router-dom@6.18.0(react-dom@18.2.0)(react@18.2.0):
+  react-router-dom@6.18.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@remix-run/router': 1.11.0
       react: 18.2.0
@@ -3721,7 +3723,7 @@ snapshots:
     dependencies:
       '@csstools/css-parser-algorithms': 2.3.2(@csstools/css-tokenizer@2.2.1)
       '@csstools/css-tokenizer': 2.2.1
-      '@csstools/media-query-list-parser': 2.1.5(@csstools/css-parser-algorithms@2.3.2)(@csstools/css-tokenizer@2.2.1)
+      '@csstools/media-query-list-parser': 2.1.5(@csstools/css-parser-algorithms@2.3.2(@csstools/css-tokenizer@2.2.1))(@csstools/css-tokenizer@2.2.1)
       '@csstools/selector-specificity': 3.0.0(postcss-selector-parser@6.0.13)
       balanced-match: 2.0.0
       colord: 2.9.3
